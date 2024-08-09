@@ -47,7 +47,7 @@ class CategoryController extends Controller
         return redirect()->route('admin.category.index')->withNotify($notify);
     }
 
-    public function changeStatus($id)
+    public function status($id)
     {
         return Category::changeStatus($id);
     }

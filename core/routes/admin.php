@@ -85,7 +85,13 @@ Route::middleware('admin')->group(function () {
     Route::controller('CategoryController')->prefix('category')->name('category.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('store/{id?}', 'store')->name('store');
-        Route::post('status/{id}', 'changeStatus')->name('status');
+        Route::post('status/{id}', 'status')->name('status');
+    });
+    // SubCategory Controller
+    Route::controller('SubCategoryController')->prefix('subcategory')->name('subcategory.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('store/{id?}', 'store')->name('store');
+        Route::post('status/{id}', 'status')->name('status');
     });
 
     // Subscriber

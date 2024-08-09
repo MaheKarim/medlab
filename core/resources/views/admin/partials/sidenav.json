@@ -32,6 +32,12 @@
         "menu_active": "admin.category*",
         "route_name": "admin.category.index"
     },
+    "manage_subcategory": {
+        "title": "Manage Sub-Category",
+        "icon": "la la-stack-exchange",
+        "menu_active": "admin.subcategory*",
+        "route_name": "admin.subcategory.index"
+    },
     "manage_users": {
         "title": "Manage Users",
         "icon": "las la-users",
