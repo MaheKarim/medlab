@@ -38,6 +38,12 @@
         "menu_active": "admin.subcategory*",
         "route_name": "admin.subcategory.index"
     },
+    "manage_brand": {
+        "title": "Manage Brands",
+        "icon": "la la-store",
+        "menu_active": "admin.brand*",
+        "route_name": "admin.brand.index"
+    },
     "manage_users": {
         "title": "Manage Users",
         "icon": "las la-users",
