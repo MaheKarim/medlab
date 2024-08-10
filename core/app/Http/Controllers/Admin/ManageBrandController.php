@@ -20,7 +20,7 @@ class ManageBrandController extends Controller
     public function store(Request $request, $id = 0)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|unique:brands|string|max:255',
         ]);
 
         if ($id) {

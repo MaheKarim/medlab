@@ -101,6 +101,15 @@ Route::middleware('admin')->group(function () {
         Route::post('status/{id}', 'status')->name('status');
     });
 
+    //Product Controller
+    Route::controller('ManageProductController')->prefix('product')->name('product.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::post('store/{id?}', 'store')->name('store');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::post('status/{id}', 'status')->name('status');
+    });
+
     // Subscriber
     Route::controller('SubscriberController')->prefix('subscriber')->name('subscriber.')->group(function(){
         Route::get('/', 'index')->name('index');

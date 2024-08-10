@@ -7,6 +7,9 @@ class Status{
     const ENABLE = 1;
     const DISABLE = 0;
 
+    const FLAT_DISCOUNT = 1;
+    const PERCENT_DISCOUNT = 2;
+
     const YES = 1;
     const NO = 0;
 

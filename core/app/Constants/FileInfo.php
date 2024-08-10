@@ -83,9 +83,13 @@ class FileInfo
             'path' => 'assets/images/category',
             'size' => '50x50'
         ];
-        $data['slider'] = [
-            'path' => 'assets/images/category',
-            'size' => '967x302'
+        $data['product'] = [
+            'path' => 'assets/images/product',
+            'size' => '500x500'
+        ];
+        $data['productGallery'] = [
+            'path' => 'assets/images/productGallery',
+            'size' => '500x500'
         ];
         return $data;
 	}

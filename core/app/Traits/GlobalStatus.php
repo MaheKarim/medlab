@@ -23,7 +23,6 @@ trait GlobalStatus
         return back()->withNotify($notify);
     }
 
-
     public function statusBadge(): Attribute
     {
         return new Attribute(
