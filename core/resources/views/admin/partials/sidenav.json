@@ -27,14 +27,14 @@
         "menu_active": "admin.dashboard"
     },
     "manage_category": {
-        "title": "Manage Category",
+        "title": "Manage Categories",
         "icon": "la la-list",
         "menu_active": "admin.category*",
         "route_name": "admin.category.index"
     },
     "manage_subcategory": {
-        "title": "Manage Sub-Category",
-        "icon": "la la-stack-exchange",
+        "title": "Manage Subcategories",
+        "icon": "la la-align-center",
         "menu_active": "admin.subcategory*",
         "route_name": "admin.subcategory.index"
     },

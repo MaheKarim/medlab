@@ -83,6 +83,10 @@ class FileInfo
             'path' => 'assets/images/category',
             'size' => '50x50'
         ];
+        $data['slider'] = [
+            'path' => 'assets/images/category',
+            'size' => '967x302'
+        ];
         return $data;
 	}
 

@@ -10,6 +10,7 @@
                             <thead>
                             <tr>
                                 <th>@lang('Name')</th>
+                                <th>@lang('Category')</th>
                                 <th>@lang('Status')</th>
                                 <th>@lang('Last Update')</th>
                                 <th>@lang('Action')</th>
@@ -18,9 +19,8 @@
                             <tbody>
                             @forelse($subcategories as $subcategory)
                                 <tr>
-                                    <td>
-                                        <span class="fw-bold"> {{ $subcategory->category->name }} </span>
-                                        / {{ $subcategory->name }}</td>
+                                    <td>{{ $subcategory->name }}</td>
+                                    <td>{{ $subcategory->category->name }} </td>
                                     <td>@php echo $subcategory->statusBadge @endphp</td>
                                     <td>{{ showDateTime($subcategory->updated_at) }}</td>
                                     <td>
