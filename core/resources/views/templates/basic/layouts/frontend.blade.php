@@ -10,8 +10,7 @@
         <section class="main-section">
             <div class="container custom--container">
                 <div class="row gy-4">
-                    @include($activeTemplate. 'partials.sidebar')
-                    @yield('content')
+                        @yield('content')
                 </div>
             </div>
         </section>

@@ -9,7 +9,7 @@
     <!-- Title -->
     <title> {{ gs()->siteName(__($pageTitle)) }} </title>
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/images/logo/favicon.png">
+    <link rel="shortcut icon" href="{{ siteFavicon() }}" type="image/x-icon">
     <!-- Bootstrap -->
     <link href="{{ asset('assets/global/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Fontawesome -->
@@ -77,12 +77,12 @@
 <!-- Jquery js -->
 <script src="{{ asset('assets/global/js/jquery-3.7.1.min.js')}}"></script>
 <script src="{{ asset('assets/global/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{ asset('assets/global/js/slick.min.js') }}"></script>
 
 @stack('script-lib')
 @php echo loadExtension('tawk-chat') @endphp
 
     <!-- Others JS  -->
+<script src="{{ asset($activeTemplateTrue . 'js/slick.min.js') }}"></script>
 <script src="{{ asset($activeTemplateTrue . 'js/swiper.js') }}"></script>
 <script src="{{ asset($activeTemplateTrue . 'js/magnific-popup.js') }}"></script>
 <script src="{{ asset($activeTemplateTrue . 'js/main.js') }}"></script>

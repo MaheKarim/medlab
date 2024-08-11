@@ -1,17 +1,14 @@
 {
     "banner": {
         "builder": true,
-        "no_selection":true,
         "name": "Banner Section",
-        "content": {
-            "images":{
-                "image":{
-                    "size":"500x500",
-                    "thumb":"100x100"
+        "element": {
+            "images": {
+                "slider_image": {
+                    "size": "1132x278"
                 }
             },
-            "heading": "text",
-            "subheading": "text"
+            "modal": false
         }
     },
     "feature": {

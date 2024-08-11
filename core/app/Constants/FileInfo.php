@@ -91,6 +91,10 @@ class FileInfo
             'path' => 'assets/images/productGallery',
             'size' => '500x500'
         ];
+        $data['banner'] = [
+            'path' => 'assets/images/banner',
+            'size' => '1132x978'
+        ];
         return $data;
 	}
 

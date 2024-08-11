@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Constants\Status;
 use App\Lib\Searchable;
 use App\Models\AdminNotification;
+use App\Models\Category;
 use App\Models\Deposit;
 use App\Models\Frontend;
 use App\Models\SupportTicket;
@@ -49,6 +50,7 @@ class AppServiceProvider extends ServiceProvider
         $viewShare['activeTemplate'] = $activeTemplate;
         $viewShare['activeTemplateTrue'] = activeTemplate(true);
         $viewShare['emptyMessage'] = 'Data not found';
+        $viewShare['categories'] = Category::active()->with('subCategories')->get();
         view()->share($viewShare);
 
 
