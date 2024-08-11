@@ -1,9 +1,8 @@
-<div class="col-xl-3 col-lg-4">
     <ul class="category-menu">
         <li class="close-sidebar-icon d-lg-none d-block">
             <i class="las la-times"></i>
         </li>
-        @foreach($categories as $category)
+        @foreach($sidebarCategories as $category)
         <li class="category-menu__item">
             <a href="medicine.html" class="category-menu__link">
             <span class="category-menu__thumb">
@@ -16,4 +15,3 @@
         </li>
         @endforeach
     </ul>
-</div>

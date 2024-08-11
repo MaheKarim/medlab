@@ -1,7 +1,7 @@
 <header class="header" id="header">
     <div class="container">
         <nav class="d-flex align-items-center">
-            <a class="navbar-brand logo" href="index.html"><img src="assets/images/logo/logo-2.png" alt=""></a>
+            <a class="navbar-brand logo" href="{{ url('/') }}"><img src="{{ siteLogo() }}" alt=""></a>
             <form action="#" autocomplete="off" class="search-box-wrapper">
                 <button type="button" class="search-icon  d-block d-lg-none"><i class="las la-search"></i></button>
                 <div class="search-field">

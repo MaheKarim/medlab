@@ -1,3 +1,6 @@
+@php
+    $downloadUrlElement = getContent('download_url.element', orderById: true);
+@endphp
 <footer class="footer-area">
     <div class="py-60">
         <div class="container">
@@ -5,19 +8,18 @@
                 <div class="col-xl-3 col-sm-6 col-xsm-6 ">
                     <div class="footer-item">
                         <div class="footer-item__logo">
-                            <a class="logo" href="index.html"><img src="assets/images/logo/logo-2.png" alt=""></a>
+                            <a class="logo" href="{{ url('/') }}"><img src="{{ siteLogo() }}" alt="Site Logo"></a>
                         </div>
                         <p class="footer-item__desc"> Amet minim lolit non deserunt ullanco est sit aliqua dolar do amet </p>
 
                         <div class="download-item">
-                            <p class="download-item__text">Over <span class="fw-bold">68,000 people</span> download</p>
+                            <p class="download-item__text">Over <span class="fw-bold">68,000</span> people download</p>
                             <div class="d-flex align-items-center gap-3">
-                                <a href="#" class="download-item__link">
-                                    <img src="assets/images/thumbs/app-1.png" alt="">
-                                </a>
-                                <a href="#" class="download-item__link">
-                                    <img src="assets/images/thumbs/app-2.png" alt="">
-                                </a>
+                                @foreach($downloadUrlElement as $element)
+                                    <a href="{{ @$element->data_values->link }}" class="download-item__link" target="_blank">
+                                        <img src="{{ frontendImage('download_url', @$element->data_values->image, '144x43') }}" alt="App Store Image">
+                                    </a>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -36,13 +38,9 @@
                 </div>
                 <div class="col-xl-3 col-sm-6 col-xsm-6">
                     <div class="footer-item">
-                        <h5 class="footer-item__title"> Module </h5>
+                    <h5 class="footer-item__title"> Categories </h5>
                         <ul class="footer-menu">
                             <li class="footer-menu__item"><a href="#" class="footer-menu__link"> OTC Medicine </a></li>
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link"> Sexual Wellness </a></li>
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link">Baby care </a></li>
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link"> Devices </a></li>
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link"> Dental Care </a></li>
                         </ul>
                     </div>
                 </div>

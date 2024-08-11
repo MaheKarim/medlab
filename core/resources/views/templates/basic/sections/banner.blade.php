@@ -1,7 +1,6 @@
 @php
     $bannerElement = getContent('banner.element', orderById: true);
 @endphp
-<div class="col-xl-9 col-lg-8 col-lg-8">
     <div class="banner-slider">
         @foreach(@$bannerElement as $banner)
             <div>
@@ -13,4 +12,3 @@
             </div>
         @endforeach
     </div>
-</div>

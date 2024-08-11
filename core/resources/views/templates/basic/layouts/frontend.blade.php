@@ -3,17 +3,10 @@
 @section('app')
     @include($activeTemplate. 'partials.header')
     <!-- ==================== Header End Here ==================== -->
-
     <main>
 
         <!--========================== main Section Start ==========================-->
-        <section class="main-section">
-            <div class="container custom--container">
-                <div class="row gy-4">
                         @yield('content')
-                </div>
-            </div>
-        </section>
         <!--========================== main Section End ==========================-->
 
     </main>

@@ -12,12 +12,12 @@ class CategoryController extends Controller
     public function index()
     {
         $pageTitle = 'All Categories';
-        $categories = Category::orderBy('name')->paginate(getPaginate());
+        $categories = Category::latest()->paginate(getPaginate());
 
         return view('admin.category.index',compact('pageTitle','categories'));
     }
 
-    public function store(Request $request, $id = 0)
+    public function store(Request $request, $id = null)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -30,9 +30,10 @@ class CategoryController extends Controller
             $category = new Category();
             $notify[] = ['success', 'Category added successfully'];
         }
+
         if ($request->hasFile('image')) {
             try {
-                $old = $category->image;
+                $old = $category->image ?? null;
                 $category->image = fileUploader($request->image, getFilePath('category'), getFileSize('category'), $old);
             } catch (\Exception $e) {
                 $notify[] = ['error', 'Could not upload your image'];
@@ -46,7 +47,6 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.category.index')->withNotify($notify);
     }
-
     public function status($id)
     {
         return Category::changeStatus($id);

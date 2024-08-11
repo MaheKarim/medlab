@@ -95,6 +95,10 @@ class FileInfo
             'path' => 'assets/images/banner',
             'size' => '1132x978'
         ];
+        $data['how_to_order'] = [
+            'path' => 'assets/images/how_to_order',
+            'size' => '306x309'
+        ];
         return $data;
 	}
 

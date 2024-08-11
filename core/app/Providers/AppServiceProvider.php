@@ -50,7 +50,7 @@ class AppServiceProvider extends ServiceProvider
         $viewShare['activeTemplate'] = $activeTemplate;
         $viewShare['activeTemplateTrue'] = activeTemplate(true);
         $viewShare['emptyMessage'] = 'Data not found';
-        $viewShare['categories'] = Category::active()->with('subCategories')->get();
+        $viewShare['sidebarCategories'] = Category::active()->orderBy('name')->limit(10)->with('subCategories')->get();
         view()->share($viewShare);
 
 

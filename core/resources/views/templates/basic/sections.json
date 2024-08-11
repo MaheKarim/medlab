@@ -11,88 +11,44 @@
             "modal": false
         }
     },
-    "feature": {
+    "categories": {
         "builder": true,
-        "name": "Feature Section",
+        "name": "Categories Section",
+        "content": {
+            "heading": "text"
+        }
+    },
+    "how_to_order": {
+        "builder": true,
+        "name": "How To Order Section",
         "content": {
             "heading": "text",
-            "subheading": "text"
+            "description": "text",
+            "button_link": "text",
+            "video_link": "text",
+            "images": {
+                "image": {
+                    "size": "306x309"
+                }
+            }
         },
         "element": {
-            "title": "text",
-            "description": "textarea",
-            "feature_icon": "icon",
-            "select":{
-                "name":"trx_type",
-                "options":{
-                  "deposit":"Deposit",
-                  "withdraw":"Withdraw"
-                }
-            },
+            "description_text": "text",
             "modal": false
         }
     },
-    "about": {
+    "download_url": {
         "builder": true,
-        "name": "About Us",
-        "content": {
-            "images":{
-                "background_image":{
-                    "size":"500x500",
-                    "thumb":"100x100"
-                },
-                "about_image":{
-                    "size":"500x500",
-                    "thumb":"100x100"
-                }
-            },
-            "heading": "text",
-            "subheading": "text",
-            "description": "textarea",
-            "about_icon": "icon"
-        }
-    },
-    "service": {
-        "builder": true,
-        "name": "Service Section",
-        "content": {
-            "select":{
-                "name":"trx_type",
-                "options":{
-                  "deposit":"Deposit",
-                  "withdraw":"Withdraw"
-                }
-            },
-            "heading": "text",
-            "subheading": "text"
-        },
-        "element": {
-            "select":{
-                "name":"trx_type",
-                "options":{
-                  "deposit":"Deposit",
-                  "withdraw":"Withdraw"
-                }
-            },
-            "service_icon": "icon",
-            "title": "text",
-            "description": "textarea",
-            "modal": false
-        }
-    },
-    "counter": {
-        "builder": true,
-        "name": "Counter Section",
-        "content": {
-            "heading": "text",
-            "subheading": "text"
-        },
+        "no_selection":true,
+        "name": "Download URL",
         "element": {
             "title": "text",
-            "counter_digit": "text",
-            "sub_title": "text",
-            "counter_icon": "icon",
-            "counter_icon_2": "icon",
+            "images": {
+                "image": {
+                    "size": "144x43"
+                }
+            },
+            "link": "text",
             "modal": false
         }
     },
