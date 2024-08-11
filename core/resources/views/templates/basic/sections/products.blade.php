@@ -5,7 +5,10 @@
         }])
         ->orderBy('name')
         ->take(10)
-        ->get();
+        ->get()
+        ->filter(function($category) {
+            return $category->products->isNotEmpty();
+        });
 @endphp
 <div class="Product-wrapper pt-60">
     @foreach($categories as $category)
