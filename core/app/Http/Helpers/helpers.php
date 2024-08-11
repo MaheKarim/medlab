@@ -491,3 +491,18 @@ function frontendImage($sectionName, $image, $size = null,$seo = false)
     }
     return getImage('assets/images/frontend/' . $sectionName . '/' . $image, $size);
 }
+
+ function getMainPrice($product)
+{
+    $price = $product->price;
+
+    if ($product->discount > 0) {
+        if ($product->discount_type == Status::FLAT_DISCOUNT) {
+            $price -= $product->discount;
+        } elseif ($product->discount_type == Status::PERCENT_DISCOUNT) {
+            $price -= ($product->price * $product->discount / 100);
+        }
+    }
+
+    return showAmount($price);
+}
