@@ -89,18 +89,24 @@
             "button_url":"text"
         }
     },
-    "faq": {
+    "testimonial": {
         "builder": true,
-        "name": "FAQ Section",
+        "name": "Testimonial",
         "content": {
-            "heading": "text",
-            "subheading": "text"
+            "heading": "text"
         },
         "element": {
-            "question": "text",
-            "answer": "textarea",
-            "icon":"icon",
-            "modal": true
+            "client_name": "text",
+            "address": "text",
+            "description": "textarea",
+            "date": "text",
+            "icon":"text",
+            "images": {
+                "image": {
+                    "size": "80x80"
+                }
+            },
+            "modal": false
         }
     },
     "blog": {
@@ -123,12 +129,25 @@
             "seo":true
         }
     },
-    "subscribe": {
+    "about": {
         "builder": true,
-        "name": "Subscribe Section",
+        "name": "About Us",
         "content": {
             "heading": "text",
-            "subheading": "text"
+            "description": "textarea-nic",
+            "images": {
+                "image": {
+                    "size": "460x309"
+                }
+            }
+        }
+    },
+    "description": {
+        "builder": true,
+        "name": "Description",
+        "content": {
+            "heading": "text",
+            "description": "textarea-nic"
         }
     },
     "social_icon": {
@@ -148,13 +167,11 @@
         "name": "Contact Us",
         "content": {
             "title": "text",
-            "short_details": "text",
+            "description": "textarea",
+            "download": "text",
             "email_address": "text",
             "contact_details": "text",
-            "contact_number": "text",
-            "latitude": "text",
-            "longitude": "text",
-            "website_footer": "textarea-nic"
+            "contact_number": "text"
         }
     },
     "kyc": {

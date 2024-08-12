@@ -1,5 +1,8 @@
 @php
     $downloadUrlElement = getContent('download_url.element', orderById: true);
+    $contactUsContent = getContent('contact_us.content', true);
+    $policyPages = getContent('policy_pages.element', orderById: true);
+    $socialLinks = getContent('social_icon.element', orderById: true);
 @endphp
 <footer class="footer-area">
     <div class="py-60">
@@ -10,10 +13,10 @@
                         <div class="footer-item__logo">
                             <a class="logo" href="{{ url('/') }}"><img src="{{ siteLogo() }}" alt="Site Logo"></a>
                         </div>
-                        <p class="footer-item__desc"> Amet minim lolit non deserunt ullanco est sit aliqua dolar do amet </p>
+                        <p class="footer-item__desc"> {{ @$contactUsContent->data_values->description }} </p>
 
                         <div class="download-item">
-                            <p class="download-item__text">Over <span class="fw-bold">68,000</span> people download</p>
+                            <p class="download-item__text">Over <span class="fw-bold">{{ @$contactUsContent->data_values->download }} </span> people download</p>
                             <div class="d-flex align-items-center gap-3">
                                 @foreach($downloadUrlElement as $element)
                                     <a href="{{ @$element->data_values->link }}" class="download-item__link" target="_blank">
@@ -28,11 +31,13 @@
                     <div class="footer-item">
                         <h5 class="footer-item__title"> Information </h5>
                         <ul class="footer-menu">
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link"> About Us </a></li>
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link"> Home</a></li>
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link"> Terms & Condition </a></li>
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link"> Delivery Information </a></li>
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link"> Privacy & Policy</a></li>
+                            <li class="footer-menu__item"><a href="{{ url('/') }}" class="footer-menu__link"> Home</a></li>
+                            @foreach (@$policyPages as $policy)
+                            <li class="footer-menu__item">
+                                <a href="{{ route('policy.pages', slug(@$policy->data_values->title)) }}" class="footer-menu__link"> Terms & Condition
+                                </a>
+                            </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -40,20 +45,22 @@
                     <div class="footer-item">
                     <h5 class="footer-item__title"> Categories </h5>
                         <ul class="footer-menu">
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link"> OTC Medicine </a></li>
+                            @foreach($sidebarCategories->take(5) as $category)
+                                <li class="footer-menu__item"><a href="{{ route('category.products', $category->slug) }}" class="footer-menu__link"> {{__($category->name)}} </a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
                 <div class="col-xl-3 col-sm-6 col-xsm-6">
                     <div class="footer-item">
-                        <h5 class="footer-item__title"> Contact With Us </h5>
+                        <h5 class="footer-item__title"> {{ @$contactUsContent->data_values->title }} </h5>
                         <ul class="footer-contact-menu">
                             <li class="footer-contact-menu__item">
                                 <div class="footer-contact-menu__item-icon">
                                     <i class="fas fa-map-marker-alt"></i>
                                 </div>
                                 <div class="footer-contact-menu__item-content">
-                                    <p>15205 Dhaka </p>
+                                    <p>{{ @$contactUsContent->data_values->contact_details }}</p>
                                 </div>
                             </li>
                             <li class="footer-contact-menu__item">
@@ -61,7 +68,7 @@
                                     <i class="fas fa-phone"></i>
                                 </div>
                                 <div class="footer-contact-menu__item-content">
-                                    <p>123 - 456 - 7890 </p>
+                                    <p>{{ @$contactUsContent->data_values->contact_number }}</p>
                                 </div>
                             </li>
                             <li class="footer-contact-menu__item">
@@ -69,15 +76,20 @@
                                     <i class="fas fa-envelope"></i>
                                 </div>
                                 <div class="footer-contact-menu__item-content">
-                                    <p>medeasy@gmail.com</p>
+                                    <p>{{ @$contactUsContent->data_values->email_address }}</p>
                                 </div>
                             </li>
                         </ul>
                         <ul class="social-list">
-                            <li class="social-list__item"><a href="https://www.facebook.com" class="social-list__link flex-center"><i class="fab fa-facebook-f"></i></a> </li>
-                            <li class="social-list__item"><a href="https://www.twitter.com" class="social-list__link flex-center active"> <i class="fab fa-twitter"></i></a></li>
-                            <li class="social-list__item"><a href="https://www.linkedin.com" class="social-list__link flex-center"> <i class="fab fa-linkedin-in"></i></a></li>
-                            <li class="social-list__item"><a href="https://www.pinterest.com" class="social-list__link flex-center"> <i class="fab fa-instagram"></i></a></li>
+                            @foreach (@$socialLinks as $socialLink)
+                            <li class="social-list__item">
+                                <a href="{{ @$socialLink->data_values->url }}" class="social-list__link flex-center" target="_blank">
+                                    @php
+                                        echo @$socialLink->data_values->social_icon;
+                                    @endphp
+                                </a>
+                            </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -91,7 +103,7 @@
         <div class="container">
             <div class="row gy-3">
                 <div class="col-md-12 text-center">
-                    <div class="bottom-footer-text text-white"> &copy; Copyright 2024 . All rights reserved.</div>
+                    <div class="bottom-footer-text text-white"> &copy; Copyright {{ now()->year }}, {{ config('app.name') }} . All rights reserved.</div>
                 </div>
             </div>
         </div>
