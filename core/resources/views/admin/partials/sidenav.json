@@ -80,20 +80,6 @@
                 "counter": "mobileUnverifiedUsersCount"
             },
             {
-                "keyword": ["kyc unverified users", "Manage Users", "User verification", "User authentication", "User management"],
-                "title": "KYC Unverified",
-                "route_name": "admin.users.kyc.unverified",
-                "menu_active": "admin.users.kyc.unverified",
-                "counter": "kycUnverifiedUsersCount"
-            },
-            {
-                "keyword": ["kyc pending users", "Manage Users", "User verification", "User authentication", "User management"],
-                "title": "KYC Pending",
-                "route_name": "admin.users.kyc.pending",
-                "menu_active": "admin.users.kyc.pending",
-                "counter": "kycPendingUsersCount"
-            },
-            {
                 "keyword": ["with balance users", "Manage Users", "User management", "User activity", "Account management"],
                 "title": "With Balance",
                 "route_name": "admin.users.with.balance",
@@ -114,13 +100,13 @@
         ]
     },
     "deposits": {
-        "title": "Deposits",
+        "title": "Payments",
         "icon": "las la-file-invoice-dollar",
         "counters": ["pendingDepositsCount"],
         "menu_active": "admin.deposit*",
         "submenu": [{
-                "keyword": ["Pending Deposits", "Deposits", "Deposit management", "Deposit control", "Deposit status", "Deposit activity"],
-                "title": "Pending Deposits",
+                "keyword": ["Pending Payments", "Payments", "Payment management", "Payments control", "Payment status", "Payment activity"],
+                "title": "Pending Payments",
                 "route_name": "admin.deposit.pending",
                 "menu_active": "admin.deposit.pending",
                 "counter": "pendingDepositsCount",
@@ -129,8 +115,8 @@
                 }
             },
             {
-                "keyword": ["Approved Deposits", "Deposits", "Deposit management", "Deposit activity"],
-                "title": "Approved Deposits",
+                "keyword": ["Approved Payments", "Payments", "Payments management", "Payments activity"],
+                "title": "Approved Payments",
                 "route_name": "admin.deposit.approved",
                 "menu_active": "admin.deposit.approved",
                 "params":{
@@ -138,8 +124,8 @@
                 }
             },
             {
-                "keyword": ["Successful Deposits", "Deposits", "Deposit management", "Deposit activity"],
-                "title": "Successful Deposits",
+                "keyword": ["Successful Payments", "Payments", "Payments management", "Payments activity"],
+                "title": "Successful Payments",
                 "route_name": "admin.deposit.successful",
                 "menu_active": "admin.deposit.successful",
                 "params":{
@@ -147,7 +133,7 @@
                 }
             },
             {
-                "keyword": ["Rejected Deposits", "Deposits", "Deposit management", "Deposit activity"],
+                "keyword": ["Rejected Payments", "Payments", "Payments management", "Payments activity"],
                 "title": "Rejected Deposits",
                 "route_name": "admin.deposit.rejected",
                 "menu_active": "admin.deposit.rejected",
@@ -156,8 +142,8 @@
                 }
             },
             {
-                "keyword": ["Initiated Deposits", "Deposits", "Deposit management", "Deposit activity"],
-                "title": "Initiated Deposits",
+                "keyword": ["Initiated Payments", "Payments", "Payments management", "Payments activity"],
+                "title": "Initiated Payments",
                 "route_name": "admin.deposit.initiated",
                 "menu_active": "admin.deposit.initiated",
                 "params":{
@@ -165,54 +151,10 @@
                 }
             },
             {
-                "keyword": ["All Deposits", "Deposits", "Deposit management", "Deposit control", "Deposit activity"],
-                "title": "All Deposits",
+                "keyword": ["All Payments", "Payments", "Payments management", "Payments control", "Payments activity"],
+                "title": "All Payments",
                 "route_name": "admin.deposit.list",
                 "menu_active": "admin.deposit.list",
-                "params":{
-                    "user_id":""
-                }
-            }
-        ]
-    },
-    "withdrawals": {
-        "title": "Withdrawals",
-        "icon": "la la-bank",
-        "counters": ["pendingWithdrawCount"],
-        "menu_active": "admin.withdraw.data*",
-        "submenu": [{
-                "keyword": ["Pending Withdrawals", "Withdrawals", "Withdrawal management", "Withdrawal control", "Withdrawal status", "Withdrawal activity"],
-                "title": "Pending Withdrawals",
-                "route_name": "admin.withdraw.data.pending",
-                "menu_active": "admin.withdraw.data.pending",
-                "counter": "pendingWithdrawCount",
-                "params":{
-                    "user_id":""
-                }
-            },
-            {
-                "keyword": ["Approved Withdrawals", "Withdrawals", "Withdrawal management", "Withdrawal activity"],
-                "title": "Approved Withdrawals",
-                "route_name": "admin.withdraw.data.approved",
-                "menu_active": "admin.withdraw.data.approved",
-                "params":{
-                    "user_id":""
-                }
-            },
-            {
-                "keyword": ["Rejected Withdrawals", "Withdrawals", "Withdrawal management", "Withdrawal activity"],
-                "title": "Rejected Withdrawals",
-                "route_name": "admin.withdraw.data.rejected",
-                "menu_active": "admin.withdraw.data.rejected",
-                "params":{
-                    "user_id":""
-                }
-            },
-            {
-                "keyword": ["All Withdrawals", "Withdrawals", "Withdrawal management", "Withdrawal control", "Withdrawal activity"],
-                "title": "All Withdrawals",
-                "route_name": "admin.withdraw.data.all",
-                "menu_active": "admin.withdraw.data.all",
                 "params":{
                     "user_id":""
                 }
@@ -319,9 +261,7 @@
             "admin.setting.notification.template.edit",
             "admin.frontend.index",
             "admin.frontend.sections*",
-            "admin.gateway*",
-            "admin.withdraw.method*",
-            "admin.setting.app.purchase"
+            "admin.gateway*"
         ]
     },
     "extra": {

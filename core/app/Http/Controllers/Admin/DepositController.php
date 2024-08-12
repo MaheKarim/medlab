@@ -13,7 +13,7 @@ class DepositController extends Controller
 {
     public function pending($userId = null)
     {
-        $pageTitle = 'Pending Deposits';
+        $pageTitle = 'Pending Payments';
         $deposits = $this->depositData('pending',userId:$userId);
         return view('admin.deposit.log', compact('pageTitle', 'deposits'));
     }
@@ -21,35 +21,35 @@ class DepositController extends Controller
 
     public function approved($userId = null)
     {
-        $pageTitle = 'Approved Deposits';
+        $pageTitle = 'Approved Payments';
         $deposits = $this->depositData('approved',userId:$userId);
         return view('admin.deposit.log', compact('pageTitle', 'deposits'));
     }
 
     public function successful($userId = null)
     {
-        $pageTitle = 'Successful Deposits';
+        $pageTitle = 'Successful Payments';
         $deposits = $this->depositData('successful',userId:$userId);
         return view('admin.deposit.log', compact('pageTitle', 'deposits'));
     }
 
     public function rejected($userId = null)
     {
-        $pageTitle = 'Rejected Deposits';
+        $pageTitle = 'Rejected Payments';
         $deposits = $this->depositData('rejected',userId:$userId);
         return view('admin.deposit.log', compact('pageTitle', 'deposits'));
     }
 
     public function initiated($userId = null)
     {
-        $pageTitle = 'Initiated Deposits';
+        $pageTitle = 'Initiated Payments';
         $deposits = $this->depositData('initiated',userId:$userId);
         return view('admin.deposit.log', compact('pageTitle', 'deposits'));
     }
 
     public function deposit($userId = null)
     {
-        $pageTitle = 'Deposit History';
+        $pageTitle = 'Payments History';
         $depositData = $this->depositData($scope = null, $summary = true,userId:$userId);
         $deposits = $depositData['data'];
         $summary = $depositData['summary'];
@@ -125,7 +125,7 @@ class DepositController extends Controller
 
         PaymentController::userDataUpdate($deposit,true);
 
-        $notify[] = ['success', 'Deposit request approved successfully'];
+        $notify[] = ['success', 'Payment request approved successfully'];
 
         return to_route('admin.deposit.pending')->withNotify($notify);
     }
