@@ -33,13 +33,6 @@
         "menu_active": "admin.category*",
         "route_name": "admin.category.index"
     },
-    "manage_subcategory": {
-        "keyword": ["Subcategories", "Subcategory",  "Manage Subcategories"],
-        "title": "Manage Subcategories",
-        "icon": "la la-align-center",
-        "menu_active": "admin.subcategory*",
-        "route_name": "admin.subcategory.index"
-    },
     "manage_brand": {
         "keyword": ["Brands", "Brand",  "Manage Brands"],
         "title": "Manage Brands",

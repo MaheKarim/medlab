@@ -738,7 +738,7 @@ button:focus {
 /* ====================== Section Heading ==================== */
 .section-heading {
     text-align: center;
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;

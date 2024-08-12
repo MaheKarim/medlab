@@ -8,11 +8,11 @@
                     <div class="card-header">@lang('Product Information')</div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label>@lang('Name')</label>
                                 <input type="text" name="name" class="form-control" value="{{ $product->name }}" required>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label>@lang('Brands')</label>
                                 <select class="form-control select2" name="brand_id" required>
                                     <option value="" selected disabled>@lang('Select One')</option>
@@ -22,7 +22,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label>@lang('Category')</label>
                                 <select name="category_id" class="form-control select2" required>
                                     <option selected disabled>@lang('Select One')</option>
@@ -32,11 +32,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-md-3">
-                                <label>@lang('Subcategory')</label>
-                                <select name="subcategory_id" class="form-control select2" required>
-                                </select>
-                            </div>
+
                             <div class="form-group col-md-3">
                                 <label>@lang('Product SKU')</label>
                                 <input type="text" name="product_sku" class="form-control" value="{{ $product->product_sku }}" required />
@@ -167,23 +163,6 @@
                     $('#errorModal').modal('show');
                 }
             });
-            $('[name=category_id]').on('change', function() {
-                let subcategories = $(this).find(':selected').data('subcategories');
-                let html = `<option  disabled selected>@lang('Select one')</option>`;
-
-                $.each(subcategories, function(id, subcat) {
-                    html += `<option  value="${subcat.id}" ${oldSubcategory == subcat.id ?'selected':''}>${subcat.name}</option>`
-                });
-
-                $('[name=subcategory_id]').html(html);
-            }).change();
-
-
-
-
-
-
-
         })(jQuery);
     </script>
 @endpush

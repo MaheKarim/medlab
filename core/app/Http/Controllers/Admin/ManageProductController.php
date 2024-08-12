@@ -22,9 +22,7 @@ class ManageProductController extends Controller
     {
         $pageTitle  = "Add New Product";
         $brands     = Brand::active()->orderBy('name')->get();
-        $categories = Category::active()->with(['subcategories' => function ($q) {
-            $q->active();
-        }])->orderBy('name')->get();
+        $categories = Category::active()->orderBy('name')->get();
 
         return view('admin.product.create', compact('pageTitle', 'brands', 'categories'));
     }
@@ -136,8 +134,8 @@ class ManageProductController extends Controller
     {
         $pageTitle  = "Edit Product";
         $product    = Product::findOrFail($id);
-        $brands     = Brand::orderBy('name')->get();
-        $categories = Category::with('subCategories')->orderBy('name')->get();
+        $brands     = Brand::active()->orderBy('name')->get();
+        $categories = Category::active()->orderBy('name')->get();
         $galleries  = [];
 
         foreach ($product->gallery ?? [] as $key => $gallery) {

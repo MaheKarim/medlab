@@ -87,12 +87,6 @@ Route::middleware('admin')->group(function () {
         Route::post('store/{id?}', 'store')->name('store');
         Route::post('status/{id}', 'status')->name('status');
     });
-    // SubCategory Controller
-    Route::controller('SubCategoryController')->prefix('subcategory')->name('subcategory.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::post('store/{id?}', 'store')->name('store');
-        Route::post('status/{id}', 'status')->name('status');
-    });
 
     // Brand Controller
     Route::controller('ManageBrandController')->prefix('brand')->name('brand.')->group(function () {

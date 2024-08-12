@@ -10,10 +10,6 @@ class Category extends Model
 {
     use GlobalStatus;
 
-    public function subCategories() :HasMany
-    {
-        return $this->hasMany(SubCategory::class);
-    }
     public function products() :HasMany
     {
         return $this->hasMany(Product::class);
