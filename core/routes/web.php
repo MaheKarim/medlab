@@ -31,6 +31,8 @@ Route::controller('SiteController')->group(function () {
 
     Route::get('/cookie/accept', 'cookieAccept')->name('cookie.accept');
 
+    Route::get('blog', 'blog')->name('blog');
+
     Route::get('blog/{slug}', 'blogDetails')->name('blog.details');
 
     Route::get('policy/{slug}', 'policyPages')->name('policy.pages');
@@ -43,4 +45,5 @@ Route::controller('SiteController')->group(function () {
 
     // Product Category
     Route::get('/category/{slug}', 'categoryProduct')->name('category.products');
+    Route::get('all/categories', 'categories')->name('all.category');
 });

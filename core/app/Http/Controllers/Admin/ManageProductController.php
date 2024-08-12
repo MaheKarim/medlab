@@ -37,7 +37,6 @@ class ManageProductController extends Controller
             'generic_name'           => 'nullable|max:255',
             'brand_id'               => 'required|exists:brands,id',
             'category_id'            => 'required|exists:categories,id',
-            'subcategory_id'         => 'required|exists:sub_categories,id',
             'product_sku'            => 'nullable|string',
             'quantity'               => 'required|integer|gt:0',
             'price'                  => 'required|numeric|gt:0',
@@ -113,7 +112,6 @@ class ManageProductController extends Controller
         $product->generic_name   = $request->generic_name;
         $product->brand_id       = $request->brand_id;
         $product->category_id    = $request->category_id;
-        $product->subcategory_id = $request->subcategory_id;
         $product->product_sku    = $request->product_sku;
         $product->quantity       = $request->quantity;
         $product->price          = $request->price;

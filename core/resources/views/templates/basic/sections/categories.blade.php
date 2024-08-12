@@ -6,7 +6,7 @@
     <div class="section-heading">
         <h5 class="section-heading__title"> {{ @$categoryData->data_values->heading }} </h5>
         <div class="section-heading__btn">
-            <a href="product-details.html" class="btn btn--base "> View all </a>
+            <a href="{{ route('all.category') }}" class="btn btn--base "> View all </a>
         </div>
     </div>
     <div class="product-slider mt-2">

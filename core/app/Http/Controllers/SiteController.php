@@ -115,6 +115,15 @@ class SiteController extends Controller
         return back();
     }
 
+    public function blog()
+    {
+        $blogs     = Frontend::where('tempname', activeTemplateName())->where('data_keys', 'blog.element')->latest()->paginate(getPaginate(12));
+        $pageTitle = 'Blog';
+        $page      = Page::where('tempname', activeTemplate())->where('slug', 'blog')->first();
+        $sections  = $page->secs;
+        return view('Template::blog', compact('blogs', 'pageTitle', 'sections'));
+    }
+
     public function blogDetails($slug){
         $blog = Frontend::where('slug',$slug)->where('data_keys','blog.element')->firstOrFail();
         $pageTitle = $blog->data_values->title;
@@ -176,11 +185,19 @@ class SiteController extends Controller
 
     public function categoryProduct($slug)
     {
-        $category = Category::where('slug', $slug)->firstOrFail();
+        $category = Category::where('slug', $slug)->paginate(getPaginate())->firstOrFail();
         $pageTitle = $category->name;
         $seoContents = $category->seo_content;
         $seoImage = @$seoContents->image ? frontendImage('category', $seoContents->image, getFileSize('seo'), true) : null;
         return view('Template::category_product', compact('category', 'pageTitle', 'seoContents', 'seoImage'));
+    }
+
+    public function categories()
+    {
+        $pageTitle = 'All Categories';
+        $categories = Category::active()->orderBy('name')->paginate(getPaginate());
+
+        return view('Template::categories', compact('pageTitle', 'categories'));
     }
 
 }

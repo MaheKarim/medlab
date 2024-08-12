@@ -8,11 +8,10 @@
                 </div>
                 <div class="col-xl-9 col-lg-8">
                 @if(@$sections->secs != null)
-                        @foreach(json_decode($sections->secs) as $sec)
+                        @foreach(json_decode(@$sections->secs) as $sec)
                             @include($activeTemplate.'sections.'.$sec)
                         @endforeach
                     @endif
-{{--                    @include($activeTemplate. 'partials.products')--}}
                 </div>
             </div>
         </div>

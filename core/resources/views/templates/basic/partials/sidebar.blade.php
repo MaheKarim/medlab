@@ -4,7 +4,7 @@
         </li>
         @foreach($sidebarCategories as $category)
         <li class="category-menu__item">
-            <a href="#" class="category-menu__link">
+            <a href="{{ route('category.products', ['slug' => $category->slug]) }}" class="category-menu__link">
             <span class="category-menu__thumb">
                 <img src="{{ getImage(getFilePath('category') .'/' . $category->image, '50x50') }}" alt="Category Image">
             </span> {{ $category->name }}

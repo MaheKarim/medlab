@@ -107,8 +107,7 @@
         "builder": true,
         "name": "Blog Section",
         "content": {
-            "heading": "text",
-            "subheading": "text"
+            "heading": "text"
         },
         "element": {
             "images":{

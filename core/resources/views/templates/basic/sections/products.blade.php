@@ -1,7 +1,7 @@
 @php
     $categories = \App\Models\Category::active()
         ->with(['products' => function($query) {
-            $query->active()->orderBy('name')->take(4);
+            $query->active()->orderBy('name')->take(10);
         }])
         ->orderBy('name')
         ->take(10)
@@ -30,15 +30,15 @@
                             <div class="product-card__content">
                                 <p class="product-card__title">{{ $product->name }} <span class="product-size">{{ $product->strength }}</span></p>
 {{--                                <a href="{{ route('product.details', $product->id) }}" class="product-card__text">{{ $product->category->name }}</a>--}}
-                                <a href="#" class="product-card__text">{{ @$product->category->name }}</a>
+                                <a href="{{ route('category.products', $product->category->slug) }}" class="product-card__text">{{ @$product->category->name }}</a>
                                 <p class="product-card__desc">{{ @$product->brand->name }}</p>
                                 <div class="product-card__bottom">
                                     <h6 class="product-card__price">
                                         @if ($product->discount > 0)
                                             {{ getMainPrice($product) }}$
-                                            <span class="old-price">{{ showAmount($product->price) }}</span>
+                                            <span class="old-price">{{ getAmount($product->price) }}</span>
                                         @else
-                                            {{ showAmount($product->price) }}$
+                                            {{ getAmount($product->price) }}$
                                         @endif
                                     </h6>
 {{--                                    <h6 class="product-card__price">{{ $product->price }}$ <span class="old-price">{{ $product->old_price }}$</span></h6>--}}
@@ -47,8 +47,14 @@
                             </div>
                             @if($product->discount > 0)
                                 <span class="product-offer">
-                        {{ $product->discount }}% Off
-                    </span>
+                                            {{ getAmount($product->discount) }}
+                                    @if($product->discount_type == \App\Constants\Status::FLAT_DISCOUNT)
+                                        @lang('Flat')
+                                    @else
+                                        @lang('%')
+                                    @endif
+                                            Off
+                                        </span>
                             @endif
                         </div>
                     </div>

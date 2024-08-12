@@ -504,5 +504,5 @@ function frontendImage($sectionName, $image, $size = null,$seo = false)
         }
     }
 
-    return showAmount($price);
+    return getAmount($price);
 }
