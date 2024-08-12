@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Constants\Status;
 use App\Models\AdminNotification;
+use App\Models\Category;
 use App\Models\Frontend;
 use App\Models\Language;
 use App\Models\Page;
@@ -12,6 +13,7 @@ use App\Models\SupportTicket;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Crypt;
 
 
 class SiteController extends Controller
@@ -39,7 +41,6 @@ class SiteController extends Controller
         return view('Template::pages', compact('pageTitle','sections','seoContents','seoImage'));
     }
 
-
     public function contact()
     {
         $pageTitle = "Contact Us";
@@ -49,7 +50,6 @@ class SiteController extends Controller
         $seoImage = @$seoContents->image ? getImage(getFilePath('seo') . '/' . @$seoContents->image, getFileSize('seo')) : null;
         return view('Template::contact',compact('pageTitle','user','sections','seoContents','seoImage'));
     }
-
 
     public function contactSubmit(Request $request)
     {
@@ -123,7 +123,6 @@ class SiteController extends Controller
         return view('Template::blog_details',compact('blog','pageTitle','seoContents','seoImage'));
     }
 
-
     public function cookieAccept(){
         Cookie::queue('gdpr_cookie',gs('site_name') , 43200);
     }
@@ -172,6 +171,16 @@ class SiteController extends Controller
         }
         $maintenance = Frontend::where('data_keys','maintenance.data')->first();
         return view('Template::maintenance',compact('pageTitle','maintenance'));
+    }
+
+
+    public function categoryProduct($slug)
+    {
+        $category = Category::where('slug', $slug)->firstOrFail();
+        $pageTitle = $category->name;
+        $seoContents = $category->seo_content;
+        $seoImage = @$seoContents->image ? frontendImage('category', $seoContents->image, getFileSize('seo'), true) : null;
+        return view('Template::category_product', compact('category', 'pageTitle', 'seoContents', 'seoImage'));
     }
 
 }

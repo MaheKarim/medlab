@@ -12,17 +12,9 @@
                             @include($activeTemplate.'sections.'.$sec)
                         @endforeach
                     @endif
-
 {{--                    @include($activeTemplate. 'partials.products')--}}
                 </div>
             </div>
         </div>
     </section>
-
-    @include($activeTemplate. 'partials.wishlist')
-
 @endsection
-
-@push('style')
-
-@endpush

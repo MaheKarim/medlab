@@ -42,6 +42,8 @@ class CategoryController extends Controller
         }
 
         $category->name = $request->name;
+        $category->slug = slug($request->name);
+        $category->description = $request->description ?? null;
         $category->status = $request->status ? Status::ENABLE : Status::DISABLE;
         $category->save();
 
@@ -50,5 +52,16 @@ class CategoryController extends Controller
     public function status($id)
     {
         return Category::changeStatus($id);
+    }
+
+    public function checkSlug($id = null){
+        $page = Category::where('slug',request()->slug);
+        if ($id) {
+            $page = $page->where('id','!=',$id);
+        }
+        $exist = $page->exists();
+        return response()->json([
+            'exists'=>$exist
+        ]);
     }
 }

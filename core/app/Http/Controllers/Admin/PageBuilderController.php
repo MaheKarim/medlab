@@ -83,8 +83,6 @@ class PageBuilderController extends Controller
         return back()->withNotify($notify);
     }
 
-
-
     public function manageSection($id)
     {
         $pData = Page::findOrFail($id);
@@ -92,8 +90,6 @@ class PageBuilderController extends Controller
         $sections =  getPageSections(true);
         return view('admin.frontend.builder.index', compact('pageTitle','pData','sections'));
     }
-
-
 
     public function manageSectionUpdate($id, Request $request)
     {
@@ -111,7 +107,6 @@ class PageBuilderController extends Controller
         $notify[] = ['success', 'Page sections updated successfully'];
         return back()->withNotify($notify);
     }
-
 
     public function manageSeo($id){
         $page = Page::findOrFail($id);

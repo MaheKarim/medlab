@@ -8,6 +8,7 @@
         <!--========================== main Section Start ==========================-->
                         @yield('content')
         <!--========================== main Section End ==========================-->
+        @include($activeTemplate. 'partials.wishlist')
 
     </main>
     <!-- Footer -->

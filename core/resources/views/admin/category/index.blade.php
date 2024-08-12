@@ -19,7 +19,9 @@
                             @forelse($categories as $category)
                                 <tr>
                                     <td>
-                                        <img src="{{ getImage(getFilePath('category').'/'. $category->image, getFileSize('category')) }}" class="icon" alt="Image">
+                                        <img
+                                            src="{{ getImage(getFilePath('category').'/'. $category->image, getFileSize('category')) }}"
+                                            class="icon" alt="Image">
                                         {{ $category->name }}
                                     </td>
                                     <td> @php echo $category->statusBadge @endphp</td>
@@ -89,14 +91,30 @@
                     <input type="hidden" name="_method" id="formMethod" value="POST">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="required">@lang('Category Name')</label>
+                            <div class="d-flex justify-content-between">
+                                <label class="required">@lang('Category Name')</label>
+                                <a href="javascript:void(0)" class="buildSlug"><i
+                                        class="las la-link"></i> @lang('Make Slug')
+                                </a>
+                            </div>
                             <input name="name" type="text" class="form-control bg--white pe-2"
                                    placeholder="@lang('Category Name')" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <div class="d-flex justify-content-between">
+                                <label> @lang('Slug')</label>
+                                <div class="slug-verification d-none"></div>
+                            </div>
+                            <input type="text" class="form-control" name="slug" value="{{old('slug')}}" required>
                         </div>
                         <div class="form-group">
                             <label class="required addImageLabel">@lang('Image')</label>
                             <x-image-uploader name="image" type="category" class="w-100" :required=true/>
                         </div>
+                        <div class="form-group">
+                            <label class="required">@lang('Description')</label>
+                            <textarea name="description" class="form-control"  required>{{ old('description') }}
+                            </textarea>
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn--primary h-45 w-100" type="submit">@lang('Submit')</button>
@@ -120,7 +138,7 @@
         'use strict';
         let defaultImage = `{{ getImage(getFilePath('category'), getFileSize('category')) }}`;
         (function ($) {
-            $('.addBtn').on('click', function() {
+            $('.addBtn').on('click', function () {
                 var modal = $('#cuModal');
                 modal.find('.image-upload-preview').css('background-image', `url(${defaultImage})`);
                 modal.find('.image-upload-input').attr('required', true);
@@ -135,5 +153,41 @@
                 modal.find('.addImageLabel').removeClass('required');
             });
         })(jQuery);
+
+        $('.buildSlug').on('click', function () {
+            let closestForm = $(this).closest('form');
+            let title = closestForm.find('[name=name]').val();
+            closestForm.find('[name=slug]').val(title);
+            closestForm.find('[name=slug]').trigger('input');
+        });
+
+        $('[name=slug]').on('input', function () {
+            let closestForm = $(this).closest('form');
+            closestForm.find('[type=submit]').addClass('disabled')
+            let slug = $(this).val();
+            slug = slug.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+            $(this).val(slug);
+            if (slug) {
+                $('.slug-verification').removeClass('d-none');
+                $('.slug-verification').html(`
+                        <small class="text--info"><i class="las la-spinner la-spin"></i> @lang('Checking')</small>
+                    `);
+                $.get("{{ route('admin.category.check.slug') }}", {slug: slug}, function (response) {
+                    if (!response.exists) {
+                        $('.slug-verification').html(`
+                                <small class="text--success"><i class="las la-check"></i> @lang('Available')</small>
+                            `);
+                        closestForm.find('[type=submit]').removeClass('disabled')
+                    }
+                    if (response.exists) {
+                        $('.slug-verification').html(`
+                                <small class="text--danger"><i class="las la-times"></i> @lang('Slug already exists')</small>
+                            `);
+                    }
+                });
+            } else {
+                $('.slug-verification').addClass('d-none');
+            }
+        })
     </script>
 @endpush

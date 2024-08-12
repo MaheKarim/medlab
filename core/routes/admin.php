@@ -86,6 +86,8 @@ Route::middleware('admin')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('store/{id?}', 'store')->name('store');
         Route::post('status/{id}', 'status')->name('status');
+        Route::get('category/check-slug/{id?}', 'checkSlug')->name('check.slug');
+
     });
 
     // Brand Controller

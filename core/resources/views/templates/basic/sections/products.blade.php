@@ -15,8 +15,7 @@
         <div class="section-heading">
             <h5 class="section-heading__title">{{ $category->name }}</h5>
             <div class="section-heading__btn">
-{{--                <a href="{{ route('category.products', $category->id) }}" class="btn btn--base">View all</a>--}}
-                <a href="#" class="btn btn--base">View all</a>
+                <a href="{{ route('category.products', $category->slug) }}" class="btn btn--base">View all</a>
             </div>
         </div>
         <div class="swiper mySwiper">
@@ -31,8 +30,8 @@
                             <div class="product-card__content">
                                 <p class="product-card__title">{{ $product->name }} <span class="product-size">{{ $product->strength }}</span></p>
 {{--                                <a href="{{ route('product.details', $product->id) }}" class="product-card__text">{{ $product->category->name }}</a>--}}
-                                <a href="#" class="product-card__text">{{ $product->category->name }}</a>
-                                <p class="product-card__desc">{{ $product->brand->name }}</p>
+                                <a href="#" class="product-card__text">{{ @$product->category->name }}</a>
+                                <p class="product-card__desc">{{ @$product->brand->name }}</p>
                                 <div class="product-card__bottom">
                                     <h6 class="product-card__price">
                                         @if ($product->discount > 0)
