@@ -32,7 +32,7 @@
                                                     {{ getAmount($product->price) }}$
                                                 @endif
                                             </h6>
-                                            <span class="add-cart"> Add to cart </span>
+                                            <span class="add-cart" data-product-id="{{ $product->id }}">@lang('Add To Cart') </span>
                                         </div>
                                     </div>
                                     @if($product->discount > 0)

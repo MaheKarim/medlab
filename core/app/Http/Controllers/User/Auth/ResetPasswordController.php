@@ -54,7 +54,6 @@ class ResetPasswordController extends Controller
         return to_route('user.login')->withNotify($notify);
     }
 
-
     protected function rules()
     {
         $passwordValidation = Password::min(6);

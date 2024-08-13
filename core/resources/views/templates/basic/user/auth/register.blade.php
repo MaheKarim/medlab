@@ -15,16 +15,6 @@
                                 <form action="{{ route('user.register') }}" method="POST" class="verify-gcaptcha disableSubmission">
                                     @csrf
                                     <div class="row">
-                                        @if (session()->get('reference') != null)
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="referenceBy" class="form-label">@lang('Reference by')</label>
-                                                    <input type="text" name="referBy" id="referenceBy" class="form-control form--control"
-                                                           value="{{ session()->get('reference') }}" readonly>
-                                                </div>
-                                            </div>
-                                        @endif
-
                                         <div class="form-group col-sm-6">
                                             <label class="form-label">@lang('First Name')</label>
                                             <input type="text" class="form-control form--control" name="firstname" value="{{old("firstname")}}" required>

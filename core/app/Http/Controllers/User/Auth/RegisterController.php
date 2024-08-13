@@ -32,7 +32,6 @@ class RegisterController extends Controller
         return view('Template::user.auth.register', compact('pageTitle'));
     }
 
-
     protected function validator(array $data)
     {
 
@@ -78,7 +77,6 @@ class RegisterController extends Controller
         }
 
 
-
         event(new Registered($user = $this->create($request->all())));
 
         $this->guard()->login($user);
@@ -86,8 +84,6 @@ class RegisterController extends Controller
         return $this->registered($request, $user)
             ?: redirect($this->redirectPath());
     }
-
-
 
     protected function create(array $data)
     {
@@ -105,7 +101,6 @@ class RegisterController extends Controller
         $user->lastname  = $data['lastname'];
         $user->password  = Hash::make($data['password']);
         $user->ref_by    = $referUser ? $referUser->id : 0;
-        $user->kv = gs('kv') ? Status::NO : Status::YES;
         $user->ev = gs('ev') ? Status::NO : Status::YES;
         $user->sv = gs('sv') ? Status::NO : Status::YES;
         $user->ts = Status::DISABLE;
