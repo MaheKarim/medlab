@@ -28,55 +28,6 @@ class UserController extends Controller
         return view('Template::user.deposit_history', compact('pageTitle', 'deposits'));
     }
 
-    public function show2faForm()
-    {
-        $ga = new GoogleAuthenticator();
-        $user = auth()->user();
-        $secret = $ga->createSecret();
-        $qrCodeUrl = $ga->getQRCodeGoogleUrl($user->username . '@' . gs('site_name'), $secret);
-        $pageTitle = '2FA Security';
-        return view('Template::user.twofactor', compact('pageTitle', 'secret', 'qrCodeUrl'));
-    }
-
-    public function create2fa(Request $request)
-    {
-        $user = auth()->user();
-        $request->validate([
-            'key' => 'required',
-            'code' => 'required',
-        ]);
-        $response = verifyG2fa($user,$request->code,$request->key);
-        if ($response) {
-            $user->tsc = $request->key;
-            $user->ts = Status::ENABLE;
-            $user->save();
-            $notify[] = ['success', 'Two factor authenticator activated successfully'];
-            return back()->withNotify($notify);
-        } else {
-            $notify[] = ['error', 'Wrong verification code'];
-            return back()->withNotify($notify);
-        }
-    }
-
-    public function disable2fa(Request $request)
-    {
-        $request->validate([
-            'code' => 'required',
-        ]);
-
-        $user = auth()->user();
-        $response = verifyG2fa($user,$request->code);
-        if ($response) {
-            $user->tsc = null;
-            $user->ts = Status::DISABLE;
-            $user->save();
-            $notify[] = ['success', 'Two factor authenticator deactivated successfully'];
-        } else {
-            $notify[] = ['error', 'Wrong verification code'];
-        }
-        return back()->withNotify($notify);
-    }
-
     public function transactions()
     {
         $pageTitle = 'Transactions';
@@ -85,53 +36,6 @@ class UserController extends Controller
         $transactions = Transaction::where('user_id',auth()->id())->searchable(['trx'])->filter(['trx_type','remark'])->orderBy('id','desc')->paginate(getPaginate());
 
         return view('Template::user.transactions', compact('pageTitle','transactions','remarks'));
-    }
-
-    public function kycForm()
-    {
-        if (auth()->user()->kv == Status::KYC_PENDING) {
-            $notify[] = ['error','Your KYC is under review'];
-            return to_route('user.home')->withNotify($notify);
-        }
-        if (auth()->user()->kv == Status::KYC_VERIFIED) {
-            $notify[] = ['error','You are already KYC verified'];
-            return to_route('user.home')->withNotify($notify);
-        }
-        $pageTitle = 'KYC Form';
-        $form = Form::where('act','kyc')->first();
-        return view('Template::user.kyc.form', compact('pageTitle','form'));
-    }
-
-    public function kycData()
-    {
-        $user = auth()->user();
-        $pageTitle = 'KYC Data';
-        abort_if($user->kv == Status::VERIFIED,403);
-        return view('Template::user.kyc.info', compact('pageTitle','user'));
-    }
-
-    public function kycSubmit(Request $request)
-    {
-        $form = Form::where('act','kyc')->firstOrFail();
-        $formData = $form->form_data;
-        $formProcessor = new FormProcessor();
-        $validationRule = $formProcessor->valueValidation($formData);
-        $request->validate($validationRule);
-        $user = auth()->user();
-        foreach (@$user->kyc_data ?? [] as $kycData) {
-            if ($kycData->type == 'file') {
-                fileManager()->removeFile(getFilePath('verify').'/'.$kycData->value);
-            }
-        }
-        $userData = $formProcessor->processFormData($request, $formData);
-        $user->kyc_data = $userData;
-        $user->kyc_rejection_reason = null;
-        $user->kv = Status::KYC_PENDING;
-        $user->save();
-
-        $notify[] = ['success','KYC data submitted successfully'];
-        return to_route('user.home')->withNotify($notify);
-
     }
 
     public function userData()
@@ -196,7 +100,6 @@ class UserController extends Controller
 
         return to_route('user.home');
     }
-
 
     public function addDeviceToken(Request $request)
     {

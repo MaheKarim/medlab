@@ -12,7 +12,7 @@
             <div class="header__button ms-auto">
                 <ul class="login-registration-list d-flex flex-wrap align-items-center">
                     <li class="login-registration-list__item">
-                        <a href="login.html" class="login-registration-list__link"> <span class="icon"><i class="las la-user-circle"></i> </span> <span class="d-lg-block d-none">Login </span></a>
+                        <a href="{{ url('user/login') }}" class="login-registration-list__link"> <span class="icon"><i class="las la-user-circle"></i> </span> <span class="d-lg-block d-none">Login </span></a>
                     </li>
                     <li class="cart">
                         <a href="#" class="cart-icon">

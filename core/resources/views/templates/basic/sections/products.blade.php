@@ -24,7 +24,7 @@
                     <div class="swiper-slide">
                         <div class="product-card">
 {{--                            <a href="{{ route('product.details', $product->id) }}" class="product-card__thumb">--}}
-                            <a href="#" class="product-card__thumb">
+                            <a href="{{ route('product.details', $product->id) }}" class="product-card__thumb">
                                 <img src="{{ getImage(getFilePath('product') . '/'. $product->image, getFileSize('product')) }}" alt="{{ $product->name }}">
                             </a>
                             <div class="product-card__content">

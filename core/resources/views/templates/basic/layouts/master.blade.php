@@ -323,19 +323,6 @@
                             </div>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @lang('Withdraw')
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item"
-                                    href="{{ route('user.withdraw') }}">@lang('Withdraw Money')</a>
-                                <a class="dropdown-item"
-                                    href="{{ route('user.withdraw.history') }}">@lang('Withdraw
-                                    Log')</a>
-                            </div>
-                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('user.transactions') }}">@lang('Transactions')</a>
@@ -354,11 +341,6 @@
                                 <a class="dropdown-item" href="{{ route('user.change.password') }}">
                                     @lang('Change Password')
                                 </a>
-                                <a class="dropdown-item" href="{{ route('user.twofactor') }}">
-                                    @lang('2FA Security')
-                                </a>
-
-
                                 <a class="dropdown-item" href="{{ route('user.logout') }}">
                                     @lang('Logout')
                                 </a>

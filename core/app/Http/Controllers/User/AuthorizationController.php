@@ -43,7 +43,7 @@ class AuthorizationController extends Controller
             return to_route('user.home');
         }
 
-        if (!$this->checkCodeValidity($user) && ($type != '2fa') && ($type != 'ban')) {
+        if (!$this->checkCodeValidity($user) &&  ($type != 'ban')) {
             $user->ver_code = verificationCode(6);
             $user->ver_code_send_at = Carbon::now();
             $user->save();
@@ -125,19 +125,4 @@ class AuthorizationController extends Controller
         throw ValidationException::withMessages(['code' => 'Verification code didn\'t match!']);
     }
 
-    public function g2faVerification(Request $request)
-    {
-        $user = auth()->user();
-        $request->validate([
-            'code' => 'required',
-        ]);
-        $response = verifyG2fa($user,$request->code);
-        if ($response) {
-            $redirection = Intended::getRedirection();
-            return $redirection ? $redirection : to_route('user.home');
-        }else{
-            $notify[] = ['error','Wrong verification code'];
-            return back()->withNotify($notify);
-        }
-    }
 }

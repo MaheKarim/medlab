@@ -173,15 +173,5 @@
             "contact_details": "text",
             "contact_number": "text"
         }
-    },
-    "kyc": {
-        "builder": true,
-        "no_selection": true,
-        "name": "KYC Content",
-        "content": {
-            "required": "text",
-            "pending": "text",
-            "reject": "text"
-        }
     }
 }

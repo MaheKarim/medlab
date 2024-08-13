@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Frontend;
 use App\Models\Language;
 use App\Models\Page;
+use App\Models\Product;
 use App\Models\SupportMessage;
 use App\Models\SupportTicket;
 use Carbon\Carbon;
@@ -198,6 +199,16 @@ class SiteController extends Controller
         $categories = Category::active()->orderBy('name')->paginate(getPaginate());
 
         return view('Template::categories', compact('pageTitle', 'categories'));
+    }
+
+
+    public function productDetails($id)
+    {
+        $product = Product::where('id', $id)->where('status', Status::ENABLE)->firstOrFail();
+        $pageTitle = $product->name;
+        $seoContents = $product->seo_content;
+        $seoImage = @$seoContents->image ? frontendImage('product', $seoContents->image, getFileSize('seo'), true) : null;
+        return view('Template::product_details', compact('product', 'pageTitle', 'seoContents', 'seoImage'));
     }
 
 }

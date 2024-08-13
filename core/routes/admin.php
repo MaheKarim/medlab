@@ -106,14 +106,6 @@ Route::middleware('admin')->group(function () {
         Route::post('status/{id}', 'status')->name('status');
     });
 
-    // Subscriber
-    Route::controller('SubscriberController')->prefix('subscriber')->name('subscriber.')->group(function(){
-        Route::get('/', 'index')->name('index');
-        Route::get('send-email', 'sendEmailForm')->name('send.email');
-        Route::post('remove/{id}', 'remove')->name('remove');
-        Route::post('send-email', 'sendEmail')->name('send.email');
-    });
-
     // Deposit Gateway
     Route::name('gateway.')->prefix('gateway')->group(function(){
         // Automatic Gateway
@@ -228,34 +220,9 @@ Route::middleware('admin')->group(function () {
         Route::get('maintenance-mode','maintenanceMode')->name('maintenance.mode');
         Route::post('maintenance-mode','maintenanceModeSubmit');
 
-        //In app purchase
-        Route::get('in-app-purchase','inAppPurchase')->name('setting.app.purchase');
-        Route::post('in-app-purchase','inAppPurchaseConfigure');
-        Route::get('in-app-purchase/file/download','inAppPurchaseFileDownload')->name('setting.app.purchase.file.download');
-
     });
 
 
-    Route::controller('CronConfigurationController')->name('cron.')->prefix('cron')->group(function () {
-        Route::get('index', 'cronJobs')->name('index');
-        Route::post('store', 'cronJobStore')->name('store');
-        Route::post('update', 'cronJobUpdate')->name('update');
-        Route::post('delete/{id}', 'cronJobDelete')->name('delete');
-        Route::get('schedule', 'schedule')->name('schedule');
-        Route::post('schedule/store', 'scheduleStore')->name('schedule.store');
-        Route::post('schedule/status/{id}', 'scheduleStatus')->name('schedule.status');
-        Route::get('schedule/pause/{id}', 'schedulePause')->name('schedule.pause');
-        Route::get('schedule/logs/{id}', 'scheduleLogs')->name('schedule.logs');
-        Route::post('schedule/log/resolved/{id}', 'scheduleLogResolved')->name('schedule.log.resolved');
-        Route::post('schedule/log/flush/{id}', 'logFlush')->name('log.flush');
-    });
-
-
-    //KYC setting
-    Route::controller('KycController')->group(function(){
-        Route::get('kyc-setting','setting')->name('kyc.setting');
-        Route::post('kyc-setting','settingUpdate');
-    });
 
     //Notification Setting
     Route::name('setting.notification.')->controller('NotificationController')->prefix('notification')->group(function(){
@@ -296,7 +263,6 @@ Route::middleware('admin')->group(function () {
         Route::post('status/{id}', 'status')->name('status');
     });
 
-
     //System Information
     Route::controller('SystemController')->name('system.')->prefix('system')->group(function(){
         Route::get('info','systemInfo')->name('info');
@@ -307,7 +273,6 @@ Route::middleware('admin')->group(function () {
         Route::post('system-update','systemUpdateProcess')->name('update.process');
         Route::get('system-update/log','systemUpdateLog')->name('update.log');
     });
-
 
     // SEO
     Route::get('seo', 'FrontendController@seoEdit')->name('seo');

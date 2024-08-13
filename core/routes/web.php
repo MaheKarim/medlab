@@ -46,4 +46,5 @@ Route::controller('SiteController')->group(function () {
     // Product Category
     Route::get('/category/{slug}', 'categoryProduct')->name('category.products');
     Route::get('all/categories', 'categories')->name('all.category');
+    Route::get('/product/{id}', 'productDetails')->name('product.details');
 });

@@ -44,7 +44,6 @@ Route::middleware('auth')->name('user.')->group(function () {
         Route::get('resend-verify/{type}', 'sendVerifyCode')->name('send.verify.code');
         Route::post('verify-email', 'emailVerification')->name('verify.email');
         Route::post('verify-mobile', 'mobileVerification')->name('verify.mobile');
-        Route::post('verify-g2fa', 'g2faVerification')->name('2fa.verify');
     });
 
     Route::middleware(['check.status','registration.complete'])->group(function () {
@@ -55,15 +54,6 @@ Route::middleware('auth')->name('user.')->group(function () {
                 Route::get('dashboard', 'home')->name('home');
                 Route::get('download-attachments/{file_hash}', 'downloadAttachment')->name('download.attachment');
 
-                //2FA
-                Route::get('twofactor', 'show2faForm')->name('twofactor');
-                Route::post('twofactor/enable', 'create2fa')->name('twofactor.enable');
-                Route::post('twofactor/disable', 'disable2fa')->name('twofactor.disable');
-
-                //KYC
-                Route::get('kyc-form','kycForm')->name('kyc.form');
-                Route::get('kyc-data','kycData')->name('kyc.data');
-                Route::post('kyc-submit','kycSubmit')->name('kyc.submit');
 
                 //Report
                 Route::any('deposit/history', 'depositHistory')->name('deposit.history');
@@ -78,18 +68,6 @@ Route::middleware('auth')->name('user.')->group(function () {
                 Route::post('profile-setting', 'submitProfile');
                 Route::get('change-password', 'changePassword')->name('change.password');
                 Route::post('change-password', 'submitPassword');
-            });
-
-
-            // Withdraw
-            Route::controller('WithdrawController')->prefix('withdraw')->name('withdraw')->group(function(){
-                Route::middleware('kyc')->group(function(){
-                    Route::get('/', 'withdrawMoney');
-                    Route::post('/', 'withdrawStore')->name('.money');
-                    Route::get('preview', 'withdrawPreview')->name('.preview');
-                    Route::post('preview', 'withdrawSubmit')->name('.submit');
-                });
-                Route::get('history', 'withdrawLog')->name('.history');
             });
         });
 

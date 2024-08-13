@@ -17,7 +17,7 @@
                             @foreach($category->products as $product)
                             <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6">
                                 <div class="product-card">
-                                    <a href="product-details.html" class="product-card__thumb">
+                                    <a href="{{ route('product.details', $product->id) }}" class="product-card__thumb">
                                         <img src="{{ getImage(getFilePath('product') . '/' . $product->image) }}" alt="Product Image">
                                     </a>
                                     <div class="product-card__content">

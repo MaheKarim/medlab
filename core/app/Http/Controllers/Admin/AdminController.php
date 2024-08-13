@@ -49,12 +49,8 @@ class AdminController extends Controller
         $deposit['total_deposit_rejected']      = Deposit::rejected()->count();
         $deposit['total_deposit_charge']        = Deposit::successful()->sum('charge');
 
-        $withdrawals['total_withdraw_amount']   = Withdrawal::approved()->sum('amount');
-        $withdrawals['total_withdraw_pending']  = Withdrawal::pending()->count();
-        $withdrawals['total_withdraw_rejected'] = Withdrawal::rejected()->count();
-        $withdrawals['total_withdraw_charge']   = Withdrawal::approved()->sum('charge');
 
-        return view('admin.dashboard', compact('pageTitle', 'widget', 'chart','deposit','withdrawals'));
+        return view('admin.dashboard', compact('pageTitle', 'widget', 'chart','deposit'));
     }
 
 
@@ -179,7 +175,6 @@ class AdminController extends Controller
         return response()->json($report);
     }
 
-
     private function getAllDates($startDate, $endDate) {
         $dates = [];
         $currentDate = new \DateTime($startDate);
@@ -210,7 +205,6 @@ class AdminController extends Controller
 
         return $months;
     }
-
 
     public function profile()
     {
@@ -277,7 +271,6 @@ class AdminController extends Controller
         $pageTitle = 'Notifications';
         return view('admin.notifications',compact('pageTitle','notifications','hasUnread','hasNotification'));
     }
-
 
     public function notificationRead($id){
         $notification = AdminNotification::findOrFail($id);
