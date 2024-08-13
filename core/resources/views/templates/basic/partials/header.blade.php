@@ -11,9 +11,16 @@
             </form>
             <div class="header__button ms-auto">
                 <ul class="login-registration-list d-flex flex-wrap align-items-center">
-                    <li class="login-registration-list__item">
-                        <a href="{{ url('user/login') }}" class="login-registration-list__link"> <span class="icon"><i class="las la-user-circle"></i> </span> <span class="d-lg-block d-none">Login </span></a>
-                    </li>
+                    @if(auth()->user())
+                        <li class="login-registration-list__item">
+                            <a href="{{ route('user.home') }}" class="login-registration-list__link"> <span class="icon"><i class="las la-user-circle"></i> </span> <span class="d-lg-block d-none">Dashboard </span></a>
+                        </li>
+                        @else
+                        <li class="login-registration-list__item">
+                            <a href="{{ route('user.login') }}" class="login-registration-list__link"> <span class="icon"><i class="las la-user-circle"></i> </span> <span class="d-lg-block d-none">Login </span></a>
+                        </li>
+                    @endif
+
                     <li class="cart">
                         <a href="#" class="cart-icon">
                             <i class="las la-shopping-bag"></i>

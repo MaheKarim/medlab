@@ -33,7 +33,7 @@
                         <div class="col-lg-6 ps-lg-5">
                             <div class="product-details__right">
                                 <h3 class="product-details__right-title"> {{ __($product->name) }} </h3>
-                                <span class="product-details__text"> Sanitary Napkin </span>
+                                <span class="product-details__text"> {{ $product->generic_name }} </span>
                                 <h6 class="product-price"> Price {{ getAmount($product->price) }}</h6>
                                 <p class="product-details__right-desc">
                                     {{ __($product->summary) }}
@@ -93,7 +93,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <!-- ==================== product details End Here ==================== -->
