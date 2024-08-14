@@ -5821,4 +5821,15 @@ input[type=number] {
     }
 }
 /* ============================================ Account Css End ====================================*/
-/*# sourceMappingURL=main.css.map */
+.social-login-btn{
+    color: hsl(var(--black)) !important;
+}
+.social-login-btn:hover{
+    border: 1px solid hsl(var(--base));
+}
+
+label.required:after{
+    content: '*';
+    color: #DC3545!important;
+    margin-left: 2px;
+}

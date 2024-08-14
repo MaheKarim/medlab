@@ -56,9 +56,6 @@
   }
 }
 
-
-
-
 .cookies-card {
   width: 520px;
   padding: 30px;
@@ -119,9 +116,6 @@
     padding: 15px;
   }
 }
-
-
-
 
 .hover-input-popup {
   position: relative;
@@ -197,8 +191,6 @@
   color: #28c76f;
 }
 
-
-
 .show-filter {
   display: none;
 }
@@ -213,7 +205,6 @@
     display: block;
   }
 }
-
 
 
 /* ////////////////// select 2 css //////////////// */
@@ -337,7 +328,6 @@
   border-radius: .375rem !important;
 }
 
-
 .gateway-card {
   padding: 15px;
 }
@@ -363,7 +353,6 @@
   height: 100%;
 
 }
-
 
 .payment-system-list.is-scrollable {
   max-height: min(388px, 70vh);
@@ -454,7 +443,6 @@
   max-height: var(--thumb-height);
   object-fit: cover;
 }
-
 
 .deposit-info {
   display: flex;
