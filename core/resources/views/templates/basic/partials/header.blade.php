@@ -1,7 +1,7 @@
 <header class="header" id="header">
     <div class="container">
         <nav class="d-flex align-items-center">
-            <a class="navbar-brand logo" href="{{ url('/') }}"><img src="{{ siteLogo() }}" alt=""></a>
+            <a class="navbar-brand logo" href="{{ route('home') }}"><img src="{{ siteLogo() }}" alt=""></a>
             <form action="#" autocomplete="off" class="search-box-wrapper">
                 <button type="button" class="search-icon  d-block d-lg-none"><i class="las la-search"></i></button>
                 <div class="search-field">
@@ -29,9 +29,9 @@
                     </li>
                 </ul>
             </div>
-            <button class="navbar-toggler header-button">
-                <span><i class="las la-bars"></i></span>
-            </button>
+{{--            <button class="navbar-toggler header-button">--}}
+{{--                <span><i class="las la-bars"></i></span>--}}
+{{--            </button>--}}
         </nav>
     </div>
 </header>

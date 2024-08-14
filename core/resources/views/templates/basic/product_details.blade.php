@@ -8,7 +8,7 @@
                     <ul class="link-list">
                         <li class="link-list__item"><a href="{{ url('/') }}" class="link"> @lang('Home') <i class="las la-angle-right"></i></a></li>
                         <li class="link-list__item"><a href="{{ route('category.products', $product->category->slug) }}" class="link">{{ $product->category->name }}  <i class="las la-angle-right"></i></a></li>
-                        <li class="link-list__item"> Product Details </li>
+                        <li class="link-list__item"> @lang('Product Details') </li>
                     </ul>
                     <div class="row gy-4">
                         <div class="col-lg-6 pe-lg-5">
@@ -33,7 +33,7 @@
                         <div class="col-lg-6 ps-lg-5">
                             <div class="product-details__right">
                                 <h3 class="product-details__right-title"> {{ __($product->name) }} </h3>
-                                <span class="product-details__text"> {{ $product->generic_name }} </span>
+                                <span class="product-details__text"> {{ __($product->generic_name) }} </span>
                                 <h6 class="product-price"> Price {{ getAmount($product->price) }}</h6>
                                 <p class="product-details__right-desc">
                                     {{ __($product->summary) }}
@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 <div class="product-details__btn">
-                                    <button class="btn btn--base w-100 cart-add-btn" data-product-id="{{ $product->id }}">Add Cart</button>
+                                    <button class="btn btn--base w-100 cart-add-btn" data-product-id="{{ $product->id }}">@lang('Add Cart')</button>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                                     <div class="tab-pane fade show active" id="pills-descrip" role="tabpanel" aria-labelledby="pills-descrip-tab" tabindex="0">
                                         <div class="product-description">
                                             <p class="product-description__desc">
-                                                @php echo $product->description; @endphp
+                                                @php echo __($product->description); @endphp
                                             </p>
                                         </div>
                                     </div>
@@ -77,7 +77,7 @@
                                     <div class="tab-pane fade" id="pills-seller" role="tabpanel" aria-labelledby="pills-seller-tab" tabindex="0">
                                         <div class="benefit">
                                             <p class="benefit__desc mb-0">
-                                                @php echo $product->benefits; @endphp
+                                                @php echo __($product->benefits); @endphp
                                             </p>
                                         </div>
                                     </div>
@@ -85,7 +85,7 @@
                                     <div class="tab-pane fade" id="pills-service" role="tabpanel" aria-labelledby="pills-service-tab" tabindex="0">
                                         <div class="service-wrapper mt-0">
                                             <div class="service-item">
-                                                <p class="service-item__desc"> @php echo $product->service @endphp </p>
+                                                <p class="service-item__desc"> @php echo __($product->service) @endphp </p>
                                             </div>
                                         </div>
                                     </div>

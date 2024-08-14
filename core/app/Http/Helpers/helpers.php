@@ -506,3 +506,33 @@ function frontendImage($sectionName, $image, $size = null,$seo = false)
 
     return getAmount($price);
 }
+
+function productPrice($product)
+{
+    $discountPrice = showDiscountPrice($product->price, $product->discount, $product->discount_type);
+
+    if ($product->today_deals == Status::YES) {
+        $general = gs();
+        $discountPrice = showDiscountPrice($product->price, $general->discount, $general->discount_type);
+    }
+
+    if ($discountPrice < 0) {
+        $discountPrice = 0;
+    }
+
+    return $discountPrice;
+}
+
+function showDiscountPrice($price, $discount, $discount_type)
+{
+    if ($discount != 0) {
+        if ($discount_type == 1) {
+            $discountPrice = $price - $discount;
+        } else {
+            $discountPrice = $price - ($price * $discount / 100);
+        }
+        return $discountPrice;
+    }
+
+    return $price;
+}

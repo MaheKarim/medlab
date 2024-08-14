@@ -21,9 +21,9 @@
                                         <img src="{{ getImage(getFilePath('product') . '/' . $product->image) }}" alt="Product Image">
                                     </a>
                                     <div class="product-card__content">
-                                        <p class="product-card__title"> {{ $product->name }} </p>
-                                        <a href="#" class="product-card__text"> {{ $product->generic_name }} </a>
-                                        <p class="product-card__desc"> {{ $product->brand->name }} </p>
+                                        <p class="product-card__title"> {{ __($product->name) }} </p>
+                                        <a href="#" class="product-card__text"> {{ __($product->generic_name) }} </a>
+                                        <p class="product-card__desc"> {{ __($product->brand->name) }} </p>
                                         <div class="product-card__bottom">
                                             <h6 class="product-card__price">  @if ($product->discount > 0)
                                                     {{ getMainPrice($product) }}$
@@ -53,16 +53,16 @@
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
                                 <li class="page-item">
-                                    @if($products->hasPages())
-                                        <a class="page-link" href="{{ paginateLinks($products) }}">
-                                            <i class="las la-angle-left"></i>
-                                        </a>
-                                     @endif
+{{--                                    @if($products->hasPages())--}}
+{{--                                        <a class="page-link" href="{{ paginateLinks($products) }}">--}}
+{{--                                            <i class="las la-angle-left"></i>--}}
+{{--                                        </a>--}}
+{{--                                     @endif--}}
                                 </li>
                             </ul>
                         </nav>
                         <div class="service-item">
-                            <h3 class="service-item__title">  {{ $category->name }}   </h3>
+                            <h3 class="service-item__title">  {{ __($category->name) }}   </h3>
                             <p class="service-item__desc"> {{ __($category->description) }} </p>
                         </div>
                         @else

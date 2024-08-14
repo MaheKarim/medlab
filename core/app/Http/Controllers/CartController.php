@@ -11,28 +11,36 @@ class CartController extends Controller
 {
     public function addToCart(Request $request)
     {
-        $validator=Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'product_id' => 'required',
-            'quantity' => 'required'
+            'quantity' => 'required|integer|min:1'
         ]);
 
-
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json([
                 'success' => false,
                 'message' => $validator->errors()->all()
             ]);
         }
+
         $product = Product::active()->find($request->product_id);
 
-        if(!$product){
+        if (!$product) {
             return response()->json([
-                'status' => false,
+                'success' => false,
                 'message' => "Product not found"
             ]);
         }
-        $userId = auth()->user()->id ?? null;
 
+        // Check Product Quantity
+        if ($product->quantity < $request->quantity) {
+            return response()->json([
+                'success' => false,
+                'message' => "Product stock is not available!"
+            ]);
+        }
+
+        $userId = auth()->user()->id ?? null;
 
         $sessionId = session()->get('session_id');
         if ($sessionId == null) {
@@ -41,18 +49,13 @@ class CartController extends Controller
         }
 
         if ($userId != null) {
-            $cart = Cart::where('user_id', $userId)->where('product_id', $request->product_id)->first();
+            $cart = Cart::where('user_id', $userId)
+                ->where('product_id', $request->product_id)
+                ->first();
         } else {
-            $cart = Cart::where('session_id', $sessionId)->where('product_id', $request->product_id)->first();
-        }
-
-        // Check Product Quantity
-        if ($product->quantity < $request->quantity) {
-            return response()->json([
-                'status' => false,
-                'message' => "Product stock is not available!"
-            ]);
-
+            $cart = Cart::where('session_id', $sessionId)
+                ->where('product_id', $request->product_id)
+                ->first();
         }
 
         if ($cart) {
@@ -68,24 +71,26 @@ class CartController extends Controller
             $cart->save();
         }
 
+        if ($userId != null) {
+            $totalCartItems = Cart::where('user_id', $userId)->with(['product'])
+                ->sum('quantity');
+        } else {
+            $totalCartItems = Cart::where('session_id', $sessionId)->with(['product'])
+                ->sum('quantity');
+        }
 
-
-        $totalCartItem=5;
-        $notify[] = ['success', 'Product added to cart successfully!'];
         return response()->json([
             'success' => true,
             'message' => 'Product added to cart successfully!',
-            'total_cart_item' => $totalCartItem
+            'totalCartItem' => $totalCartItems
         ]);
-
     }
-
 
     public function getCartTotal()
     {
         $userId    = auth()->user()->id ?? null;
         if ($userId != null) {
-            $total_cart = Cart::where('user_id', $userId)
+            $totalCart = Cart::where('user_id', $userId)
                 ->with(['product'])
                 ->whereHas('product', function ($q) {
                     return $q->whereHas('category');
@@ -94,13 +99,87 @@ class CartController extends Controller
         } else {
             $sessionId = session()->get('session_id');
 
-            $total_cart = Cart::where('session_id', $sessionId)
+            $totalCart = Cart::where('session_id', $sessionId)
                 ->with(['product'])
                 ->whereHas('product', function ($q) {
                     return $q->whereHas('category');
                 })
                 ->get();
         }
-        return $total_cart->count();
+        return $totalCart->count();
+    }
+
+    public function cart()
+    {
+        $pageTitle = 'Cart';
+        $userId = auth()->user()->id ?? null;
+        $sessionId = session()->get('session_id');
+
+        if ($userId) {
+            $carts = Cart::where('user_id', $userId)
+                ->with('product')
+                ->get();
+        } else {
+            $carts = Cart::where('session_id', $sessionId)
+                ->with('product')
+                ->get();
+        }
+
+        return view('Template::cart_view', compact('pageTitle','carts'));
+    }
+
+    public function remove(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'product_id' => 'required|integer',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()]);
+        }
+
+        $userId = auth()->id();
+
+        if ($userId) {
+            $cart = Cart::where('user_id', $userId)->where('product_id', $request->product_id)->first();
+            $cart->delete();
+        } else {
+            $cart = session()->get('cart');
+            unset($cart[$request->product_id]);
+            session()->put('cart', $cart);
+        }
+
+        return response()->json(['success' => 'Product was successfully removed.']);
+    }
+
+    public function update(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'product_id' => 'required|integer',
+            'quantity'   => 'required|integer|gt:0',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()]);
+        }
+
+        $product = Product::active()->find($request->product_id);
+        $userId  = auth()->id();
+
+        if ($request->quantity > $product->quantity) {
+            return response()->json(['error' => 'Requested quantity is not available in our stock.']);
+        }
+
+        if ($userId) {
+            $cart           = Cart::where('user_id', $userId)->where('product_id', $request->product_id)->first();
+            $cart->quantity = $request->quantity;
+            $cart->save();
+        } else {
+            $cart                                   = session()->get('cart');
+            $cart[$request->product_id]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
+        }
+
+        return response()->json(['success' => 'Cart was successfully updated.']);
     }
 }

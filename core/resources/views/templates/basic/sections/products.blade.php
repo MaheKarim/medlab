@@ -23,15 +23,13 @@
                 @foreach($category->products as $product)
                     <div class="swiper-slide">
                         <div class="product-card">
-{{--                            <a href="{{ route('product.details', $product->id) }}" class="product-card__thumb">--}}
                             <a href="{{ route('product.details', $product->id) }}" class="product-card__thumb">
                                 <img src="{{ getImage(getFilePath('product') . '/'. $product->image, getFileSize('product')) }}" alt="{{ $product->name }}">
                             </a>
                             <div class="product-card__content">
-                                <p class="product-card__title">{{ $product->name }} <span class="product-size">{{ $product->strength }}</span></p>
-{{--                                <a href="{{ route('product.details', $product->id) }}" class="product-card__text">{{ $product->category->name }}</a>--}}
+                                <p class="product-card__title">{{ __($product->name) }} <span class="product-size">{{ __($product->strength) }}</span></p>
                                 <a href="{{ route('category.products', $product->category->slug) }}" class="product-card__text">{{ @$product->category->name }}</a>
-                                <p class="product-card__desc">{{ @$product->brand->name }}</p>
+                                <p class="product-card__desc">{{ __(@$product->brand->name) }}</p>
                                 <div class="product-card__bottom">
                                     <h6 class="product-card__price">
                                         @if ($product->discount > 0)

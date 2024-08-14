@@ -1,4 +1,3 @@
-<!-- Header -->
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}" itemscope itemtype="http://schema.org/WebPage">
 
@@ -12,7 +11,6 @@
     <title> {{ gs()->siteName(__($pageTitle)) }} </title>
 
     @include('partials.seo')
-
 
     <!-- Bootstrap -->
     <link href="{{ asset('assets/global/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -79,9 +77,26 @@
 <a class="scroll-top"><i class="fas fa-angle-double-up"></i></a>
 <!-- ==================== Scroll to Top End Here ==================== -->
 <!-- ==================== Header Start Here ==================== -->
+@stack('fbComment')
 
 @yield('app')
 
+@php
+    $cookie = App\Models\Frontend::where('data_keys','cookie.data')->first();
+@endphp
+@if(($cookie->data_values->status == Status::ENABLE) && !\Cookie::get('gdpr_cookie'))
+    <!-- cookies dark version start -->
+    <div class="cookies-card text-center hide">
+        <div class="cookies-card__icon bg--base">
+            <i class="las la-cookie-bite"></i>
+        </div>
+        <p class="mt-4 cookies-card__content">{{ $cookie->data_values->short_desc }} <a href="{{ route('cookie.policy') }}" target="_blank">@lang('learn more')</a></p>
+        <div class="cookies-card__btn mt-4">
+            <a href="javascript:void(0)" class="btn btn--base w-100 policy">@lang('Allow')</a>
+        </div>
+    </div>
+    <!-- cookies dark version end -->
+@endif
 
 <!-- Jquery js -->
 <script src="{{ asset('assets/global/js/jquery-3.7.1.min.js')}}"></script>
@@ -145,7 +160,8 @@
                 },
                 success: function (response) {
                     if (response.success) {
-                        $('.cart-count').text(response.total_cart_item);
+                        $('.cart-count').text(response.totalCartItem);
+                        notify('success', response.message);
                     }else{
                         notify('error', response.message);
                     }
@@ -159,7 +175,6 @@
                 dataType: "json",
                 success: function (response) {
                     $('.cart-count').text(response);
-                    console.log(response);
                 }
             });
         }
