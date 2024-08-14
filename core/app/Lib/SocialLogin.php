@@ -125,14 +125,10 @@ class SocialLogin
         $newUser->password = Hash::make($password);
         $newUser->firstname = $firstName;
         $newUser->lastname = $lastName;
-        $user->ref_by    = $referUser ? $referUser->id : 0;
 
         $newUser->status = Status::VERIFIED;
-        $newUser->kv = $general->kv ? Status::NO : Status::YES;
         $newUser->ev = Status::VERIFIED;
         $newUser->sv = gs('sv') ? Status::UNVERIFIED : Status::VERIFIED;
-        $newUser->ts = Status::DISABLE;
-        $newUser->tv = Status::VERIFIED;
         $newUser->provider = $provider;
         $newUser->save();
 

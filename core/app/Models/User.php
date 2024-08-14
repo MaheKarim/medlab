@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token','ver_code','balance','kyc_data'
+        'password', 'remember_token','ver_code','balance'
     ];
 
     /**
@@ -28,7 +28,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'kyc_data' => 'object',
         'ver_code_send_at' => 'datetime'
     ];
 
@@ -48,10 +47,6 @@ class User extends Authenticatable
         return $this->hasMany(Deposit::class)->where('status','!=',Status::PAYMENT_INITIATE);
     }
 
-    public function withdrawals()
-    {
-        return $this->hasMany(Withdrawal::class)->where('status','!=',Status::PAYMENT_INITIATE);
-    }
 
     public function tickets()
     {
@@ -93,15 +88,6 @@ class User extends Authenticatable
         return $query->where('sv', Status::UNVERIFIED);
     }
 
-    public function scopeKycUnverified($query)
-    {
-        return $query->where('kv', Status::KYC_UNVERIFIED);
-    }
-
-    public function scopeKycPending($query)
-    {
-        return $query->where('kv', Status::KYC_PENDING);
-    }
 
     public function scopeEmailVerified($query)
     {

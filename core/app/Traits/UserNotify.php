@@ -93,27 +93,6 @@ trait UserNotify
         }], 'amount')->orderBy('deposits_sum_amount', 'desc')->take(request()->number_of_top_deposited_user ?? 10);
     }
 
-    public function scopeHasWithdrawUsers($query)
-    {
-        return $query->whereHas('withdrawals', function ($q) {
-            $q->approved();
-        });
-    }
-
-    public function scopePendingWithdrawUsers($query)
-    {
-        return $query->whereHas('withdrawals', function ($q) {
-            $q->pending();
-        });
-    }
-
-    public function scopeRejectedWithdrawUsers($query)
-    {
-        return $query->whereHas('withdrawals', function ($q) {
-            $q->rejected();
-        });
-    }
-
     public function scopePendingTicketUser($query)
     {
         return $query->whereHas('tickets', function ($q) {
@@ -141,11 +120,6 @@ trait UserNotify
         return $query->whereDoesntHave('loginLogs', function ($q) {
             $q->whereDate('created_at', '>=', now()->subDays(request()->number_of_days ?? 10));
         });
-    }
-
-    public function scopeKycVerified($query)
-    {
-        return $query->where('kv', Status::KYC_VERIFIED);
     }
 
 }

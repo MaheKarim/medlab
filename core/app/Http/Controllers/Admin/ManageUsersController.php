@@ -8,7 +8,6 @@ use App\Models\NotificationLog;
 use App\Models\NotificationTemplate;
 use App\Models\Transaction;
 use App\Models\User;
-use App\Models\Withdrawal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Rules\FileTypeValidate;
@@ -41,20 +40,6 @@ class ManageUsersController extends Controller
     {
         $pageTitle = 'Email Unverified Users';
         $users = $this->userData('emailUnverified');
-        return view('admin.users.list', compact('pageTitle', 'users'));
-    }
-
-    public function kycUnverifiedUsers()
-    {
-        $pageTitle = 'KYC Unverified Users';
-        $users = $this->userData('kycUnverified');
-        return view('admin.users.list', compact('pageTitle', 'users'));
-    }
-
-    public function kycPendingUsers()
-    {
-        $pageTitle = 'KYC Pending Users';
-        $users = $this->userData('kycPending');
         return view('admin.users.list', compact('pageTitle', 'users'));
     }
 
@@ -106,49 +91,17 @@ class ManageUsersController extends Controller
         $pageTitle = 'User Detail - '.$user->username;
 
         $totalDeposit = Deposit::where('user_id',$user->id)->successful()->sum('amount');
-        $totalWithdrawals = Withdrawal::where('user_id',$user->id)->approved()->sum('amount');
         $totalTransaction = Transaction::where('user_id',$user->id)->count();
         $countries = json_decode(file_get_contents(resource_path('views/partials/country.json')));
-        return view('admin.users.detail', compact('pageTitle', 'user','totalDeposit','totalWithdrawals','totalTransaction','countries'));
+
+        return view('admin.users.detail', compact('pageTitle', 'user','totalDeposit','totalTransaction','countries'));
     }
 
 
-    public function kycDetails($id)
-    {
-        $pageTitle = 'KYC Details';
-        $user = User::findOrFail($id);
-        return view('admin.users.kyc_detail', compact('pageTitle','user'));
-    }
 
-    public function kycApprove($id)
-    {
-        $user = User::findOrFail($id);
-        $user->kv = Status::KYC_VERIFIED;
-        $user->save();
 
-        notify($user,'KYC_APPROVE',[]);
 
-        $notify[] = ['success','KYC approved successfully'];
-        return to_route('admin.users.kyc.pending')->withNotify($notify);
-    }
 
-    public function kycReject(Request $request,$id)
-    {
-        $request->validate([
-            'reason'=>'required'
-        ]);
-        $user = User::findOrFail($id);
-        $user->kv = Status::KYC_UNVERIFIED;
-        $user->kyc_rejection_reason = $request->reason;
-        $user->save();
-
-        notify($user,'KYC_REJECT',[
-            'reason'=>$request->reason
-        ]);
-
-        $notify[] = ['success','KYC rejected successfully'];
-        return to_route('admin.users.kyc.pending')->withNotify($notify);
-    }
 
 
     public function update(Request $request, $id)
@@ -191,20 +144,7 @@ class ManageUsersController extends Controller
 
         $user->ev = $request->ev ? Status::VERIFIED : Status::UNVERIFIED;
         $user->sv = $request->sv ? Status::VERIFIED : Status::UNVERIFIED;
-        $user->ts = $request->ts ? Status::ENABLE : Status::DISABLE;
-        if (!$request->kv) {
-            $user->kv = Status::KYC_UNVERIFIED;
-            if ($user->kyc_data) {
-                foreach ($user->kyc_data as $kycData) {
-                    if ($kycData->type == 'file') {
-                        fileManager()->removeFile(getFilePath('verify').'/'.$kycData->value);
-                    }
-                }
-            }
-            $user->kyc_data = null;
-        }else{
-            $user->kv = Status::KYC_VERIFIED;
-        }
+
         $user->save();
 
         $notify[] = ['success', 'User details updated successfully'];
@@ -294,7 +234,6 @@ class ManageUsersController extends Controller
         return back()->withNotify($notify);
 
     }
-
 
     public function showNotificationSingleForm($id)
     {

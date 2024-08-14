@@ -50,11 +50,11 @@ Route::controller('SiteController')->group(function () {
     Route::get('/product/{id}', 'productDetails')->name('product.details');
 });
 
-   // Cart Category
+// Cart Category
 Route::controller('CartController')->prefix('cart')->name('cart.')->group(function () {
         Route::get('/view', 'cart')->name('cart');
         Route::post('add-to-cart', 'addToCart')->name('add');
         Route::get('get-cart-total', 'getCartTotal')->name('getCartTotal');
         Route::post('remove', 'remove')->name('remove');
         Route::post('update', 'update')->name('update');
-    });
+});

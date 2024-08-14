@@ -100,11 +100,8 @@ class RegisterController extends Controller
         $user->firstname = $data['firstname'];
         $user->lastname  = $data['lastname'];
         $user->password  = Hash::make($data['password']);
-        $user->ref_by    = $referUser ? $referUser->id : 0;
         $user->ev = gs('ev') ? Status::NO : Status::YES;
         $user->sv = gs('sv') ? Status::NO : Status::YES;
-        $user->ts = Status::DISABLE;
-        $user->tv = Status::ENABLE;
         $user->save();
 
         $adminNotification            = new AdminNotification();

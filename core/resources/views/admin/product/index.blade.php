@@ -12,7 +12,7 @@
                                 <th>@lang('Name')</th>
                                 <th>@lang('Product SKU')</th>
                                 <th>@lang('Price')</th>
-                                <th>@lang('Stock Quantity')</th>
+                                <th>@lang('Quantity')</th>
                                 <th>@lang('Status')</th>
                                 <th>@lang('Action')</th>
                             </tr>
@@ -23,12 +23,12 @@
                                     <td>
                                         <div class="user">
                                             <div class="thumb">
-                                                <img src="{{ $product->imageShow() }}" alt="@lang('image')">
+                                                <img src="{{ getImage(getFilePath('product') . '/' . $product->image) }}" alt="@lang('image')">
                                             </div>
                                             <span class="name">{{ __($product->name) }}</span>
                                         </div>
                                     </td>
-                                    <td>{{ $product->product_sku }}</td>
+                                    <td>{{ __($product->product_sku) }}</td>
                                     <td>
                                         @if($product->discount > 0)
                                             <del>{{ showAmount($product->price) }}</del> <br>
@@ -44,7 +44,7 @@
                                             {{ showAmount($product->price) }}
                                         @endif
                                     </td>
-                                    <td>{{ $product->quantity }}</td>
+                                    <td>{{ __($product->quantity) }}</td>
                                     <td>
                                         @php
                                             echo $product->statusBadge;

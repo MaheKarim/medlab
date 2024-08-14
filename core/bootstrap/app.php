@@ -70,7 +70,6 @@ return Application::configure(basePath: dirname(__DIR__))
 
             'check.status' => CheckStatus::class,
             'demo' => Demo::class,
-            'kyc' => KycMiddleware::class,
             'registration.complete' => RegistrationStep::class,
             'maintenance' => MaintenanceMode::class,
         ]);

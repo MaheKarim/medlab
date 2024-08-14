@@ -47,121 +47,44 @@
         </div><!-- dashboard-w1 end -->
     </div><!-- row end-->
 
-    <div class="row mt-2 gy-4">
-        <div class="col-xxl-12">
-            <div class="card box-shadow3 h-100">
-                <div class="card-body">
-                    <h5 class="card-title">@lang('Payments')</h5>
-                    <div class="widget-card-wrapper">
-
-                        <div class="widget-card bg--success">
-                            <a href="{{ route('admin.deposit.list') }}" class="widget-card-link"></a>
-                            <div class="widget-card-left">
-                                <div class="widget-card-icon">
-                                    <i class="fas fa-hand-holding-usd"></i>
-                                </div>
-                                <div class="widget-card-content">
-                                    <h6 class="widget-card-amount">{{ showAmount($deposit['total_deposit_amount']) }}</h6>
-                                    <p class="widget-card-title">@lang('Total Payment')</p>
-                                </div>
-                            </div>
-                            <span class="widget-card-arrow">
-                                <i class="las la-angle-right"></i>
-                            </span>
-                        </div>
-
-                        <div class="widget-card bg--warning">
-                            <a href="{{ route('admin.deposit.pending') }}" class="widget-card-link"></a>
-                            <div class="widget-card-left">
-                                <div class="widget-card-icon">
-                                    <i class="fas fa-spinner"></i>
-                                </div>
-                                <div class="widget-card-content">
-                                    <h6 class="widget-card-amount">{{ $deposit['total_deposit_pending'] }}</h6>
-                                    <p class="widget-card-title">@lang('Pending Payments')</p>
-                                </div>
-                            </div>
-                            <span class="widget-card-arrow">
-                                <i class="las la-angle-right"></i>
-                            </span>
-                        </div>
-
-                        <div class="widget-card bg--danger">
-                            <a href="{{ route('admin.deposit.rejected') }}" class="widget-card-link"></a>
-                            <div class="widget-card-left">
-                                <div class="widget-card-icon">
-                                    <i class="fas fa-ban"></i>
-                                </div>
-                                <div class="widget-card-content">
-                                    <h6 class="widget-card-amount">{{ $deposit['total_deposit_rejected'] }}</h6>
-                                    <p class="widget-card-title">@lang('Rejected Payments')</p>
-                                </div>
-                            </div>
-                            <span class="widget-card-arrow">
-                                <i class="las la-angle-right"></i>
-                            </span>
-                        </div>
-
-                        <div class="widget-card bg--primary">
-                            <a href="{{ route('admin.deposit.list') }}" class="widget-card-link"></a>
-                            <div class="widget-card-left">
-                                <div class="widget-card-icon">
-                                    <i class="fas fa-percentage"></i>
-                                </div>
-                                <div class="widget-card-content">
-                                    <h6 class="widget-card-amount">{{ showAmount($deposit['total_deposit_charge']) }}</h6>
-                                    <p class="widget-card-title">@lang('Payments Charge')</p>
-                                </div>
-                            </div>
-                            <span class="widget-card-arrow">
-                                <i class="las la-angle-right"></i>
-                            </span>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="row gy-4 mt-2">
         <div class="col-xxl-3 col-sm-6">
             <x-widget
                 style="6"
-                link="#"
-                title="Demo"
-                icon="far fa-c"
-                value="xxx"
+                link="{{ route('admin.deposit.list') }}"
+                title="{{ __('Total Payments') }}"
+                icon="fas fa-hand-holding-usd"
+                value="{{ showAmount($deposit['total_deposit_amount']) }}"
                 bg="success"
             />
         </div><!-- dashboard-w1 end -->
         <div class="col-xxl-3 col-sm-6">
             <x-widget
                 style="6"
-                link="#"
-                title="Demo"
-                icon="far fa-user"
-                value="xxx"
+                link="{{ route('admin.deposit.pending') }}"
+                title="{{ __('Pending Payments') }}"
+                icon="fas fa-spinner"
+                value="{{ $deposit['total_deposit_pending'] }}"
                 bg="warning"
             />
         </div><!-- dashboard-w1 end -->
         <div class="col-xxl-3 col-sm-6">
             <x-widget
                 style="6"
-                link="#"
-                title="Demo"
-                icon="far fa-user"
-                value="xxx"
+                link="{{ route('admin.deposit.rejected') }}"
+                title="{{ __('Rejected Payments') }}"
+                icon="fas fa-ban"
+                value="{{ $deposit['total_deposit_rejected'] }}"
                 bg="danger"
             />
         </div><!-- dashboard-w1 end -->
         <div class="col-xxl-3 col-sm-6">
             <x-widget
                 style="6"
-                link="#"
-                title="Demo"
-                icon="far fa-user"
-                value="xxx"
+                link="{{ route('admin.deposit.list') }}"
+                title="{{ __('Payments Charge') }}"
+                icon="fas fa-percentage"
+                value="{{ showAmount($deposit['total_deposit_charge']) }}"
                 bg="primary"
             />
         </div><!-- dashboard-w1 end -->

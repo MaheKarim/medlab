@@ -55,7 +55,6 @@ class AdminController extends Controller
 
 
 
-
     public function depositAndWithdrawReport(Request $request) {
 
         $diffInDays = Carbon::parse($request->start_date)->diffInDays(Carbon::parse($request->end_date));

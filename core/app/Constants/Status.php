@@ -33,10 +33,6 @@ class Status{
     const USER_ACTIVE = 1;
     const USER_BAN = 0;
 
-    const KYC_UNVERIFIED = 0;
-    const KYC_PENDING = 2;
-    const KYC_VERIFIED = 1;
-
     const GOOGLE_PAY = 5001;
 
     const CUR_BOTH = 1;
