@@ -1,5 +1,5 @@
 @foreach($blogs as $blog)
-    <div class="col-xl-4 col-md-6">
+    <div class="col-xl-4 col-md-6 py-4">
         <div class="blog-item">
             <div class="blog-item__thumb">
                 <a href="{{ route('blog.details', $blog->slug) }}" class="blog-item__thumb-link">
@@ -18,7 +18,7 @@
                         echo strLimit(strip_tags(@$blog->data_values->description), 60);
                     @endphp
                 </p>
-                <a href="{{ route('blog.details', $blog->slug) }}" class="btn btn--base btn--sm">Read More <span
+                <a href="{{ route('blog.details', $blog->slug) }}" class="btn btn--base btn--sm">@lang('Read More') <span
                         class="btn--simple__icon"><i class="fas fa-arrow-right"></i></span> </a>
             </div>
         </div>

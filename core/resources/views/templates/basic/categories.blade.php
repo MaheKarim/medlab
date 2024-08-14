@@ -9,7 +9,7 @@
                 <div class="col-xl-9 col-lg-8">
                     <!-- All Categories -->
                     <div class="product-category-wrapper">
-                        <h6 class="title"> Product Category </h6>
+                        <h6 class="title"> @lang('All Categories') </h6>
                         <div class="row gy-4">
                             @foreach($categories as $category)
                                 <div class="col-xl-3 col-lg-4 col-sm-3 col-xsm-6">

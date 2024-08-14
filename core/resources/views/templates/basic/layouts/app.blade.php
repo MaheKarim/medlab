@@ -6,26 +6,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Title -->
     <title> {{ gs()->siteName(__($pageTitle)) }} </title>
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ siteFavicon() }}" type="image/x-icon">
+
+    @include('partials.seo')
+
+
     <!-- Bootstrap -->
     <link href="{{ asset('assets/global/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Fontawesome -->
     <link href="{{ asset('assets/global/css/all.min.css') }}" rel="stylesheet">
+
+    <!-- line awesome -->
+    <link rel="stylesheet" href="{{asset('assets/global/css/line-awesome.min.css')}}">
+
     <!-- Slick -->
     <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/slick.css')}}">
     <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/magnific-popup.css')}}">
 
-    <!-- line awesome -->
-    <link rel="stylesheet" href="{{asset('assets/global/css/line-awesome.min.css')}}">
+
     <!-- Main css -->
     <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/swiper.css')}}">
+    @stack('style-lib')
+
     <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/main.css')}}">
     <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/custom.css')}}">
+    @stack('style')
 
-    @stack('style-lib')
 
     <link rel="stylesheet" href="{{ asset($activeTemplateTrue.'css/color.php') }}?color={{ gs('base_color') }}&secondColor={{ gs('secondary_color') }}">
 </head>
@@ -71,7 +80,7 @@
 <!-- ==================== Scroll to Top End Here ==================== -->
 <!-- ==================== Header Start Here ==================== -->
 
-      @yield('app')
+@yield('app')
 
 
 <!-- Jquery js -->
@@ -81,7 +90,9 @@
 @stack('script-lib')
 @php echo loadExtension('tawk-chat') @endphp
 
-    <!-- Others JS  -->
+@include('partials.notify')
+
+<!-- Others JS  -->
 <script src="{{ asset($activeTemplateTrue . 'js/slick.min.js') }}"></script>
 <script src="{{ asset($activeTemplateTrue . 'js/swiper.js') }}"></script>
 <script src="{{ asset($activeTemplateTrue . 'js/magnific-popup.js') }}"></script>
@@ -91,6 +102,7 @@
 <script>
     (function($) {
         "use strict";
+        getCartTotal();
         $(".langSel").on("click", function() {
             window.location.href = "{{ route('home') }}/change/" + $(this).data('lang_code');
         });
@@ -104,8 +116,54 @@
         setTimeout(function() {
             $('.cookies-card').removeClass('hide')
         }, 2000);
+
+        // Cart Related Code
+        $(document).on('click', '.cart-add-btn', function (e) {
+            var productId = $(this).data('product-id');
+            var quantity = $(`[name="quantity"]`).val() || 1;
+            var $this=$(this);
+
+            let formData = new FormData();
+            formData.append('product_id', productId);
+            formData.append('quantity', quantity);
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('cart.add') }}",
+                method: 'POST',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function () {
+                    $this.attr("disabled",true);
+                },
+                complete: function () {
+                    $this.attr("disabled",false);
+                },
+                success: function (response) {
+                    if (response.success) {
+                        $('.cart-count').text(response.total_cart_item);
+                    }else{
+                        notify('error', response.message);
+                    }
+                },
+            });
+        });
+        function getCartTotal() {
+            $.ajax({
+                url: "{{ route('cart.getCartTotal') }}",
+                method: "get",
+                dataType: "json",
+                success: function (response) {
+                    $('.cart-count').text(response);
+                    console.log(response);
+                }
+            });
+        }
     })(jQuery);
 </script>
-
 </body>
 </html>

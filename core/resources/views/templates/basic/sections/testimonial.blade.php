@@ -3,7 +3,7 @@
      $testimonialElement = getContent('testimonial.element', orderById: true);
 @endphp
 <section class="testimonials py-60">
-    <div class="section-heading">
+    <div class="section-heading mb-3">
         <h5 class="section-heading__title"> {{ __(@$singleTestimonial->data_values->heading) }} </h5>
     </div>
     <div class="testimonial-slider">

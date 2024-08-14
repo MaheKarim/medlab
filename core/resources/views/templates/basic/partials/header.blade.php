@@ -22,7 +22,7 @@
                     @endif
 
                     <li class="cart">
-                        <a href="#" class="cart-icon">
+                        <a href="javascript:void(0)" class="cart-icon">
                             <i class="las la-shopping-bag"></i>
                         </a>
                         <span class="cart-count">0</span>

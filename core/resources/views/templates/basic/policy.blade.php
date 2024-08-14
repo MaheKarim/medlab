@@ -9,7 +9,7 @@
                     </div>
                     <div class="card-body">
                         @php
-                            echo $policy->data_values->details
+                            echo __(@$policy->data_values->details)
                         @endphp
                     </div>
                 </div>

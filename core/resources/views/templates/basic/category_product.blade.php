@@ -32,7 +32,7 @@
                                                     {{ getAmount($product->price) }}$
                                                 @endif
                                             </h6>
-                                            <span class="add-cart" data-product-id="{{ $product->id }}">@lang('Add To Cart') </span>
+                                            <span class="add-cart cart-add-btn" data-product-id="{{ $product->id }}">@lang('Add To Cart') </span>
                                         </div>
                                     </div>
                                     @if($product->discount > 0)
@@ -53,13 +53,11 @@
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
                                 <li class="page-item">
-
-{{--                                    @if($category->hasPages())--}}
-{{--                                    <a class="page-link" href="product-details.html">--}}
-{{--                                        <i class="las la-angle-left"></i>--}}
-{{--                                        {{ paginateLinks($category) }}--}}
-{{--                                    </a>--}}
-{{--                                     @endif--}}
+                                    @if($products->hasPages())
+                                        <a class="page-link" href="{{ paginateLinks($products) }}">
+                                            <i class="las la-angle-left"></i>
+                                        </a>
+                                     @endif
                                 </li>
                             </ul>
                         </nav>

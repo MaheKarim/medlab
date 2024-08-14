@@ -14,14 +14,14 @@
         </div>
         <div class="col-xl-8 ps-lg-5">
             <div class="how-work-item">
-                <h4 class="how-work-item__title"> {{ @$howToOrderContent->data_values->heading }} </h4>
+                <h4 class="how-work-item__title"> {{ __(@$howToOrderContent->data_values->heading) }} </h4>
                 @foreach($howToOrderElement as $element)
                 <ul class="work-list">
-                    <li class="work-list__item"> {{ @$element->data_values->description_text }}</li>
+                    <li class="work-list__item"> {{ __(@$element->data_values->description_text) }}</li>
                 </ul>
                 @endforeach
                 <p class="how-work-item__text">
-                    {{ @$howToOrderContent->data_values->description }}
+                    {{ __(@$howToOrderContent->data_values->description) }}
                 </p>
 
                 @foreach($downloadUrlElement as $element)

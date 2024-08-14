@@ -19,12 +19,8 @@ use Illuminate\Support\Facades\Crypt;
 
 class SiteController extends Controller
 {
-    public function index(){
-        $reference = @$_GET['reference'];
-        if ($reference) {
-            session()->put('reference', $reference);
-        }
-
+    public function index()
+    {
         $pageTitle = 'Home';
         $sections = Page::where('tempname',activeTemplate())->where('slug','/')->first();
         $seoContents = $sections->seo_content;
@@ -183,14 +179,14 @@ class SiteController extends Controller
         return view('Template::maintenance',compact('pageTitle','maintenance'));
     }
 
-
     public function categoryProduct($slug)
     {
-        $category = Category::where('slug', $slug)->paginate(getPaginate())->firstOrFail();
+        $category = Category::where('slug', $slug)->firstOrFail();
+        $products = $category->products()->paginate(getPaginate(2));
         $pageTitle = $category->name;
         $seoContents = $category->seo_content;
         $seoImage = @$seoContents->image ? frontendImage('category', $seoContents->image, getFileSize('seo'), true) : null;
-        return view('Template::category_product', compact('category', 'pageTitle', 'seoContents', 'seoImage'));
+        return view('Template::category_product', compact('category', 'pageTitle', 'seoContents', 'seoImage', 'products'));
     }
 
     public function categories()
@@ -200,7 +196,6 @@ class SiteController extends Controller
 
         return view('Template::categories', compact('pageTitle', 'categories'));
     }
-
 
     public function productDetails($id)
     {

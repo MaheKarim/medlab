@@ -1,6 +1,6 @@
 @extends($activeTemplate .'layouts.frontend')
 @section('content')
-{{--    <section class="account section-bg">--}}
+    <section class="account section-bg">
         <div class="container">
             <div class="d-flex justify-content-center">
                 <div class="verification-code-wrapper">

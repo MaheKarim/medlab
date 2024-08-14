@@ -7,7 +7,7 @@
             <a href="{{ route('category.products', ['slug' => $category->slug]) }}" class="category-menu__link">
             <span class="category-menu__thumb">
                 <img src="{{ getImage(getFilePath('category') .'/' . $category->image, '50x50') }}" alt="Category Image">
-            </span> {{ $category->name }}
+            </span> {{ __($category->name) }}
                 <span class="category-menu__icon">
                 <i class="fas fa-angle-down"></i>
             </span>

@@ -1,12 +1,10 @@
 @extends($activeTemplate . 'layouts.frontend')
 @section('content')
-    <div class="container">
+    <section class="account section-bg py-30">
+        <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-7 col-xl-5">
-                <div class="text-end">
-                    <a href="{{ route('home') }}" class="fw-bold home-link"> <i class="las la-long-arrow-alt-left"></i> @lang('Go to Home')</a>
-                </div>
-                <div class="card custom--card">
+                <div class="account-form">
                     <div class="card-header">
                         <h5 class="card-title">{{ __($pageTitle) }}</h5>
                     </div>
@@ -26,7 +24,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">@lang('Country')</label>
-                                        <select name="country" class="form-control form--control select2" required>
+                                        <select name="country" class="form-control form--control select2-basic" required>
                                             @foreach ($countries as $key => $country)
                                                 <option data-mobile_code="{{ $country->dial_code }}" value="{{ $country->country }}" data-code="{{ $key }}">{{ __($country->country) }}
                                                 </option>
@@ -78,6 +76,7 @@
             </div>
         </div>
     </div>
+    </section>
 @endsection
 
 @push('style-lib')

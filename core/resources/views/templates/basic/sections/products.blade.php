@@ -13,12 +13,12 @@
 <div class="Product-wrapper pt-60">
     @foreach($categories as $category)
         <div class="section-heading">
-            <h5 class="section-heading__title">{{ $category->name }}</h5>
+            <h5 class="section-heading__title">{{ __($category->name) }}</h5>
             <div class="section-heading__btn">
-                <a href="{{ route('category.products', $category->slug) }}" class="btn btn--base">View all</a>
+                <a href="{{ route('category.products', $category->slug) }}" class="btn btn--base"> @lang('View All') </a>
             </div>
         </div>
-        <div class="swiper mySwiper">
+        <div class="swiper mySwiper py-3">
             <div class="swiper-wrapper">
                 @foreach($category->products as $product)
                     <div class="swiper-slide">
@@ -42,7 +42,7 @@
                                         @endif
                                     </h6>
 {{--                                    <h6 class="product-card__price">{{ $product->price }}$ <span class="old-price">{{ $product->old_price }}$</span></h6>--}}
-                                    <span class="add-cart">Add to cart</span>
+                                    <span class="add-cart cart-add-btn" data-product-id="{{ $product->id }}">@lang('Add To Cart')</span>
                                 </div>
                             </div>
                             @if($product->discount > 0)

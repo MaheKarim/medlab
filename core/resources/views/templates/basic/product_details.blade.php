@@ -41,12 +41,12 @@
                                 <div class="product-details__quantity d-flex">
                                     <div class="qty-container">
                                         <button class="qty-btn-minus btn-light" type="button"><i class="fa fa-minus"></i></button>
-                                        <input type="text" name="qty" value="3" class="input-qty"/>
+                                        <input type="text" name="quantity" value="1" class="input-qty"/>
                                         <button class="qty-btn-plus btn-light" type="button"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
                                 <div class="product-details__btn">
-                                    <button class="btn btn--base w-100">Add Cart</button>
+                                    <button class="btn btn--base w-100 cart-add-btn" data-product-id="{{ $product->id }}">Add Cart</button>
                                 </div>
                             </div>
                         </div>

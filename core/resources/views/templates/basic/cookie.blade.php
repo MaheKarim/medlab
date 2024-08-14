@@ -9,7 +9,7 @@
                     </div>
                     <div class="card-body">
                         @php
-                            echo $cookie->data_values->description
+                            echo __(@$cookie->data_values->description)
                         @endphp
                     </div>
                 </div>

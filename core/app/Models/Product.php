@@ -17,19 +17,9 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function subcategory()
-    {
-        return $this->belongsTo(SubCategory::class);
-    }
-
     public function brand()
     {
         return $this->belongsTo(Brand::class);
-    }
-
-    public function imageShow()
-    {
-        return getImage(getFilePath('product') . '/' . $this->image, getFileSize('product'));
     }
 
     public function scopeAvailable($query)
@@ -38,8 +28,6 @@ class Product extends Model
             $category->active();
         })->whereHas('brand', function ($brand) {
             $brand->active();
-        })->whereHas('subcategory', function ($subcategory) {
-            $subcategory->active();
         });
     }
 }
