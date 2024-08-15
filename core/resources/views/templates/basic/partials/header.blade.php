@@ -1,7 +1,7 @@
 <header class="header" id="header">
     <div class="container">
         <nav class="d-flex align-items-center">
-            <a class="navbar-brand logo" href="{{ route('home') }}"><img src="{{ siteLogo() }}" alt=""></a>
+            <a class="navbar-brand logo" href="{{ route('home') }}"><img src="{{ siteLogo() }}" alt="Site Logo"></a>
             <form action="#" autocomplete="off" class="search-box-wrapper">
                 <button type="button" class="search-icon  d-block d-lg-none"><i class="las la-search"></i></button>
                 <div class="search-field">
@@ -22,16 +22,13 @@
                     @endif
 
                     <li class="cart">
-                        <a href="javascript:void(0)" class="cart-icon">
-                            <i class="las la-shopping-bag"></i>
+                        <a href="{{ route('cart.cart') }}" class="cart-icon">
+                            <i class="las la-shopping-cart"></i>
                         </a>
                         <span class="cart-count">0</span>
                     </li>
                 </ul>
             </div>
-{{--            <button class="navbar-toggler header-button">--}}
-{{--                <span><i class="las la-bars"></i></span>--}}
-{{--            </button>--}}
         </nav>
     </div>
 </header>

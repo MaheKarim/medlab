@@ -83,7 +83,6 @@ class PaymentController extends Controller
         return to_route('user.deposit.confirm');
     }
 
-
     public function depositConfirm()
     {
         $track = session()->get('Track');
@@ -118,7 +117,6 @@ class PaymentController extends Controller
         $pageTitle = 'Payment Confirm';
         return view("Template::$data->view", compact('data', 'pageTitle', 'deposit'));
     }
-
 
     public static function userDataUpdate($deposit,$isManual = null)
     {

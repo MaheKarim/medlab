@@ -89,14 +89,7 @@
     // ========================== category menu sidebar Bar Js End =====================
 
     // ========================== cart sidebar Bar Js Start =====================
-    $(".cart-icon").on("click", function () {
-      $(".cart-sidebar-area").addClass("active");
-      $('.sidebar-overlay').addClass('show');
-    });
-    $(".sidebar-overlay, .side-sidebar-close-btn").on("click", function () {
-      $(".cart-sidebar-area").removeClass("active");
-      $('.sidebar-overlay').removeClass('show');
-    });
+
     // ========================== cart sidebar Bar Js End =====================
 
     // ========================== Small Device Header Menu On Click Dropdown menu collapse Stop Js Start =====================
