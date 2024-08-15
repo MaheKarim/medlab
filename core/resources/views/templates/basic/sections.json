@@ -54,11 +54,7 @@
     },
     "products": {
         "builder": true,
-        "name": "Products",
-        "content": {
-            "title": "text",
-            "modal": false
-        }
+        "name": "Products"
     },
     "policy_pages": {
         "builder": true,

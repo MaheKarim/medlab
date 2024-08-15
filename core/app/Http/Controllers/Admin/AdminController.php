@@ -10,7 +10,6 @@ use App\Models\Deposit;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\UserLogin;
-use App\Models\Withdrawal;
 use App\Rules\FileTypeValidate;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

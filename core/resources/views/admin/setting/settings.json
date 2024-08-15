@@ -42,7 +42,9 @@
         "route_name": "admin.seo"
     },
     "manage_frontend": {
-        "keyword": ["frontend","template","manage frontend", "frontend contents", "frontend settings", "about us","banner","contact","faq","social icons","section settings","subscribe"],
+        "keyword": ["frontend","template","manage frontend", "frontend contents", "frontend settings",
+            "about us","banner","contact","social icons","testimonial","products", "download url",
+            "description", "categories"],
         "title": "Manage Frontend",
         "subtitle": "Control all of the frontend contents of the system.",
         "icon": "la la-html5",

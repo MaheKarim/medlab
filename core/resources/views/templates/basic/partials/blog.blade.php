@@ -3,7 +3,7 @@
         <div class="blog-item">
             <div class="blog-item__thumb">
                 <a href="{{ route('blog.details', $blog->slug) }}" class="blog-item__thumb-link">
-                    <img src="{{ frontendImage('blog',  @$blog->data_values->image, '728x465') }}" class="fit-image"
+                    <img src="{{ frontendImage('blog',  @$blog->data_values->image, '120x80') }}" class="fit-image"
                          alt="Blog Image">
                 </a>
             </div>
