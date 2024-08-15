@@ -343,23 +343,6 @@ function getContent($dataKeys, $singleQuery = false, $limit = null, $orderById =
     return $content;
 }
 
-function verifyG2fa($user, $code, $secret = null)
-{
-    $authenticator = new GoogleAuthenticator();
-    if (!$secret) {
-        $secret = $user->tsc;
-    }
-    $oneCode = $authenticator->getCode($secret);
-    $userCode = $code;
-    if ($oneCode == $userCode) {
-        $user->tv = Status::YES;
-        $user->save();
-        return true;
-    } else {
-        return false;
-    }
-}
-
 
 function urlPath($routeName, $routeParam = null)
 {

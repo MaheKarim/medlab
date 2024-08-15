@@ -106,6 +106,9 @@
 @php echo loadExtension('tawk-chat') @endphp
 
 @include('partials.notify')
+@if(gs('pn'))
+    @include('partials.push_script')
+@endif
 
 <!-- Others JS  -->
 <script src="{{ asset($activeTemplateTrue . 'js/slick.min.js') }}"></script>
@@ -131,6 +134,15 @@
         setTimeout(function() {
             $('.cookies-card').removeClass('hide')
         }, 2000);
+
+        let disableSubmission = false;
+        $('.disableSubmission').on('submit',function(e){
+            if (disableSubmission) {
+                e.preventDefault()
+            }else{
+                disableSubmission = true;
+            }
+        });
 
         // Cart Related Code
         $(document).on('click', '.cart-add-btn', function (e) {
