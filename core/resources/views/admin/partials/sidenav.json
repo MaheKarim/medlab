@@ -69,12 +69,13 @@
         "title": "Manage Orders",
         "icon": "la la-shopping-cart",
         "menu_active": "admin.order*",
+        "counters": ["pendingOrdersCount"],
         "submenu": [
             {
                 "keyword": [
-                    "Pending orders",
-                    "Manage Pending Orders",
-                    "Pending Order management",
+                    "All orders",
+                    "Manage Orders",
+                    "Order",
                     "Orders"
                 ],
                 "title": "All Orders",
@@ -90,7 +91,8 @@
                 ],
                 "title": "Pending Orders",
                 "route_name": "admin.order.pending",
-                "menu_active": "admin.order.pending"
+                "menu_active": "admin.order.pending",
+                "counter": "pendingOrdersCount"
             },
             {
                 "keyword": [

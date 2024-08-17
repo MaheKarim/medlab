@@ -190,7 +190,7 @@
             <div class="card">
               <div class="card-body">
                 <div class="d-flex flex-wrap justify-content-between">
-                    <h5 class="card-title">@lang('Deposit & Withdraw Report')</h5>
+                    <h5 class="card-title">@lang('Sales Report')</h5>
 
                     <div id="dwDatePicker" class="border p-1 cursor-pointer rounded">
                         <i class="la la-calendar"></i>&nbsp;
@@ -217,6 +217,72 @@
               </div>
             </div>
         </div>
+        <div class="col-xl-12 mb-30">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-wrap justify-content-between">
+                        <h5 class="card-title">@lang('Order History')</h5>
+
+                        <div id="orderDatePicker" class="border p-1 cursor-pointer rounded">
+                            <i class="la la-calendar"></i>&nbsp;
+                            <span></span> <i class="la la-caret-down"></i>
+                        </div>
+                    </div>
+
+                    <div id="orderChartArea"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h5 class="mt-30">@lang('Latest Orders')</h5>
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <div class="card b-radius--10 ">
+                <div class="card-body p-0">
+
+                    <div class="table-responsive--sm table-responsive">
+                        <table class="table table--light style--two">
+                            <thead>
+                            <tr>
+                                <th>@lang('Order No')</th>
+                                <th>@lang('Price')</th>
+                                <th>@lang('Status')</th>
+                                <th>@lang('Action')</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse($recentOrders as $rorders)
+                                <tr>
+                                    <td>{{ @$rorders->order_no }}</td>
+                                    <td>{{ showAmount($rorders->total) }}</td>
+                                    <td>
+                                        @php
+                                            echo $rorders->ordersBadge;
+                                        @endphp
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('admin.order.details', $rorders->id) }}"
+                                           class="btn btn-sm btn-outline--primary">
+                                            <i class="las la-desktop"></i>
+                                            @lang('Details')
+                                        </a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td class="text-muted text-center" colspan="100%">
+                                        {{ __($emptyMessage) }}
+                                    </td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div class="row mb-none-30 mt-5">
@@ -293,9 +359,9 @@
             document.querySelector("#dwChartArea"),
             @json(__(gs('cur_text'))),
             [{
-                    name: 'Deposited',
-                    data: []
-                },
+                name: 'Deposited',
+                data: []
+            },
                 {
                     name: 'Withdrawn',
                     data: []
@@ -307,11 +373,39 @@
         let trxChart = lineChart(
             document.querySelector("#transactionChartArea"),
             [{
-                    name: "Plus Transactions",
+                name: "Plus Transactions",
+                data: []
+            },
+                {
+                    name: "Minus Transactions",
+                    data: []
+                }
+            ],
+            []
+        );
+
+
+        let orderChartData = lineChart(
+            document.querySelector("#orderChartArea"),
+            [{
+                name: "Pending Order",
+                data: [],
+                backgroundColor: "black"
+            },
+                {
+                    name: "Confirm Order",
                     data: []
                 },
                 {
-                    name: "Minus Transactions",
+                    name: "Shipped Order",
+                    data: []
+                },
+                {
+                    name: "Delivered Order",
+                    data: []
+                },
+                {
+                    name: "Cancel Order",
                     data: []
                 }
             ],
@@ -369,18 +463,65 @@
         }
 
 
+        const orderChart = (startDate, endDate) => {
 
-        $('#dwDatePicker').daterangepicker(dateRangeOptions, (start, end) => changeDatePickerText('#dwDatePicker span', start, end));
-        $('#trxDatePicker').daterangepicker(dateRangeOptions, (start, end) => changeDatePickerText('#trxDatePicker span', start, end));
+            const data = {
+                start_date: startDate.format('YYYY-MM-DD'),
+                end_date: endDate.format('YYYY-MM-DD')
+            }
+
+            const url = @json(route('admin.chart.order'));
+
+            $.get(url, data,
+                function(data, status) {
+                    if (status == 'success') {
+
+
+                        orderChartData.updateSeries(data.data);
+                        orderChartData.updateOptions({
+                            xaxis: {
+                                categories: data.created_on,
+                            },
+                            colors: [
+                                'rgba(255, 99, 132, 1)', // Red
+                                'rgba(54, 162, 235, 1)', // Blue
+                                'rgba(255, 206, 86, 1)', // Yellow
+                                'rgba(75, 192, 192, 1)', // Teal
+                                'rgba(153, 102, 255, 1)', // Purple
+                                'rgba(255, 159, 64, 1)' // Orange
+                            ]
+                        });
+                    }
+                }
+            );
+        }
+
+
+
+        $('#dwDatePicker').daterangepicker(dateRangeOptions, (start, end) => changeDatePickerText('#dwDatePicker span',
+            start, end));
+        $('#trxDatePicker').daterangepicker(dateRangeOptions, (start, end) => changeDatePickerText('#trxDatePicker span',
+            start, end));
+        $('#orderDatePicker').daterangepicker(dateRangeOptions, (start, end) => changeDatePickerText(
+            '#orderDatePicker span',
+            start, end));
 
         changeDatePickerText('#dwDatePicker span', start, end);
         changeDatePickerText('#trxDatePicker span', start, end);
+        changeDatePickerText('#orderDatePicker span', start, end);
 
         depositWithdrawChart(start, end);
         transactionChart(start, end);
+        orderChart(start, end);
 
-        $('#dwDatePicker').on('apply.daterangepicker', (event, picker) => depositWithdrawChart(picker.startDate, picker.endDate));
-        $('#trxDatePicker').on('apply.daterangepicker', (event, picker) => transactionChart(picker.startDate, picker.endDate));
+        $('#dwDatePicker').on('apply.daterangepicker', (event, picker) => depositWithdrawChart(picker.startDate, picker
+            .endDate));
+
+        $('#trxDatePicker').on('apply.daterangepicker', (event, picker) => transactionChart(picker.startDate, picker
+            .endDate));
+
+        $('#orderDatePicker').on('apply.daterangepicker', (event, picker) => orderChart(picker.startDate, picker
+            .endDate));
 
         piChart(
             document.getElementById('userBrowserChart'),

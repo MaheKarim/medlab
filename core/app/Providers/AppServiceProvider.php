@@ -8,9 +8,9 @@ use App\Models\AdminNotification;
 use App\Models\Category;
 use App\Models\Deposit;
 use App\Models\Frontend;
+use App\Models\Order;
 use App\Models\SupportTicket;
 use App\Models\User;
-use App\Models\Withdrawal;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
@@ -61,6 +61,7 @@ class AppServiceProvider extends ServiceProvider
                 'mobileUnverifiedUsersCount'   => User::mobileUnverified()->count(),
                 'pendingTicketCount'         => SupportTicket::whereIN('status', [Status::TICKET_OPEN, Status::TICKET_REPLY])->count(),
                 'pendingDepositsCount'    => Deposit::pending()->count(),
+                'pendingOrdersCount' => Order::pending()->count(),
                 'updateAvailable'    => version_compare(gs('available_version'),systemDetails()['version'],'>') ? 'v'.gs('available_version') : false,
             ]);
         });

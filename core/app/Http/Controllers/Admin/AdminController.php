@@ -93,23 +93,12 @@ class AdminController extends Controller
             ->groupBy('created_on')
             ->get();
 
-
-        $withdrawals = Withdrawal::approved()
-            ->whereDate('created_at', '>=', $request->start_date)
-            ->whereDate('created_at', '<=', $request->end_date)
-            ->selectRaw('SUM(amount) AS amount')
-            ->selectRaw("DATE_FORMAT(created_at, '{$format}') as created_on")
-            ->latest()
-            ->groupBy('created_on')
-            ->get();
-
         $data = [];
 
         foreach ($dates as $date) {
             $data[] = [
                 'created_on' => $date,
                 'deposits' => getAmount($deposits->where('created_on', $date)->first()?->amount ?? 0),
-                'withdrawals' => getAmount($withdrawals->where('created_on', $date)->first()?->amount ?? 0)
             ];
         }
 
@@ -121,10 +110,6 @@ class AdminController extends Controller
             [
                 'name' => 'Deposited',
                 'data' => $data->pluck('deposits')
-            ],
-            [
-                'name' => 'Withdrawn',
-                'data' => $data->pluck('withdrawals')
             ]
         ];
 
@@ -377,6 +362,107 @@ class AdminController extends Controller
         header('Content-Disposition: attachment; filename="' . $title);
         header("Content-Type: " . $mimetype);
         return readfile($filePath);
+    }
+
+    public function order(Request $request) {
+
+        $diffInDays = Carbon::parse($request->start_date)->diffInDays(Carbon::parse($request->end_date));
+
+        $groupBy = $diffInDays > 30 ? 'months' : 'days';
+        $format  = $diffInDays > 30 ? '%M-%Y' : '%d-%M-%Y';
+
+        if ($groupBy == 'days') {
+            $dates = $this->getAllDates($request->start_date, $request->end_date);
+        } else {
+            $dates = $this->getAllMonths($request->start_date, $request->end_date);
+        }
+
+        $pendingOrder = Order::where('order_status', Status::ORDER_PENDING)
+            ->whereDate('created_at', '>=', $request->start_date)
+            ->whereDate('created_at', '<=', $request->end_date)
+            ->selectRaw('SUM(total) AS amount')
+            ->selectRaw("DATE_FORMAT(created_at, '{$format}') as created_on")
+            ->latest()
+            ->groupBy('created_on')
+            ->get();
+
+        $confirmOrder = Order::where('order_status', Status::ORDER_CONFIRMED)
+            ->whereDate('created_at', '>=', $request->start_date)
+            ->whereDate('created_at', '<=', $request->end_date)
+            ->selectRaw('SUM(total) AS amount')
+            ->selectRaw("DATE_FORMAT(created_at, '{$format}') as created_on")
+            ->latest()
+            ->groupBy('created_on')
+            ->get();
+
+        $shippedOrder = Order::where('order_status', Status::ORDER_SHIPPED)
+            ->whereDate('created_at', '>=', $request->start_date)
+            ->whereDate('created_at', '<=', $request->end_date)
+            ->selectRaw('SUM(total) AS amount')
+            ->selectRaw("DATE_FORMAT(created_at, '{$format}') as created_on")
+            ->latest()
+            ->groupBy('created_on')
+            ->get();
+
+        $deliveredOrder = Order::where('order_status', Status::ORDER_DELIVERED)
+            ->whereDate('created_at', '>=', $request->start_date)
+            ->whereDate('created_at', '<=', $request->end_date)
+            ->selectRaw('SUM(total) AS amount')
+            ->selectRaw("DATE_FORMAT(created_at, '{$format}') as created_on")
+            ->latest()
+            ->groupBy('created_on')
+            ->get();
+
+        $cancelOrder = Order::where('order_status', Status::ORDER_CANCEL)
+            ->whereDate('created_at', '>=', $request->start_date)
+            ->whereDate('created_at', '<=', $request->end_date)
+            ->selectRaw('SUM(total) AS amount')
+            ->selectRaw("DATE_FORMAT(created_at, '{$format}') as created_on")
+            ->latest()
+            ->groupBy('created_on')
+            ->get();
+
+        $data = [];
+
+        foreach ($dates as $date) {
+            $data[] = [
+                'created_on' => $date,
+                'pending'    => getAmount($pendingOrder->where('created_on', $date)->first()?->amount ?? 0),
+                'confirmed'  => getAmount($confirmOrder->where('created_on', $date)->first()?->amount ?? 0),
+                'shipped'    => getAmount($shippedOrder->where('created_on', $date)->first()?->amount ?? 0),
+                'delivered'  => getAmount($deliveredOrder->where('created_on', $date)->first()?->amount ?? 0),
+                'cancel'     => getAmount($cancelOrder->where('created_on', $date)->first()?->amount ?? 0),
+            ];
+        }
+
+        $data = collect($data);
+
+        $report['created_on'] = $data->pluck('created_on');
+        $report['data']       = [
+            [
+                'name' => 'Pending Order',
+                'data' => $data->pluck('pending'),
+            ],
+            [
+                'name' => 'Confirm Order',
+                'data' => $data->pluck('confirmed'),
+            ],
+            [
+                'name' => 'Shipped Order',
+                'data' => $data->pluck('shipped'),
+            ],
+            [
+                'name' => 'Deliver Order',
+                'data' => $data->pluck('delivered'),
+            ],
+            [
+                'name' => 'Cancel Order',
+                'data' => $data->pluck('cancel'),
+            ],
+
+        ];
+
+        return response()->json($report);
     }
 
 
