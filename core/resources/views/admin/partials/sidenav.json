@@ -183,18 +183,6 @@
             },
             {
                 "keyword": [
-                    "with balance users",
-                    "Manage Users",
-                    "User management",
-                    "User activity",
-                    "Account management"
-                ],
-                "title": "With Balance",
-                "route_name": "admin.users.with.balance",
-                "menu_active": "admin.users.with.balance"
-            },
-            {
-                "keyword": [
                     "all users users",
                     "Manage Users",
                     "User management",

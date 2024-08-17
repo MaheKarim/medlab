@@ -19,11 +19,10 @@ class PaymentController extends Controller
     use OrderConfirmation;
     public function deposit($orderId)
     {
-        $check = session()->get('subtotal');
+        $pageTitle = 'Payment Methods';
         $gatewayCurrency = GatewayCurrency::whereHas('method', function ($gate) {
             $gate->where('status', Status::ENABLE);
         })->with('method')->orderby('name')->get();
-        $pageTitle = 'Deposit Methods';
         $order     = Order::where('user_id', auth()->id())->where('payment_status', Status::ORDER_PAYMENT_PENDING)->findOrFail($orderId);
         return view('Template::user.payment.deposit', compact('gatewayCurrency', 'pageTitle' ,'order'));
     }
@@ -36,7 +35,6 @@ class PaymentController extends Controller
             'currency' => 'required',
         ]);
 
-        $check = session()->get('total');
         $order = Order::where('user_id', auth()->id())->where('payment_status', Status::ORDER_PAYMENT_PENDING)->findOrFail($orderId);
 
         $user = auth()->user();
@@ -73,7 +71,6 @@ class PaymentController extends Controller
         $data->failed_url = urlPath('user.deposit.history');
         $data->save();
         session()->put('Track', $data->trx);
-//        dd($data, route('user.deposit.confirm'));
         return to_route('user.deposit.confirm');
     }
 
@@ -113,15 +110,12 @@ class PaymentController extends Controller
         return view("Template::$data->view", compact('data', 'pageTitle', 'deposit'));
     }
 
-    public static function userDataUpdate($deposit,$isManual = null)
+    public static function userDataUpdate($deposit, $isManual = null)
     {
         if ($deposit->status == Status::PAYMENT_INITIATE || $deposit->status == Status::PAYMENT_PENDING) {
             $deposit->status = Status::PAYMENT_SUCCESS;
             $deposit->save();
-
             $user = User::find($deposit->user_id);
-//            $user->balance += $deposit->amount;
-//            $user->save();
 
             if (!$isManual) {
                 $adminNotification = new AdminNotification();
@@ -132,17 +126,17 @@ class PaymentController extends Controller
             }
 
             notify($user, $isManual ? 'DEPOSIT_APPROVE' : 'DEPOSIT_COMPLETE', [
-                'method_name' => $deposit->gatewayCurrency()->name,
+                'method_name'     => $deposit->gatewayCurrency()->name,
                 'method_currency' => $deposit->method_currency,
-                'method_amount' => showAmount($deposit->final_amo),
-                'amount' => showAmount($deposit->amount),
-                'charge' => showAmount($deposit->charge),
-                'rate' => showAmount($deposit->rate),
-                'trx' => $deposit->trx,
+                'method_amount'   => showAmount($deposit->final_amount),
+                'amount'          => showAmount($deposit->amount),
+                'charge'          => showAmount($deposit->charge),
+                'rate'            => showAmount($deposit->rate),
+                'trx'             => $deposit->trx,
             ]);
 
-            $user = User::find($deposit->user_id);
-            $order = Order::findOrFail($deposit->order_id);
+            $order = Order::where('payment_status', Status::ORDER_PAYMENT_PENDING)->findOrFail($deposit->order_id);
+            static::confirmOrder($order);
             static::transactionCreate($order, $user, $deposit);
         }
     }
@@ -183,7 +177,7 @@ class PaymentController extends Controller
 
         $adminNotification = new AdminNotification();
         $adminNotification->user_id = $data->user->id;
-        $adminNotification->title = 'Deposit request from '.$data->user->username;
+        $adminNotification->title = 'Payment request from '.$data->user->username;
         $adminNotification->click_url = urlPath('admin.deposit.details',$data->id);
         $adminNotification->save();
 
@@ -197,7 +191,7 @@ class PaymentController extends Controller
             'trx' => $data->trx
         ]);
 
-        $notify[] = ['success', 'You have deposit request has been taken'];
+        $notify[] = ['success', 'Your payment request has been taken'];
         return to_route('user.deposit.history')->withNotify($notify);
     }
 

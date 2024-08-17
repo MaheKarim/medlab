@@ -15,7 +15,6 @@ trait OrderConfirmation
     public static function confirmOrder($order) {
         $user    = auth()->user();
         $carts   = Cart::where('user_id', $user->id)->get();
-        $general = gs();
 
         $orderDetailsData = [];
         $productStockUpdate = [];
@@ -29,7 +28,6 @@ trait OrderConfirmation
 
             $productStockUpdate[$cart->product_id] = $cart->quantity;
         }
-//        dd($orderDetailsData);
         if (!empty($orderDetailsData)) {
             OrderDetail::insert($orderDetailsData);
         }
@@ -54,8 +52,7 @@ trait OrderConfirmation
         $adminNotification            = new AdminNotification();
         $adminNotification->user_id   = $user->id;
         $adminNotification->title     = 'Order successfully placed.';
-//        $adminNotification->click_url = urlPath('admin.orders.detail',$order->id);
-        $adminNotification->click_url = '#';
+        $adminNotification->click_url = urlPath('admin.order.details',$order->id);
         $adminNotification->save();
 
         notify($user, 'ORDER_COMPLETE', [
