@@ -117,6 +117,10 @@
                                                 <input id="onlinePayment" type="radio" class="form-check-input" name="payment_type" value="1">
                                                 <label for="onlinePayment" class="form-check-label">@lang('Online Payment')</label>
                                             </div>
+                                            <div class="form-check form--check">
+                                                <input id="offlinePayment" type="radio" class="form-check-input" name="payment_type" value="2">
+                                                <label for="offlinePayment" class="form-check-label">@lang('Cash On Delivery')</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

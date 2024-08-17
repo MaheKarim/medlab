@@ -23,7 +23,7 @@ class UserController extends Controller
 
     public function depositHistory(Request $request)
     {
-        $pageTitle = 'Deposit History';
+        $pageTitle = 'Payment History';
         $deposits = auth()->user()->deposits()->searchable(['trx'])->with(['gateway'])->orderBy('id','desc')->paginate(getPaginate());
         return view('Template::user.deposit_history', compact('pageTitle', 'deposits'));
     }

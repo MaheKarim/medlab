@@ -50,17 +50,17 @@
     <div class="row gy-4 mt-2">
         <div class="col-xxl-3 col-sm-6">
             <x-widget
-                style="6"
+                style="3"
                 link="{{ route('admin.deposit.list') }}"
                 title="{{ __('Total Payments') }}"
                 icon="fas fa-hand-holding-usd"
                 value="{{ showAmount($deposit['total_deposit_amount']) }}"
-                bg="success"
+                bg="primary"
             />
         </div><!-- dashboard-w1 end -->
         <div class="col-xxl-3 col-sm-6">
             <x-widget
-                style="6"
+                style="3"
                 link="{{ route('admin.deposit.pending') }}"
                 title="{{ __('Pending Payments') }}"
                 icon="fas fa-spinner"
@@ -70,7 +70,7 @@
         </div><!-- dashboard-w1 end -->
         <div class="col-xxl-3 col-sm-6">
             <x-widget
-                style="6"
+                style="3"
                 link="{{ route('admin.deposit.rejected') }}"
                 title="{{ __('Rejected Payments') }}"
                 icon="fas fa-ban"
@@ -80,12 +80,12 @@
         </div><!-- dashboard-w1 end -->
         <div class="col-xxl-3 col-sm-6">
             <x-widget
-                style="6"
+                style="3"
                 link="{{ route('admin.deposit.list') }}"
                 title="{{ __('Payments Charge') }}"
                 icon="fas fa-percentage"
                 value="{{ showAmount($deposit['total_deposit_charge']) }}"
-                bg="primary"
+                bg="3"
             />
         </div><!-- dashboard-w1 end -->
     </div><!-- row end-->
