@@ -17,9 +17,7 @@ class FileInfo
     */
 
     public function fileInfo(){
-        $data['withdrawVerify'] = [
-            'path'=>'assets/images/verify/withdraw'
-        ];
+
         $data['depositVerify'] = [
             'path'      =>'assets/images/verify/deposit'
         ];

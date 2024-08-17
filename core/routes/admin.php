@@ -107,6 +107,19 @@ Route::middleware('admin')->group(function () {
         Route::post('status/{id}', 'status')->name('status');
     });
 
+    // Manage Order Controller
+    Route::controller('ManageOrderController')->prefix('order')->name('order.')->group(function () {
+       Route::get('/', 'index')->name('index');
+        Route::get('pending', 'pending')->name('pending');
+        Route::get('confirmed', 'confirmed')->name('confirmed');
+        Route::get('cancel', 'cancel')->name('cancel');
+        Route::get('shipped', 'shipped')->name('shipped');
+        Route::get('delivered', 'delivered')->name('delivered');
+        Route::post('status/{id}', 'status')->name('status');
+        Route::get('details/{id}', 'details')->name('details');
+        Route::get('invoice/{id}', 'invoice')->name('invoice');
+    });
+
     // Deposit Gateway
     Route::name('gateway.')->prefix('gateway')->group(function(){
         // Automatic Gateway
