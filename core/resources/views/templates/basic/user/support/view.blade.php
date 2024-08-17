@@ -1,6 +1,6 @@
 @extends($activeTemplate.'layouts.'.$layout)
 @section('content')
-    <div class="container">
+    <div class="container py-60">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card custom--card">

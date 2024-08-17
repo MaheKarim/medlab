@@ -1,7 +1,7 @@
 @extends($activeTemplate.'layouts.frontend')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
+    <section class="main-section">
+        <div class="row justify-content-center custom--container">
         <div class="col-md-8 col-lg-7 col-xl-5">
             <div class="card custom--card">
                 <div class="card-header">
@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 
 
 @if(@$sections->secs != null)

@@ -53,7 +53,7 @@
                     @if ($order->discount != 0)
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             @lang('Coupon')
-                            <span class="fw-bold">{{ __(@$order->coupon->name) }}</span>
+                            <span class="fw-bold">{{ __(@$order->discount) }}</span>
                         </li>
                     @endif
                     @php
