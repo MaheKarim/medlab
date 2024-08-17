@@ -6,7 +6,10 @@ use App\Constants\Status;
 use App\Http\Controllers\Controller;
 use App\Lib\CurlRequest;
 use App\Models\AdminNotification;
+use App\Models\Category;
 use App\Models\Deposit;
+use App\Models\Order;
+use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\UserLogin;
@@ -27,7 +30,8 @@ class AdminController extends Controller
         $widget['verified_users']          = User::active()->count();
         $widget['email_unverified_users']  = User::emailUnverified()->count();
         $widget['mobile_unverified_users'] = User::mobileUnverified()->count();
-
+        $widget['total_product']           = Product::active()->count();
+        $widget['total_category']          = Category::active()->count();
 
         // user Browsing, Country, Operating Log
         $userLoginData = UserLogin::where('created_at', '>=', Carbon::now()->subDays(30))->get(['browser', 'os', 'country']);
@@ -48,8 +52,22 @@ class AdminController extends Controller
         $deposit['total_deposit_rejected']      = Deposit::rejected()->count();
         $deposit['total_deposit_charge']        = Deposit::successful()->sum('charge');
 
+        $order['total_order'] = Order::where(function ($query) {
+            $query->orWhere('payment_status', Status::PAYMENT_ONLINE)
+                ->orWhere(function ($query) {
+                    $query->where('payment_type', Status::PAYMENT_OFFLINE)
+                        ->where('payment_status', Status::PAYMENT_INITIATE);
+                });
+        })->count();
 
-        return view('admin.dashboard', compact('pageTitle', 'widget', 'chart','deposit'));
+        $order['pending_order']   = Order::pending()->count();
+        $order['rejected_order']  = Order::cancel()->count();
+        $order['shipped_order']   = Order::shipped()->count();
+        $order['confirmed_order'] = Order::confirmed()->count();
+        $order['delivered_order'] = Order::delivered()->count();
+        $recentOrders             = Order::latest()->pending()->take(10)->get();
+
+        return view('admin.dashboard', compact('pageTitle', 'widget', 'chart','deposit', 'order','recentOrders'));
     }
 
 

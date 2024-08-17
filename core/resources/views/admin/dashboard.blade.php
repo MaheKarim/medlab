@@ -90,6 +90,99 @@
         </div><!-- dashboard-w1 end -->
     </div><!-- row end-->
 
+    <div class="row gy-4 mt-2">
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget
+                style="6"
+                link="{{ route('admin.order.index') }}"
+                title="{{ __('Total Orders') }}"
+                icon="las la-list-alt"
+                value="{{ $order['total_order'] }}"
+                outline="false"
+                bg="19"
+            />
+        </div><!-- dashboard-w1 end -->
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget
+                style="6"
+                link="{{ route('admin.order.pending') }}"
+                title="{{ __('Pending Orders') }}"
+                icon="las la-spinner"
+                value="{{ $order['pending_order'] }}"
+                bg="4"
+                outline="false"
+            />
+        </div><!-- dashboard-w1 end -->
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget
+                style="6"
+                link="{{ route('admin.order.confirmed') }}"
+                title="{{ __('Confirmed Orders') }}"
+                icon="las la-check-double"
+                value="{{ $order['confirmed_order'] }}"
+                bg="info"
+                outline="true"
+            />
+        </div><!-- dashboard-w1 end -->
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget
+                style="6"
+                link="{{ route('admin.order.shipped') }}"
+                title="{{ __('Shipped Orders') }}"
+                icon="las la-truck"
+                value="{{ $order['shipped_order']  }}"
+                bg="primary"
+                outline="true"
+            />
+        </div>
+    </div><!-- row end-->
+
+    <div class="row gy-4 mt-2">
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget
+                style="2"
+                icon_style="false"
+                link="{{ route('admin.order.delivered') }}"
+                title="{{ __('Delivered Orders') }}"
+                icon="las la-check-circle"
+                value="{{ $order['delivered_order'] }}"
+                color="success"
+            />
+        </div><!-- dashboard-w1 end -->
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget
+                style="2"
+                icon_style="false"
+                link="{{ route('admin.order.cancel') }}"
+                title="{{ __('Rejected Orders') }}"
+                icon="las la-times-circle"
+                value="{{ $order['rejected_order'] }}"
+                color="danger"
+            />
+        </div><!-- dashboard-w1 end -->
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget
+                style="2"
+                icon_style="false"
+                link="{{ route('admin.product.index') }}"
+                title="{{ __('Total Product') }}"
+                icon="fab fa-product-hunt"
+                value="{{ $widget['total_product'] }}"
+                color="success"
+            />
+        </div><!-- dashboard-w1 end -->
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget
+                style="2"
+                icon_style="false"
+                link="{{ route('admin.category.index') }}"
+                title="{{ __('Total Category') }}"
+                icon="las la-stream"
+                value="{{ $widget['total_category'] }}"
+                color="primary"
+            />
+        </div>
+    </div><!-- row end-->
 
 
     <div class="row mb-none-30 mt-30">

@@ -4,7 +4,7 @@
         <div class="col-xl-4 col-md-6 mb-30">
             <div class="card overflow-hidden box--shadow1">
                 <div class="card-body">
-                    <h5 class="mb-20 text-muted">@lang('Deposit Via') @if($deposit->method_code < 5000) {{ __(@$deposit->gateway->name) }} @else @lang('Google Pay') @endif</h5>
+                    <h5 class="mb-20 text-muted">@lang('Payment Via') @if($deposit->method_code < 5000) {{ __(@$deposit->gateway->name) }} @else @lang('Google Pay') @endif</h5>
                     <ul class="list-group">
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             @lang('Date')
@@ -70,7 +70,7 @@
         <div class="col-xl-8 col-md-6 mb-30">
             <div class="card overflow-hidden box--shadow1">
                 <div class="card-body">
-                    <h5 class="card-title border-bottom pb-2">@lang('User Deposit Information')</h5>
+                    <h5 class="card-title border-bottom pb-2">@lang('User Payment Information')</h5>
                     @if($details != null)
                         @foreach(json_decode($details) as $val)
                             @if($deposit->method_code >= 1000)
@@ -122,7 +122,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">@lang('Reject Deposit Confirmation')</h5>
+                    <h5 class="modal-title">@lang('Reject Payment Confirmation')</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <i class="las la-times"></i>
                     </button>
