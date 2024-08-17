@@ -1,6 +1,6 @@
 @extends($activeTemplate . 'layouts.frontend')
 @section('content')
-    <div class="cart-section pt-60 bg-white">
+    <div class="cart-section py-60 bg-white">
         <div class="container">
             <div class="cart-header">
                 <h4 class="title mb-3">@lang('My Cart')</h4>
@@ -28,11 +28,15 @@
                         <td>
                             <div class="product-item">
                                 <div class="product-thumb">
-                                    <img src="{{ getImage(getFilePath('product') . '/' . $image, getFileSize('product')) }}" alt="products">
+                                    <img
+                                        src="{{ getImage(getFilePath('product') . '/' . $image, getFileSize('product')) }}"
+                                        alt="products">
                                 </div>
                                 <div class="product-content">
                                     <h6 class="name">
-                                        <a href="{{ route('product.details', [slug($name), $cart->product_id]) }}" class="productName" data-product_id="{{ $cart->product_id }}">{{ __($name) }}</a>
+                                        <a href="{{ route('product.details', [slug($name), $cart->product_id]) }}"
+                                           class="productName"
+                                           data-product_id="{{ $cart->product_id }}">{{ __($name) }}</a>
                                     </h6>
                                 </div>
                             </div>
@@ -40,7 +44,7 @@
 
                         <td>
                                 <span class="price">
-                                    {{ gs('cur_sym') }}{{ getAmount($price) }}
+                                    {{ showAmount($price, currencyFormat: false) }}
                                 </span>
                         </td>
                         <td>
@@ -73,7 +77,7 @@
 
             <div class="row gy-4 pt-5 justify-content-between">
                 <div class="col-md-5 col-xl-3">
-                    <a href="#" class="btn btn-outline--primary  btn-lg fs-6 w-100">@lang('Continue Shopping ')
+                    <a href="{{ route('home') }}" class="btn btn-outline--primary  btn-lg fs-6 w-100">@lang('Continue Shopping ')
                         <i class="las la-long-arrow-alt-right ms-3"></i>
                     </a>
                 </div>
@@ -91,7 +95,7 @@
                             <h6 class="value total total-price text--base">{{ gs('cur_sym') }}0.00</h6>
                         </li>
                         <li>
-                            <a href="#" class="btn btn-outline--primary w-100">@lang('Proceed to Checkout')</a>
+                            <a href="{{ route('user.checkout.index') }}" class="btn btn-outline--primary w-100">@lang('Proceed to Checkout')</a>
                         </li>
                     </ul>
                 </div>
@@ -104,7 +108,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <strong class="modal-title">@lang('Confirmation Alert!')</strong>
-                    <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <p>@lang('Are you sure to remove this product?')</p>
@@ -120,7 +125,7 @@
 
 @push('script')
     <script>
-        (function($) {
+        (function ($) {
             "use strict";
             let removeableItem = null;
             let modal = $('#removeCartModal');
@@ -128,7 +133,7 @@
             let currentRow;
             let quantity
 
-            $('.cart-decrease').click(function() {
+            $('.cart-decrease').click(function () {
                 currentRow = $(this).closest("tr");
                 quantity = currentRow.find('input[name="quantity"]').val();
                 if (quantity > 0) {
@@ -139,12 +144,12 @@
                 }
             });
 
-            $('.cart-increase').click(function() {
+            $('.cart-increase').click(function () {
                 currentRow = $(this).closest("tr");
                 CartCalculation(currentRow)
             });
 
-            $('input[name="quantity"]').on('focusout', function() {
+            $('input[name="quantity"]').on('focusout', function () {
                 currentRow = $(this).closest("tr");
                 quantity = currentRow.find('input[name="quantity"]').val();
 
@@ -157,12 +162,12 @@
                 }
             });
 
-            $('.remove-btn').on('click', function() {
+            $('.remove-btn').on('click', function () {
                 removeableItem = $(this).closest("tr");
                 modal.modal('show');
             });
 
-            $(".remove-product").on('click', function() {
+            $(".remove-product").on('click', function () {
                 let product_id = removeableItem.find('.productName').data('product_id');
                 $('.coupon-show').addClass('d-none');
                 $('.total-show').addClass('d-none');
@@ -176,7 +181,7 @@
                     data: {
                         product_id: product_id
                     },
-                    success: function(response) {
+                    success: function (response) {
                         if (response.success) {
                             removeableItem.remove();
                             subTotal();
@@ -196,7 +201,7 @@
                 $.ajax({
                     type: "GET",
                     url: "{{ route('cart.getCartTotal') }}",
-                    success: function(response) {
+                    success: function (response) {
                         $('.cart-count').text(response);
                     }
                 });
@@ -209,9 +214,9 @@
                 var totalArr = [];
                 var subtotal = 0;
 
-                $('.cart-table tr').each(function(index, tr) {
-                    $(tr).find('td').each(function(index, td) {
-                        $(td).find('.subtotal').each(function(index, value) {
+                $('.cart-table tr').each(function (index, tr) {
+                    $(tr).find('td').each(function (index, td) {
+                        $(td).find('.subtotal').each(function (index, value) {
                             var productPrice = $(value).text();
                             var splitPrice = productPrice.split("{{ gs('cur_sym') }}");
                             var price = parseFloat(splitPrice[1]);
@@ -249,7 +254,7 @@
                         product_id: product_id,
                         quantity: quantity
                     },
-                    success: function(response) {
+                    success: function (response) {
                         if (response.success) {
                             notify('success', response.success);
                         } else {

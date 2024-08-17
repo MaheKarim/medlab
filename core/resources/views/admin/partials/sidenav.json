@@ -99,6 +99,13 @@
             }
         ]
     },
+    "shipping_methods": {
+        "keyword": ["Shipping Methods", "Shipping Method",  "Manage Shipping Methods"],
+        "title": "Shipping Methods",
+        "icon": "las la-shipping-fast",
+        "menu_active": "admin.shipping*",
+        "route_name": "admin.shipping.index"
+    },
     "deposits": {
         "title": "Payments",
         "icon": "las la-file-invoice-dollar",

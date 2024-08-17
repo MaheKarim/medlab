@@ -91,7 +91,6 @@ class SocialLogin
 
     private function createUser($user, $provider)
     {
-        $general  = gs();
         $password = getTrx(8);
 
         $firstName = null;
@@ -108,13 +107,6 @@ class SocialLogin
             $firstName = preg_replace('/\W\w+\s*(\W*)$/', '$1', $user->name);
             $pieces    = explode(' ', $user->name);
             $lastName  = array_pop($pieces);
-        }
-
-        $referBy = session()->get('reference');
-        if ($referBy) {
-            $referUser = User::where('username', $referBy)->first();
-        } else {
-            $referUser = null;
         }
 
         $newUser = new User();

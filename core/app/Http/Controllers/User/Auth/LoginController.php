@@ -105,8 +105,7 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
-        $user->tv = $user->ts == Status::VERIFIED ? Status::UNVERIFIED : Status::VERIFIED;
-        $user->save();
+
         $ip = getRealIP();
         $exist = UserLogin::where('user_ip',$ip)->first();
         $userLogin = new UserLogin();

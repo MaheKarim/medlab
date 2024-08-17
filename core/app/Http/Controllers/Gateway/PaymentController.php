@@ -8,22 +8,27 @@ use App\Lib\FormProcessor;
 use App\Models\AdminNotification;
 use App\Models\Deposit;
 use App\Models\GatewayCurrency;
+use App\Models\Order;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Traits\OrderConfirmation;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    public function deposit()
+    use OrderConfirmation;
+    public function deposit($orderId)
     {
+        $check = session()->get('subtotal');
         $gatewayCurrency = GatewayCurrency::whereHas('method', function ($gate) {
             $gate->where('status', Status::ENABLE);
         })->with('method')->orderby('name')->get();
         $pageTitle = 'Deposit Methods';
-        return view('Template::user.payment.deposit', compact('gatewayCurrency', 'pageTitle'));
+        $order     = Order::where('user_id', auth()->id())->where('payment_status', Status::ORDER_PAYMENT_PENDING)->findOrFail($orderId);
+        return view('Template::user.payment.deposit', compact('gatewayCurrency', 'pageTitle' ,'order'));
     }
 
-    public function depositInsert(Request $request)
+    public function depositInsert(Request $request, $orderId)
     {
         $request->validate([
             'amount' => 'required|numeric|gt:0',
@@ -31,6 +36,8 @@ class PaymentController extends Controller
             'currency' => 'required',
         ]);
 
+        $check = session()->get('total');
+        $order = Order::where('user_id', auth()->id())->where('payment_status', Status::ORDER_PAYMENT_PENDING)->findOrFail($orderId);
 
         $user = auth()->user();
         $gate = GatewayCurrency::whereHas('method', function ($gate) {
@@ -42,7 +49,7 @@ class PaymentController extends Controller
         }
 
         if ($gate->min_amount > $request->amount || $gate->max_amount < $request->amount) {
-            $notify[] = ['error', 'Please follow deposit limit'];
+            $notify[] = ['error', 'Please follow the limit'];
             return back()->withNotify($notify);
         }
 
@@ -52,6 +59,7 @@ class PaymentController extends Controller
 
         $data = new Deposit();
         $data->user_id = $user->id;
+        $data->order_id  = $orderId ?? 0;
         $data->method_code = $gate->method_code;
         $data->method_currency = strtoupper($gate->currency);
         $data->amount = $request->amount;
@@ -60,31 +68,18 @@ class PaymentController extends Controller
         $data->final_amount = $finalAmount;
         $data->btc_amount = 0;
         $data->btc_wallet = "";
-        $data->trx = getTrx();
+        $data->trx = $orderId ? $order->order_no : getTrx();;
         $data->success_url = urlPath('user.deposit.history');
         $data->failed_url = urlPath('user.deposit.history');
         $data->save();
         session()->put('Track', $data->trx);
-        return to_route('user.deposit.confirm');
-    }
-
-
-    public function appDepositConfirm($hash)
-    {
-        try {
-            $id = decrypt($hash);
-        } catch (\Exception $ex) {
-            abort(404);
-        }
-        $data = Deposit::where('id', $id)->where('status', Status::PAYMENT_INITIATE)->orderBy('id', 'DESC')->firstOrFail();
-        $user = User::findOrFail($data->user_id);
-        auth()->login($user);
-        session()->put('Track', $data->trx);
+//        dd($data, route('user.deposit.confirm'));
         return to_route('user.deposit.confirm');
     }
 
     public function depositConfirm()
     {
+
         $track = session()->get('Track');
         $deposit = Deposit::where('trx', $track)->where('status',Status::PAYMENT_INITIATE)->orderBy('id', 'DESC')->with('gateway')->firstOrFail();
 
@@ -125,40 +120,30 @@ class PaymentController extends Controller
             $deposit->save();
 
             $user = User::find($deposit->user_id);
-            $user->balance += $deposit->amount;
-            $user->save();
-
-            $methodName = $deposit->methodName();
-
-            $transaction = new Transaction();
-            $transaction->user_id = $deposit->user_id;
-            $transaction->amount = $deposit->amount;
-            $transaction->post_balance = $user->balance;
-            $transaction->charge = $deposit->charge;
-            $transaction->trx_type = '+';
-            $transaction->details = 'Deposit Via ' . $methodName;
-            $transaction->trx = $deposit->trx;
-            $transaction->remark = 'deposit';
-            $transaction->save();
+//            $user->balance += $deposit->amount;
+//            $user->save();
 
             if (!$isManual) {
                 $adminNotification = new AdminNotification();
                 $adminNotification->user_id = $user->id;
-                $adminNotification->title = 'Deposit successful via '.$methodName;
+                $adminNotification->title = 'Payment successful via ' . $deposit->gatewayCurrency()->name;
                 $adminNotification->click_url = urlPath('admin.deposit.successful');
                 $adminNotification->save();
             }
 
             notify($user, $isManual ? 'DEPOSIT_APPROVE' : 'DEPOSIT_COMPLETE', [
-                'method_name' => $methodName,
+                'method_name' => $deposit->gatewayCurrency()->name,
                 'method_currency' => $deposit->method_currency,
-                'method_amount' => showAmount($deposit->final_amount,currencyFormat:false),
-                'amount' => showAmount($deposit->amount,currencyFormat:false),
-                'charge' => showAmount($deposit->charge,currencyFormat:false),
-                'rate' => showAmount($deposit->rate,currencyFormat:false),
+                'method_amount' => showAmount($deposit->final_amo),
+                'amount' => showAmount($deposit->amount),
+                'charge' => showAmount($deposit->charge),
+                'rate' => showAmount($deposit->rate),
                 'trx' => $deposit->trx,
-                'post_balance' => showAmount($user->balance)
             ]);
+
+            $user = User::find($deposit->user_id);
+            $order = Order::findOrFail($deposit->order_id);
+            static::transactionCreate($order, $user, $deposit);
         }
     }
 

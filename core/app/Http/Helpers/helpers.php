@@ -17,7 +17,7 @@ use Laramin\Utility\VugiChugi;
 
 function systemDetails()
 {
-    $system['name'] = 'Medlab';
+    $system['name'] = 'laramin';
     $system['version'] = '1.0';
     $system['build_version'] = '5.0.9';
     return $system;

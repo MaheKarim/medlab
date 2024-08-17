@@ -69,15 +69,20 @@ Route::middleware('auth')->name('user.')->group(function () {
                 Route::get('change-password', 'changePassword')->name('change.password');
                 Route::post('change-password', 'submitPassword');
             });
+            // Checkout
+            Route::controller('CheckoutController')->name('checkout.')->prefix('checkout')->group(function(){
+                Route::get('/', 'checkout')->name('index');
+                Route::post('order', 'order')->name('order');
+            });
         });
 
         // Payment
         Route::prefix('deposit')->name('deposit.')->controller('Gateway\PaymentController')->group(function(){
-            Route::any('/', 'deposit')->name('index');
-            Route::post('insert', 'depositInsert')->name('insert');
+            Route::post('insert/{orderId}', 'depositInsert')->name('insert');
             Route::get('confirm', 'depositConfirm')->name('confirm');
             Route::get('manual', 'manualDepositConfirm')->name('manual.confirm');
             Route::post('manual', 'manualDepositUpdate')->name('manual.update');
+            Route::any('/{orderId}', 'deposit')->name('index');
         });
     });
 });

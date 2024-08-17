@@ -36,9 +36,6 @@ class AuthorizationController extends Controller
             $type = 'sms';
             $pageTitle = 'Verify Mobile Number';
             $notifyTemplate = 'SVER_CODE';
-        }elseif (!$user->tv) {
-            $pageTitle = '2FA Verification';
-            $type = '2fa';
         }else{
             return to_route('user.home');
         }

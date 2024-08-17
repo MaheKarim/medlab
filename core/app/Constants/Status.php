@@ -4,6 +4,12 @@ namespace App\Constants;
 
 class Status{
 
+    const ORDER_PENDING   = 0;
+    const ORDER_CONFIRMED = 1;
+    const ORDER_SHIPPED   = 2;
+    const ORDER_DELIVERED = 3;
+    const ORDER_CANCEL    = 9;
+
     const ENABLE = 1;
     const DISABLE = 0;
 
@@ -20,6 +26,10 @@ class Status{
     const PAYMENT_SUCCESS = 1;
     const PAYMENT_PENDING = 2;
     const PAYMENT_REJECT = 3;
+
+    const ORDER_PAYMENT_PENDING = 0;
+    const ORDER_PAYMENT_SUCCESS = 1;
+    const ORDER_PAYMENT_CANCEL  = 9;
 
     CONST TICKET_OPEN = 0;
     CONST TICKET_ANSWER = 1;
@@ -38,5 +48,8 @@ class Status{
     const CUR_BOTH = 1;
     const CUR_TEXT = 2;
     const CUR_SYM = 3;
+
+    const PAYMENT_ONLINE  = 1;
+    const PAYMENT_OFFLINE = 2;
 
 }

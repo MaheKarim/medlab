@@ -82,11 +82,17 @@ Route::middleware('admin')->group(function () {
         Route::post('store/{id?}', 'store')->name('store');
         Route::post('status/{id}', 'status')->name('status');
         Route::get('category/check-slug/{id?}', 'checkSlug')->name('check.slug');
-
     });
 
     // Brand Controller
     Route::controller('ManageBrandController')->prefix('brand')->name('brand.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('store/{id?}', 'store')->name('store');
+        Route::post('status/{id}', 'status')->name('status');
+    });
+
+    // Shipping Controller
+    Route::controller('ShippingMethodController')->prefix('shipping')->name('shipping.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('store/{id?}', 'store')->name('store');
         Route::post('status/{id}', 'status')->name('status');
@@ -112,7 +118,6 @@ Route::middleware('admin')->group(function () {
             Route::post('status/{id}', 'status')->name('status');
         });
 
-
         // Manual Methods
         Route::controller('ManualGatewayController')->prefix('manual')->name('manual.')->group(function(){
             Route::get('/', 'index')->name('index');
@@ -123,7 +128,6 @@ Route::middleware('admin')->group(function () {
             Route::post('status/{id}', 'status')->name('status');
         });
     });
-
 
     // DEPOSIT SYSTEM
     Route::controller('DepositController')->prefix('deposit')->name('deposit.')->group(function(){
@@ -148,7 +152,6 @@ Route::middleware('admin')->group(function () {
         Route::get('email/detail/{id}', 'emailDetails')->name('email.details');
     });
 
-
     // Admin Support
     Route::controller('SupportTicketController')->prefix('ticket')->name('ticket.')->group(function(){
         Route::get('/', 'tickets')->name('index');
@@ -161,7 +164,6 @@ Route::middleware('admin')->group(function () {
         Route::get('download/{attachment_id}', 'ticketDownload')->name('download');
         Route::post('delete/{id}', 'ticketDelete')->name('delete');
     });
-
 
     // Language Manager
     Route::controller('LanguageController')->prefix('language')->name('language.')->group(function(){
@@ -217,8 +219,6 @@ Route::middleware('admin')->group(function () {
 
     });
 
-
-
     //Notification Setting
     Route::name('setting.notification.')->controller('NotificationController')->prefix('notification')->group(function(){
         //Template Setting
@@ -271,7 +271,6 @@ Route::middleware('admin')->group(function () {
 
     // SEO
     Route::get('seo', 'FrontendController@seoEdit')->name('seo');
-
 
     // Frontend
     Route::name('frontend.')->prefix('frontend')->group(function () {

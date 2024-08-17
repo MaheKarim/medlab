@@ -49,6 +49,7 @@ class CartController extends Controller
         }
 
         if ($userId != null) {
+
             $cart = Cart::where('user_id', $userId)
                 ->where('product_id', $request->product_id)
                 ->first();
@@ -78,7 +79,7 @@ class CartController extends Controller
             $totalCartItems = Cart::where('session_id', $sessionId)->with(['product'])
                 ->sum('quantity');
         }
-
+        session()->put('cart', $cart);
         return response()->json([
             'success' => true,
             'message' => 'Product added to cart successfully!',
@@ -106,6 +107,8 @@ class CartController extends Controller
                 })
                 ->get();
         }
+        session()->put('total', ['total' => $totalCart]);
+
         return $totalCart->count();
     }
 

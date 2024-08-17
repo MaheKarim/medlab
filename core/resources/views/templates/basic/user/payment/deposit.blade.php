@@ -3,7 +3,7 @@
     <div class="container ">
         <div class="row justify-content-center">
             <div class="col-lg-9">
-                <form action="{{ route('user.deposit.insert') }}" method="post" class="deposit-form">
+                <form action="{{ route('user.deposit.insert', $order->id) }}" method="post" class="deposit-form">
                     @csrf
                     <input type="hidden" name="currency">
                     <div class="gateway-card">
@@ -50,7 +50,7 @@
                                             <div class="deposit-info__input-group input-group">
                                                 <span class="deposit-info__input-group-text">{{ gs('cur_sym') }}</span>
                                                 <input type="text" class="form-control form--control amount" name="amount"
-                                                    placeholder="@lang('00.00')" value="{{ old('amount') }}" autocomplete="off">
+                                                    placeholder="@lang('00.00')" value="{{ getAmount(@$order->total) }}" autocomplete="off">
                                             </div>
                                         </div>
                                     </div>

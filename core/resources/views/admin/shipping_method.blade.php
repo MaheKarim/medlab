@@ -10,38 +10,40 @@
                             <thead>
                             <tr>
                                 <th>@lang('Name')</th>
+                                <th>@lang('Price')</th>
                                 <th>@lang('Status')</th>
                                 <th>@lang('Last Update')</th>
                                 <th>@lang('Action')</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($brands as $brand)
+                            @forelse($methods as $method)
                                 <tr>
-                                    <td>{{ __($brand->name) }}</td>
-                                    <td>@php echo $brand->statusBadge @endphp</td>
-                                    <td>{{ showDateTime($brand->updated_at) }}</td>
+                                    <td>{{ __($method->name) }}</td>
+                                    <td>{{ __(showAmount($method->price, currencyFormat: false)) }}</td>
+                                    <td>@php echo $method->statusBadge @endphp</td>
+                                    <td>{{ showDateTime($method->updated_at) }}</td>
                                     <td>
                                         <div class="button-group">
                                             <button class="btn btn-outline--primary cuModalBtn btn-sm editBtn"
-                                                    data-modal_title="@lang('Edit brand')"
-                                                    data-resource="{{ $brand }}"
+                                                    data-modal_title="@lang('Edit shipping method')"
+                                                    data-resource="{{ $method }}"
                                             >
                                                 <i class="las la-pen"></i>@lang('Edit')
                                             </button>
 
-                                            @if ($brand->status == Status::ENABLE)
+                                            @if ($method->status == Status::ENABLE)
                                                 <button
                                                     class="btn btn-sm btn-outline--danger ms-1 confirmationBtn"
-                                                    data-question="@lang('Are you sure to disable this brand?')"
-                                                    data-action="{{ route('admin.brand.status',$brand->id) }}">
+                                                    data-question="@lang('Are you sure to disable this shipping method?')"
+                                                    data-action="{{ route('admin.shipping.status',$method->id) }}">
                                                     <i class="la la-eye-slash"></i> @lang('Disable')
                                                 </button>
                                             @else
                                                 <button
                                                     class="btn btn-sm btn-outline--success ms-1 confirmationBtn"
-                                                    data-question="@lang('Are you sure to enable this brand?')"
-                                                    data-action="{{ route('admin.brand.status',$brand->id) }}">
+                                                    data-question="@lang('Are you sure to enable this shipping method?')"
+                                                    data-action="{{ route('admin.shipping.status',$method->id) }}">
                                                     <i class="la la-eye"></i> @lang('Enable')
                                                 </button>
                                             @endif
@@ -58,9 +60,9 @@
                         </table><!-- table end -->
                     </div>
                 </div>
-                @if ($brands->hasPages())
+                @if ($methods->hasPages())
                     <div class="card-footer py-4">
-                        {{ paginateLinks($brands) }}
+                        {{ paginateLinks($methods) }}
                     </div>
                 @endif
             </div><!-- card end -->
@@ -73,20 +75,28 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><span class="type"></span> <span>@lang('Add Brand')</span></h5>
+                    <h5 class="modal-title"><span class="type"></span> <span>@lang('Add Shipping Method')</span></h5>
                     <button class="close" data-bs-dismiss="modal" type="button" aria-label="Close">
                         <i class="las la-times"></i>
                     </button>
                 </div>
 
-                <form method="POST" action="{{ route('admin.brand.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('admin.shipping.store') }}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="_method" id="formMethod" value="POST">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="required">@lang('Brand Name')</label>
+                            <label class="required">@lang('Shipping Method Name')</label>
                             <input name="name" type="text" class="form-control bg--white pe-2"
-                                   placeholder="@lang('Brand Name')" autocomplete="off">
+                                   placeholder="@lang('Shipping Method Name')" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label class="required">@lang('Price')</label>
+                            <div class="input-group">
+                            <input name="price" type="number" min="0" class="form-control bg--white pe-2"
+                                   placeholder="@lang('Price')" autocomplete="off">
+                                <span class="input-group-text">{{ gs('cur_text') }}</span>
+                            </div>
                         </div>
 
                     </div>
@@ -102,6 +112,6 @@
 @endsection
 @push('breadcrumb-plugins')
     <button class="btn btn-sm btn-outline--primary float-sm-end cuModalBtn addBtn"
-            data-modal_title="@lang('Create New Brand')" type="button">
-        <i class="las la-plus"></i>@lang('Add New Brand')</button>
+            data-modal_title="@lang('Create New Shipping Method')" type="button">
+        <i class="las la-plus"></i>@lang('Add New Shipping Method')</button>
 @endpush

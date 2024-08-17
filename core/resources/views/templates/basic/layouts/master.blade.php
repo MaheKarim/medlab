@@ -314,14 +314,14 @@
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             @lang('Deposit')
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item"
-                            href="{{ route('user.deposit.index') }}">@lang('Deposit Money')</a>
-                            <a class="dropdown-item"
-                            href="{{ route('user.deposit.history') }}">@lang('Deposit
-                                    Log')</a>
-                            </div>
-                        </li>
+{{--                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">--}}
+{{--                            <a class="dropdown-item"--}}
+{{--                            href="{{ route('user.deposit.index') }}">@lang('Deposit Money')</a>--}}
+{{--                            <a class="dropdown-item"--}}
+{{--                            href="{{ route('user.deposit.history') }}">@lang('Deposit--}}
+{{--                                    Log')</a>--}}
+{{--                            </div>--}}
+{{--                        </li>--}}
 
 
                         <li class="nav-item">

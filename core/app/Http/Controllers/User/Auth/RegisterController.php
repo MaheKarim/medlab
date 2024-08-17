@@ -87,14 +87,7 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        $referBy = session()->get('reference');
-        if ($referBy) {
-            $referUser = User::where('username', $referBy)->first();
-        } else {
-            $referUser = null;
-        }
 
-        //User Create
         $user            = new User();
         $user->email     = strtolower($data['email']);
         $user->firstname = $data['firstname'];

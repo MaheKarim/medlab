@@ -22,7 +22,7 @@
                                         <img
                                             src="{{ getImage(getFilePath('category').'/'. $category->image, getFileSize('category')) }}"
                                             class="icon" alt="Image">
-                                        {{ $category->name }}
+                                        {{ __($category->name) }}
                                     </td>
                                     <td> @php echo $category->statusBadge @endphp</td>
                                     <td>{{ showDateTime($category->updated_at) }}</td>
