@@ -12,6 +12,7 @@
                                 <th>@lang('User')</th>
                                 <th>@lang('Price')</th>
                                 <th>@lang('Created At')</th>
+                                <th>@lang('Payment Status')</th>
                                 <th>@lang('Status')</th>
                                 <th>@lang('Action')</th>
                             </tr>
@@ -28,7 +29,12 @@
                                         </div>
                                     </td>
                                     <td>{{ showAmount($order->total) }}</td>
-                                    <td>{{ showDateTime($order->created_at) }}</td>
+                                    <td>
+                                        {{ showDateTime($order->created_at) }}
+                                        <br>
+                                        {{ diffForHumans($order->created_at) }}
+                                    </td>
+                                    <td> @php echo $order->paymentBadge; @endphp </td>
                                     <td> @php echo $order->ordersBadge; @endphp </td>
                                     <td>
                                         <div class="button--group">

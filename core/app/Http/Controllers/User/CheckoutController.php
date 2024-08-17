@@ -8,7 +8,6 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ShippingMethod;
-use App\Traits\GlobalStatus;
 use Illuminate\Http\Request;
 use App\Traits\OrderConfirmation;
 
@@ -17,7 +16,7 @@ class CheckoutController extends Controller
 {
     use OrderConfirmation;
 
-    public function checkout()
+    public function checkout(Request $request)
     {
         $pageTitle = 'Checkout';
         $userId = auth()->user()->id;
@@ -47,7 +46,7 @@ class CheckoutController extends Controller
             'lastname'        => 'required',
             'mobile'          => 'required',
             'email'           => 'required',
-            'country_name'         => 'required',
+            'country_name'    => 'required',
             'address'         => 'required',
             'state'           => 'required',
             'city'            => 'required',
@@ -65,11 +64,11 @@ class CheckoutController extends Controller
         }
 
         $grandTotal = $subtotal + $shipping->price;
-        $total = session()->get('total');
+//        $total = session()->get('total');
 
-        if ($total) {
-            $grandTotal = $grandTotal - 0;
-        }
+//        if ($total) {
+//            $grandTotal = $grandTotal - 0;
+//        }
 
         $address = [
             'address' => $request->address,
@@ -87,17 +86,17 @@ class CheckoutController extends Controller
         $order->total              = $grandTotal;
         $order->shipping_method_id = $shipping->id;
         $order->address            = json_encode($address);
-//        $order->payment_type       = $request->payment_type;
+        $order->payment_type       = $request->payment_type;
         $order->save();
 
-//        if ($request->payment_type == Status::PAYMENT_ONLINE) {
-//        }
-//        dd(session()->get('cart'));
+        if ($request->payment_type == Status::PAYMENT_ONLINE) {
+            return redirect()->route('user.deposit.index', $order->id);
+        }
 
         static::confirmOrder($order);
 
         $notify[] = ['success', 'Order successfully completed.'];
-        return redirect()->route('user.deposit.index', $order->id);
+        return redirect()->route('user.home', $order->id)->withNotify($notify);
     }
 
     protected function cartSubTotal($user_id)

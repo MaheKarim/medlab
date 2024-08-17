@@ -118,9 +118,9 @@ class PaymentController extends Controller
             $user = User::find($deposit->user_id);
 
             if (!$isManual) {
-                $adminNotification = new AdminNotification();
-                $adminNotification->user_id = $user->id;
-                $adminNotification->title = 'Payment successful via ' . $deposit->gatewayCurrency()->name;
+                $adminNotification            = new AdminNotification();
+                $adminNotification->user_id   = $user->id;
+                $adminNotification->title     = 'Payment successful via ' . $deposit->gatewayCurrency()->name;
                 $adminNotification->click_url = urlPath('admin.deposit.successful');
                 $adminNotification->save();
             }
@@ -181,7 +181,10 @@ class PaymentController extends Controller
         $adminNotification->click_url = urlPath('admin.deposit.details',$data->id);
         $adminNotification->save();
 
-        notify($data->user, 'DEPOSIT_REQUEST', [
+        $order = Order::where('user_id', auth()->id())->where('payment_status', Status::ORDER_PAYMENT_PENDING)->findOrFail($data->order_id);
+        static::confirmOrder($order);
+
+        notify($data->user, 'PAYMENT_REQUEST', [
             'method_name' => $data->gatewayCurrency()->name,
             'method_currency' => $data->method_currency,
             'method_amount' => showAmount($data->final_amount,currencyFormat:false),

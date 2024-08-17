@@ -9,9 +9,52 @@
                         <h5 class="card-title">{{ __($pageTitle) }}</h5>
                     </div>
                     <div class="card-body">
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum unde, vitae esse eum perspiciatis consectetur nisi, atque repellendus, cumque magnam ab a inventore quis nobis quod quisquam omnis. In, possimus!
-                        </p>
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Order ID</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Payment Type</th>
+                                <th scope="col">Payment Status</th>
+                                <th scope="col">Order Status</th>
+                                <th scope="col">Order Time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($orders as $order)
+                                <tr>
+                                    <th>{{ $order->order_no }}</th>
+                                    <td>{{ showAmount($order->total) }}</td>
+                                    <td>
+                                        @if ($order->payment_type == Status::PAYMENT_ONLINE)
+                                            @lang('Online Payment')
+                                        @else
+                                            @lang('Cash On Delivery')
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @php
+                                            echo $order->paymentBadge;
+                                        @endphp
+                                    </td>
+                                    <td>
+                                        @php
+                                            echo $order->ordersBadge;
+                                        @endphp
+
+                                        @if (@$order->deposit->admin_feedback != null)
+                                            <span class="badge badge--info status-info detailBtn" data-admin_feedback="{{ __(@$order->deposit->admin_feedback) }}"><i class="fa fa-info"></i></span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        {{ showDateTime($order->created_at) }}
+                                        <br>{{ diffForHumans($order->created_at) }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

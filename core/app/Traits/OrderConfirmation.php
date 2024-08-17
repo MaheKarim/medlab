@@ -58,9 +58,9 @@ trait OrderConfirmation
         notify($user, 'ORDER_COMPLETE', [
             'method_name'     => 'Order successfully placed.',
             'user_name'       => $user->username,
-            'subtotal'        => showAmount($order->subtotal),
-            'shipping_charge' => showAmount($order->shipping_charge),
-            'total'           => showAmount($order->total),
+            'subtotal'        => showAmount($order->subtotal, currencyFormat: false),
+            'shipping_charge' => showAmount($order->shipping_charge, currencyFormat: false),
+            'total'           => showAmount($order->total, currencyFormat: false),
             'currency'        => gs('cur_text'),
             'order_no'        => $order->order_no,
         ]);

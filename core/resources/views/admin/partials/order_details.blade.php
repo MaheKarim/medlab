@@ -78,6 +78,12 @@
                         </span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
+                        @lang('Payment Type')
+                        @php
+                            echo $order->paymentTypeBadge;
+                        @endphp
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
                         @lang('Payment Status')
                         @php
                             echo $order->paymentBadge;
@@ -143,10 +149,6 @@
                 <tr>
                     <td colspan="3"></td>
                     <td><span>@lang('Shipping Charge :')</span><strong> {{ showAmount($order->shipping_charge) }} </strong></td>
-                </tr>
-                <tr>
-                    <td colspan="3"></td>
-                    <td><span>@lang('Discount :')</span><strong> {{ showAmount($order->discount) }} </strong></td>
                 </tr>
                 <tr>
                     <td colspan="3"></td>

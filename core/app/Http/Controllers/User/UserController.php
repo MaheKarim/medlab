@@ -4,10 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Constants\Status;
 use App\Http\Controllers\Controller;
-use App\Lib\FormProcessor;
-use App\Lib\GoogleAuthenticator;
 use App\Models\DeviceToken;
-use App\Models\Form;
+use App\Models\Order;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +16,10 @@ class UserController extends Controller
     public function home()
     {
         $pageTitle = 'Dashboard';
-        return view('Template::user.dashboard', compact('pageTitle'));
+        $orders = Order::where('user_id', auth()->user()->id)
+            ->with(['orderDetail','orderDetail.product', 'user'])->orderBy('id', 'desc')->paginate(getPaginate());
+
+        return view('Template::user.dashboard', compact('pageTitle', 'orders'));
     }
 
     public function depositHistory(Request $request)

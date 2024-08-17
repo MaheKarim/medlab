@@ -96,4 +96,18 @@ class Order extends Model
             return $html;
         });
     }
+
+    public function paymentTypeBadge(): Attribute
+    {
+        return new Attribute(function () {
+            $html = '';
+            if ($this->payment_type == Status::PAYMENT_OFFLINE) {
+                $html = '<span class="badge badge--warning">' . trans('Offline / COD') . '</span>';
+            } else {
+                $html = '<span class="badge badge--primary">' . trans('Online') . '</span>';
+            }
+
+            return $html;
+        });
+    }
 }
