@@ -1,15 +1,13 @@
 @extends($activeTemplate . 'layouts.master')
 @section('content')
     <div class="container">
-        <div class="notice"></div>
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card custom--card">
                     <div class="card-header">
                         <h5 class="card-title">{{ __($pageTitle) }}</h5>
                     </div>
                     <div class="card-body">
-
                         <table class="table">
                             <thead>
                             <tr>
@@ -19,13 +17,13 @@
                                 <th scope="col">Payment Status</th>
                                 <th scope="col">Order Status</th>
                                 <th scope="col">Order Time</th>
+                                <th scope="col">Details</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($orders as $order)
                                 <tr>
                                     <th>{{ $order->order_no }}</th>
-                                    <td>{{ showAmount($order->total) }}</td>
                                     <td>
                                         @if ($order->payment_type == Status::PAYMENT_ONLINE)
                                             @lang('Online Payment')
@@ -33,6 +31,7 @@
                                             @lang('Cash On Delivery')
                                         @endif
                                     </td>
+                                    <td>{{ showAmount($order->total) }}</td>
                                     <td>
                                         @php
                                             echo $order->paymentBadge;
@@ -50,6 +49,10 @@
                                     <td>
                                         {{ showDateTime($order->created_at) }}
                                         <br>{{ diffForHumans($order->created_at) }}
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('user.order.details', $order->id) }}"
+                                           class="btn btn-sm btn-primary btn--primary">Details</a>
                                     </td>
                                 </tr>
                             @endforeach

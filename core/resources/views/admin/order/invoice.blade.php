@@ -401,7 +401,7 @@
                             <li>
                                 <div class="list list--row" style="--gap: 0.5rem">
                                     <span class="strong">@lang('Country :')</span>
-                                    <span>{{ __(@$address->country) }}</span>
+                                    <span>{{ __(@$address->country_name) }}</span>
                                 </div>
                             </li>
                             <li>

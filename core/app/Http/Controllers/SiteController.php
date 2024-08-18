@@ -199,7 +199,7 @@ class SiteController extends Controller
 
     public function productDetails($id)
     {
-        $product = Product::where('id', $id)->where('status', Status::ENABLE)->firstOrFail();
+        $product = Product::where('id', $id)->active()->firstOrFail();
         $pageTitle = $product->name;
         $seoContents = $product->seo_content;
         $seoImage = @$seoContents->image ? frontendImage('product', $seoContents->image, getFileSize('seo'), true) : null;
@@ -210,7 +210,7 @@ class SiteController extends Controller
     {
         $pageTitle = 'Search';
         $search = $request->search;
-        $products = Product::where('name', 'like', '%' . $search . '%')->where('status', Status::ENABLE)->paginate(getPaginate());
+        $products = Product::where('name', 'like', '%'.$search .'%')->active()->paginate(getPaginate());
         return view('Template::search', compact('pageTitle', 'products'));
     }
 

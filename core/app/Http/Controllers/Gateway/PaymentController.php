@@ -125,7 +125,7 @@ class PaymentController extends Controller
                 $adminNotification->save();
             }
 
-            notify($user, $isManual ? 'DEPOSIT_APPROVE' : 'DEPOSIT_COMPLETE', [
+            notify($user, $isManual ? 'PAYMENT_APPROVE' : 'PAYMENT_COMPLETE', [
                 'method_name'     => $deposit->gatewayCurrency()->name,
                 'method_currency' => $deposit->method_currency,
                 'method_amount'   => showAmount($deposit->final_amount),
@@ -136,7 +136,7 @@ class PaymentController extends Controller
             ]);
 
             $order = Order::where('payment_status', Status::ORDER_PAYMENT_PENDING)->findOrFail($deposit->order_id);
-            static::confirmOrder($order);
+//            static::confirmOrder($order);
             static::transactionCreate($order, $user, $deposit);
         }
     }

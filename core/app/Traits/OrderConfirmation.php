@@ -56,7 +56,6 @@ trait OrderConfirmation
         $adminNotification->save();
 
         notify($user, 'ORDER_COMPLETE', [
-            'method_name'     => 'Order successfully placed.',
             'user_name'       => $user->username,
             'subtotal'        => showAmount($order->subtotal, currencyFormat: false),
             'shipping_charge' => showAmount($order->shipping_charge, currencyFormat: false),

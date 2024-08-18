@@ -144,4 +144,24 @@ class UserController extends Controller
         return readfile($filePath);
     }
 
+
+    public function orderHistory()
+    {
+        $pageTitle = 'Orders History';
+        $orders = Order::where('user_id', auth()->user()->id)
+            ->with(['orderDetail','orderDetail.product', 'user'])->orderBy('id', 'desc')->paginate(getPaginate());
+
+        return view('Template::user.orders', compact('pageTitle', 'orders'));
+    }
+
+    public function orderDetails(Request $request, $orderId)
+    {
+        $pageTitle = 'Order Details';
+        $orders = Order::where('id', $orderId)
+            ->where('user_id', auth()->user()->id)
+            ->with(['orderDetail','orderDetail.product', 'user'])->orderBy('id', 'desc')->paginate(getPaginate());
+
+        return view('Template::user.order_details', compact('pageTitle', 'orders'));
+    }
+
 }

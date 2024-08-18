@@ -51,7 +51,7 @@ Route::controller('SiteController')->group(function () {
     Route::get('/product/{id}', 'productDetails')->name('product.details');
 
     // Search
-    Route::get('/search', 'search')->name('search');
+    Route::get('all/search', 'search')->name('search');
 });
 
 // Cart Category

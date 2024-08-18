@@ -57,6 +57,8 @@ Route::middleware('auth')->name('user.')->group(function () {
 
                 //Report
                 Route::any('deposit/history', 'depositHistory')->name('deposit.history');
+                Route::get('order/history', 'orderHistory')->name('order.history');
+                Route::get('order/details/{orderId}', 'orderDetails')->name('order.details');
                 Route::get('transactions','transactions')->name('transactions');
 
                 Route::post('add-device-token','addDeviceToken')->name('add.device.token');

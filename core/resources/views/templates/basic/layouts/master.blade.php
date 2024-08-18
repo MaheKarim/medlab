@@ -2,13 +2,11 @@
 <html lang="{{ config('app.locale') }}" itemscope itemtype="http://schema.org/WebPage">
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title> {{ gs()->siteName(__($pageTitle)) }}</title>
 
     @include('partials.seo')
-
 
 
     <link href="{{ asset('assets/global/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -23,7 +21,6 @@
     @stack('style-lib')
 
     @stack('style')
-
 
     <style>
 
@@ -249,8 +246,6 @@
 </head>
 @php echo loadExtension('google-analytics') @endphp
 <body>
-
-
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
@@ -275,8 +270,6 @@
                             @endforeach
                         </select>
                     @endif
-
-
 
                     @guest
                         <li class="nav-item">
@@ -309,21 +302,9 @@
                             </div>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            @lang('Deposit')
-                        </a>
-{{--                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">--}}
-{{--                            <a class="dropdown-item"--}}
-{{--                            href="{{ route('user.deposit.index') }}">@lang('Deposit Money')</a>--}}
-{{--                            <a class="dropdown-item"--}}
-{{--                            href="{{ route('user.deposit.history') }}">@lang('Deposit--}}
-{{--                                    Log')</a>--}}
-{{--                            </div>--}}
-{{--                        </li>--}}
-
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.order.history') }}">@lang('Orders')</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('user.transactions') }}">@lang('Transactions')</a>
                         </li>

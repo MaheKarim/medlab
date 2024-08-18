@@ -70,7 +70,7 @@ class CheckoutController extends Controller
             'address' => $request->address,
             'state'   => $request->state,
             'zip'     => $request->zip,
-            'country_name' => $request->country,
+            'country_name' => $request->country_name,
             'city'    => $request->city,
         ];
 
