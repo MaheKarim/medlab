@@ -63,8 +63,13 @@ class ManageOrderController extends Controller
         } else {
             $orders = Order::query();
         }
-
-        return $orders->searchable(['order_no', 'user:username'])->with('user')->latest()->paginate(getPaginate());
+        return $orders->where(function ($query) {
+            $query->orWhere('payment_status', Status::PAYMENT_ONLINE)
+                ->orWhere(function ($query) {
+                    $query->where('payment_type', Status::PAYMENT_OFFLINE)
+                        ->where('payment_status', Status::PAYMENT_INITIATE);
+                });
+        })->searchable(['order_no', 'user:username'])->with('user')->latest()->paginate(getPaginate());
     }
 
     public function details($id)
@@ -77,8 +82,8 @@ class ManageOrderController extends Controller
     public function invoice($id)
     {
         $pageTitle = 'Print Invoice';
-        $order     = Order::where('id', $id)->with(['orderDetail.product', 'shipping', 'deposit', 'user', 'orderDetail'])->firstOrFail();
-        return view('admin.order.invoice', compact('order'));
+        $order     = Order::where('id', $id)->with(['orderDetail.product', 'deposit', 'user', 'orderDetail'])->firstOrFail();
+        return view('admin.order.invoice', compact('order', 'pageTitle'));
     }
 
     public function status(Request $request, $id)

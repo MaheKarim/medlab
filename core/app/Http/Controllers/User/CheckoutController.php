@@ -52,6 +52,7 @@ class CheckoutController extends Controller
             'city'            => 'required',
             'zip'             => 'required',
             'shipping_method' => 'required|integer',
+            'payment_type'    => 'required|integer|in:1,2',
         ]);
 
         $user     = auth()->user();
@@ -64,17 +65,12 @@ class CheckoutController extends Controller
         }
 
         $grandTotal = $subtotal + $shipping->price;
-//        $total = session()->get('total');
-
-//        if ($total) {
-//            $grandTotal = $grandTotal - 0;
-//        }
 
         $address = [
             'address' => $request->address,
             'state'   => $request->state,
             'zip'     => $request->zip,
-//            'country_name' => $request->country,
+            'country_name' => $request->country,
             'city'    => $request->city,
         ];
 

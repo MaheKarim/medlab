@@ -193,6 +193,7 @@ Route::middleware('admin')->group(function () {
         Route::get('get-keys', 'getKeys')->name('get.key');
     });
 
+
     Route::controller('GeneralSettingController')->group(function(){
 
         Route::get('system-setting', 'systemSetting')->name('setting.system');

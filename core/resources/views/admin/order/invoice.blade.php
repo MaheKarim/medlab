@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@lang('Invoice')</title>
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/png" href="{{ siteLogo() }}">
+    <link rel="shortcut icon" type="image/png" href="{{ getImage(getFilePath('logoIcon') . '/favicon.png') }}">
 </head>
 <style>
     @page {
