@@ -9,7 +9,7 @@
                 <div class="col-xl-9 col-lg-8">
                     <div class="Product-wrapper">
                         <ul class="link-list">
-                            <li class="link-list__item"><a href="{{ url('/') }}" class="link"> @lang('Home') <i class="las la-angle-right"></i></a></li>
+                            <li class="link-list__item"><a href="{{ route('home') }}" class="link"> @lang('Home') <i class="las la-angle-right"></i></a></li>
                             <li class="link-list__item"> {{ __($category->name) }} </li>
                         </ul>
                         @if($category->products->isNotEmpty())
@@ -19,10 +19,10 @@
                                 <div class="product-card">
                                     <a href="{{ route('product.details', $product->id) }}" class="product-card__thumb">
                                         <img src="{{ getImage(getFilePath('product') . '/' . $product->image) }}" alt="Product Image">
-                                    </a>
+                                     </a>
                                     <div class="product-card__content">
                                         <p class="product-card__title"> {{ __($product->name) }} </p>
-                                        <a href="#" class="product-card__text"> {{ __($product->generic_name) }} </a>
+                                        <p class="product-card__text"> {{ __($product->generic_name) }} </p>
                                         <p class="product-card__desc"> {{ __($product->brand->name) }} </p>
                                         <div class="product-card__bottom">
                                             <h6 class="product-card__price">  @if ($product->discount > 0)
@@ -53,11 +53,13 @@
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
                                 <li class="page-item">
-{{--                                    @if($products->hasPages())--}}
-{{--                                        <a class="page-link" href="{{ paginateLinks($products) }}">--}}
-{{--                                            <i class="las la-angle-left"></i>--}}
-{{--                                        </a>--}}
-{{--                                     @endif--}}
+                                    @if($products->hasPages())
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                                {{ $products->links() }}
+                                            </ul>
+                                        </nav>
+                                    @endif
                                 </li>
                             </ul>
                         </nav>

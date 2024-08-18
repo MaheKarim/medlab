@@ -1,5 +1,4 @@
 @extends('admin.layouts.app')
-
 @section('panel')
     <div class="row">
         <div class="col-lg-12">
@@ -53,6 +52,7 @@
                                                 </button>
                                             @endif
                                         </div>
+
                                     </td>
                                 </tr>
                             @empty
@@ -60,9 +60,8 @@
                                     <td class="text-muted text-center" colspan="100%">{{ __($emptyMessage) }}</td>
                                 </tr>
                             @endforelse
-
                             </tbody>
-                        </table><!-- table end -->
+                        </table>
                     </div>
                 </div>
                 @if ($categories->hasPages())
@@ -70,10 +69,11 @@
                         {{ paginateLinks($categories) }}
                     </div>
                 @endif
-            </div><!-- card end -->
+            </div>
         </div>
     </div>
 
+    <x-confirmation-modal />
 
     <!-- Confirmation Modal Start -->
     <div class="modal fade" id="cuModal" role="dialog" tabindex="-1">
@@ -109,7 +109,7 @@
                         </div>
                         <div class="form-group">
                             <label class="required addImageLabel">@lang('Image')</label>
-                            <x-image-uploader name="image" type="category" class="w-100" :required=true/>
+                            <x-image-uploader name="image" type="category" class="w-100" :required="true"/>
                         </div>
                         <div class="form-group">
                             <label class="required">@lang('Description')</label>
@@ -126,6 +126,7 @@
     <!-- Confirmation Modal End -->
     <x-confirmation-modal/>
 @endsection
+
 @push('breadcrumb-plugins')
     <button class="btn btn-sm btn-outline--primary float-sm-end cuModalBtn addBtn"
             data-modal_title="@lang('Create New Category')" type="button">
@@ -133,7 +134,6 @@
 @endpush
 
 @push('script')
-
     <script>
         'use strict';
         let defaultImage = `{{ getImage(getFilePath('category'), getFileSize('category')) }}`;
@@ -152,6 +152,7 @@
                 modal.find('.image-upload-input').removeAttr('required', true);
                 modal.find('.addImageLabel').removeClass('required');
             });
+
         })(jQuery);
 
         $('.buildSlug').on('click', function () {

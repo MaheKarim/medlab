@@ -59,9 +59,9 @@
                             </div>
                         </td>
                         <td>
-                                <span class="subtotal">
-                                    {{ gs('cur_sym') }}{{ getAmount($subTotal) }}
-                                </span>
+                            <span class="subtotal">
+                                {{ gs('cur_sym') }}{{ getAmount($subTotal) }}
+                            </span>
                         </td>
                         <td>
                             <button class="btn btn-sm btn--danger remove-btn"><i class="las la-trash"></i></button>
