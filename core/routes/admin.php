@@ -60,11 +60,9 @@ Route::middleware('admin')->group(function () {
         Route::get('email-unverified', 'emailUnverifiedUsers')->name('email.unverified');
         Route::get('mobile-unverified', 'mobileUnverifiedUsers')->name('mobile.unverified');
         Route::get('mobile-verified', 'mobileVerifiedUsers')->name('mobile.verified');
-        Route::get('with-balance', 'usersWithBalance')->name('with.balance');
 
         Route::get('detail/{id}', 'detail')->name('detail');
         Route::post('update/{id}', 'update')->name('update');
-        Route::post('add-sub-balance/{id}', 'addSubBalance')->name('add.sub.balance');
         Route::get('send-notification/{id}', 'showNotificationSingleForm')->name('notification.single');
         Route::post('send-notification/{id}', 'sendNotificationSingle')->name('notification.single');
         Route::get('login/{id}', 'login')->name('login');

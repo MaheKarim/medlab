@@ -6,34 +6,32 @@
             <div class="row gy-4">
                 <div class="col-xxl-4 col-sm-6">
                     <x-widget
-                        style="7"
-                        link="{{ route('admin.report.transaction',$user->id) }}"
-                        title="Balance"
+                        style="6"
+                        link="{{ route('admin.deposit.list', $user->id) }}"
+                        title="Payments"
                         icon="las la-money-bill-wave-alt"
-                        value="{{ showAmount($user->balance) }}"
-                        bg="indigo"
+                        value="{{ showAmount($totalDeposit) }}"
+                        bg="18"
                         type="2"
                     />
                 </div>
 
-
                 <div class="col-xxl-4 col-sm-6">
                     <x-widget
-                        style="7"
-                        link="{{ route('admin.deposit.list',$user->id) }}"
-                        title="Deposits"
-                        icon="las la-wallet"
-                        value="{{ showAmount($totalDeposit) }}"
+                        style="6"
+                        link="{{ route('admin.order.index', ['search' => $user->username]) }}"
+                        title="Total Order"
+                        icon="las la-shopping-cart"
+                        value="{{ $order['total'] }}"
                         bg="8"
                         type="2"
                     />
                 </div>
 
-
                 <div class="col-xxl-4 col-sm-6">
                     <x-widget
-                        style="7"
-                        link="{{ route('admin.report.transaction',$user->id) }}"
+                        style="6"
+                        link="{{ route('admin.report.transaction', $user->id) }}"
                         title="Transactions"
                         icon="las la-exchange-alt"
                         value="{{ $totalTransaction }}"
@@ -43,18 +41,83 @@
                 </div>
             </div>
 
-            <div class="d-flex flex-wrap gap-3 mt-4">
-                <div class="flex-fill">
-                    <button data-bs-toggle="modal" data-bs-target="#addSubModal" class="btn btn--success btn--shadow w-100 btn-lg bal-btn" data-act="add">
-                        <i class="las la-plus-circle"></i> @lang('Balance')
-                    </button>
+            <div class="row gy-4 mt-1">
+                <div class="col-xxl-4 col-sm-6">
+                    <x-widget
+                        style="6"
+                        link="{{ route('admin.order.pending') }}?search={{ $user->username }}"
+                        title="Pending Order"
+                        icon="las la-spinner"
+                        value="{{ $order['pending'] }}"
+                        bg="warning"
+                        type="2"
+                    />
                 </div>
 
-                <div class="flex-fill">
-                    <button data-bs-toggle="modal" data-bs-target="#addSubModal" class="btn btn--danger btn--shadow w-100 btn-lg bal-btn" data-act="sub">
-                        <i class="las la-minus-circle"></i> @lang('Balance')
-                    </button>
+                <div class="col-xxl-4 col-sm-6">
+                    <x-widget
+                        style="6"
+                        link="{{ route('admin.order.confirmed') }}?search={{ $user->username }}"
+                        title="Confirmed Order"
+                        icon="las la-check-double"
+                        value="{{ $order['confirmed'] }}"
+                        bg="success"
+                        type="2"
+                    />
                 </div>
+
+                <div class="col-xxl-4 col-sm-6">
+                    <x-widget
+                        style="6"
+                        link="{{ route('admin.order.shipped') }}?search={{ $user->username }}"
+                        title="Shipped Order"
+                        icon="las la-truck"
+                        value="{{ $order['shipped'] }}"
+                        bg="19"
+                        type="2"
+                    />
+                </div>
+            </div>
+
+            <div class="row gy-4 mt-1">
+                <div class="col-xxl-4 col-sm-6">
+                    <x-widget
+                        style="6"
+                        link="{{ route('admin.order.delivered') }}?search={{ $user->username }}"
+                        title="Delivered Order"
+                        icon="las la-check-circle"
+                        value="{{ $order['delivered'] }}"
+                        bg="info"
+                        type="2"
+                    />
+                </div>
+
+                <div class="col-xxl-4 col-sm-6">
+                    <x-widget
+                        style="6"
+                        link="{{ route('admin.order.cancel') }}?search={{ $user->username }}"
+                        title="Rejected Order"
+                        icon="las la-times-circle"
+                        value="{{ $order['canceled'] }}"
+                        bg="danger"
+                        type="2"
+                    />
+                </div>
+
+                <div class="col-xxl-4 col-sm-6">
+                    <x-widget
+                        style="6"
+                        link="{{ route('admin.order.shipped') }}?search={{ $user->username }}"
+                        title="Support Ticket"
+                        icon="las la-ticket-alt"
+                        value="{{ $order['ticket'] }}"
+                        bg="11"
+                        type="2"
+                    />
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap gap-3 mt-4">
 
                 <div class="flex-fill">
                     <a href="{{route('admin.report.login.history')}}?search={{ $user->username }}" class="btn btn--primary btn--shadow w-100 btn-lg">
@@ -69,7 +132,6 @@
                 </div>
 
 
-
                 <div class="flex-fill">
                     @if($user->status == Status::USER_ACTIVE)
                     <button type="button" class="btn btn--warning btn--shadow w-100 btn-lg userStatus" data-bs-toggle="modal" data-bs-target="#userStatusModal">
@@ -82,7 +144,6 @@
                     @endif
                 </div>
             </div>
-
 
             <div class="card mt-30">
                 <div class="card-header">
@@ -192,82 +253,6 @@
             </div>
         </div>
     </div>
-
-
-
-    {{-- Add Sub Balance MODAL --}}
-    <div id="addSubModal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"><span class="type"></span> <span>@lang('Balance')</span></h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="las la-times"></i>
-                    </button>
-                </div>
-                <form action="{{route('admin.users.add.sub.balance',$user->id)}}" class="balanceAddSub disableSubmission" method="POST">
-                    @csrf
-                    <input type="hidden" name="act">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>@lang('Amount')</label>
-                            <div class="input-group">
-                                <input type="number" step="any" name="amount" class="form-control" placeholder="@lang('Please provide positive amount')" required>
-                                <div class="input-group-text">{{ __(gs('cur_text')) }}</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>@lang('Remark')</label>
-                            <textarea class="form-control" placeholder="@lang('Remark')" name="remark" rows="4" required></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn--primary h-45 w-100">@lang('Submit')</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-    <div id="userStatusModal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        @if($user->status == Status::USER_ACTIVE) @lang('Ban User') @else @lang('Unban User') @endif
-                    </h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="las la-times"></i>
-                    </button>
-                </div>
-                <form action="{{route('admin.users.status',$user->id)}}" method="POST">
-                    @csrf
-                    <div class="modal-body">
-                        @if($user->status == Status::USER_ACTIVE)
-                        <h6 class="mb-2">@lang('If you ban this user he/she won\'t able to access his/her dashboard.')</h6>
-                        <div class="form-group">
-                            <label>@lang('Reason')</label>
-                            <textarea class="form-control" name="reason" rows="4" required></textarea>
-                        </div>
-                        @else
-                        <p><span>@lang('Ban reason was'):</span></p>
-                        <p>{{ $user->ban_reason }}</p>
-                        <h4 class="text-center mt-3">@lang('Are you sure to unban this user?')</h4>
-                        @endif
-                    </div>
-                    <div class="modal-footer">
-                        @if($user->status == Status::USER_ACTIVE)
-                        <button type="submit" class="btn btn--primary h-45 w-100">@lang('Submit')</button>
-                        @else
-                        <button type="button" class="btn btn--dark" data-bs-dismiss="modal">@lang('No')</button>
-                        <button type="submit" class="btn btn--primary">@lang('Yes')</button>
-                        @endif
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @push('breadcrumb-plugins')
@@ -278,26 +263,10 @@
 <script>
     (function($){
     "use strict"
-
-
-        $('.bal-btn').on('click',function(){
-
-            $('.balanceAddSub')[0].reset();
-
-            var act = $(this).data('act');
-            $('#addSubModal').find('input[name=act]').val(act);
-            if (act == 'add') {
-                $('.type').text('Add');
-            }else{
-                $('.type').text('Subtract');
-            }
-        });
-
         let mobileElement = $('.mobile-code');
         $('select[name=country]').on('change',function(){
             mobileElement.text(`+${$('select[name=country] :selected').data('mobile_code')}`);
         });
-
     })(jQuery);
 </script>
 @endpush

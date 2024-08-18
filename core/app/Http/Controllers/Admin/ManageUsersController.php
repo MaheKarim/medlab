@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Deposit;
 use App\Models\NotificationLog;
 use App\Models\NotificationTemplate;
+use App\Models\Order;
+use App\Models\SupportTicket;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -67,14 +69,6 @@ class ManageUsersController extends Controller
     }
 
 
-    public function usersWithBalance()
-    {
-        $pageTitle = 'Users with Balance';
-        $users = $this->userData('withBalance');
-        return view('admin.users.list', compact('pageTitle', 'users'));
-    }
-
-
     protected function userData($scope = null){
         if ($scope) {
             $users = User::$scope();
@@ -87,21 +81,30 @@ class ManageUsersController extends Controller
 
     public function detail($id)
     {
-        $user = User::findOrFail($id);
-        $pageTitle = 'User Detail - '.$user->username;
+        $user             = User::findOrFail($id);
+        $pageTitle        = 'User Detail - '.$user->username;
 
-        $totalDeposit = Deposit::where('user_id',$user->id)->successful()->sum('amount');
+        $totalDeposit     = Deposit::where('user_id',$user->id)->successful()->sum('amount');
         $totalTransaction = Transaction::where('user_id',$user->id)->count();
-        $countries = json_decode(file_get_contents(resource_path('views/partials/country.json')));
+        $countries        = json_decode(file_get_contents(resource_path('views/partials/country.json')));
 
-        return view('admin.users.detail', compact('pageTitle', 'user','totalDeposit','totalTransaction','countries'));
+        $order['total']   = Order::where('user_id', $user->id)
+            ->where(function ($query) {
+                $query->orWhere('payment_status', Status::PAYMENT_ONLINE)
+                    ->orWhere(function ($query) {
+                        $query->where('payment_type', Status::PAYMENT_OFFLINE)
+                            ->where('payment_status', Status::PAYMENT_INITIATE);
+                    });
+            })->count();
+        $order['pending']   = Order::pending()->where('user_id', $user->id)->count();
+        $order['shipped']   = Order::shipped()->where('user_id', $user->id)->count();
+        $order['confirmed'] = Order::confirmed()->where('user_id', $user->id)->count();
+        $order['delivered'] = Order::delivered()->where('user_id', $user->id)->count();
+        $order['canceled']  = Order::cancel()->where('user_id', $user->id)->count();
+        $order['ticket']    = SupportTicket::where('user_id', $user->id)->count();
+
+        return view('admin.users.detail', compact('pageTitle', 'user','totalDeposit','totalTransaction','countries', 'order'));
     }
-
-
-
-
-
-
 
 
     public function update(Request $request, $id)
@@ -148,65 +151,6 @@ class ManageUsersController extends Controller
         $user->save();
 
         $notify[] = ['success', 'User details updated successfully'];
-        return back()->withNotify($notify);
-    }
-
-    public function addSubBalance(Request $request, $id)
-    {
-        $request->validate([
-            'amount' => 'required|numeric|gt:0',
-            'act' => 'required|in:add,sub',
-            'remark' => 'required|string|max:255',
-        ]);
-
-        $user = User::findOrFail($id);
-        $amount = $request->amount;
-        $trx = getTrx();
-
-        $transaction = new Transaction();
-
-        if ($request->act == 'add') {
-            $user->balance += $amount;
-
-            $transaction->trx_type = '+';
-            $transaction->remark = 'balance_add';
-
-            $notifyTemplate = 'BAL_ADD';
-
-            $notify[] = ['success', 'Balance added successfully'];
-
-        } else {
-            if ($amount > $user->balance) {
-                $notify[] = ['error', $user->username . ' doesn\'t have sufficient balance.'];
-                return back()->withNotify($notify);
-            }
-
-            $user->balance -= $amount;
-
-            $transaction->trx_type = '-';
-            $transaction->remark = 'balance_subtract';
-
-            $notifyTemplate = 'BAL_SUB';
-            $notify[] = ['success', 'Balance subtracted successfully'];
-        }
-
-        $user->save();
-
-        $transaction->user_id = $user->id;
-        $transaction->amount = $amount;
-        $transaction->post_balance = $user->balance;
-        $transaction->charge = 0;
-        $transaction->trx =  $trx;
-        $transaction->details = $request->remark;
-        $transaction->save();
-
-        notify($user, $notifyTemplate, [
-            'trx' => $trx,
-            'amount' => showAmount($amount,currencyFormat:false),
-            'remark' => $request->remark,
-            'post_balance' => showAmount($user->balance,currencyFormat:false)
-        ]);
-
         return back()->withNotify($notify);
     }
 
@@ -377,7 +321,6 @@ class ManageUsersController extends Controller
 
         return $this->sessionForNotification($totalUserCount, $request);
     }
-
 
     private function sessionForNotification($totalUserCount, $request)
     {
