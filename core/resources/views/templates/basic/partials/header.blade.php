@@ -6,7 +6,7 @@
                 <button type="button" class="search-icon  d-block d-lg-none"><i class="las la-search"></i></button>
                 <div class="search-field">
                     <input type="text" class="form--control" placeholder="Search to buy...">
-                    <button type="submit" class="btn btn--base btn--sm">Search <span class="icon"><i class="las la-search"></i></span></button>
+                    <button type="submit" class="btn btn--base btn--sm">@lang('Search') <span class="icon"><i class="las la-search"></i></span></button>
                 </div>
             </form>
             <div class="header__button ms-auto">

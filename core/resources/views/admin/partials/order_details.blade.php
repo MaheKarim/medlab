@@ -16,7 +16,13 @@
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         @lang('Total Price')
-                        <span class="fw-bold">{{ showAmount($order->total) }} {{ __(gs('cur_text')) }}</span>
+                        <span class="fw-bold">{{ showAmount($order->total, currencyFormat: false) }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        @lang('Payment Type')
+                        @php
+                            echo $order->paymentTypeBadge;
+                        @endphp
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         @lang('Payment')
@@ -33,13 +39,9 @@
                         </li>
                     @endif
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        @lang('Order Date')
-                        <span class="fw-bold">{{ showDateTime($order->created_at) }}</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        @lang('Order Status')
+                        @lang('Payment Status')
                         @php
-                            echo $order->ordersBadge;
+                            echo $order->paymentBadge;
                         @endphp
                     </li>
                 </ul>
@@ -78,15 +80,13 @@
                         </span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        @lang('Payment Type')
-                        @php
-                            echo $order->paymentTypeBadge;
-                        @endphp
+                        @lang('Order Date')
+                        <span class="fw-bold">{{ showDateTime($order->created_at) }}</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        @lang('Payment Status')
+                        @lang('Order Status')
                         @php
-                            echo $order->paymentBadge;
+                            echo $order->ordersBadge;
                         @endphp
                     </li>
                 </ul>

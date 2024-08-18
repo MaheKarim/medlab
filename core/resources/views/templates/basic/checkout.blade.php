@@ -129,7 +129,6 @@
                         </div>
                     </div>
                 </form>
-                @php var_dump(session()->get('total')) @endphp
             </div>
         </div>
     </div>

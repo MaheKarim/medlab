@@ -142,7 +142,7 @@ class DepositController extends Controller
         $deposit->status = Status::PAYMENT_REJECT;
         $deposit->save();
 
-        notify($deposit->user, 'DEPOSIT_REJECT', [
+        notify($deposit->user, 'PAYMENT_REJECT', [
             'method_name' => $deposit->methodName(),
             'method_currency' => $deposit->method_currency,
             'method_amount' => showAmount($deposit->final_amount,currencyFormat:false),
