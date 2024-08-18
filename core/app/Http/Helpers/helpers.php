@@ -487,7 +487,7 @@ function frontendImage($sectionName, $image, $size = null,$seo = false)
         }
     }
 
-    return getAmount($price);
+    return showAmount($price);
 }
 
 function productPrice($product)

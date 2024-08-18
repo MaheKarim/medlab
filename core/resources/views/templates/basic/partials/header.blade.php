@@ -2,7 +2,7 @@
     <div class="container">
         <nav class="d-flex align-items-center">
             <a class="navbar-brand logo" href="{{ route('home') }}"><img src="{{ siteLogo() }}" alt="Site Logo"></a>
-            <form action="#" autocomplete="off" class="search-box-wrapper">
+            <form action="{{ route('search') }}" autocomplete="off" class="search-box-wrapper">
                 <button type="button" class="search-icon  d-block d-lg-none"><i class="las la-search"></i></button>
                 <div class="search-field">
                     <input type="text" class="form--control" placeholder="Search to buy...">

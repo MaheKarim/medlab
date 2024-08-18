@@ -45,8 +45,8 @@
 
                                             @if($order->order_status == Status::ORDER_PENDING || $order->order_status == Status::ORDER_CONFIRMED ||$order->order_status == Status::ORDER_SHIPPED)
                                                 <button class="btn btn-sm orderStatusModal
-                                                        @if ($order->order_status == Status::ORDER_PENDING) btn-outline--warning
-                                                        @elseif($order->order_status == Status::ORDER_CONFIRMED) btn-outline--success
+                                                        @if ($order->order_status == Status::ORDER_PENDING) btn-outline--success
+                                                        @elseif($order->order_status == Status::ORDER_CONFIRMED) btn-outline--warning
                                                         @elseif($order->order_status == Status::ORDER_SHIPPED) btn-outline--info
                                                         @endif"
                                                         data-url="{{ route('admin.order.status', $order->id) }}"
@@ -55,9 +55,9 @@
                                                     @if ($order->order_status == Status::ORDER_PENDING)
                                                         <i class="lar la-check-circle"></i>@lang('Confirm')
                                                     @elseif($order->order_status == Status::ORDER_CONFIRMED)
-                                                        <i class="lar la-check-circle"></i>@lang('Shipped')
+                                                        <i class="las la-truck-loading"></i>@lang('Shipped')
                                                     @elseif($order->order_status == Status::ORDER_SHIPPED)
-                                                        <i class="las la-truck"></i>@lang('Delivered')
+                                                        <i class="las la-grin-stars"></i>@lang('Delivered')
                                                     @endif
                                                 </button>
                                             @endif

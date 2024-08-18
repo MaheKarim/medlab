@@ -16,7 +16,7 @@
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         @lang('Total Price')
-                        <span class="fw-bold">{{ showAmount($order->total, currencyFormat: false) }}</span>
+                        <span class="fw-bold">{{ showAmount($order->total) }}</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         @lang('Payment Type')

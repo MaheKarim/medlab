@@ -347,7 +347,7 @@
             <div class="col-12">
                 <div class="list--row">
                     <div class="logo float-left">
-                        <img src="{{ getImage('assets/images/logoIcon/logo.png', '183x54') }}" alt="image" class="logo-img" />
+                        <img src="{{ getImage(getFilePath('logoIcon') .'/logo.png') }}" alt="image" class="logo-img" />
                     </div>
                     <h4 class="m-0 float-right">@lang('Invoice')</h4>
                 </div>

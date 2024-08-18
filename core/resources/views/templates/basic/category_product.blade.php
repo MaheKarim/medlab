@@ -26,10 +26,10 @@
                                         <p class="product-card__desc"> {{ __($product->brand->name) }} </p>
                                         <div class="product-card__bottom">
                                             <h6 class="product-card__price">  @if ($product->discount > 0)
-                                                    {{ getMainPrice($product) }}$
-                                                    <span class="old-price">{{ getAmount($product->price) }}</span>
+                                                    {{ getMainPrice($product) }}
+                                                    <span class="old-price">{{ showAmount($product->price) }}</span>
                                                 @else
-                                                    {{ getAmount($product->price) }}$
+                                                    {{ showAmount($product->price) }}$
                                                 @endif
                                             </h6>
                                             <span class="add-cart cart-add-btn" data-product-id="{{ $product->id }}">@lang('Add To Cart') </span>

@@ -206,4 +206,12 @@ class SiteController extends Controller
         return view('Template::product_details', compact('product', 'pageTitle', 'seoContents', 'seoImage'));
     }
 
+    public function search(Request $request)
+    {
+        $pageTitle = 'Search';
+        $search = $request->search;
+        $products = Product::where('name', 'like', '%' . $search . '%')->where('status', Status::ENABLE)->paginate(getPaginate());
+        return view('Template::search', compact('pageTitle', 'products'));
+    }
+
 }

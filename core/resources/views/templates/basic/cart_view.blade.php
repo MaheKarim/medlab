@@ -85,17 +85,16 @@
                 <div class="col-xl-4">
                     <ul class="cart-details">
                         <li>
-                            <h6 class="title text-muted">@lang('Subtotal')</h6>
+                            <h6 class="title">@lang('Subtotal')</h6>
                             <h6 class="value subtotal-price text--base">{{ gs('cur_sym') }}0.00</h6>
                         </li>
 
-
                         <li class="total-show d-none">
-                            <h6 class="title text-muted">@lang('Total')</h6>
+                            <h6 class="title">@lang('Total')</h6>
                             <h6 class="value total total-price text--base">{{ gs('cur_sym') }}0.00</h6>
                         </li>
                         <li>
-                            <a href="{{ route('user.checkout.index') }}" class="btn btn-outline--primary w-100">@lang('Proceed to Checkout')</a>
+                            <a href="{{ route('user.checkout.index') }}" class="checkoutBtn btn btn-outline--primary w-100">@lang('Proceed to Checkout')</a>
                         </li>
                     </ul>
                 </div>
@@ -231,6 +230,12 @@
 
                 $('.subtotal-price').text("{{ gs('cur_sym') }}" + subtotal.toFixed(2));
                 $('.total-price').text("{{ gs('cur_sym') }}" + subtotal.toFixed(2));
+
+                if (subtotal > 0) {
+                    $('.checkoutBtn').removeClass('d-none');
+                } else {
+                    $('.checkoutBtn').addClass('d-none');
+                }
             }
 
             function CartCalculation(currentRow) {

@@ -6,7 +6,7 @@
             <div class="product-details-section">
                 <div class="container">
                     <ul class="link-list">
-                        <li class="link-list__item"><a href="{{ url('/') }}" class="link"> @lang('Home') <i class="las la-angle-right"></i></a></li>
+                        <li class="link-list__item"><a href="{{ route('home') }}" class="link"> @lang('Home') <i class="las la-angle-right"></i></a></li>
                         <li class="link-list__item"><a href="{{ route('category.products', $product->category->slug) }}" class="link">{{ $product->category->name }}  <i class="las la-angle-right"></i></a></li>
                         <li class="link-list__item"> @lang('Product Details') </li>
                     </ul>
@@ -15,11 +15,6 @@
                             <div class="product-details__wrapper">
                                 <div class="product-details__item">
                                     <img src="{{ getImage(getFilePath('product') . '/'. $product->image, getFileSize('product')) }}" alt="{{ $product->name }}">
-{{--                                    @foreach($product->gallery ?? [] as $gallery)--}}
-{{--                                        <div class="product-details__item">--}}
-{{--                                            <img src="{{ getImage(getFilePath('productGallery') . '/'. $gallery, getFileSize('productGallery')) }}" alt="{{ $product->name }}">--}}
-{{--                                        </div>--}}
-{{--                                    @endforeach--}}
                                 </div>
                             </div>
                             <div class="product-details__gallery">
@@ -34,7 +29,7 @@
                             <div class="product-details__right">
                                 <h3 class="product-details__right-title"> {{ __($product->name) }} </h3>
                                 <span class="product-details__text"> {{ __($product->generic_name) }} </span>
-                                <h6 class="product-price"> Price {{ getAmount($product->price) }}</h6>
+                                <h6 class="product-price"> @lang('Price') {{ showAmount($product->price) }}</h6>
                                 <p class="product-details__right-desc">
                                     {{ __($product->summary) }}
                                 </p>
@@ -56,13 +51,13 @@
                             <div class="product-details__tab">
                                 <ul class="nav nav-pills custom--tab" id="pills-tab" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="pills-descrip-tab" data-bs-toggle="pill" data-bs-target="#pills-descrip" type="button" role="tab" aria-controls="pills-descrip" aria-selected="true"> Description </button>
+                                        <button class="nav-link active" id="pills-descrip-tab" data-bs-toggle="pill" data-bs-target="#pills-descrip" type="button" role="tab" aria-controls="pills-descrip" aria-selected="true"> @lang('Description') </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="pills-seller-tab" data-bs-toggle="pill" data-bs-target="#pills-seller" type="button" role="tab" aria-controls="pills-seller" aria-selected="false"> Benefits </button>
+                                        <button class="nav-link" id="pills-seller-tab" data-bs-toggle="pill" data-bs-target="#pills-seller" type="button" role="tab" aria-controls="pills-seller" aria-selected="false"> @lang('Benefits') </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="pills-service-tab" data-bs-toggle="pill" data-bs-target="#pills-service" type="button" role="tab" aria-controls="pills-service" aria-selected="false"> Services </button>
+                                        <button class="nav-link" id="pills-service-tab" data-bs-toggle="pill" data-bs-target="#pills-service" type="button" role="tab" aria-controls="pills-service" aria-selected="false"> @lang('Services') </button>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">

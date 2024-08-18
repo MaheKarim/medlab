@@ -17,7 +17,6 @@ Route::controller('TicketController')->prefix('ticket')->name('ticket.')->group(
     Route::get('download/{attachment_id}', 'ticketDownload')->name('download');
 });
 
-//Route::get('app/deposit/confirm/{hash}', 'Gateway\PaymentController@appDepositConfirm')->name('deposit.app.confirm');
 
 Route::controller('SiteController')->group(function () {
     Route::get('/contact', 'contact')->name('contact');
@@ -30,7 +29,7 @@ Route::controller('SiteController')->group(function () {
 
     Route::get('/cookie/accept', 'cookieAccept')->name('cookie.accept');
 
-    Route::get('blog', 'blog')->name('blog');
+    Route::get('blogs', 'blog')->name('blogs');
 
     Route::get('blog/{slug}', 'blogDetails')->name('blog.details');
 
@@ -46,8 +45,13 @@ Route::controller('SiteController')->group(function () {
 
     // Product Category
     Route::get('/category/{slug}', 'categoryProduct')->name('category.products');
+
     Route::get('all/categories', 'categories')->name('all.category');
+
     Route::get('/product/{id}', 'productDetails')->name('product.details');
+
+    // Search
+    Route::get('/search', 'search')->name('search');
 });
 
 // Cart Category

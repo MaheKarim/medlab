@@ -36,8 +36,9 @@
                     <div class="footer-item">
                         <h5 class="footer-item__title"> @lang('Information') </h5>
                         <ul class="footer-menu">
-                            <li class="footer-menu__item"><a href="{{route('home') }}"
-                                                             class="footer-menu__link">@lang('Home')</a></li>
+                            <li class="footer-menu__item"><a href="{{ route('home') }}" class="footer-menu__link">@lang('Home')</a></li>
+                            <li class="footer-menu__item"><a href="{{ route('blogs') }}" class="footer-menu__link">@lang('Blog')</a></li>
+                            <li class="footer-menu__item"><a href="{{ route('contact') }}" class="footer-menu__link">@lang('Contact')</a></li>
                             @foreach (@$policyPages as $policy)
                                 <li class="footer-menu__item">
                                     <a href="{{ route('policy.pages', slug(@$policy->data_values->title)) }}"
