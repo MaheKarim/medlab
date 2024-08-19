@@ -124,7 +124,6 @@
         </div>
     </div>
     <!-- Confirmation Modal End -->
-    <x-confirmation-modal/>
 @endsection
 
 @push('breadcrumb-plugins')
@@ -143,6 +142,10 @@
                 modal.find('.image-upload-preview').css('background-image', `url(${defaultImage})`);
                 modal.find('.image-upload-input').attr('required', true);
                 modal.find('.addImageLabel').addClass('required');
+                // Clear the slug verification element
+                modal.find('.slug-verification').addClass('d-none').html('');
+                modal.find('[name=slug]').val('');
+                modal.find('[name=name]').val('');
             });
 
             $('.editBtn').click(function () {
@@ -151,6 +154,9 @@
                 modal.find('.image-upload-preview').css('background-image', `url(${image})`);
                 modal.find('.image-upload-input').removeAttr('required', true);
                 modal.find('.addImageLabel').removeClass('required');
+
+                modal.find('.slug-verification').addClass('d-none').html('');
+                modal.find('[name=slug]').val('');
             });
 
         })(jQuery);
