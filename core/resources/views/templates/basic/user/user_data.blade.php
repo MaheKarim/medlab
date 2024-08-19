@@ -24,7 +24,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">@lang('Country')</label>
-                                        <select name="country" class="form-control form--control select2-basic" required>
+                                        <select name="country" class="form--control select2" required>
                                             @foreach ($countries as $key => $country)
                                                 <option data-mobile_code="{{ $country->dial_code }}" value="{{ $country->country }}" data-code="{{ $key }}">{{ __($country->country) }}
                                                 </option>

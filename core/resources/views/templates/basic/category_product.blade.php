@@ -29,7 +29,7 @@
                                                     {{ getMainPrice($product) }}
                                                     <span class="old-price">{{ showAmount($product->price) }}</span>
                                                 @else
-                                                    {{ showAmount($product->price) }}$
+                                                    {{ showAmount($product->price) }}
                                                 @endif
                                             </h6>
                                             <span class="add-cart cart-add-btn" data-product-id="{{ $product->id }}">@lang('Add To Cart') </span>

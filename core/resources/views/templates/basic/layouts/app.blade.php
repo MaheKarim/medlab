@@ -19,6 +19,7 @@
 
     <!-- line awesome -->
     <link rel="stylesheet" href="{{asset('assets/global/css/line-awesome.min.css')}}">
+{{--    <link href="{{ asset('assets/global/css/select2.min.css') }}" rel="stylesheet">--}}
 
     <!-- Slick -->
     <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/slick.css')}}">
@@ -101,6 +102,7 @@
 <!-- Jquery js -->
 <script src="{{ asset('assets/global/js/jquery-3.7.1.min.js')}}"></script>
 <script src="{{ asset('assets/global/js/bootstrap.bundle.min.js')}}"></script>
+{{--<script src="{{ asset('assets/global/js/select2.min.js')}}"></script>--}}
 
 @stack('script-lib')
 @php echo loadExtension('tawk-chat') @endphp
@@ -190,6 +192,12 @@
                 }
             });
         }
+
+        $('.select2-basic').each(function(index,element){
+            $(element).select2({
+                dropdownParent: $(element).closest('.select2-parent')
+            });
+        });
     })(jQuery);
 </script>
 </body>

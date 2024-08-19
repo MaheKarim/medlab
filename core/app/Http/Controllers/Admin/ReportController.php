@@ -12,7 +12,7 @@ class ReportController extends Controller
 {
     public function transaction(Request $request,$userId = null)
     {
-        $pageTitle = 'Transaction Logs';
+        $pageTitle = 'Payment Logs';
 
         $remarks = Transaction::distinct('remark')->orderBy('remark')->get('remark');
 

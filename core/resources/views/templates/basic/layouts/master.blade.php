@@ -306,7 +306,7 @@
                             <a class="nav-link" href="{{ route('user.order.history') }}">@lang('Orders')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.transactions') }}">@lang('Transactions')</a>
+                            <a class="nav-link" href="{{ route('user.transactions') }}">@lang('Payments')</a>
                         </li>
 
 
@@ -355,10 +355,7 @@
     @include('partials.push_script')
     @endif
 
-
     @stack('script')
-
-
 
     <script>
         (function ($) {
@@ -388,7 +385,6 @@
         })(jQuery);
 
     </script>
-
 
     <script>
         (function ($) {
@@ -435,7 +431,6 @@
             });
 
         })(jQuery);
-
     </script>
 
 </body>

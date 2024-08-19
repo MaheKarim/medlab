@@ -129,7 +129,7 @@ class AdminController extends Controller
             $dates = $this->getAllMonths($request->start_date, $request->end_date);
         }
 
-        $plusTransactions   = Transaction::where('trx_type','+')
+        $plusTransactions   = Transaction::where('trx_type','-')
             ->whereDate('created_at', '>=', $request->start_date)
             ->whereDate('created_at', '<=', $request->end_date)
             ->selectRaw('SUM(amount) AS amount')
@@ -138,7 +138,7 @@ class AdminController extends Controller
             ->groupBy('created_on')
             ->get();
 
-        $minusTransactions  = Transaction::where('trx_type','-')
+        $minusTransactions  = Transaction::where('trx_type','+')
             ->whereDate('created_at', '>=', $request->start_date)
             ->whereDate('created_at', '<=', $request->end_date)
             ->selectRaw('SUM(amount) AS amount')

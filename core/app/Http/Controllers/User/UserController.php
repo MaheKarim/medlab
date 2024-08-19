@@ -31,10 +31,10 @@ class UserController extends Controller
 
     public function transactions()
     {
-        $pageTitle = 'Transactions';
+        $pageTitle = 'Payments History';
         $remarks = Transaction::distinct('remark')->orderBy('remark')->get('remark');
 
-        $transactions = Transaction::where('user_id',auth()->id())->searchable(['trx'])->filter(['trx_type','remark'])->orderBy('id','desc')->paginate(getPaginate());
+        $transactions = Transaction::where('user_id',auth()->id())->searchable(['trx'])->filter(['remark'])->orderBy('id','desc')->paginate(getPaginate());
 
         return view('Template::user.transactions', compact('pageTitle','transactions','remarks'));
     }

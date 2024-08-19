@@ -73,7 +73,6 @@ trait OrderConfirmation
         $transaction               = new Transaction();
         $transaction->user_id      = $user->id;
         $transaction->amount       = $order->total;
-        $transaction->post_balance = 0;
         $transaction->charge       = $deposit->charge;
         $transaction->trx_type     = '-';
         $transaction->details      = 'Order confirmation via '.$deposit->gatewayCurrency()->name;

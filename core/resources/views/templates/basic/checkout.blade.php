@@ -43,8 +43,8 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form--label">@lang('Shipping Area')</label>
-                                            <select name="shipping_method" class="form-select form--control" required>
-                                                <option value selected disabled>@lang('Select One')</option>
+                                            <select name="shipping_method" class="form-select form--control select2-basic" required>
+                                                <option>@lang('Select One')</option>
                                                 @foreach ($shippingMethod as $method)
                                                     <option value="{{ $method->id }}" data-price="{{$method->price}}">{{ __($method->name) }}</option>
                                                 @endforeach
@@ -133,6 +133,7 @@
         </div>
     </div>
 @endsection
+
 
 @push('script')
     <script>
