@@ -5,7 +5,7 @@
             <form action="{{ route('search') }}" autocomplete="off" class="search-box-wrapper">
                 <button type="button" class="search-icon  d-block d-lg-none"><i class="las la-search"></i></button>
                 <div class="search-field">
-                    <input type="text" class="form--control" placeholder="Search to buy...">
+                    <input type="text" class="form--control" name="search"  placeholder="Search to buy...">
                     <button type="submit" class="btn btn--base btn--sm">@lang('Search') <span class="icon"><i class="las la-search"></i></span></button>
                 </div>
             </form>
