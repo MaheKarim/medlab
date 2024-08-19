@@ -45,13 +45,7 @@
                         </td>
                         <td>
                             <div class="cart-plus-minus">
-{{--                                <div class="cart-decrease qtybutton dec">--}}
-{{--                                    <i class="las la-minus"></i>--}}
-{{--                                </div>--}}
                                 <input type="number" class="form-control" name="quantity" value="{{ $cart->quantity }}">
-{{--                                <div class="cart-increase qtybutton inc active">--}}
-{{--                                    <i class="las la-plus"></i>--}}
-{{--                                </div>--}}
                             </div>
                         </td>
                         <td>
@@ -85,10 +79,6 @@
                             <h6 class="value subtotal-price text--base">{{ gs('cur_sym') }}0.00</h6>
                         </li>
 
-{{--                        <li class="total-show d-none">--}}
-{{--                            <h6 class="title">@lang('Total')</h6>--}}
-{{--                            <h6 class="value total total-price text--base">{{ gs('cur_sym') }}0.00</h6>--}}
-{{--                        </li>--}}
                         <li>
                             <a href="{{ route('user.checkout.index') }}"
                                class="checkoutBtn btn btn-outline--primary w-100">@lang('Proceed to Checkout')</a>
@@ -128,22 +118,6 @@
 
             let currentRow;
             let quantity;
-
-            // $('.cart-decrease').click(function () {
-            //     currentRow = $(this).closest("tr");
-            //     quantity = currentRow.find('input[name="quantity"]').val();
-            //     if (quantity > 0) {
-            //         CartCalculation(currentRow)
-            //     } else {
-            //         currentRow.find('input[name="quantity"]').val(1)
-            //         notify('error', 'You have to order a minimum amount of one.');
-            //     }
-            // });
-            //
-            // $('.cart-increase').click(function () {
-            //     currentRow = $(this).closest("tr");
-            //     CartCalculation(currentRow)
-            // });
 
             $('input[name="quantity"]').on('focusout keypress', function (e) {
                 if (e.type === 'focusout' || (e.type === 'keypress' && e.which === 13)) {

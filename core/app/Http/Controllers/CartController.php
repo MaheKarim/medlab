@@ -32,7 +32,6 @@ class CartController extends Controller
             ]);
         }
 
-        // Check Product Quantity
         if ($product->quantity < $request->quantity) {
             return response()->json([
                 'success' => false,
@@ -122,12 +121,10 @@ class CartController extends Controller
             $carts = Cart::where('user_id', $userId)
                 ->with('product')
                 ->get();
-//            dd($carts);
         } else {
             $carts = Cart::where('session_id', $sessionId)
                 ->with('product')
                 ->get();
-//            dd($carts);
         }
 
         return view('Template::cart_view', compact('pageTitle','carts'));
