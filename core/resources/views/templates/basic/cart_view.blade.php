@@ -19,48 +19,44 @@
                 @forelse ($carts as $cart)
                     @php
                         $user     = auth()->user() ?? null;
-                        $image    = $user ? @$cart->product->image : $cart->image;
-                        $name     = $user ? @$cart->product->name : $cart->name;
-                        $price    = $user ? productPrice($cart->product) : showDiscountPrice($cart->price, $cart->discount, $cart->discount_type);
-                        $subTotal = $price * $cart->quantity;
+                        $price    = showDiscountPrice($cart->product->price, $cart->product->discount, $cart->product->discount_type);
                     @endphp
                     <tr>
                         <td>
                             <div class="product-item">
                                 <div class="product-thumb">
                                     <img
-                                        src="{{ getImage(getFilePath('product') . '/' . $image, getFileSize('product')) }}"
+                                        src="{{ getImage(getFilePath('product') . '/' . $cart->product->image, getFileSize('product')) }}"
                                         alt="products">
                                 </div>
                                 <div class="product-content">
                                     <h6 class="name">
-                                        <a href="{{ route('product.details', [slug($name), $cart->product_id]) }}"
+                                        <a href="{{ route('product.details',  $cart->product_id) }}"
                                            class="productName"
-                                           data-product_id="{{ $cart->product_id }}">{{ __($name) }}</a>
+                                           data-product_id="{{ $cart->product_id }}">{{ __($cart->product->name) }}</a>
                                     </h6>
                                 </div>
                             </div>
                         </td>
-
                         <td>
-                                <span class="price">
-                                    {{ showAmount($price, currencyFormat: false) }}
-                                </span>
+                            <span class="price">
+                                {{ showAmount($price) }}
+                            </span>
                         </td>
                         <td>
                             <div class="cart-plus-minus">
-                                <div class="cart-decrease qtybutton dec">
-                                    <i class="las la-minus"></i>
-                                </div>
+{{--                                <div class="cart-decrease qtybutton dec">--}}
+{{--                                    <i class="las la-minus"></i>--}}
+{{--                                </div>--}}
                                 <input type="number" class="form-control" name="quantity" value="{{ $cart->quantity }}">
-                                <div class="cart-increase qtybutton inc active">
-                                    <i class="las la-plus"></i>
-                                </div>
+{{--                                <div class="cart-increase qtybutton inc active">--}}
+{{--                                    <i class="las la-plus"></i>--}}
+{{--                                </div>--}}
                             </div>
                         </td>
                         <td>
                             <span class="subtotal">
-                                {{ gs('cur_sym') }}{{ getAmount($subTotal) }}
+                                {{ showAmount($price * $cart->quantity) }}
                             </span>
                         </td>
                         <td>
@@ -74,10 +70,10 @@
                 @endforelse
                 </tbody>
             </table>
-
             <div class="row gy-4 pt-5 justify-content-between">
                 <div class="col-md-5 col-xl-3">
-                    <a href="{{ route('home') }}" class="btn btn-outline--primary  btn-lg fs-6 w-100">@lang('Continue Shopping ')
+                    <a href="{{ route('home') }}"
+                       class="btn btn-outline--primary  btn-lg fs-6 w-100">@lang('Continue Shopping ')
                         <i class="las la-long-arrow-alt-right ms-3"></i>
                     </a>
                 </div>
@@ -89,12 +85,13 @@
                             <h6 class="value subtotal-price text--base">{{ gs('cur_sym') }}0.00</h6>
                         </li>
 
-                        <li class="total-show d-none">
-                            <h6 class="title">@lang('Total')</h6>
-                            <h6 class="value total total-price text--base">{{ gs('cur_sym') }}0.00</h6>
-                        </li>
+{{--                        <li class="total-show d-none">--}}
+{{--                            <h6 class="title">@lang('Total')</h6>--}}
+{{--                            <h6 class="value total total-price text--base">{{ gs('cur_sym') }}0.00</h6>--}}
+{{--                        </li>--}}
                         <li>
-                            <a href="{{ route('user.checkout.index') }}" class="checkoutBtn btn btn-outline--primary w-100">@lang('Proceed to Checkout')</a>
+                            <a href="{{ route('user.checkout.index') }}"
+                               class="checkoutBtn btn btn-outline--primary w-100">@lang('Proceed to Checkout')</a>
                         </li>
                     </ul>
                 </div>
@@ -132,34 +129,37 @@
             let currentRow;
             let quantity;
 
-            $('.cart-decrease').click(function () {
-                currentRow = $(this).closest("tr");
-                quantity = currentRow.find('input[name="quantity"]').val();
-                if (quantity > 0) {
-                    CartCalculation(currentRow)
-                } else {
-                    currentRow.find('input[name="quantity"]').val(1)
-                    notify('error', 'You have to order a minimum amount of one.');
+            // $('.cart-decrease').click(function () {
+            //     currentRow = $(this).closest("tr");
+            //     quantity = currentRow.find('input[name="quantity"]').val();
+            //     if (quantity > 0) {
+            //         CartCalculation(currentRow)
+            //     } else {
+            //         currentRow.find('input[name="quantity"]').val(1)
+            //         notify('error', 'You have to order a minimum amount of one.');
+            //     }
+            // });
+            //
+            // $('.cart-increase').click(function () {
+            //     currentRow = $(this).closest("tr");
+            //     CartCalculation(currentRow)
+            // });
+
+            $('input[name="quantity"]').on('focusout keypress', function (e) {
+                if (e.type === 'focusout' || (e.type === 'keypress' && e.which === 13)) {
+                    currentRow = $(this).closest("tr");
+                    quantity = currentRow.find('input[name="quantity"]').val();
+
+                    if (parseInt(quantity) > 0) {
+                        CartCalculation(currentRow);
+                    } else {
+                        currentRow.find('input[name="quantity"]').val(1);
+                        CartCalculation(currentRow);
+                        notify('error', 'You have to order a minimum amount of one.');
+                    }
                 }
             });
 
-            $('.cart-increase').click(function () {
-                currentRow = $(this).closest("tr");
-                CartCalculation(currentRow)
-            });
-
-            $('input[name="quantity"]').on('focusout', function () {
-                currentRow = $(this).closest("tr");
-                quantity = currentRow.find('input[name="quantity"]').val();
-
-                if (parseInt(quantity) > 0) {
-                    CartCalculation(currentRow)
-                } else {
-                    currentRow.find('input[name="quantity"]').val(1)
-                    CartCalculation(currentRow)
-                    notify('error', 'You have to order a minimum amount of one.');
-                }
-            });
 
             $('.remove-btn').on('click', function () {
                 removeableItem = $(this).closest("tr");
@@ -168,9 +168,7 @@
 
             $(".remove-product").on('click', function () {
                 let product_id = removeableItem.find('.productName').data('product_id');
-                $('.coupon-show').addClass('d-none');
-                $('.total-show').addClass('d-none');
-                $('.coupon').val('');
+                $('.cart-count').val('');
                 $.ajax({
                     method: "POST",
                     headers: {
@@ -210,23 +208,19 @@
 
             function subTotal() {
 
-                var totalArr = [];
-                var subtotal = 0;
+                let subtotal = 0;
 
-                $('.cart-table tr').each(function (index, tr) {
-                    $(tr).find('td').each(function (index, td) {
-                        $(td).find('.subtotal').each(function (index, value) {
-                            var productPrice = $(value).text();
-                            var splitPrice = productPrice.split("{{ gs('cur_sym') }}");
-                            var price = parseFloat(splitPrice[1]);
-                            totalArr.push(price);
-                        });
-                    });
+                $('.cart-table tr').each(function () {
+                    let currentRow = $(this);
+                    let subtotalText = currentRow.find('.subtotal').text().trim();
+                    if (subtotalText) {
+                        let price = parseFloat(subtotalText.replace("{{ gs('cur_sym') }}", '').replace(/,/g, ''));
+                        if (!isNaN(price)) {
+                            subtotal += price;
+                        }
+                    }
                 });
 
-                for (var i = 0; i < totalArr.length; i++) {
-                    subtotal += totalArr[i];
-                }
 
                 $('.subtotal-price').text("{{ gs('cur_sym') }}" + subtotal.toFixed(2));
                 $('.total-price').text("{{ gs('cur_sym') }}" + subtotal.toFixed(2));
@@ -239,16 +233,25 @@
             }
 
             function CartCalculation(currentRow) {
-
                 let product_id = currentRow.find('.productName').data('product_id');
-                let quantity = currentRow.find('input[name="quantity"]').val();
-                let productPrice = currentRow.find('.price').text();
-                let splitPrice = productPrice.split("{{ gs('cur_sym') }}");
-                let price = parseFloat(splitPrice[1]);
+                let quantity = parseInt(currentRow.find('input[name="quantity"]').val(), 10); // Ensure quantity is an integer
+                let productPrice = currentRow.find('.price').text().trim();
+
+                // Remove currency symbol and commas, then parse the price
+                let price = parseFloat(productPrice.replace("{{ gs('cur_sym') }}", '').replace(/,/g, ''));
+
+                if (isNaN(price) || isNaN(quantity) || quantity <= 0) {
+                    // Handle invalid price or quantity
+                    notify('error', 'Invalid price or quantity.');
+                    return;
+                }
+
                 let totalPrice = quantity * price;
                 currentRow.find('.subtotal').text("{{ gs('cur_sym') }}" + totalPrice.toFixed(2));
 
-                subTotal();
+                subTotal(); // Recalculate the subtotal
+
+                // Update the cart quantity via AJAX
                 $.ajax({
                     headers: {
                         "X-CSRF-TOKEN": "{{ csrf_token() }}",

@@ -29,7 +29,7 @@
                             <div class="product-details__right">
                                 <h3 class="product-details__right-title"> {{ __($product->name) }} </h3>
                                 <span class="product-details__text"> {{ __($product->generic_name) }} </span>
-                                <h6 class="product-price"> @lang('Price') {{ showAmount($product->price) }}</h6>
+                                <h6 class="product-price"> @lang('Price') {{ showAmount(showDiscountPrice($product->price, $product->discount, $product->discount_type)) }}</h6>
                                 <p class="product-details__right-desc">
                                     {{ __($product->summary) }}
                                 </p>

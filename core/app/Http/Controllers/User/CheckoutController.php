@@ -103,7 +103,7 @@ class CheckoutController extends Controller
         foreach ($carts as $cart) {
             $sumPrice = 0;
             $product  = Product::active()->where('id', $cart->product->id)->first();
-            $price    = productPrice($product);
+            $price    = showDiscountPrice($product->price, $product->discount, $product->discount_type);
 
             $sumPrice = $sumPrice + ($price * $cart->quantity);
             $total[]  = $sumPrice;

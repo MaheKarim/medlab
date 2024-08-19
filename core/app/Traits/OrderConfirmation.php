@@ -23,7 +23,7 @@ trait OrderConfirmation
                 'order_id'   => $order->id,
                 'product_id' => $cart->product_id,
                 'quantity'   => $cart->quantity,
-                'price'      => productPrice($cart->product),
+                'price'      => showDiscountPrice($cart->product->price, $cart->product->discount, $cart->product->discount_type),
             ];
 
             $productStockUpdate[$cart->product_id] = $cart->quantity;

@@ -122,10 +122,12 @@ class CartController extends Controller
             $carts = Cart::where('user_id', $userId)
                 ->with('product')
                 ->get();
+//            dd($carts);
         } else {
             $carts = Cart::where('session_id', $sessionId)
                 ->with('product')
                 ->get();
+//            dd($carts);
         }
 
         return view('Template::cart_view', compact('pageTitle','carts'));
@@ -147,9 +149,16 @@ class CartController extends Controller
             $cart = Cart::where('user_id', $userId)->where('product_id', $request->product_id)->first();
             $cart->delete();
         } else {
-            $cart = session()->get('cart');
-            unset($cart[$request->product_id]);
-            session()->put('cart', $cart);
+            $cart = session()->get('cart', []);
+
+            $sessionId = session()->getId();
+
+            if ($sessionId == null) {
+                session()->put('session_id', session()->getId());
+                $sessionId = session()->get('session_id');
+            }
+            $cart = Cart::where('session_id', $sessionId)->where('product_id', $request->product_id)->first();
+            $cart->delete();
         }
 
         return response()->json(['success' => 'Product was successfully removed.']);
