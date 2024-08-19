@@ -44,7 +44,7 @@ class CartController extends Controller
 
         $sessionId = session()->get('session_id');
         if ($sessionId == null) {
-            session()->put('session_id', uniqid());
+            session()->put('session_id', session()->getId());
             $sessionId = session()->get('session_id');
         }
 
@@ -174,11 +174,11 @@ class CartController extends Controller
         }
 
         if ($userId) {
-            $cart           = Cart::where('user_id', $userId)->where('product_id', $request->product_id)->first();
+            $cart = Cart::where('user_id', $userId)->where('product_id', $request->product_id)->first();
             $cart->quantity = $request->quantity;
             $cart->save();
         } else {
-            $cart                                   = session()->get('cart');
+            $cart = session()->get('cart');
             $cart[$request->product_id]["quantity"] = $request->quantity;
             session()->put('cart', $cart);
         }

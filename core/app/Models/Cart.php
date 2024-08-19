@@ -15,12 +15,15 @@ class Cart extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
-
-    public static function insertUserToCart($user_id, $session_id)
+    public function user()
     {
-        $cart = self::where('session_id', $session_id)->get();
+        return $this->belongsTo(User::class);
+    }
 
-        self::where('session_id', $session_id)->update(['user_id'=>$user_id]);
+    public static function insertUserToCart($userId, $sessionId)
+    {
+        static::where('session_id', $sessionId)->get();
+        static::where('session_id', $sessionId)->update(['user_id'=>$userId]);
     }
 
 }

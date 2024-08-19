@@ -130,7 +130,7 @@
             let modal = $('#removeCartModal');
 
             let currentRow;
-            let quantity
+            let quantity;
 
             $('.cart-decrease').click(function () {
                 currentRow = $(this).closest("tr");

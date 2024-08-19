@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User\Auth;
 use App\Constants\Status;
 use App\Http\Controllers\Controller;
 use App\Lib\Intended;
+use App\Models\Cart;
 use App\Models\UserLogin;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -131,6 +132,8 @@ class LoginController extends Controller
         $userLogin->browser = @$userAgent['browser'];
         $userLogin->os = @$userAgent['os_platform'];
         $userLogin->save();
+
+        Cart::insertUserToCart(auth()->user()->id, session('session_id'));
 
         $redirection = Intended::getRedirection();
         return $redirection ? $redirection : to_route('user.home');
