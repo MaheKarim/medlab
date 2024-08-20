@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div class="card custom--card">
                     <div class="card-header card-header-bg d-flex flex-wrap justify-content-between align-items-center">
-                        <h5 class="text-white mt-0">
+                        <h5 class="mt-0">
                             @php echo $myTicket->statusBadge; @endphp
                             [@lang('Ticket')#{{ $myTicket->ticket }}] {{ $myTicket->subject }}
                         </h5>
@@ -49,7 +49,7 @@
                                         <h5 class="my-3">{{ $message->ticket->name }}</h5>
                                     </div>
                                     <div class="col-md-9">
-                                        <p class="text-muted fw-bold my-3">
+                                        <p class="fw-bold my-3">
                                             @lang('Posted on') {{ showDateTime($message->created_at,'l, dS F Y @ h:i a') }}</p>
                                         <p>{{$message->message}}</p>
                                         @if($message->attachments->count() > 0)

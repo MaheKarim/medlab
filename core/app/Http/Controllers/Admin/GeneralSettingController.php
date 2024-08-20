@@ -102,6 +102,15 @@ class GeneralSettingController extends Controller
             }
         }
 
+        if ($request->hasFile('logo_dark')) {
+            try {
+                fileUploader($request->logo_dark,$path,filename:'logo_dark.png');
+            } catch (\Exception $exp) {
+                $notify[] = ['error', 'Couldn\'t upload the logo'];
+                return back()->withNotify($notify);
+            }
+        }
+
         if ($request->hasFile('favicon')) {
             try {
                 fileUploader($request->favicon,$path,filename:'favicon.png');

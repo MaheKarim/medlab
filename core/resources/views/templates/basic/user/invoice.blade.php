@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@lang('Invoice')</title>
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/png" href="{{ getImage(getFilePath('logoIcon') . '/favicon.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ siteLogo('dark') }}">
 </head>
 <style>
     @page {
@@ -519,7 +519,7 @@
             <div class="col-12">
                     <span class="d-block text-center">
                         @lang('Copyright') &copy; @php date('Y') @endphp @lang('All Right Reserved By')
-                        <a href="#" class="footer-link">{{ gs('site_name') }}</a>
+                        <a href="{{ route('home') }}" class="footer-link">{{ gs('site_name') }}</a>
                     </span>
             </div>
         </div>

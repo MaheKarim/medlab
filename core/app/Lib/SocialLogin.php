@@ -4,6 +4,7 @@ namespace App\Lib;
 
 use App\Constants\Status;
 use App\Models\AdminNotification;
+use App\Models\Cart;
 use App\Models\User;
 use App\Models\UserLogin;
 use Exception;
@@ -131,6 +132,7 @@ class SocialLogin
         $adminNotification->save();
 
         $user = User::find($newUser->id);
+        Cart::insertUserToCart($user->id, session('session_id'));
 
         return $user;
     }
