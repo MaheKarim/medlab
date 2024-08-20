@@ -53,6 +53,7 @@ Route::middleware('auth')->name('user.')->group(function () {
             Route::controller('UserController')->group(function(){
                 Route::get('dashboard', 'home')->name('home');
                 Route::get('download-attachments/{file_hash}', 'downloadAttachment')->name('download.attachment');
+                Route::get('invoice-download/{id}', 'downloadInvoice')->name('download.invoice');
 
 
                 //Report

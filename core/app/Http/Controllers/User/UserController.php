@@ -164,4 +164,11 @@ class UserController extends Controller
         return view('Template::user.order_details', compact('pageTitle', 'orders'));
     }
 
+    public function downloadInvoice($id)
+    {
+        $pageTitle = 'Print Invoice';
+        $order     = Order::where('id', $id)->where('user_id', auth()->user()->id)->with(['orderDetail.product', 'deposit', 'user', 'orderDetail'])->firstOrFail();
+        return view('Template::user.invoice', compact('order', 'pageTitle'));
+    }
+
 }
