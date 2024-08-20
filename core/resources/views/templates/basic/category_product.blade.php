@@ -12,9 +12,9 @@
                             <li class="link-list__item"><a href="{{ route('home') }}" class="link"> @lang('Home') <i class="las la-angle-right"></i></a></li>
                             <li class="link-list__item"> {{ __($category->name) }} </li>
                         </ul>
-                        @if($category->products->isNotEmpty())
+                        @if($products->isNotEmpty())
                         <div class="row gy-4 mb-4">
-                            @foreach($category->products as $product)
+                            @foreach($products as $product)
                             <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6">
                                 <div class="product-card">
                                     <a href="{{ route('product.details', $product->id) }}" class="product-card__thumb">
@@ -38,7 +38,7 @@
                                     @if($product->discount > 0)
                                         <span class="product-offer">
                                             {{ getAmount($product->discount) }}
-                                            @if($product->discount_type == \App\Constants\Status::FLAT_DISCOUNT)
+                                            @if($product->discount_type == Status::FLAT_DISCOUNT)
                                                 @lang('Flat')
                                             @else
                                                 @lang('%')
@@ -50,20 +50,16 @@
                             </div>
                             @endforeach
                         </div>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    @if($products->hasPages())
-                                        <nav aria-label="Page navigation example">
-                                            <ul class="pagination">
-                                                {{ $products->links() }}
-                                            </ul>
-                                        </nav>
-                                    @endif
-                                </li>
-                            </ul>
-                        </nav>
-                        <div class="service-item">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        @if($products->hasPages())
+                                            {{ $products->links() }}
+                                        @endif
+                                    </li>
+                                </ul>
+                            </nav>
+                            <div class="service-item">
                             <h3 class="service-item__title">  {{ __($category->name) }}   </h3>
                             <p class="service-item__desc"> {{ __($category->description) }} </p>
                         </div>

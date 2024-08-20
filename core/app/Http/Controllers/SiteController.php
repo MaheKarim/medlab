@@ -179,6 +179,14 @@ class SiteController extends Controller
         return view('Template::maintenance',compact('pageTitle','maintenance'));
     }
 
+    public function categories()
+    {
+        $pageTitle = 'All Categories';
+        $categories = Category::active()->orderBy('name')->paginate(getPaginate());
+
+        return view('Template::categories', compact('pageTitle', 'categories'));
+    }
+
     public function categoryProduct($slug)
     {
         $category = Category::where('slug', $slug)->firstOrFail();
@@ -187,14 +195,6 @@ class SiteController extends Controller
         $seoContents = $category->seo_content;
         $seoImage = @$seoContents->image ? frontendImage('category', $seoContents->image, getFileSize('seo'), true) : null;
         return view('Template::category_product', compact('category', 'pageTitle', 'seoContents', 'seoImage', 'products'));
-    }
-
-    public function categories()
-    {
-        $pageTitle = 'All Categories';
-        $categories = Category::active()->orderBy('name')->paginate(getPaginate());
-
-        return view('Template::categories', compact('pageTitle', 'categories'));
     }
 
     public function productDetails($id)

@@ -10,6 +10,6 @@
     </main>
     <!-- Footer -->
     <!-- ==================== Footer Start Here ==================== -->
-    @include($activeTemplate.'.partials.footer')
+    @include($activeTemplate.'partials.footer')
     <!-- ==================== Footer End Here ==================== -->
 @endsection

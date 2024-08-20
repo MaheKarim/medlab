@@ -16,7 +16,7 @@
                         <p class="footer-item__desc"> {{ __(@$contactUsContent->data_values->description) }} </p>
 
                         <div class="download-item">
-                            <p class="download-item__text">Over <span
+                            <p class="download-item__text">@lang('Over') <span
                                     class="fw-bold">{{ __(@$contactUsContent->data_values->download) }} </span>@lang(' people
                                 download')</p>
                             <div class="d-flex align-items-center gap-3">

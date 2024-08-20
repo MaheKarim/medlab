@@ -6,7 +6,7 @@
     <div class="section-heading">
         <h5 class="section-heading__title"> {{ __($blogsContent->data_values->heading) }} </h5>
         <div class="section-heading__btn">
-            <a href="{{ url('blogs') }}" class="btn btn--base "> @lang('View All') </a>
+            <a href="{{ route('blogs') }}" class="btn btn--base "> @lang('View All') </a>
         </div>
     </div>
     <div class="row gy-4 justify-content-center">

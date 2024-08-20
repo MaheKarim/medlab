@@ -51,7 +51,6 @@ class AppServiceProvider extends ServiceProvider
         $viewShare['activeTemplate'] = $activeTemplate;
         $viewShare['activeTemplateTrue'] = activeTemplate(true);
         $viewShare['emptyMessage'] = 'Data not found';
-        $viewShare['sidebarCategories'] = Category::active()->orderBy('name')->limit(10)->get();
         view()->share($viewShare);
 
 
@@ -66,6 +65,12 @@ class AppServiceProvider extends ServiceProvider
                 'stockCheckCount' => Product::stockCheck()->count(),
                 'lowStockCount' => Product::lowStock()->count(),
                 'updateAvailable'    => version_compare(gs('available_version'),systemDetails()['version'],'>') ? 'v'.gs('available_version') : false,
+            ]);
+        });
+
+        view()->composer([$activeTemplate.'partials.sidebar',$activeTemplate.'partials.footer',$activeTemplate.'sections.categories'], function ($view) {
+            $view->with([
+                'sidebarCategories' => Category::active()->orderBy('name')->limit(10)->get(),
             ]);
         });
 
