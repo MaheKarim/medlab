@@ -1,5 +1,8 @@
 @extends('admin.layouts.app')
 @section('panel')
+<div class="text-end mb-2 position-absolute top-0 end-0">
+    <x-back route="{{ route('admin.product.index') }}"/>
+</div>
     <div class="row">
         <div class="col-md-12">
             <form action="{{ route('admin.product.store', $product->id) }}" method="post" enctype="multipart/form-data">
@@ -165,4 +168,12 @@
             });
         })(jQuery);
     </script>
+@endpush
+
+@push('style')
+    <style>
+        .bodywrapper__inner{
+            position: relative;
+        }
+    </style>
 @endpush
