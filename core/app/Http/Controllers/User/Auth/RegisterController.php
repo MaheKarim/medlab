@@ -6,6 +6,7 @@ use App\Constants\Status;
 use App\Http\Controllers\Controller;
 use App\Lib\Intended;
 use App\Models\AdminNotification;
+use App\Models\Cart;
 use App\Models\User;
 use App\Models\UserLogin;
 use Illuminate\Auth\Events\Registered;
@@ -132,6 +133,7 @@ class RegisterController extends Controller
         $userLogin->os      = @$userAgent['os_platform'];
         $userLogin->save();
 
+        Cart::insertUserToCart($user->id, session('session_id'));
 
         return $user;
     }

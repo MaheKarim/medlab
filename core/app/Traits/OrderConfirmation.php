@@ -35,7 +35,7 @@ trait OrderConfirmation
             $productStockUpdate[$cart->product_id] = $cart->quantity;
             $saleCountUpdate[$cart->product_id] = $cart->quantity;
             // Order Details as String for Notification (No Array)
-            $orderDetails .= $cart->product->name . " x " . $cart->quantity . " - <b>" . showAmount($price) . "</b>\n";
+            $orderDetails .= $cart->product->name . " x " . $cart->quantity . " - <b>" . showAmount($price) . "</b>\n". "<br>";
         }
 
         if (!empty($orderDetailsData)) {
