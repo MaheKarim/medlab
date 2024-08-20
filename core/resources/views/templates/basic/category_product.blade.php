@@ -60,8 +60,8 @@
                                 </ul>
                             </nav>
                             <div class="service-item">
-                            <h3 class="service-item__title">  {{ __($category->name) }}   </h3>
-                            <p class="service-item__desc"> {{ __($category->description) }} </p>
+                            <h3 class="service-item__title">{{ __($category->name) }}</h3>
+                            <p class="service-item__desc">{{ __($category->description) }}</p>
                         </div>
                         @else
                             <div class="alert alert-danger">
