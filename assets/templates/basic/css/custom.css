@@ -124,12 +124,15 @@
 .input-popup {
   display: none;
 }
+.form-group .input-popup p {
+  color: #fff !important;
+}
 
 .hover-input-popup .input-popup {
   display: block;
   position: absolute;
-  bottom: 130%;
-  left: 50%;
+  bottom: 80%;
+  left: 40%;
   width: 280px;
   background-color: #1a1a1a;
   color: #fff;
@@ -556,9 +559,6 @@ button .spinner-border {
   position: relative;
 }
 
-.select2-container, .selection{
-  width: 100% !important;
-}
 .select2-container--default .select2-selection--single .select2-selection__rendered{
   line-height: 34px !important;
 }
