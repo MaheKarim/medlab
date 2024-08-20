@@ -13,12 +13,14 @@ use Illuminate\Support\Facades\DB;
 trait OrderConfirmation
 {
     public static function confirmOrder($order) {
-        $user    = auth()->user();
-        $carts   = Cart::where('user_id', $user->id)->get();
+        $user  = auth()->user();
+        $carts = Cart::where('user_id', $user->id)->get();
 
-        $orderDetailsData = [];
+        $orderDetailsData   = [];
         $productStockUpdate = [];
-        $orderDetails = "";
+        $saleCountUpdate    = [];
+        $orderDetails       = "";
+
         foreach ($carts as $cart) {
             $price = showDiscountPrice($cart->product->price, $cart->product->discount, $cart->product->discount_type);
             $orderDetailsData[] = [
@@ -31,9 +33,11 @@ trait OrderConfirmation
             ];
 
             $productStockUpdate[$cart->product_id] = $cart->quantity;
+            $saleCountUpdate[$cart->product_id] = $cart->quantity;
             // Order Details as String for Notification (No Array)
             $orderDetails .= $cart->product->name . " x " . $cart->quantity . " - <b>" . showAmount($price) . "</b>\n";
         }
+
         if (!empty($orderDetailsData)) {
             OrderDetail::insert($orderDetailsData);
         }
@@ -43,15 +47,24 @@ trait OrderConfirmation
         }
 
         if (!empty($productStockUpdate)) {
-            $updateValues = [];
+            $updateStockValues = [];
+            $updateSaleValues = [];
 
             foreach ($productStockUpdate as $id => $quantity) {
-                $updateValues[] = "WHEN id = $id THEN quantity - $quantity";
+                $updateStockValues[] = "WHEN id = $id THEN quantity - $quantity";
             }
 
-            $updateValues = implode(' ', $updateValues);
+            foreach ($saleCountUpdate as $id => $quantity) {
+                $updateSaleValues[] = "WHEN id = $id THEN sale_count + $quantity";
+            }
+
+            $updateStockValues = implode(' ', $updateStockValues);
+            $updateSaleValues = implode(' ', $updateSaleValues);
+
+            // Update stock and sale_count
             Product::whereIn('id', array_keys($productStockUpdate))->update([
-                'quantity' => DB::raw("CASE $updateValues ELSE quantity END")
+                'quantity' => DB::raw("CASE $updateStockValues ELSE quantity END"),
+                'sale_count' => DB::raw("CASE $updateSaleValues ELSE sale_count END")
             ]);
         }
 
@@ -69,7 +82,6 @@ trait OrderConfirmation
             'total'           => showAmount($order->total, currencyFormat: false),
             'order_details'   => $orderDetails,
         ]);
-
     }
 
     protected static function transactionCreate($order, $user, $deposit) {

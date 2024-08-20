@@ -13,6 +13,7 @@
                                 <th>@lang('Product SKU')</th>
                                 <th>@lang('Price')</th>
                                 <th>@lang('Quantity')</th>
+                                <th>@lang('Sale Count')</th>
                                 <th>@lang('Status')</th>
                                 <th>@lang('Action')</th>
                             </tr>
@@ -46,6 +47,9 @@
                                     </td>
                                     <td>
                                         @php  echo $product->quantityBadge; @endphp
+                                    </td>
+                                    <td>
+                                        {{ __($product->sale_count) }}
                                     </td>
                                     <td>
                                         @php
