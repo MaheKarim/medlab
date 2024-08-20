@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\Status;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -117,17 +118,24 @@ class CartController extends Controller
         $userId = auth()->user()->id ?? null;
         $sessionId = session()->get('session_id');
 
+        $cartQuery = Cart::with('product');
+
         if ($userId) {
-            $carts = Cart::where('user_id', $userId)
-                ->with('product')
-                ->get();
+            $cartQuery->where('user_id', $userId);
         } else {
-            $carts = Cart::where('session_id', $sessionId)
-                ->with('product')
-                ->get();
+            $cartQuery->where('session_id', $sessionId);
         }
 
-        return view('Template::cart_view', compact('pageTitle','carts'));
+        $carts = $cartQuery->get()->filter(function ($cart) {
+            $product = $cart->product;
+            if (!$product || $product->status == Status::DISABLE || $product->quantity == 0) {
+                $cart->delete();
+                return false;
+            }
+            return true;
+        });
+
+        return view('Template::cart_view', compact('pageTitle', 'carts'));
     }
 
     public function remove(Request $request)

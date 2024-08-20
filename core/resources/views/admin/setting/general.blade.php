@@ -43,13 +43,8 @@
                                 </div>
                             </div>
                             <div class="form-group col-xl-3 col-sm-6">
-                                <label class="required"> @lang('Site Secondary Color')</label>
-                                <div class="input-group">
-                                    <span class="input-group-text p-0 border-0">
-                                        <input type='text' class="form-control colorPicker" value="{{gs('secondary_color')}}">
-                                    </span>
-                                    <input type="text" class="form-control colorCode" name="secondary_color" value="{{ gs('secondary_color') }}">
-                                </div>
+                                <label class="required"> @lang('Stock Alert')</label>
+                                <input class="form-control" type="text" name="stock_alert" required value="{{gs('stock_alert')}}">
                             </div>
                             <div class="form-group col-xl-3 col-sm-6">
                                 <label> @lang('Record to Display Per page')</label>

@@ -182,7 +182,7 @@ class SiteController extends Controller
     public function categoryProduct($slug)
     {
         $category = Category::where('slug', $slug)->firstOrFail();
-        $products = $category->products()->paginate(getPaginate(4));
+        $products = $category->products()->paginate(getPaginate());
         $pageTitle = $category->name;
         $seoContents = $category->seo_content;
         $seoImage = @$seoContents->image ? frontendImage('category', $seoContents->image, getFileSize('seo'), true) : null;

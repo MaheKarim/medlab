@@ -104,6 +104,8 @@ Route::middleware('admin')->group(function () {
         Route::post('store/{id?}', 'store')->name('store');
         Route::get('edit/{id}', 'edit')->name('edit');
         Route::post('status/{id}', 'status')->name('status');
+        Route::get('stock-out', 'stockOut')->name('stockOut');
+        Route::get('low-stock', 'lowStock')->name('lowStock');
     });
 
     // Manage Order Controller

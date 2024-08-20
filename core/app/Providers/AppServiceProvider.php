@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Deposit;
 use App\Models\Frontend;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\SupportTicket;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -62,6 +63,8 @@ class AppServiceProvider extends ServiceProvider
                 'pendingTicketCount'         => SupportTicket::whereIN('status', [Status::TICKET_OPEN, Status::TICKET_REPLY])->count(),
                 'pendingDepositsCount'    => Deposit::pending()->count(),
                 'pendingOrdersCount' => Order::pending()->count(),
+                'stockCheckCount' => Product::stockCheck()->count(),
+                'lowStockCount' => Product::lowStock()->count(),
                 'updateAvailable'    => version_compare(gs('available_version'),systemDetails()['version'],'>') ? 'v'.gs('available_version') : false,
             ]);
         });

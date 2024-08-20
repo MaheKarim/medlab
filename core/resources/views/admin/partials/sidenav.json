@@ -57,7 +57,43 @@
         "title": "Manage Products",
         "icon": "la la-shopping-bag",
         "menu_active": "admin.product*",
-        "route_name": "admin.product.index"
+        "counters": ["stockCheckCount", "lowStockCount"],
+        "submenu": [
+            {
+                "keyword": [
+                    "All Products",
+                    "Manage Products",
+                    "Product management",
+                    "Products"
+                ],
+                "title": "All Products",
+                "route_name": "admin.product.index",
+                "menu_active": "admin.product.index*"
+            },
+            {
+                "keyword": [
+                    "Stock Out Product",
+                    "Product Stock",
+                    "Stock management"
+                ],
+                "title": "Stock Out Product",
+                "route_name": "admin.product.stockOut",
+                "menu_active": "admin.product.stockOut*",
+                "counter":"stockCheckCount"
+            },
+            {
+                "keyword": [
+                    "Low Stock Product",
+                    "Product Stock",
+                    "Stock management"
+                ],
+                "title": "Low Stock Product",
+                "route_name": "admin.product.lowStock",
+                "menu_active": "admin.product.lowStock*",
+                "counter":"lowStockCount"
+            }
+        ]
+
     },
     "manage_order": {
         "keyword": [

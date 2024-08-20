@@ -25,7 +25,9 @@ class Product extends Model
 
     public function scopeAvailable($query)
     {
-        return $query->active()->whereHas('category', function ($category) {
+        return $query->active()
+            ->where('quantity', '>', 0)
+            ->whereHas('category', function ($category) {
             $category->active();
         })->whereHas('brand', function ($brand) {
             $brand->active();
@@ -33,7 +35,12 @@ class Product extends Model
     }
 
     public function scopeStockCheck($query){
-        return $query->where('quantity', '>', 0);
+        return $query->where('quantity', '=', 0);
+    }
+
+    public function scopeLowStock($query){
+        $stock = (int) gs('stock_alert');
+        return $query->whereBetween('quantity', [1, $stock]);
     }
 
     public function quantityBadge(): Attribute

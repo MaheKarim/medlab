@@ -149,4 +149,20 @@ class ManageProductController extends Controller
     {
         return Product::changeStatus($id);
     }
+
+    public function stockOut()
+    {
+        $pageTitle = "Stock Out Product";
+        $products = Product::orderBy('id', 'desc')->stockCheck()->paginate(getPaginate());
+
+        return view('admin.product.index', compact('pageTitle', 'products'));
+    }
+
+    public function lowStock()
+    {
+        $pageTitle = "Low Stock Product";
+        $products = Product::lowStock()->latest()->paginate(getPaginate());
+
+        return view('admin.product.index', compact('pageTitle', 'products'));
+    }
 }

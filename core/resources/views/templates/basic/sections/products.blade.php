@@ -1,7 +1,7 @@
 @php
     $categories = \App\Models\Category::active()
         ->with(['products' => function($query) {
-            $query->active()->stockCheck()->orderBy('name')->take(10);
+            $query->active()->orderBy('name')->take(10);
         }])
         ->orderBy('name')
         ->take(10)
