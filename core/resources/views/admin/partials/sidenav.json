@@ -48,6 +48,17 @@
         "menu_active": "admin.brand*",
         "route_name": "admin.brand.index"
     },
+    "shipping_methods": {
+        "keyword": [
+            "Shipping Methods",
+            "Shipping Method",
+            "Manage Shipping Methods"
+        ],
+        "title": "Shipping Methods",
+        "icon": "las la-shipping-fast",
+        "menu_active": "admin.shipping*",
+        "route_name": "admin.shipping.index"
+    },
     "manage_product": {
         "keyword": [
             "Products",
@@ -243,17 +254,6 @@
                 "menu_active": "admin.users.notification.all"
             }
         ]
-    },
-    "shipping_methods": {
-        "keyword": [
-            "Shipping Methods",
-            "Shipping Method",
-            "Manage Shipping Methods"
-        ],
-        "title": "Shipping Methods",
-        "icon": "las la-shipping-fast",
-        "menu_active": "admin.shipping*",
-        "route_name": "admin.shipping.index"
     },
     "deposits": {
         "title": "Payments",
