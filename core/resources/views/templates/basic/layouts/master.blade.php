@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('assets/global/css/select2.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset($activeTemplateTrue.'css/custom.css') }}">
-    <link rel="stylesheet" href="{{ asset($activeTemplateTrue.'css/color.php') }}?color={{ gs('base_color') }}&secondColor={{ gs('secondary_color') }}">
+    <link rel="stylesheet" href="{{ asset($activeTemplateTrue.'css/color.php') }}?color={{ gs('base_color') }}">
     @stack('style-lib')
 
     @stack('style')
@@ -249,7 +249,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <img src="{{ siteLogo() }}" alt="Logo">
+                <img src="{{ siteLogo('dark') }}" alt="Logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="@lang('Toggle navigation')">
@@ -377,10 +377,9 @@
 
 
             $('.select2-basic').each(function(index,element){
-                $(element).select2({
-                    dropdownParent: $(element).closest('.select2-parent')
-                });
+                $(element).select2();
             });
+
 
         })(jQuery);
 

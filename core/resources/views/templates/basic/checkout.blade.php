@@ -44,7 +44,7 @@
                                         <div class="form-group">
                                             <label class="form--label">@lang('Shipping Area')</label>
                                             <select name="shipping_method" class="form-select form--control select2-basic" required>
-                                                <option>@lang('Select One')</option>
+                                                <option selected disabled>@lang('Select One')</option>
                                                 @foreach ($shippingMethod as $method)
                                                     <option value="{{ $method->id }}" data-price="{{$method->price}}">{{ __($method->name) }}</option>
                                                 @endforeach
@@ -133,13 +133,20 @@
         </div>
     </div>
 @endsection
-
+@push('style-lib')
+    <link rel="stylesheet" href="{{ asset('assets/global/css/select2.min.css') }}">
+@endpush
+@push('script-lib')
+    <script src="{{ asset('assets/global/js/select2.min.js') }}"></script>
+@endpush
 
 @push('script')
     <script>
         (function($) {
             'use script';
-
+            $(document).ready(function() {
+                $('.select2-basic').select2();
+            })
             $('[name=shipping_method]').on('change', function() {
                 let subtotal = parseFloat('{{getAmount($data['subtotal'])}}');
                 let price = parseFloat($(this).find(":selected").data('price'));

@@ -19,7 +19,6 @@
 
     <!-- line awesome -->
     <link rel="stylesheet" href="{{asset('assets/global/css/line-awesome.min.css')}}">
-{{--    <link href="{{ asset('assets/global/css/select2.min.css') }}" rel="stylesheet">--}}
 
     <!-- Slick -->
     <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/slick.css')}}">
@@ -35,7 +34,7 @@
     @stack('style')
 
 
-    <link rel="stylesheet" href="{{ asset($activeTemplateTrue.'css/color.php') }}?color={{ gs('base_color') }}&secondColor={{ gs('secondary_color') }}">
+    <link rel="stylesheet" href="{{ asset($activeTemplateTrue.'css/color.php') }}?color={{ gs('base_color') }}">
 </head>
 @php echo loadExtension('google-analytics') @endphp
 
@@ -192,12 +191,6 @@
                 }
             });
         }
-
-        $('.select2-basic').each(function(index,element){
-            $(element).select2({
-                dropdownParent: $(element).closest('.select2-parent')
-            });
-        });
     })(jQuery);
 </script>
 </body>
