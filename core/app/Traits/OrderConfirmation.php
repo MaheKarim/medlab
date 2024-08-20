@@ -18,15 +18,21 @@ trait OrderConfirmation
 
         $orderDetailsData = [];
         $productStockUpdate = [];
+        $orderDetails = "";
         foreach ($carts as $cart) {
+            $price = showDiscountPrice($cart->product->price, $cart->product->discount, $cart->product->discount_type);
             $orderDetailsData[] = [
                 'order_id'   => $order->id,
                 'product_id' => $cart->product_id,
                 'quantity'   => $cart->quantity,
-                'price'      => showDiscountPrice($cart->product->price, $cart->product->discount, $cart->product->discount_type),
+                'price'      => $price,
+                'created_at' => now(),
+                'updated_at' => now()
             ];
 
             $productStockUpdate[$cart->product_id] = $cart->quantity;
+            // Order Details as String for Notification (No Array)
+            $orderDetails .= $cart->product->name . " x " . $cart->quantity . " - <b>" . showAmount($price) . "</b>\n";
         }
         if (!empty($orderDetailsData)) {
             OrderDetail::insert($orderDetailsData);
@@ -57,11 +63,11 @@ trait OrderConfirmation
 
         notify($user, 'ORDER_COMPLETE', [
             'user_name'       => $user->username,
+            'order_no'        => $order->order_no,
             'subtotal'        => showAmount($order->subtotal, currencyFormat: false),
             'shipping_charge' => showAmount($order->shipping_charge, currencyFormat: false),
             'total'           => showAmount($order->total, currencyFormat: false),
-            'currency'        => gs('cur_text'),
-            'order_no'        => $order->order_no,
+            'order_details'   => $orderDetails,
         ]);
 
     }
@@ -79,6 +85,17 @@ trait OrderConfirmation
         $transaction->trx          = $order->order_no;
         $transaction->remark       = 'Payment';
         $transaction->save();
+
+        notify($user, 'PAYMENT_COMPLETE', [
+            'user_name'       => $user->username,
+            'subtotal'        => showAmount($order->subtotal, currencyFormat: false),
+            'shipping_charge' => showAmount($order->shipping_charge, currencyFormat: false),
+            'total'           => showAmount($order->total, currencyFormat: false),
+            'currency'        => gs('cur_text'),
+            'order_no'        => $order->order_no,
+            'method'          => $deposit->gatewayCurrency()->name,
+            'charge' => showAmount($deposit->charge, currencyFormat: false),
+        ]);
     }
 
     protected static function orderCancel($order) {

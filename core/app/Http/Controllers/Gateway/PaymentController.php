@@ -136,7 +136,6 @@ class PaymentController extends Controller
             ]);
 
             $order = Order::where('payment_status', Status::ORDER_PAYMENT_PENDING)->findOrFail($deposit->order_id);
-//            static::confirmOrder($order);
             static::transactionCreate($order, $user, $deposit);
         }
     }

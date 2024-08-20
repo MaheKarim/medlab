@@ -85,11 +85,12 @@ class CheckoutController extends Controller
         $order->payment_type       = $request->payment_type;
         $order->save();
 
+        static::confirmOrder($order);
+
         if ($request->payment_type == Status::PAYMENT_ONLINE) {
             return redirect()->route('user.deposit.index', $order->id);
         }
 
-        static::confirmOrder($order);
 
         $notify[] = ['success', 'Order successfully completed.'];
         return redirect()->route('user.home', $order->id)->withNotify($notify);

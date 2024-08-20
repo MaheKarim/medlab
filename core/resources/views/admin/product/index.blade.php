@@ -44,7 +44,9 @@
                                             {{ showAmount($product->price) }}
                                         @endif
                                     </td>
-                                    <td>{{ __($product->quantity) }}</td>
+                                    <td>
+                                        @php  echo $product->quantityBadge; @endphp
+                                    </td>
                                     <td>
                                         @php
                                             echo $product->statusBadge;

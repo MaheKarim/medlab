@@ -14,7 +14,7 @@ class ManageProductController extends Controller
     public function index()
     {
         $pageTitle = 'All Products';
-        $products = Product::latest()->paginate(getPaginate());
+        $products = Product::orderBy('id', 'desc')->paginate(getPaginate());
         return view('admin.product.index', compact('pageTitle', 'products'));
     }
 
