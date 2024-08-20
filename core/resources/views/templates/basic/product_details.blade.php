@@ -13,9 +13,11 @@
                     <div class="row gy-4">
                         <div class="col-lg-6 pe-lg-5">
                             <div class="product-details__wrapper">
+                                @foreach($product->gallery ?? [] as $gallery)
                                 <div class="product-details__item">
-                                    <img src="{{ getImage(getFilePath('product') . '/'. $product->image, getFileSize('product')) }}" alt="{{ $product->name }}">
+                                    <img src="{{ getImage(getFilePath('productGallery') . '/'. $gallery, getFileSize('productGallery')) }}" alt="{{ $product->name }}">
                                 </div>
+                                @endforeach
                             </div>
                             <div class="product-details__gallery">
                                 @foreach($product->gallery ?? [] as $gallery)
