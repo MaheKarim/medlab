@@ -21,9 +21,7 @@ class FileInfo
         $data['depositVerify'] = [
             'path'      =>'assets/images/verify/deposit'
         ];
-        $data['verify'] = [
-            'path'      =>'assets/verify'
-        ];
+
         $data['default'] = [
             'path'      => 'assets/images/default.png',
         ];

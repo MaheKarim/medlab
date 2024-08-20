@@ -27,6 +27,33 @@
                         </a>
                         <span class="cart-count">0</span>
                     </li>
+                        @if (gs('multi_language'))
+                            @php
+                                $language = App\Models\Language::all();
+                                $selectedLang = $language->where('code', session('lang'))->first();
+                            @endphp
+                            <div class="dropdown-lang dropdown mt-0 d-block">
+                                <a href="#" class="language-btn dropdown-toggle" data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    <img class="flag"
+                                         src="{{ getImage(getFilePath('language') . '/' . @$selectedLang->image, getFileSize('language')) }}"
+                                         alt="us">
+                                    <span class="language-text text-white">{{ @$selectedLang->name }}</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @foreach ($language as $lang)
+                                        <li>
+                                            <a href="{{ route('lang', $lang->code) }}">
+                                                <img class="flag"
+                                                     src="{{ getImage(getFilePath('language') . '/' . @$lang->image, getFileSize('language')) }}"
+                                                     alt="@lang('image')">
+                                                {{ @$lang->name }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                 </ul>
             </div>
         </nav>

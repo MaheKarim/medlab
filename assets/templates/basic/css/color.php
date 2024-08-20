@@ -10,12 +10,6 @@ if (isset($_GET['color']) and $_GET['color'] != '') {
 if (!$color or !checkHexColor($color)) {
     $color = "#336699";
 }
-if (isset($_GET['secondColor']) and $_GET['secondColor'] != '') {
-    $secondColor = "#" . $_GET['secondColor'];
-}
-if (!$secondColor or !checkHexColor($secondColor)) {
-    $secondColor = "#336699";
-}
 
 function hexToHsl($hex)
 {
@@ -57,7 +51,4 @@ function hexToHsl($hex)
 --base-h: <?php echo hexToHsl($color)['h']; ?>;
 --base-s: <?php echo hexToHsl($color)['s']; ?>%;
 --base-l: <?php echo hexToHsl($color)['l']; ?>%;
---base-two-h: <?php echo hexToHsl($secondColor)['h']; ?>;
---base-two-s: <?php echo hexToHsl($secondColor)['s']; ?>%;
---base-two-l: <?php echo hexToHsl($secondColor)['l']; ?>%;
 }

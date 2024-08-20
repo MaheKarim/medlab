@@ -4,7 +4,7 @@
 
 <div class="product-category">
     <div class="section-heading">
-        <h5 class="section-heading__title"> {{ @$categoryData->data_values->heading }} </h5>
+        <h5 class="section-heading__title"> {{ __(@$categoryData->data_values->heading) }} </h5>
         <div class="section-heading__btn">
             <a href="{{ route('all.category') }}" class="btn btn--base "> @lang('View All') </a>
         </div>
