@@ -223,7 +223,7 @@
                 let totalPrice = quantity * price;
                 currentRow.find('.subtotal').text("{{ gs('cur_sym') }}" + totalPrice.toFixed(2));
 
-                subTotal(); // Recalculate the subtotal
+                subTotal();
 
                 // Update the cart quantity via AJAX
                 $.ajax({

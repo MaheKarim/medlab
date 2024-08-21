@@ -106,7 +106,7 @@ trait OrderConfirmation
             'currency'        => gs('cur_text'),
             'order_no'        => $order->order_no,
             'method'          => $deposit->gatewayCurrency()->name,
-            'charge' => showAmount($deposit->charge, currencyFormat: false),
+            'charge'          => showAmount($deposit->charge, currencyFormat: false),
         ]);
     }
 

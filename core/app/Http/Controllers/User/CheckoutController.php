@@ -46,7 +46,6 @@ class CheckoutController extends Controller
             'lastname'        => 'required',
             'mobile'          => 'required',
             'email'           => 'required',
-            'country_name'    => 'required',
             'address'         => 'required',
             'state'           => 'required',
             'city'            => 'required',
@@ -70,7 +69,6 @@ class CheckoutController extends Controller
             'address' => $request->address,
             'state'   => $request->state,
             'zip'     => $request->zip,
-            'country_name' => $request->country_name,
             'city'    => $request->city,
         ];
 

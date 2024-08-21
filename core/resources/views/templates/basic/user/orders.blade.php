@@ -11,13 +11,13 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th scope="col">Order ID</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Payment Type</th>
-                                <th scope="col">Payment Status</th>
-                                <th scope="col">Order Status</th>
-                                <th scope="col">Order Time</th>
-                                <th scope="col">Details</th>
+                                <th scope="col">@lang('Order ID')</th>
+                                <th scope="col">@lang('Price')</th>
+                                <th scope="col">@lang('Payment Type')</th>
+                                <th scope="col">@lang('Payment Status')</th>
+                                <th scope="col">@lang('Status')</th>
+                                <th scope="col">@lang('Order Time')</th>
+                                <th scope="col">@lang('Details')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -52,7 +52,7 @@
                                     </td>
                                     <td>
                                         <a href="{{ route('user.order.details', $order->id) }}"
-                                           class="btn btn-sm btn-primary btn--primary">Details</a>
+                                           class="btn btn-sm btn-primary btn--primary">@lang('Details')</a>
                                     </td>
                                 </tr>
                             @endforeach

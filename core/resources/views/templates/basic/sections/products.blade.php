@@ -33,7 +33,7 @@
                                 <p class="product-card__title">{{ __($product->name) }} <span
                                         class="product-size">{{ __($product->strength) }}</span></p>
                                 <a href="{{ route('category.products', $product->category->slug) }}"
-                                    class="product-card__text">{{ @$product->category->name }}</a>
+                                    class="product-card__text">{{ __(@$product->category->name) }}</a>
                                 <p class="product-card__desc">{{ __(@$product->brand->name) }}</p>
                                 <div class="product-card__bottom">
                                     <h6 class="product-card__price">
@@ -69,3 +69,43 @@
         </div>
     @endforeach
 </div>
+@push('script')
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            pagination: {
+                el: ".swiper-pagination",
+                type: "fraction",
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                460: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                767: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+                1399: {
+                    slidesPerView: 4,
+                    spaceBetween: 20,
+                },
+            },
+        });
+    </script>
+@endpush
+@push('style-lib')
+    <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/slick.css')}}">
+    <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/swiper.css')}}">
+@endpush
+@push('script-lib')
+    <script src="{{ asset($activeTemplateTrue . 'js/slick.min.js') }}"></script>
+    <script src="{{ asset($activeTemplateTrue . 'js/magnific-popup.js') }}"></script>
+    <script src="{{ asset($activeTemplateTrue . 'js/swiper.js') }}"></script>
+@endpush

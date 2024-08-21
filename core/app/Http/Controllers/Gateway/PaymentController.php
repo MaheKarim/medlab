@@ -46,13 +46,13 @@ class PaymentController extends Controller
             return back()->withNotify($notify);
         }
 
-        if ($gate->min_amount > $request->amount || $gate->max_amount < $request->amount) {
+        if ($gate->min_amount > $order->total || $gate->max_amount < $order->total) {
             $notify[] = ['error', 'Please follow the limit'];
             return back()->withNotify($notify);
         }
 
-        $charge = $gate->fixed_charge + ($request->amount * $gate->percent_charge / 100);
-        $payable = $request->amount + $charge;
+        $charge = $gate->fixed_charge + ($order->total * $gate->percent_charge / 100);
+        $payable = $order->total + $charge;
         $finalAmount = $payable * $gate->rate;
 
         $data = new Deposit();
@@ -60,7 +60,7 @@ class PaymentController extends Controller
         $data->order_id  = $orderId ?? 0;
         $data->method_code = $gate->method_code;
         $data->method_currency = strtoupper($gate->currency);
-        $data->amount = $request->amount;
+        $data->amount = $order->total;
         $data->charge = $charge;
         $data->rate = $gate->rate;
         $data->final_amount = $finalAmount;

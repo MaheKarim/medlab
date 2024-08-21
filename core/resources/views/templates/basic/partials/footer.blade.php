@@ -78,7 +78,7 @@
                                     <i class="fas fa-phone"></i>
                                 </div>
                                 <div class="footer-contact-menu__item-content">
-                                    <p>{{@$contactUsContent->data_values->contact_number }}</p>
+                                    <p>{{ @$contactUsContent->data_values->contact_number }}</p>
                                 </div>
                             </li>
                             <li class="footer-contact-menu__item">
@@ -112,7 +112,7 @@
         <div class="container">
             <div class="row gy-3">
                 <div class="col-md-12 text-center">
-                    <div class="bottom-footer-text text-white"> &copy; Copyright {{ now()->year }}
+                    <div class="bottom-footer-text text-white"> &copy; @lang('Copyright') {{ now()->year }}
                         , {{ config('app.name') }} . @lang('All rights reserved.')
                     </div>
                 </div>

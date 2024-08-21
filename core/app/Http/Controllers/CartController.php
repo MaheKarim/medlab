@@ -74,10 +74,10 @@ class CartController extends Controller
 
         if ($userId != null) {
             $totalCartItems = Cart::where('user_id', $userId)->with(['product'])
-                ->sum('quantity');
+                ->count();
         } else {
             $totalCartItems = Cart::where('session_id', $sessionId)->with(['product'])
-                ->sum('quantity');
+                ->count();
         }
         session()->put('cart', $cart);
         return response()->json([
@@ -154,14 +154,18 @@ class CartController extends Controller
             $cart = Cart::where('user_id', $userId)->where('product_id', $request->product_id)->first();
             $cart->delete();
         } else {
-            $cart = session()->get('cart', []);
-
-            $sessionId = session()->getId();
+            // Get session id
+            $sessionId = session()->get('session_id');
 
             if ($sessionId == null) {
                 session()->put('session_id', session()->getId());
                 $sessionId = session()->get('session_id');
             }
+            // If $sessionId not match then session_id not found
+            if ($sessionId != session()->get('session_id')) {
+                return response()->json(['error' => 'Session not found!']);
+            }
+
             $cart = Cart::where('session_id', $sessionId)->where('product_id', $request->product_id)->first();
             $cart->delete();
         }
@@ -192,9 +196,10 @@ class CartController extends Controller
             $cart->quantity = $request->quantity;
             $cart->save();
         } else {
-            $cart = session()->get('cart');
-            $cart[$request->product_id]["quantity"] = $request->quantity;
-            session()->put('cart', $cart);
+            $sessionId = session()->get('session_id');
+            $cart = Cart::where('session_id', $sessionId)->where('product_id', $request->product_id)->first();
+            $cart->quantity = $request->quantity;
+            $cart->save();
         }
 
         return response()->json(['success' => 'Cart was successfully updated.']);

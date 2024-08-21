@@ -33,3 +33,13 @@
         </div>
     </div>
 </div>
+@push('script')
+    <script>
+        var videoItem = $(".play-button");
+        if (videoItem) {
+        videoItem.magnificPopup({
+            type: "iframe",
+        });
+        };
+    </script>
+@endpush

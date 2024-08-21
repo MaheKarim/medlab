@@ -40,3 +40,52 @@
         @endforeach
     </div>
 </section>
+@push('script')
+    <script>
+                $(".testimonial-slider").slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            Infinity: true,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            speed: 1500,
+            dots: false,
+            pauseOnHover: true,
+            arrows: true,
+            prevArrow:
+                '<button type="button" class="slick-prev"><i class="las la-angle-left"></i></button>',
+            nextArrow:
+                '<button type="button" class="slick-next"><i class="las la-angle-right"></i></button>',
+            responsive: [
+                {
+                    breakpoint: 1199,
+                    settings: {
+                        slidesToShow: 2,
+                    },
+                },
+                {
+                    breakpoint: 991,
+                    settings: {
+                        slidesToShow: 2,
+                    },
+                },
+                {
+                    breakpoint: 767,
+                    settings: {
+                        arrows: false,
+                        slidesToShow: 1,
+                        dots: true,
+                    },
+                },
+            ],
+        });
+
+    </script>
+@endpush
+@push('style-lib')
+    <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/slick.css')}}">
+@endpush
+
+@push('script-lib')
+    <script src="{{ asset($activeTemplateTrue . 'js/slick.min.js') }}"></script>
+@endpush

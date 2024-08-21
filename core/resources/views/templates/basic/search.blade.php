@@ -51,3 +51,40 @@
         </div>
     </section>
 @endsection
+
+@push('script')
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            pagination: {
+                el: ".swiper-pagination",
+                type: "fraction",
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                460: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                767: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+                1399: {
+                    slidesPerView: 4,
+                    spaceBetween: 20,
+                },
+            },
+        });
+    </script>
+@endpush
+@push('style-lib')
+    <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/swiper.css')}}">
+@endpush
+@push('script-lib')
+    <script src="{{ asset($activeTemplateTrue . 'js/swiper.js') }}"></script>
+@endpush

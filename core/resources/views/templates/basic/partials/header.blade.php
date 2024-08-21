@@ -25,12 +25,20 @@
                                     class="d-lg-block d-none">@lang('Login')</span></a>
                         </li>
                     @endif
-
+                        @php
+                            $userId = auth()->id();
+                            $sessionId = session()->get('session_id');
+                            if (auth()->check()) {
+                                $totalCart = App\Models\Cart::where('user_id', $userId)->count();
+                            } else {
+                               $totalCart = App\Models\Cart::where('session_id', $sessionId)->count();
+                            }
+                        @endphp
                     <li class="cart">
                         <a href="{{ route('cart.cart') }}" class="cart-icon">
                             <i class="las la-shopping-cart"></i>
                         </a>
-                        <span class="cart-count">0</span>
+                        <span class="cart-count">{{ $totalCart }}</span>
                     </li>
                     @if (gs('multi_language'))
                         @php

@@ -1,78 +1,5 @@
 (function ($) {
   ("use strict");
-
-  /*========= swiper slider js =========*/
-
-  var swiper = new Swiper(".mySwiper", {
-    slidesPerView: 1,
-    spaceBetween: 20,
-    pagination: {
-      el: ".swiper-pagination",
-      type: "fraction",
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-    breakpoints: {
-      460: {
-        slidesPerView: 2,
-        spaceBetween: 20,
-      },
-      767: {
-        slidesPerView: 3,
-        spaceBetween: 20,
-      },
-      1399: {
-        slidesPerView: 4,
-        spaceBetween: 20,
-      },
-    },
-
-  });
-
-  /*================ swiper slider js end here ================*/
-
-  // ========================= testimonial Slider Js Start ==============
-  $(".testimonial-slider").slick({
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    Infinity: true,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    speed: 1500,
-    dots: false,
-    pauseOnHover: true,
-    arrows: true,
-    prevArrow:
-      '<button type="button" class="slick-prev"><i class="las la-angle-left"></i></button>',
-    nextArrow:
-      '<button type="button" class="slick-next"><i class="las la-angle-right"></i></button>',
-    responsive: [
-      {
-        breakpoint: 1199,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 991,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 767,
-        settings: {
-          arrows: false,
-          slidesToShow: 1,
-          dots: true,
-        },
-      },
-    ],
-  });
-  // ========================= testimonial Slider Js End ===================
-
   // ==========================================
   //      Start Document Ready function
   // ==========================================
@@ -87,10 +14,6 @@
       $('.sidebar-overlay').removeClass('show');
     });
     // ========================== category menu sidebar Bar Js End =====================
-
-    // ========================== cart sidebar Bar Js Start =====================
-
-    // ========================== cart sidebar Bar Js End =====================
 
     // ========================== Small Device Header Menu On Click Dropdown menu collapse Stop Js Start =====================
     $(".dropdown-item").on("click", function () {
@@ -142,60 +65,6 @@
     });
     // =============== Password Show Hide Js End =================
 
-    // ========================= Slick Slider Js Start ==============
-    $(".banner-slider").slick({
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 1000,
-      speed: 1000,
-      dots: false,
-      pauseOnHover: true,
-      arrows: false,
-    });
-    // ========================= Slick Slider Js End ===================
-
-    // ========================= product category Slider Js Start ===============
-    $('.product-slider').slick({
-      slidesToShow: 4,
-      slidesToScroll: 1,
-      autoplaySpeed: 1000,
-      pauseOnHover: true,
-      speed: 1000,
-      dots: false,
-      arrows: true,
-      prevArrow: '<button type="button" class="slick-prev"><i class="las la-angle-left"></i></button>',
-      nextArrow: '<button type="button" class="slick-next"><i class="las la-angle-right"></i></button>',
-      responsive: [
-        {
-          breakpoint: 1199,
-          settings: {
-            slidesToShow: 3,
-          }
-        },
-
-        {
-          breakpoint: 767,
-          settings: {
-            slidesToShow: 2
-          }
-        },
-        {
-          breakpoint: 375,
-          settings: {
-            slidesToShow: 1
-          }
-        }
-      ]
-    });
-    // ========================= product category Slider Js End ===================
-    // magnific popup js start here 
-    var videoItem = $(".play-button");
-    if (videoItem) {
-      videoItem.magnificPopup({
-        type: "iframe",
-      });
-    };
     // ================== Sidebar Menu Js Start ===============
     $(".has-dropdown > a").click(function () {
       $(".sidebar-submenu").slideUp(200);
@@ -258,65 +127,7 @@
     // qty js end here 
   });
   //============== product details slider js start here ==============
-  $('.product-details__wrapper').slick({
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    dots: false,
-    fade: true,
-    asNavFor: '.product-details__gallery',
-    prevArrow: '<button type="button" class="slick-prev gig-details-thumb-arrow"><i class="las la-long-arrow-alt-left"></i></button>',
-    nextArrow: '<button type="button" class="slick-next gig-details-thumb-arrow"><i class="las la-long-arrow-alt-right"></i></button>',
-  });
 
-  $('.product-details__gallery').slick({
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    asNavFor: '.product-details__wrapper',
-    dots: false,
-    arrows: false,
-
-    focusOnSelect: true,
-    prevArrow: '<button type="button" class="slick-prev gig-details-arrow"><i class="las la-long-arrow-alt-left"></i></button>',
-    nextArrow: '<button type="button" class="slick-next gig-details-arrow"><i class="las la-long-arrow-alt-right"></i></button>',
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1
-        }
-      },
-      {
-        breakpoint: 991,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1
-        }
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1
-        }
-      },
-      {
-        breakpoint: 676,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1
-        }
-      },
-      {
-        breakpoint: 460,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1
-        }
-      },
-    ]
-  });
 
   //============== product details slider js end here ==============
 

@@ -56,6 +56,11 @@
                             </tbody>
                         </table>
                     </div>
+                    @if($orders->hasPages())
+                        <div class="card-footer">
+                            {{ paginateLinks($orders) }}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

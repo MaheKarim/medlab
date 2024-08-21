@@ -89,4 +89,76 @@
         </div>
     </section>
 @endsection
+@push('script')
+    <script>
+        $('.product-details__wrapper').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: false,
+            fade: true,
+            asNavFor: '.product-details__gallery',
+            prevArrow: '<button type="button" class="slick-prev gig-details-thumb-arrow"><i class="las la-long-arrow-alt-left"></i></button>',
+            nextArrow: '<button type="button" class="slick-next gig-details-thumb-arrow"><i class="las la-long-arrow-alt-right"></i></button>',
+        });
 
+        $('.product-details__gallery').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            asNavFor: '.product-details__wrapper',
+            dots: false,
+            arrows: false,
+
+            focusOnSelect: true,
+            prevArrow: '<button type="button" class="slick-prev gig-details-arrow"><i class="las la-long-arrow-alt-left"></i></button>',
+            nextArrow: '<button type="button" class="slick-next gig-details-arrow"><i class="las la-long-arrow-alt-right"></i></button>',
+            responsive: [
+                {
+                    breakpoint: 1200,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 991,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 676,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 460,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+            ]
+        });
+    </script>
+@endpush
+@push('style-lib')
+    <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/slick.css')}}">
+    <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/swiper.css')}}">
+@endpush
+@push('script-lib')
+    <script src="{{ asset($activeTemplateTrue . 'js/slick.min.js') }}"></script>
+    <script src="{{ asset($activeTemplateTrue . 'js/magnific-popup.js') }}"></script>
+    <script src="{{ asset($activeTemplateTrue . 'js/swiper.js') }}"></script>
+@endpush

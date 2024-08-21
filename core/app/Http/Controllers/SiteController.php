@@ -187,7 +187,7 @@ class SiteController extends Controller
     public function categoryProduct($slug)
     {
         $category = Category::where('slug', $slug)->firstOrFail();
-        $products = $category->products()->paginate(getPaginate());
+        $products = $category->products()->active()->paginate(getPaginate());
         $pageTitle = $category->name;
         $seoContents = $category->seo_content;
         $seoImage = @$seoContents->image ? frontendImage('category', $seoContents->image, getFileSize('seo'), true) : null;
@@ -207,6 +207,9 @@ class SiteController extends Controller
     {
         $pageTitle = 'Search';
         $search = $request->search;
+        if (!$search) {
+            return to_route('home');
+        }
         $products = Product::where('name', 'like', '%'.$search .'%')->active()->paginate(getPaginate());
         return view('Template::search', compact('pageTitle', 'products'));
     }

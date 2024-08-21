@@ -22,3 +22,40 @@
         @endforeach
     </div>
 </div>
+
+@push('script')
+    <script>
+    $('.product-slider').slick({
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      autoplaySpeed: 1000,
+      pauseOnHover: true,
+      speed: 1000,
+      dots: false,
+      arrows: true,
+      prevArrow: '<button type="button" class="slick-prev"><i class="las la-angle-left"></i></button>',
+      nextArrow: '<button type="button" class="slick-next"><i class="las la-angle-right"></i></button>',
+      responsive: [
+        {
+          breakpoint: 1199,
+          settings: {
+            slidesToShow: 3,
+          }
+        },
+
+        {
+          breakpoint: 767,
+          settings: {
+            slidesToShow: 2
+          }
+        },
+        {
+          breakpoint: 375,
+          settings: {
+            slidesToShow: 1
+          }
+        }
+      ]
+    });
+    </script>
+@endpush
