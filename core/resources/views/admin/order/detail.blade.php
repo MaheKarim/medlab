@@ -10,7 +10,10 @@
                             <img src="{{ getImage(getFilePath('userProfile') . '/' . @$order->user->image, getFileSize('userProfile')) }}" alt="@lang('Profile Image')" class="b-radius--10">
                         </div>
                         <div class="mt-15">
-                            <h4>{{ @$order->user->fullname }}</h4>
+                            <h4>
+                                <a href="{{ route('admin.users.detail', $order->user->id) }}"
+                                   class="text--primary">{{ @$order->user->fullname }}</a>
+                            </h4>
                             <p>{{ @$order->user->email }}</p>
                             <span class="text--small">@lang('Joined At')
                                 <strong>{{ showDateTime(@$order->user->created_at, 'd M, Y h:i A') }}</strong>

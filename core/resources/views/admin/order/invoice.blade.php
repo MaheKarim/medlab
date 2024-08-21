@@ -347,7 +347,7 @@
             <div class="col-12">
                 <div class="list--row">
                     <div class="logo float-left">
-                        <img src="{{ getImage(getFilePath('logoIcon') .'/logo.png') }}" alt="image" class="logo-img" />
+                        <img src="{{ siteLogo('dark') }}" alt="Logo" class="logo-img" />
                     </div>
                     <h4 class="m-0 float-right">@lang('Invoice')</h4>
                 </div>
@@ -401,7 +401,7 @@
                             <li>
                                 <div class="list list--row" style="--gap: 0.5rem">
                                     <span class="strong">@lang('Country :')</span>
-                                    <span>{{ __(@$address->country_name) }}</span>
+                                    <span>{{ __($order->user->country_name) }}</span>
                                 </div>
                             </li>
                             <li>

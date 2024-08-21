@@ -1,8 +1,5 @@
 @extends('admin.layouts.app')
 @section('panel')
-<div class="text-end mb-2 position-absolute top-0 end-0">
-    <x-back route="{{ route('admin.product.index') }}"/>
-</div>
     <div class="row">
         <div class="col-md-12">
             <form action="{{ route('admin.product.store', $product->id) }}" method="post" enctype="multipart/form-data">
@@ -134,6 +131,10 @@
         </div>
     </div>
 @endsection
+
+@push('breadcrumb-plugins')
+    <x-back route="{{ route('admin.product.index') }}" />
+@endpush
 
 @push('script-lib')
     <script src="{{ asset('assets/admin/js/image-uploader.min.js') }}"></script>

@@ -34,7 +34,7 @@
                     </li>
                     @if (@$order->deposit->trx)
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            @lang('Payment Trx')
+                            @lang('Payment TRX')
                             <span class="fw-bold">{{ @$order->deposit->trx }}</span>
                         </li>
                     @endif
@@ -70,7 +70,7 @@
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         @lang('Country / State')
                         <span class="fw-bold">
-                            {{ __(@$address->country) }} / {{ __(@$address->state) }}
+                            {{ __(@$order->user->country_name) }} / {{ __(@$address->state) }}
                         </span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
