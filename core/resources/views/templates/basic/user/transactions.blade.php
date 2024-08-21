@@ -55,9 +55,7 @@
                                         </td>
 
                                         <td>
-                                            <span class="fw-bold @if($trx->trx_type == '+')text--success @else text--danger @endif">
-                                                {{ $trx->trx_type }} {{showAmount($trx->amount)}}
-                                            </span>
+                                            {{showAmount($trx->amount)}}
                                         </td>
                                     <td>{{ __($trx->details) }}</td>
                                 </tr>

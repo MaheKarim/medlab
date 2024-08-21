@@ -18,6 +18,17 @@ Route::controller('TicketController')->prefix('ticket')->name('ticket.')->group(
 });
 
 
+
+// Cart Category
+Route::controller('CartController')->prefix('cart')->name('cart.')->group(function () {
+    Route::get('/view', 'cart')->name('cart');
+    Route::post('add-to-cart', 'addToCart')->name('add');
+    Route::get('get-cart-total', 'getCartTotal')->name('getCartTotal');
+    Route::post('remove', 'remove')->name('remove');
+    Route::post('update', 'update')->name('update');
+});
+
+
 Route::controller('SiteController')->group(function () {
     Route::get('/contact', 'contact')->name('contact');
 
@@ -38,27 +49,14 @@ Route::controller('SiteController')->group(function () {
     Route::get('placeholder-image/{size}', 'placeholderImage')->withoutMiddleware('maintenance')->name('placeholder.image');
 
     Route::get('maintenance-mode','maintenance')->withoutMiddleware('maintenance')->name('maintenance');
+    Route::get('/category/{slug}', 'categoryProduct')->name('category.products');
+    Route::get('all/categories', 'categories')->name('all.category');
+    Route::get('/product/{id}', 'productDetails')->name('product.details');
+    Route::get('all/search', 'search')->name('search');
 
     Route::get('/{slug}', 'pages')->name('pages');
 
     Route::get('/', 'index')->name('home');
 
     // Product Category
-    Route::get('/category/{slug}', 'categoryProduct')->name('category.products');
-
-    Route::get('all/categories', 'categories')->name('all.category');
-
-    Route::get('/product/{id}', 'productDetails')->name('product.details');
-
-    // Search
-    Route::get('all/search', 'search')->name('search');
-});
-
-// Cart Category
-Route::controller('CartController')->prefix('cart')->name('cart.')->group(function () {
-        Route::get('/view', 'cart')->name('cart');
-        Route::post('add-to-cart', 'addToCart')->name('add');
-        Route::get('get-cart-total', 'getCartTotal')->name('getCartTotal');
-        Route::post('remove', 'remove')->name('remove');
-        Route::post('update', 'update')->name('update');
 });

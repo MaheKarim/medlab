@@ -78,7 +78,7 @@
                                     <i class="fas fa-phone"></i>
                                 </div>
                                 <div class="footer-contact-menu__item-content">
-                                    <p>{{ __(@$contactUsContent->data_values->contact_number) }}</p>
+                                    <p>{{@$contactUsContent->data_values->contact_number }}</p>
                                 </div>
                             </li>
                             <li class="footer-contact-menu__item">
@@ -86,7 +86,7 @@
                                     <i class="fas fa-envelope"></i>
                                 </div>
                                 <div class="footer-contact-menu__item-content">
-                                    <p>{{ __(@$contactUsContent->data_values->email_address) }}</p>
+                                    <p>{{ @$contactUsContent->data_values->email_address }}</p>
                                 </div>
                             </li>
                         </ul>
@@ -107,9 +107,7 @@
             </div>
         </div>
     </div>
-    <!-- Footer Top End-->
 
-    <!-- bottom Footer -->
     <div class="bottom-footer py-3">
         <div class="container">
             <div class="row gy-3">

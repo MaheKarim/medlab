@@ -5,19 +5,24 @@
             <form action="{{ route('search') }}" autocomplete="off" class="search-box-wrapper">
                 <button type="button" class="search-icon  d-block d-lg-none"><i class="las la-search"></i></button>
                 <div class="search-field">
-                    <input type="text" class="form--control" name="search"  placeholder="Search to buy...">
-                    <button type="submit" class="btn btn--base btn--sm">@lang('Search') <span class="icon"><i class="las la-search"></i></span></button>
+                    <input type="text" class="form--control" name="search" placeholder="Search to buy...">
+                    <button type="submit" class="btn btn--base btn--sm">@lang('Search') <span class="icon"><i
+                                class="las la-search"></i></span></button>
                 </div>
             </form>
             <div class="header__button ms-auto">
                 <ul class="login-registration-list d-flex flex-wrap align-items-center">
-                    @if(auth()->user())
+                    @if (auth()->user())
                         <li class="login-registration-list__item">
-                            <a href="{{ route('user.home') }}" class="login-registration-list__link"> <span class="icon"><i class="las la-home"></i> </span> <span class="d-lg-block d-none">Dashboard </span></a>
+                            <a href="{{ route('user.home') }}" class="login-registration-list__link"> <span
+                                    class="icon"><i class="las la-home"></i> </span> <span
+                                    class="d-lg-block d-none">@lang('Dashboard')</span></a>
                         </li>
-                        @else
+                    @else
                         <li class="login-registration-list__item">
-                            <a href="{{ route('user.login') }}" class="login-registration-list__link"> <span class="icon"><i class="las la-user-circle"></i> </span> <span class="d-lg-block d-none">Login </span></a>
+                            <a href="{{ route('user.login') }}" class="login-registration-list__link"> <span
+                                    class="icon"><i class="las la-user-circle"></i> </span> <span
+                                    class="d-lg-block d-none">@lang('Login')</span></a>
                         </li>
                     @endif
 
@@ -27,33 +32,33 @@
                         </a>
                         <span class="cart-count">0</span>
                     </li>
-                        @if (gs('multi_language'))
-                            @php
-                                $language = App\Models\Language::all();
-                                $selectedLang = $language->where('code', session('lang'))->first();
-                            @endphp
-                            <div class="dropdown-lang dropdown mt-0 d-block">
-                                <a href="#" class="language-btn dropdown-toggle" data-bs-toggle="dropdown"
-                                   aria-expanded="false">
-                                    <img class="flag"
-                                         src="{{ getImage(getFilePath('language') . '/' . @$selectedLang->image, getFileSize('language')) }}"
-                                         alt="us">
-                                    <span class="language-text text-white">{{ @$selectedLang->name }}</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    @foreach ($language as $lang)
-                                        <li>
-                                            <a href="{{ route('lang', $lang->code) }}">
-                                                <img class="flag"
-                                                     src="{{ getImage(getFilePath('language') . '/' . @$lang->image, getFileSize('language')) }}"
-                                                     alt="@lang('image')">
-                                                {{ @$lang->name }}
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+                    @if (gs('multi_language'))
+                        @php
+                            $language = App\Models\Language::all();
+                            $selectedLang = $language->where('code', session('lang'))->first();
+                        @endphp
+                        <div class="dropdown-lang dropdown mt-0 d-block">
+                            <a href="#" class="language-btn dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <img class="flag"
+                                    src="{{ getImage(getFilePath('language') . '/' . @$selectedLang->image, getFileSize('language')) }}"
+                                    alt="us">
+                                <span class="language-text text-white">{{ @$selectedLang->name }}</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                @foreach ($language as $lang)
+                                    <li>
+                                        <a href="{{ route('lang', $lang->code) }}">
+                                            <img class="flag"
+                                                src="{{ getImage(getFilePath('language') . '/' . @$lang->image, getFileSize('language')) }}"
+                                                alt="@lang('image')">
+                                            {{ @$lang->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 </ul>
             </div>
         </nav>

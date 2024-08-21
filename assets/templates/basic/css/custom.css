@@ -331,6 +331,10 @@
   border-radius: .375rem !important;
 }
 
+.select2-container, .selection{
+  width: 100% !important;
+}
+
 .gateway-card {
   padding: 15px;
 }

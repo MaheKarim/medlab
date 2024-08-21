@@ -14,9 +14,6 @@ use App\Models\SupportTicket;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Crypt;
-
-
 class SiteController extends Controller
 {
     public function index()

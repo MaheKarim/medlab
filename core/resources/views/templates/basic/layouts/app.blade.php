@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}" itemscope itemtype="http://schema.org/WebPage">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,7 +38,6 @@
 @php echo loadExtension('google-analytics') @endphp
 
 <body>
-<!--==================== Preloader Start ====================-->
 <div class="preloader-wrapper">
     <div class="preloader">
         <div class="wrapper">
@@ -64,19 +62,11 @@
         </div>
     </div>
 </div>
-<!--==================== Preloader End ====================-->
-<!--==================== Overlay Start ====================-->
 <div class="body-overlay"></div>
-<!--==================== Overlay End ====================-->
 
-<!--==================== Sidebar Overlay End ====================-->
 <div class="sidebar-overlay"></div>
-<!--==================== Sidebar Overlay End ====================-->
 
-<!-- ==================== Scroll to Top End Here ==================== -->
 <a class="scroll-top"><i class="fas fa-angle-double-up"></i></a>
-<!-- ==================== Scroll to Top End Here ==================== -->
-<!-- ==================== Header Start Here ==================== -->
 @stack('fbComment')
 
 @yield('app')
@@ -101,7 +91,6 @@
 <!-- Jquery js -->
 <script src="{{ asset('assets/global/js/jquery-3.7.1.min.js')}}"></script>
 <script src="{{ asset('assets/global/js/bootstrap.bundle.min.js')}}"></script>
-{{--<script src="{{ asset('assets/global/js/select2.min.js')}}"></script>--}}
 
 @stack('script-lib')
 @php echo loadExtension('tawk-chat') @endphp

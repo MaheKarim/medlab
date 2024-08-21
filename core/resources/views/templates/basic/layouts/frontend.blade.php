@@ -1,15 +1,8 @@
 @extends($activeTemplate . 'layouts.app')
-
 @section('app')
-    @include($activeTemplate. 'partials.header')
-    <!-- ==================== Header End Here ==================== -->
+    @include($activeTemplate . 'partials.header')
     <main>
-        <!--========================== main Section Start ==========================-->
-                        @yield('content')
-        <!--========================== main Section End ==========================-->
+        @yield('content')
     </main>
-    <!-- Footer -->
-    <!-- ==================== Footer Start Here ==================== -->
-    @include($activeTemplate.'partials.footer')
-    <!-- ==================== Footer End Here ==================== -->
+    @include($activeTemplate . 'partials.footer')
 @endsection
