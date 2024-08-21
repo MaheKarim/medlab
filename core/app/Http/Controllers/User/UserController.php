@@ -16,10 +16,16 @@ class UserController extends Controller
     public function home()
     {
         $pageTitle = 'Dashboard';
-        $orders = Order::where('user_id', auth()->user()->id)
-            ->with(['orderDetail','orderDetail.product', 'user'])->orderBy('id', 'desc')->paginate(getPaginate());
+        $userId               = auth()->user()->id;
+        $orders             = Order::where('user_id', $userId)->latest()->take(5)->with(['orderDetail'])->get();
+        $singleOrder['total']     = Order::where('user_id', $userId)->count();
+        $singleOrder['pending']   = Order::pending()->where('user_id', $userId)->count();
+        $singleOrder['confirmed'] = Order::confirmed()->where('user_id', $userId)->count();
+        $singleOrder['shipped']   = Order::shipped()->where('user_id', $userId)->count();
+        $singleOrder['delivered'] = Order::delivered()->where('user_id', $userId)->count();
+        $singleOrder['cancelled'] = Order::cancel()->where('user_id', $userId)->count();
 
-        return view('Template::user.dashboard', compact('pageTitle', 'orders'));
+        return view('Template::user.dashboard', compact('pageTitle', 'orders', 'singleOrder'));
     }
 
     public function depositHistory(Request $request)
@@ -167,7 +173,7 @@ class UserController extends Controller
     public function downloadInvoice($id)
     {
         $pageTitle = 'Print Invoice';
-        $order     = Order::where('id', $id)->where('user_id', auth()->user()->id)->with(['orderDetail.product', 'deposit', 'user', 'orderDetail'])->firstOrFail();
+        $order     = Order::where('id', $id)->where('user_id', auth()->user()->id)->with(['user', 'orderDetail'])->firstOrFail();
         return view('Template::user.invoice', compact('order', 'pageTitle'));
     }
 

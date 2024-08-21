@@ -7,7 +7,8 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
                             <h5 class="card-title ">@lang('Order detail of') {{ $order->order_no }}</h5>
-                            <a href="{{ route('user.download.invoice',$order->id) }}" class="btn btn-outline--primary " target="_blank">
+                            <a href="{{ route('user.download.invoice',$order->id) }}" class="btn btn-outline--primary "
+                               target="_blank">
                                 <i class="las la-print"></i>
                                 @lang('Print Invoice')
                             </a>
@@ -33,7 +34,8 @@
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
                                             @lang('Payment')
                                             @if ($order->payment_type == Status::PAYMENT_ONLINE)
-                                                <span class="fw-bold">{{ __(@$order->deposit->gateway->name) }} @lang('payment gateway')</span>
+                                                <span
+                                                    class="fw-bold">{{ __(@$order->deposit->gateway->name) }} @lang('payment gateway')</span>
                                             @else
                                                 <span class="fw-bold">@lang('Cash on delivery')</span>
                                             @endif
@@ -76,14 +78,14 @@
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
                                             @lang('Country / State')
                                             <span class="fw-bold">
-                                            {{ __(@$address->country) }} / {{ __(@$address->state) }}
+                                            {{ __(@$order->user->country_name) }} / {{ __(@$address->state) }}
                                             </span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
                                             @lang('City / Zip')
                                             <span class="fw-bold">
-                            {{ __(@$address->city) }} / {{ __(@$address->zip) }}
-                        </span>
+                                                 {{ __(@$address->city) }} / {{ __(@$address->zip) }}
+                                            </span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
                                             @lang('Order Date')
@@ -116,18 +118,6 @@
                                                 <a href="{{ route('admin.product.edit', $detail->product->id) }}">
                                                     {{ __(strLimit($detail->product->name, 20)) }}
                                                 </a>
-
-                                                @if ($detail->product->file)
-                                                    (<a href="{{ route('download', [$detail->product->id, $detail->product->file]) }}" class="mr-3 text--primary">
-                                                        <i class="las la-arrow-circle-down"></i>@lang('Download File')
-                                                    </a>)
-                                                @elseif ($detail->product->link)
-                                                    (<span>
-                                        <a href="{{ $detail->product->link }}" target="_blank" class="mr-3 text--primary">
-                                            <i class="las la-external-link-alt"></i> @lang('Visit URL')
-                                        </a>
-                                    </span>)
-                                                @endif
                                             </td>
                                             <td>
                                                 <strong>{{ $detail->quantity }}</strong>
@@ -143,22 +133,29 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td class="text-muted text-center" colspan="100%">{{ __($emptyMessage) }}</td>
+                                            <td class="text-muted text-center"
+                                                colspan="100%">{{ __($emptyMessage) }}</td>
                                         </tr>
                                     @endforelse
                                     </tbody>
                                     <tfoot>
                                     <tr>
                                         <td colspan="3"></td>
-                                        <td><span>@lang('Subtotal :')</span><strong> {{ showAmount($order->subtotal) }} </strong></td>
+                                        <td>
+                                            <span>@lang('Subtotal :')</span><strong> {{ showAmount($order->subtotal) }} </strong>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td colspan="3"></td>
-                                        <td><span>@lang('Shipping Charge :')</span><strong> {{ showAmount($order->shipping_charge) }} </strong></td>
+                                        <td>
+                                            <span>@lang('Shipping Charge :')</span><strong> {{ showAmount($order->shipping_charge) }} </strong>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td colspan="3"></td>
-                                        <td><span>@lang('Total :')</span><strong> {{ showAmount($order->total) }}</strong></td>
+                                        <td>
+                                            <span>@lang('Total :')</span><strong> {{ showAmount($order->total) }}</strong>
+                                        </td>
                                     </tr>
                                     </tfoot>
                                 </table>

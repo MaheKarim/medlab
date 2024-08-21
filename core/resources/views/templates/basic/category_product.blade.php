@@ -43,7 +43,7 @@
                                             @else
                                                 @lang('%')
                                             @endif
-                                            Off
+                                            @lang('Off')
                                         </span>
                                     @endif
                                 </div>
@@ -53,9 +53,7 @@
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
                                     <li class="page-item">
-                                        @if($products->hasPages())
-                                            {{ $products->links() }}
-                                        @endif
+                                     {{ paginateLinks($products) }}
                                     </li>
                                 </ul>
                             </nav>

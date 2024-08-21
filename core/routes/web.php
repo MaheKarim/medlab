@@ -17,8 +17,6 @@ Route::controller('TicketController')->prefix('ticket')->name('ticket.')->group(
     Route::get('download/{attachment_id}', 'ticketDownload')->name('download');
 });
 
-
-
 // Cart Category
 Route::controller('CartController')->prefix('cart')->name('cart.')->group(function () {
     Route::get('/view', 'cart')->name('cart');
@@ -57,6 +55,4 @@ Route::controller('SiteController')->group(function () {
     Route::get('/{slug}', 'pages')->name('pages');
 
     Route::get('/', 'index')->name('home');
-
-    // Product Category
 });

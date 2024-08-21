@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Constants\Status;
 use App\Http\Controllers\Controller;
-use App\Models\Brand;
 use App\Models\ShippingMethod;
 use Illuminate\Http\Request;
 

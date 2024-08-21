@@ -58,8 +58,6 @@ class FrontendController extends Controller
         return view('admin.frontend.seo', compact('pageTitle', 'seo'));
     }
 
-
-
     public function frontendSections($key)
     {
         $section = @getPageSections()->$key;
@@ -69,9 +67,6 @@ class FrontendController extends Controller
         $pageTitle = $section->name ;
         return view('admin.frontend.section', compact('section', 'content', 'elements', 'key', 'pageTitle'));
     }
-
-
-
 
     public function frontendContent(Request $request, $key)
     {
@@ -172,8 +167,6 @@ class FrontendController extends Controller
         return back()->withNotify($notify);
     }
 
-
-
     public function frontendElement($key, $id = null)
     {
         $section = @getPageSections()->$key;
@@ -191,7 +184,6 @@ class FrontendController extends Controller
         return view('admin.frontend.element', compact('section', 'key', 'pageTitle'));
     }
 
-
     public function frontendElementSlugCheck($key,$id = null){
         $content = Frontend::where('data_keys', $key . '.element')->where('tempname', activeTemplateName())->where('slug',request()->slug);
         if ($id) {
@@ -202,7 +194,6 @@ class FrontendController extends Controller
             'exists'=>$exist
         ]);
     }
-
 
     public function frontendSeo($key,$id)
     {
@@ -248,7 +239,6 @@ class FrontendController extends Controller
 
     }
 
-
     protected function storeImage($imgJson,$type,$key,$image,$imgKey,$oldImage = null)
     {
         $path = 'assets/images/frontend/' . $key;
@@ -285,6 +275,5 @@ class FrontendController extends Controller
         $notify[] = ['success', 'Content removed successfully'];
         return back()->withNotify($notify);
     }
-
 
 }

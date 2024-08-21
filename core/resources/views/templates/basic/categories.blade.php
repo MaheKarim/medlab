@@ -7,7 +7,6 @@
                     @include($activeTemplate. 'partials.sidebar')
                 </div>
                 <div class="col-xl-9 col-lg-8">
-                    <!-- All Categories -->
                     <div class="product-category-wrapper">
                         <h6 class="title"> @lang('All Categories') </h6>
                         <div class="row gy-4">
@@ -27,7 +26,6 @@
                             @endforeach
                         </div>
                     </div>
-                    <!-- All Categories End -->
                 </div>
             </div>
         </div>

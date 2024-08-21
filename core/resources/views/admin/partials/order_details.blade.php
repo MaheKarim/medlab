@@ -110,19 +110,8 @@
                             <a href="{{ route('admin.product.edit', $detail->product->id) }}">
                                 {{ __(strLimit($detail->product->name, 20)) }}
                             </a>
-
-                            @if ($detail->product->file)
-                                (<a href="{{ route('download', [$detail->product->id, $detail->product->file]) }}" class="mr-3 text--primary">
-                                    <i class="las la-arrow-circle-down"></i>@lang('Download File')
-                                </a>)
-                            @elseif ($detail->product->link)
-                                (<span>
-                                        <a href="{{ $detail->product->link }}" target="_blank" class="mr-3 text--primary">
-                                            <i class="las la-external-link-alt"></i> @lang('Visit URL')
-                                        </a>
-                                    </span>)
-                            @endif
                         </td>
+
                         <td>
                             <strong>{{ $detail->quantity }}</strong>
                         </td>

@@ -69,9 +69,9 @@
                         </div>
                     </div>
                     @if($transactions->hasPages())
-                    <div class="card-footer">
-                        {{ paginateLinks($transactions) }}
-                    </div>
+                        <div class="card-footer">
+                            {{ paginateLinks($transactions) }}
+                        </div>
                     @endif
                 </div>
             </div>

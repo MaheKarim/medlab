@@ -52,7 +52,6 @@ class ManageUsersController extends Controller
         return view('admin.users.list', compact('pageTitle', 'users'));
     }
 
-
     public function mobileUnverifiedUsers()
     {
         $pageTitle = 'Mobile Unverified Users';
@@ -60,14 +59,12 @@ class ManageUsersController extends Controller
         return view('admin.users.list', compact('pageTitle', 'users'));
     }
 
-
     public function mobileVerifiedUsers()
     {
         $pageTitle = 'Mobile Verified Users';
         $users = $this->userData('mobileVerified');
         return view('admin.users.list', compact('pageTitle', 'users'));
     }
-
 
     protected function userData($scope = null){
         if ($scope) {
@@ -77,7 +74,6 @@ class ManageUsersController extends Controller
         }
         return $users->searchable(['username','email'])->orderBy('id','desc')->paginate(getPaginate());
     }
-
 
     public function detail($id)
     {
@@ -105,7 +101,6 @@ class ManageUsersController extends Controller
 
         return view('admin.users.detail', compact('pageTitle', 'user','totalDeposit','totalTransaction','countries', 'order'));
     }
-
 
     public function update(Request $request, $id)
     {

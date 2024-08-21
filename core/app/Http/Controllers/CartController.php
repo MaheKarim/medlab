@@ -154,7 +154,6 @@ class CartController extends Controller
             $cart = Cart::where('user_id', $userId)->where('product_id', $request->product_id)->first();
             $cart->delete();
         } else {
-            // Get session id
             $sessionId = session()->get('session_id');
 
             if ($sessionId == null) {
