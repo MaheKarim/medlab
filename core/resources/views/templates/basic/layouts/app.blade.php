@@ -105,6 +105,23 @@
             $('.cookies-card').removeClass('hide')
         }, 2000);
 
+        var inputElements = $('[type=text],select,textarea');
+        $.each(inputElements, function (index, element) {
+            element = $(element);
+            element.closest('.form-group').find('label').attr('for',element.attr('name'));
+            element.attr('id',element.attr('name'))
+        });
+
+        $.each($('input, select, textarea'), function (i, element) {
+            var elementType = $(element);
+            if(elementType.attr('type') != 'checkbox'){
+                if (element.hasAttribute('required')) {
+                    $(element).closest('.form-group').find('label').addClass('required');
+                }
+            }
+
+        });
+
         let disableSubmission = false;
         $('.disableSubmission').on('submit',function(e){
             if (disableSubmission) {
