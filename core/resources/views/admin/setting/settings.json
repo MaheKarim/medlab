@@ -1,6 +1,6 @@
 {
     "general_setting": {
-        "keyword": ["general", "fundamental", "site information", "site", "website settings", "basic settings", "global settings","site color","timezone","site currency","pagination","currency format","site title","base color","secondary color","paginate"],
+        "keyword": ["general", "fundamental", "site information", "site", "website settings", "basic settings", "global settings","site color","timezone","site currency","pagination","currency format","site title","base color","paginate"],
         "title": "General Setting",
         "subtitle": "Configure the fundamental information of the site.",
         "icon": "las la-cog",
@@ -14,7 +14,7 @@
         "route_name": "admin.setting.logo.icon"
     },
     "system_configuration": {
-        "keyword": ["basic modules", "control", "modules", "system", "configuration settings", "system control","force ssl","force secure password","kyc control","email control","sms control","verification control","push notification control","language control","mobile verification","email verification","in app payment"],
+        "keyword": ["basic modules", "control", "modules", "system", "configuration settings", "system control","force ssl","force secure password","email control","sms control","verification control","push notification control","language control","mobile verification","email verification"],
         "title": "System Configuration",
         "subtitle": "Control all of the basic modules of the system.",
         "icon": "las la-cogs",
@@ -28,7 +28,7 @@
         "route_name": "admin.setting.notification.global.email"
     },
     "payment_gateways": {
-        "keyword": ["automatic", "manual", "configure payment gateways","aamarpay","amarpay","authorize","autorize.net","btcpay","btc pay","binance","blockchain","cashmaal","checkout","coinbase commerce","coingate","coinpayments","flutterwave","instamojo","mercado pago","mollie","nmi","now payments","nowpayments","payeer","paypal","paystack","paytm","perfect money","perfectmoney","razorpay","skrill","sslcommerz","stripe","twocheckout","two checkout","2checkout"],
+        "keyword": ["automatic", "manual", "configure payment gateways","aamarpay","amarpay","authorize","autorize.net","btcpay","btc pay","binance","blockchain","cashmaal","checkout","coinbase commerce","coingate","coinpayments","flutterwave","instamojo","mercado pago","mollie","nmi","now payments","nowpayments","payeer","paypal","paystack","paytm","perfect money","perfectmoney","razorpay","skrill","sslcommerz","stripe","twocheckout","two checkout","2checkout", "sslcommerz", "aamarpay"],
         "title": "Payment Gateways",
         "subtitle": "Configure automatic or manual payment gateways to accept payment from users.",
         "icon": "las la-credit-card",
