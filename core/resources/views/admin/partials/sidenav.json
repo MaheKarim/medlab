@@ -26,6 +26,96 @@
         "route_name": "admin.dashboard",
         "menu_active": "admin.dashboard"
     },
+    "manage_users": {
+        "title": "Manage Users",
+        "icon": "las la-users",
+        "counters": [
+            "bannedUsersCount",
+            "emailUnverifiedUsersCount",
+            "mobileUnverifiedUsersCount"
+        ],
+        "menu_active": "admin.users*",
+        "submenu": [
+            {
+                "keyword": [
+                    "active users",
+                    "Manage Users",
+                    "User management",
+                    "User control",
+                    "User status",
+                    "User activity",
+                    "User analytics"
+                ],
+                "title": "Active Users",
+                "route_name": "admin.users.active",
+                "menu_active": "admin.users.active"
+            },
+            {
+                "keyword": [
+                    "banned users",
+                    "Manage Users",
+                    "User management",
+                    "Account bans",
+                    "User activity"
+                ],
+                "title": "Banned Users",
+                "route_name": "admin.users.banned",
+                "menu_active": "admin.users.banned",
+                "counter": "bannedUsersCount"
+            },
+            {
+                "keyword": [
+                    "email unverified users",
+                    "Manage Users",
+                    "User verification",
+                    "User authentication",
+                    "User management"
+                ],
+                "title": "Email Unverified",
+                "route_name": "admin.users.email.unverified",
+                "menu_active": "admin.users.email.unverified",
+                "counter": "emailUnverifiedUsersCount"
+            },
+            {
+                "keyword": [
+                    "mobile unverified users",
+                    "Manage Users",
+                    "User verification",
+                    "User authentication",
+                    "User management"
+                ],
+                "title": "Mobile Unverified",
+                "route_name": "admin.users.mobile.unverified",
+                "menu_active": "admin.users.mobile.unverified",
+                "counter": "mobileUnverifiedUsersCount"
+            },
+            {
+                "keyword": [
+                    "all users users",
+                    "Manage Users",
+                    "User management",
+                    "User control",
+                    "User activity",
+                    "User analytics"
+                ],
+                "title": "All Users",
+                "route_name": "admin.users.all",
+                "menu_active": "admin.users.all"
+            },
+            {
+                "keyword": [
+                    "send notification users",
+                    "Manage Users",
+                    "User notifications",
+                    "User management",
+                    "User activity"
+                ],
+                "title": "Send Notification",
+                "route_name": "admin.users.notification.all",
+                "menu_active": "admin.users.notification.all"
+            }
+        ]
+    },
     "manage_category": {
         "keyword": [
             "Categories",
@@ -162,96 +252,6 @@
                 "title": "Cancelled Orders",
                 "route_name": "admin.order.cancel",
                 "menu_active": "admin.order.cancel*"
-            }
-        ]
-    },
-    "manage_users": {
-        "title": "Manage Users",
-        "icon": "las la-users",
-        "counters": [
-            "bannedUsersCount",
-            "emailUnverifiedUsersCount",
-            "mobileUnverifiedUsersCount"
-        ],
-        "menu_active": "admin.users*",
-        "submenu": [
-            {
-                "keyword": [
-                    "active users",
-                    "Manage Users",
-                    "User management",
-                    "User control",
-                    "User status",
-                    "User activity",
-                    "User analytics"
-                ],
-                "title": "Active Users",
-                "route_name": "admin.users.active",
-                "menu_active": "admin.users.active"
-            },
-            {
-                "keyword": [
-                    "banned users",
-                    "Manage Users",
-                    "User management",
-                    "Account bans",
-                    "User activity"
-                ],
-                "title": "Banned Users",
-                "route_name": "admin.users.banned",
-                "menu_active": "admin.users.banned",
-                "counter": "bannedUsersCount"
-            },
-            {
-                "keyword": [
-                    "email unverified users",
-                    "Manage Users",
-                    "User verification",
-                    "User authentication",
-                    "User management"
-                ],
-                "title": "Email Unverified",
-                "route_name": "admin.users.email.unverified",
-                "menu_active": "admin.users.email.unverified",
-                "counter": "emailUnverifiedUsersCount"
-            },
-            {
-                "keyword": [
-                    "mobile unverified users",
-                    "Manage Users",
-                    "User verification",
-                    "User authentication",
-                    "User management"
-                ],
-                "title": "Mobile Unverified",
-                "route_name": "admin.users.mobile.unverified",
-                "menu_active": "admin.users.mobile.unverified",
-                "counter": "mobileUnverifiedUsersCount"
-            },
-            {
-                "keyword": [
-                    "all users users",
-                    "Manage Users",
-                    "User management",
-                    "User control",
-                    "User activity",
-                    "User analytics"
-                ],
-                "title": "All Users",
-                "route_name": "admin.users.all",
-                "menu_active": "admin.users.all"
-            },
-            {
-                "keyword": [
-                    "send notification users",
-                    "Manage Users",
-                    "User notifications",
-                    "User management",
-                    "User activity"
-                ],
-                "title": "Send Notification",
-                "route_name": "admin.users.notification.all",
-                "menu_active": "admin.users.notification.all"
             }
         ]
     },

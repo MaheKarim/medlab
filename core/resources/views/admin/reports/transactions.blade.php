@@ -16,14 +16,6 @@
                             <input type="search" name="search" value="{{ request()->search }}" class="form-control">
                         </div>
                         <div class="flex-grow-1">
-                            <label>@lang('Type')</label>
-                            <select name="trx_type" class="form-control select2" data-minimum-results-for-search="-1">
-                                <option value="">@lang('All')</option>
-                                <option value="+" @selected(request()->trx_type == '+')>@lang('Plus')</option>
-                                <option value="-" @selected(request()->trx_type == '-')>@lang('Minus')</option>
-                            </select>
-                        </div>
-                        <div class="flex-grow-1">
                             <label>@lang('Remark')</label>
                             <select class="form-control select2" data-minimum-results-for-search="-1" name="remark">
                                 <option value="">@lang('All')</option>
@@ -74,12 +66,8 @@
                                     </td>
 
                                     <td class="budget">
-                                        <span class="fw-bold @if($trx->trx_type == '+')text--success @else text--danger @endif">
-                                            {{ $trx->trx_type }} {{showAmount($trx->amount)}}
-                                        </span>
+                                          <strong>{{showAmount($trx->amount)}}</strong>
                                     </td>
-
-
                                     <td>{{ __($trx->details) }}</td>
                                 </tr>
                             @empty
@@ -89,7 +77,7 @@
                             @endforelse
 
                     </tbody>
-                </table><!-- table end -->
+                </table>
             </div>
         </div>
         @if($transactions->hasPages())
@@ -97,7 +85,7 @@
             {{ paginateLinks($transactions) }}
         </div>
         @endif
-    </div><!-- card end -->
+    </div>
 </div>
 </div>
 
@@ -140,9 +128,7 @@
                 $(event.target).val(startDate.format('MMMM DD, YYYY') + ' - ' + endDate.format('MMMM DD, YYYY'));
             }
 
-
             $('.date-range').on('apply.daterangepicker', (event, picker) => changeDatePickerText(event, picker.startDate, picker.endDate));
-
 
             if ($('.date-range').val()) {
                 let dateRange = $('.date-range').val().split(' - ');

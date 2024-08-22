@@ -96,7 +96,7 @@
             "address": "text",
             "description": "textarea",
             "date": "text",
-            "icon":"text",
+            "star_rating":"text",
             "images": {
                 "image": {
                     "size": "80x80"

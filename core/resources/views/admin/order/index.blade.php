@@ -13,7 +13,7 @@
                                 <th>@lang('Price')</th>
                                 <th>@lang('Created At')</th>
                                 <th>@lang('Payment Status')</th>
-                                <th>@lang('Status')</th>
+                                <th>@lang('Order Status')</th>
                                 <th>@lang('Action')</th>
                             </tr>
                             </thead>

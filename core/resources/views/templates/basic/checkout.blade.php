@@ -53,25 +53,25 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form--label">@lang('Address')</label>
+                                            <label>@lang('Address')</label>
                                             <input type="text" class="form-control form--control" name="address" required value="{{ old('address', $user->address) }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form--label">@lang('State')</label>
+                                            <label>@lang('State')</label>
                                             <input type="text" class="form-control form--control" name="state" required value="{{ old('state', $user->state) }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form--label">@lang('City')</label>
+                                            <label>@lang('City')</label>
                                             <input type="text" class="form-control form--control" name="city" required value="{{ old('city', $user->city) }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form--label">@lang('Zip')</label>
+                                            <label>@lang('Zip')</label>
                                             <input type="text" class="form-control form--control" name="zip" required value="{{ old('zip', $user->zip) }}">
                                         </div>
                                     </div>
