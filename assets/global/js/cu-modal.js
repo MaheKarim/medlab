@@ -10,6 +10,9 @@ $(document).on("click", ".cuModalBtn", function () {
         form[0].action = `${action}`;
         $(form).find('textarea').text('');
         cuModal.find(".status").empty();
+        cuModal
+            .find(".image-upload-preview")
+            .css("background-image", `url(${data.image_with_path})`);
     }
     cuModal.find(".modal-title").text(`${data.modal_title}`);
     if (resource) {
@@ -54,7 +57,7 @@ $(document).on("click", ".cuModalBtn", function () {
                         $(element).bootstrapToggle("off");
                     }
                 }
-                else if(element.type == 'select-one'){
+                else if (element.type == 'select-one') {
                     $(`[name='${element.name}']`).val(resource[fieldName]).trigger('change');
                 }
                 else if (element.type == "file") {

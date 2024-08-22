@@ -29,7 +29,7 @@ Route::namespace('Auth')->group(function () {
 Route::middleware('admin')->group(function () {
     Route::controller('AdminController')->group(function(){
         Route::get('dashboard', 'dashboard')->name('dashboard');
-        Route::get('chart/deposit-withdraw', 'depositAndWithdrawReport')->name('chart.deposit.withdraw');
+        Route::get('chart/deposit', 'depositReport')->name('chart.deposit');
         Route::get('chart/transaction', 'transactionReport')->name('chart.transaction');
         Route::get('chart/order', 'order')->name('chart.order');
         Route::get('profile', 'profile')->name('profile');

@@ -86,15 +86,15 @@
                     <input type="hidden" name="_method" id="formMethod" value="POST">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="required">@lang('Shipping Method Name')</label>
+                            <label>@lang('Shipping Method Name')</label>
                             <input name="name" type="text" class="form-control bg--white pe-2"
-                                   placeholder="@lang('Shipping Method Name')" autocomplete="off">
+                                   placeholder="@lang('Shipping Method Name')" autocomplete="off" required>
                         </div>
                         <div class="form-group">
-                            <label class="required">@lang('Price')</label>
+                            <label>@lang('Price')</label>
                             <div class="input-group">
                             <input name="price" type="number" min="0" class="form-control bg--white pe-2"
-                                   placeholder="@lang('Price')" autocomplete="off">
+                                   placeholder="@lang('Price')" autocomplete="off" required>
                                 <span class="input-group-text">{{ gs('cur_text') }}</span>
                             </div>
                         </div>

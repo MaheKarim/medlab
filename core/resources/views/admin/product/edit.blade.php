@@ -105,7 +105,6 @@
                                     <div class="payment-method-header d-flex flex-wrap">
                                         <div class="thumb">
                                             <div class="avatar-preview">
-
                                             </div>
                                             <div class="avatar-edit">
                                                 <x-image-uploader image="{{ @$product->image }}" class="w-100" type="product" :required=false/>
@@ -169,12 +168,4 @@
             });
         })(jQuery);
     </script>
-@endpush
-
-@push('style')
-    <style>
-        .bodywrapper__inner{
-            position: relative;
-        }
-    </style>
 @endpush

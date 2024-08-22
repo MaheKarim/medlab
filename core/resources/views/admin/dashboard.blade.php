@@ -72,7 +72,7 @@
             <x-widget
                 style="3"
                 link="{{ route('admin.deposit.rejected') }}"
-                title="{{ __('Rejected Payments') }}"
+                title="{{ __('Canceled Payments') }}"
                 icon="fas fa-ban"
                 value="{{ $deposit['total_deposit_rejected'] }}"
                 bg="danger"
@@ -154,9 +154,9 @@
                 style="2"
                 icon_style="false"
                 link="{{ route('admin.order.cancel') }}"
-                title="{{ __('Rejected Orders') }}"
+                title="{{ __('Canceled Orders') }}"
                 icon="las la-times-circle"
-                value="{{ $order['rejected_order'] }}"
+                value="{{ $order['canceled_order'] }}"
                 color="danger"
             />
         </div><!-- dashboard-w1 end -->
@@ -413,15 +413,14 @@
         );
 
 
-        const depositWithdrawChart = (startDate, endDate) => {
+        const depositChart = (startDate, endDate) => {
 
             const data = {
                 start_date: startDate.format('YYYY-MM-DD'),
                 end_date: endDate.format('YYYY-MM-DD')
             }
 
-            const url = @json(route('admin.chart.deposit.withdraw'));
-
+            const url = @json(route('admin.chart.deposit'));
             $.get(url, data,
                 function(data, status) {
                     if (status == 'success') {
@@ -449,8 +448,6 @@
             $.get(url, data,
                 function(data, status) {
                     if (status == 'success') {
-
-
                         trxChart.updateSeries(data.data);
                         trxChart.updateOptions({
                             xaxis: {
@@ -475,8 +472,6 @@
             $.get(url, data,
                 function(data, status) {
                     if (status == 'success') {
-
-
                         orderChartData.updateSeries(data.data);
                         orderChartData.updateOptions({
                             xaxis: {
@@ -496,8 +491,6 @@
             );
         }
 
-
-
         $('#dwDatePicker').daterangepicker(dateRangeOptions, (start, end) => changeDatePickerText('#dwDatePicker span',
             start, end));
         $('#trxDatePicker').daterangepicker(dateRangeOptions, (start, end) => changeDatePickerText('#trxDatePicker span',
@@ -510,11 +503,11 @@
         changeDatePickerText('#trxDatePicker span', start, end);
         changeDatePickerText('#orderDatePicker span', start, end);
 
-        depositWithdrawChart(start, end);
+        depositChart(start, end);
         transactionChart(start, end);
         orderChart(start, end);
 
-        $('#dwDatePicker').on('apply.daterangepicker', (event, picker) => depositWithdrawChart(picker.startDate, picker
+        $('#dwDatePicker').on('apply.daterangepicker', (event, picker) => depositChart(picker.startDate, picker
             .endDate));
 
         $('#trxDatePicker').on('apply.daterangepicker', (event, picker) => transactionChart(picker.startDate, picker

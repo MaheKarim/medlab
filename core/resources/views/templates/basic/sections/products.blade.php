@@ -100,12 +100,10 @@
     </script>
 @endpush
 @push('style-lib')
-    <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/slick.css')}}">
-    <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/magnific-popup.css')}}">
     <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/swiper.css')}}">
+    <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/magnific-popup.css')}}">
 @endpush
 @push('script-lib')
-    <script src="{{ asset($activeTemplateTrue . 'js/slick.min.js') }}"></script>
-    <script src="{{ asset($activeTemplateTrue . 'js/magnific-popup.js') }}"></script>
     <script src="{{ asset($activeTemplateTrue . 'js/swiper.js') }}"></script>
+    <script src="{{ asset($activeTemplateTrue . 'js/magnific-popup.js') }}"></script>
 @endpush

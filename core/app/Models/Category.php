@@ -10,7 +10,7 @@ class Category extends Model
 {
     use GlobalStatus;
 
-    public function products() :HasMany
+    public function products(): HasMany
     {
         return $this->hasMany(Product::class)->where('quantity', '!=', 0);
     }

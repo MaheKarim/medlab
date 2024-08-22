@@ -12,11 +12,9 @@ class CategoryController extends Controller
     public function index()
     {
         $pageTitle = 'All Categories';
-        $categories = Category::latest()->paginate(getPaginate());
-
+        $categories = Category::orderBy('name')->paginate(getPaginate());
         return view('admin.category.index',compact('pageTitle','categories'));
     }
-
     public function store(Request $request, $id = null)
     {
         $request->validate([
@@ -44,7 +42,6 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->slug = slug($request->name);
         $category->description = $request->description ?? null;
-        $category->status = $request->status ? Status::ENABLE : Status::DISABLE;
         $category->save();
 
         return redirect()->route('admin.category.index')->withNotify($notify);
@@ -53,7 +50,6 @@ class CategoryController extends Controller
     {
         return Category::changeStatus($id);
     }
-
     public function checkSlug($id = null){
         $page = Category::where('slug',request()->slug);
         if ($id) {

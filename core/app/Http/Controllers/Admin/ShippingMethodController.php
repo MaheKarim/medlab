@@ -36,7 +36,6 @@ class ShippingMethodController extends Controller
 
         $method->name = $request->name;
         $method->price = $request->price;
-        $method->status = $request->status ? Status::ENABLE : Status::DISABLE;
         $method->save();
 
         return redirect()->route('admin.shipping.index')->withNotify($notify);

@@ -11,7 +11,7 @@
                             <tr>
                                 <th>@lang('Name')</th>
                                 <th>@lang('Status')</th>
-                                <th>@lang('Last Update')</th>
+                                <th>@lang('Created At')</th>
                                 <th>@lang('Action')</th>
                             </tr>
                             </thead>
@@ -20,7 +20,7 @@
                                 <tr>
                                     <td>{{ __($brand->name) }}</td>
                                     <td>@php echo $brand->statusBadge @endphp</td>
-                                    <td>{{ showDateTime($brand->updated_at) }}</td>
+                                    <td>{{ showDateTime($brand->created_at) }}</td>
                                     <td>
                                         <div class="button-group">
                                             <button class="btn btn-outline--primary cuModalBtn btn-sm editBtn"
@@ -55,7 +55,7 @@
                             @endforelse
 
                             </tbody>
-                        </table><!-- table end -->
+                        </table>
                     </div>
                 </div>
                 @if ($brands->hasPages())
@@ -63,7 +63,7 @@
                         {{ paginateLinks($brands) }}
                     </div>
                 @endif
-            </div><!-- card end -->
+            </div>
         </div>
     </div>
 
@@ -84,9 +84,9 @@
                     <input type="hidden" name="_method" id="formMethod" value="POST">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="required">@lang('Brand Name')</label>
+                            <label>@lang('Brand Name')</label>
                             <input name="name" type="text" class="form-control bg--white pe-2"
-                                   placeholder="@lang('Brand Name')" autocomplete="off">
+                                   placeholder="@lang('Brand Name')" autocomplete="off" required>
                         </div>
 
                     </div>

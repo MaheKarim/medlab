@@ -33,7 +33,6 @@ class ManageBrandController extends Controller
 
 
         $brand->name = $request->name;
-        $brand->status = $request->status ? Status::ENABLE : Status::DISABLE;
         $brand->save();
 
         return redirect()->route('admin.brand.index')->withNotify($notify);

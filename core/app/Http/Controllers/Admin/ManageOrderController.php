@@ -51,8 +51,9 @@ class ManageOrderController extends Controller
 
     public function cancel()
     {
-        $pageTitle = "Cancel Orders";
-        $orders    = $this->orderData('cancel');
+        $pageTitle = "Canceled Orders";
+        $orders    = Order::where('order_status', Status::ORDER_CANCEL)
+            ->searchable(['order_no', 'user:username'])->with('user')->latest()->paginate(getPaginate());
         return view('admin.order.index', compact('pageTitle', 'orders'));
     }
 

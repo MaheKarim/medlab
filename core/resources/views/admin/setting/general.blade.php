@@ -43,7 +43,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-xl-3 col-sm-6">
-                                <label class="required"> @lang('Stock Alert')</label>
+                                <label> @lang('Stock Alert')</label>
                                 <input class="form-control" type="text" name="stock_alert" required value="{{gs('stock_alert')}}">
                             </div>
                             <div class="form-group col-xl-3 col-sm-6">

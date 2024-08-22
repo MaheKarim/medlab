@@ -53,7 +53,6 @@
                                 <th>@lang('TRX')</th>
                                 <th>@lang('Transacted')</th>
                                 <th>@lang('Amount')</th>
-                                <th>@lang('Post Balance')</th>
                                 <th>@lang('Details')</th>
                             </tr>
                         </thead>
@@ -80,9 +79,6 @@
                                         </span>
                                     </td>
 
-                                    <td class="budget">
-                                        {{ showAmount($trx->post_balance) }}
-                                    </td>
 
                                     <td>{{ __($trx->details) }}</td>
                                 </tr>

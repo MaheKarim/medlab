@@ -76,11 +76,11 @@ class FileInfo
         ];
         $data['product'] = [
             'path' => 'assets/images/product',
-            'size' => '500x500'
+            'size' => '256x144'
         ];
         $data['productGallery'] = [
             'path' => 'assets/images/productGallery',
-            'size' => '500x500'
+            'size' => '750x422'
         ];
         $data['banner'] = [
             'path' => 'assets/images/banner',

@@ -160,7 +160,7 @@ class CartController extends Controller
                 session()->put('session_id', session()->getId());
                 $sessionId = session()->get('session_id');
             }
-            // If $sessionId not match then session_id not found
+
             if ($sessionId != session()->get('session_id')) {
                 return response()->json(['error' => 'Session not found!']);
             }

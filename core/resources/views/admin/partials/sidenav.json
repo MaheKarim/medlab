@@ -315,7 +315,7 @@
                     "Payments management",
                     "Payments activity"
                 ],
-                "title": "Rejected Deposits",
+                "title": "Rejected Payments",
                 "route_name": "admin.deposit.rejected",
                 "menu_active": "admin.deposit.rejected",
                 "params": {

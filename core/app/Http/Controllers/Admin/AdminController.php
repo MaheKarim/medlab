@@ -61,7 +61,7 @@ class AdminController extends Controller
         })->count();
 
         $order['pending_order']   = Order::pending()->count();
-        $order['rejected_order']  = Order::cancel()->count();
+        $order['canceled_order']  = Order::cancel()->count();
         $order['shipped_order']   = Order::shipped()->count();
         $order['confirmed_order'] = Order::confirmed()->count();
         $order['delivered_order'] = Order::delivered()->count();
@@ -71,8 +71,7 @@ class AdminController extends Controller
     }
 
 
-
-    public function depositAndWithdrawReport(Request $request) {
+    public function depositReport(Request $request) {
 
         $diffInDays = Carbon::parse($request->start_date)->diffInDays(Carbon::parse($request->end_date));
 
