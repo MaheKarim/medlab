@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Rules\FileTypeValidate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
@@ -21,12 +22,23 @@ class ProfileController extends Controller
         $request->validate([
             'firstname' => 'required|string',
             'lastname' => 'required|string',
+            'image' => ['nullable','image',new FileTypeValidate(['jpg','jpeg','png'])]
         ],[
             'firstname.required'=>'The first name field is required',
             'lastname.required'=>'The last name field is required'
         ]);
 
         $user = auth()->user();
+
+        if ($request->hasFile('image')) {
+            try {
+                $old = $user->image;
+                $user->image = fileUploader($request->image, getFilePath('userProfile'), getFileSize('userProfile'), $old);
+            } catch (\Exception $exp) {
+                $notify[] = ['error', 'Couldn\'t upload your image'];
+                return back()->withNotify($notify);
+            }
+        }
 
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
