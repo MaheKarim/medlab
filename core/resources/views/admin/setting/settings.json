@@ -28,7 +28,7 @@
         "route_name": "admin.setting.notification.global.email"
     },
     "payment_gateways": {
-        "keyword": ["automatic", "manual", "configure payment gateways","aamarpay","amarpay","authorize","autorize.net","btcpay","btc pay","binance","blockchain","cashmaal","checkout","coinbase commerce","coingate","coinpayments","flutterwave","instamojo","mercado pago","mollie","nmi","now payments","nowpayments","payeer","paypal","paystack","paytm","perfect money","perfectmoney","razorpay","skrill","sslcommerz","stripe","twocheckout","two checkout","2checkout", "sslcommerz", "aamarpay"],
+        "keyword": ["automatic", "manual", "configure payment gateways","aamarpay","amarpay","authorize","authorize.net","btcpay","btc pay","binance","blockchain","cashmaal","checkout","coinbase commerce","coingate","coinpayments","flutterwave","instamojo","mercado pago","mollie","nmi","now payments","nowpayments","payeer","paypal","paystack","paytm","perfect money","perfectmoney","razorpay","skrill","sslcommerz","stripe","twocheckout","two checkout","2checkout",  "aamarpay"],
         "title": "Payment Gateways",
         "subtitle": "Configure automatic or manual payment gateways to accept payment from users.",
         "icon": "las la-credit-card",
@@ -44,7 +44,7 @@
     "manage_frontend": {
         "keyword": ["frontend","template","manage frontend", "frontend contents", "frontend settings",
             "about us","banner","contact","social icons","testimonial","products", "download url",
-            "description", "categories"],
+            "description", "categories", "registration disable"],
         "title": "Manage Frontend",
         "subtitle": "Control all of the frontend contents of the system.",
         "icon": "la la-html5",

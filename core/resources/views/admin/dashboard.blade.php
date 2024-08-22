@@ -252,17 +252,17 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($recentOrders as $rorders)
+                            @forelse($recentOrders as $orders)
                                 <tr>
-                                    <td>{{ @$rorders->order_no }}</td>
-                                    <td>{{ showAmount($rorders->total) }}</td>
+                                    <td>{{ @$orders->order_no }}</td>
+                                    <td>{{ showAmount($orders->total) }}</td>
                                     <td>
                                         @php
-                                            echo $rorders->ordersBadge;
+                                            echo $orders->ordersBadge;
                                         @endphp
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.order.details', $rorders->id) }}"
+                                        <a href="{{ route('admin.order.details', $orders->id) }}"
                                            class="btn btn-sm btn-outline--primary">
                                             <i class="las la-desktop"></i>
                                             @lang('Details')
@@ -282,7 +282,76 @@
                 </div>
             </div>
         </div>
+    </div>
 
+    <h5 class="mt-30">@lang('Best Selling Products')</h5>
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <div class="card b-radius--10 ">
+                <div class="card-body p-0">
+
+                    <div class="table-responsive--sm table-responsive">
+                        <table class="table table--light style--two">
+                            <thead>
+                            <tr>
+                                <th>@lang('Product Name')</th>
+                                <th>@lang('Price')</th>
+                                <th>@lang('Quantity')</th>
+                                <th>@lang('Sale Count')</th>
+                                <th>@lang('Status')</th>
+                                <th>@lang('Created At')</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($bestSellingItems as $product)
+                                <tr>
+                                    <td>
+                                        <div class="user">
+                                            <div class="thumb">
+                                                <img src="{{ getImage(getFilePath('product') . '/' . $product->image) }}" alt="@lang('image')">
+                                            </div>
+                                            <span class="name">{{ __($product->name) }}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @if($product->discount > 0)
+                                            <del>{{ showAmount($product->price) }}</del> <br>
+                                            @php
+                                                if ($product->discount_type == Status::FLAT_DISCOUNT) {
+                                                    $discountedPrice = $product->price - $product->discount;
+                                                } elseif ($product->discount_type == Status::PERCENT_DISCOUNT) {
+                                                    $discountedPrice = $product->price - ($product->price * $product->discount / 100);
+                                                }
+                                            @endphp
+                                            <b> {{ showAmount($discountedPrice) }} </b>
+                                        @else
+                                            {{ showAmount($product->price) }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @php  echo $product->quantityBadge; @endphp
+                                    </td>
+                                    <td>
+                                        {{ __($product->sale_count) }}
+                                    </td>
+                                    <td>
+                                        @php
+                                            echo $product->statusBadge;
+                                        @endphp
+                                    </td>
+                                    <td>
+                                        {{ showDateTime($product->created_at) }}
+                                        <br>
+                                        {{ diffForHumans($product->created_at) }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="row mb-none-30 mt-5">

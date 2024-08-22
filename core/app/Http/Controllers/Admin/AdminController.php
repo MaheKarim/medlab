@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-
     public function dashboard()
     {
         $pageTitle = 'Dashboard';
@@ -66,10 +65,11 @@ class AdminController extends Controller
         $order['confirmed_order'] = Order::confirmed()->count();
         $order['delivered_order'] = Order::delivered()->count();
         $recentOrders             = Order::latest()->pending()->take(10)->get();
+        $bestSellingItems         = Product::orderBy('sale_count', 'desc')->limit(5)->get();
 
-        return view('admin.dashboard', compact('pageTitle', 'widget', 'chart','deposit', 'order','recentOrders'));
+
+        return view('admin.dashboard', compact('pageTitle', 'widget', 'chart','deposit', 'order','recentOrders', 'bestSellingItems'));
     }
-
 
     public function depositReport(Request $request) {
 
@@ -463,6 +463,5 @@ class AdminController extends Controller
 
         return response()->json($report);
     }
-
 
 }
