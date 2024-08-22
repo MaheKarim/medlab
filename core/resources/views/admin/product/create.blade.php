@@ -131,7 +131,9 @@
         </div>
     </div>
 @endsection
-
+@push('breadcrumb-plugins')
+    <x-back route="{{ route('admin.product.index') }}" />
+@endpush
 @push('script-lib')
     <script src="{{ asset('assets/admin/js/image-uploader.min.js') }}"></script>
 @endpush

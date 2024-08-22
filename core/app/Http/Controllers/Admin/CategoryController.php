@@ -12,7 +12,7 @@ class CategoryController extends Controller
     public function index()
     {
         $pageTitle = 'All Categories';
-        $categories = Category::orderBy('name')->paginate(getPaginate());
+        $categories = Category::orderBy('name')->searchable(['name'])->paginate(getPaginate());
         return view('admin.category.index',compact('pageTitle','categories'));
     }
     public function store(Request $request, $id = null)

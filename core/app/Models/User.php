@@ -47,7 +47,6 @@ class User extends Authenticatable
         return $this->hasMany(Deposit::class)->where('status','!=',Status::PAYMENT_INITIATE);
     }
 
-
     public function tickets()
     {
         return $this->hasMany(SupportTicket::class);
@@ -88,7 +87,6 @@ class User extends Authenticatable
         return $query->where('sv', Status::UNVERIFIED);
     }
 
-
     public function scopeEmailVerified($query)
     {
         return $query->where('ev', Status::VERIFIED);
@@ -97,11 +95,6 @@ class User extends Authenticatable
     public function scopeMobileVerified($query)
     {
         return $query->where('sv', Status::VERIFIED);
-    }
-
-    public function scopeWithBalance($query)
-    {
-        return $query->where('balance','>', 0);
     }
 
     public function deviceTokens()

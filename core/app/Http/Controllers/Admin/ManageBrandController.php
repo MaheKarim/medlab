@@ -12,7 +12,7 @@ class ManageBrandController extends Controller
     public function index()
     {
         $pageTitle = 'All Brands';
-        $brands = Brand::orderBy('name')->paginate(getPaginate());
+        $brands = Brand::orderBy('name')->searchable(['name'])->paginate(getPaginate());
 
         return view('admin.brand.index',compact('pageTitle','brands'));
     }

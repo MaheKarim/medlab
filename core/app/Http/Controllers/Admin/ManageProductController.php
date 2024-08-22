@@ -14,7 +14,7 @@ class ManageProductController extends Controller
     public function index()
     {
         $pageTitle = 'All Products';
-        $products = Product::orderBy('id', 'desc')->paginate(getPaginate());
+        $products = Product::orderBy('id', 'desc')->searchable(['name'])->paginate(getPaginate());
         return view('admin.product.index', compact('pageTitle', 'products'));
     }
 
@@ -153,7 +153,7 @@ class ManageProductController extends Controller
     public function stockOut()
     {
         $pageTitle = "Stock Out Product";
-        $products = Product::orderBy('id', 'desc')->stockCheck()->paginate(getPaginate());
+        $products = Product::orderBy('id', 'desc')->stockCheck()->searchable(['name'])->paginate(getPaginate());
 
         return view('admin.product.index', compact('pageTitle', 'products'));
     }
@@ -161,7 +161,7 @@ class ManageProductController extends Controller
     public function lowStock()
     {
         $pageTitle = "Low Stock Product";
-        $products = Product::lowStock()->latest()->paginate(getPaginate());
+        $products = Product::lowStock()->searchable(['name'])->latest()->paginate(getPaginate());
 
         return view('admin.product.index', compact('pageTitle', 'products'));
     }

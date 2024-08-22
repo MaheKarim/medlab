@@ -79,7 +79,6 @@
 
     <x-confirmation-modal />
 
-    <!-- Confirmation Modal Start -->
     <div class="modal fade" id="cuModal" role="dialog" tabindex="-1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -89,7 +88,6 @@
                         <i class="las la-times"></i>
                     </button>
                 </div>
-
                 <form method="POST" action="{{ route('admin.category.store') }}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="_method" id="formMethod" value="POST">
@@ -127,10 +125,10 @@
             </div>
         </div>
     </div>
-    <!-- Confirmation Modal End -->
 @endsection
 
 @push('breadcrumb-plugins')
+    <x-search-form placeholder="Search here..." />
     <button class="btn btn-sm btn-outline--primary float-sm-end cuModalBtn addBtn" data-modal_title="@lang('Create New Category')"
         type="button" data-image_with_path="{{ getImage(getFilePath('category'), getFileSize('category')) }}">
         <i class="las la-plus"></i>@lang('Add New Category')

@@ -101,6 +101,7 @@
     <x-confirmation-modal/>
 @endsection
 @push('breadcrumb-plugins')
+    <x-search-form placeholder="Search here..." />
     <button class="btn btn-sm btn-outline--primary float-sm-end cuModalBtn addBtn"
             data-modal_title="@lang('Create New Brand')" type="button">
         <i class="las la-plus"></i>@lang('Add New Brand')</button>
