@@ -4275,8 +4275,8 @@ input[type=number] {
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
     right: 0;
-    height: 30px;
-    width: 30px;
+    height: 30px !important;
+    width: 30px !important;
     background-image: none !important;
     background-color: hsl(var(--base));
     border-radius: 50%;
@@ -4292,9 +4292,9 @@ input[type=number] {
 }
 
 .swiper-button-next::after {
-    font-size: 17px;
+    font-size: 17px !important;
     line-height: 1;
-    font-family: "Font Awesome 5 Free";
+    font-family: "Font Awesome 5 Free" !important;
     content: "\f054" !important;
     font-weight: 900;
     color: hsl(var(--white)) !important;
@@ -4302,7 +4302,7 @@ input[type=number] {
 
 @media screen and (max-width: 575px) {
     .swiper-button-next::after {
-        font-size: 15px;
+        font-size: 15px !important;
     }
 }
 
@@ -4316,8 +4316,8 @@ input[type=number] {
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
     left: 0px !important;
-    height: 30px;
-    width: 30px;
+    height: 30px !important;
+    width: 30px !important;
     left: unset !important;
     line-height: 30;
     background-color: hsl(var(--base));
@@ -4340,9 +4340,9 @@ input[type=number] {
 }
 
 .swiper-button-prev::after {
-    font-size: 17px;
+    font-size: 17px !important;
     line-height: 1;
-    font-family: "Font Awesome 5 Free";
+    font-family: "Font Awesome 5 Free" !important;
     content: "\f053" !important;
     font-weight: 700;
     color: hsl(var(--white));
