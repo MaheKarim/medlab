@@ -96,18 +96,17 @@ class CheckoutController extends Controller
     protected function cartSubTotal($user_id)
     {
         $carts = Cart::where('user_id', $user_id)->with('product')->get();
-        $total = [0];
+        $subtotal = 0;
 
         foreach ($carts as $cart) {
-            $sumPrice = 0;
             $product  = Product::active()->where('id', $cart->product->id)->first();
-            $price    = showDiscountPrice($product->price, $product->discount, $product->discount_type);
-
-            $sumPrice = $sumPrice + ($price * $cart->quantity);
-            $total[]  = $sumPrice;
+            if ($product) {
+                $price = showDiscountPrice($product->price, $product->discount, $product->discount_type);
+                $subtotal += $price * $cart->quantity;
+            }
         }
 
-        $subtotal = array_sum($total);
         return $subtotal;
     }
+
 }

@@ -6,7 +6,8 @@
                 <button type="button" class="search-icon  d-block d-lg-none"><i class="las la-search"></i></button>
                 <div class="search-field">
                     <input type="text" class="form--control" name="search" placeholder="@lang('Search products')...">
-                    <button type="submit" class="btn btn--base btn--sm">@lang('Search') <span class="icon"><i class="las la-search"></i></span></button>
+                    <button type="submit" class="btn btn--base btn--sm">@lang('Search') <span class="icon"><i
+                                class="las la-search"></i></span></button>
                 </div>
             </form>
             <div class="header__button ms-auto">
@@ -24,15 +25,15 @@
                                     class="d-lg-block d-none">@lang('Login')</span></a>
                         </li>
                     @endif
-                        @php
-                            if (auth()->check()) {
-                                $userId = auth()->id();
-                                $totalCart = App\Models\Cart::where('user_id', $userId)->count();
-                            } else {
-                               $sessionId = session()->get('session_id');
-                               $totalCart = App\Models\Cart::where('session_id', $sessionId)->count();
-                            }
-                        @endphp
+                    @php
+                        if (auth()->check()) {
+                            $userId = auth()->id();
+                            $totalCart = App\Models\Cart::where('user_id', $userId)->count();
+                        } else {
+                           $sessionId = session()->get('session_id');
+                           $totalCart = App\Models\Cart::where('session_id', $sessionId)->count();
+                        }
+                    @endphp
                     <li class="cart">
                         <a href="{{ route('cart.cart') }}" class="cart-icon">
                             <i class="las la-shopping-cart"></i>
@@ -46,10 +47,10 @@
                         @endphp
                         <div class="dropdown-lang dropdown mt-0 d-block">
                             <a href="#" class="language-btn dropdown-toggle" data-bs-toggle="dropdown"
-                                aria-expanded="false">
+                               aria-expanded="false">
                                 <img class="flag"
-                                    src="{{ getImage(getFilePath('language') . '/' . @$selectedLang->image, getFileSize('language')) }}"
-                                    alt="us">
+                                     src="{{ getImage(getFilePath('language') . '/' . @$selectedLang->image, getFileSize('language')) }}"
+                                     alt="us">
                                 <span class="language-text text-white">{{ __(@$selectedLang->name) }}</span>
                             </a>
                             <ul class="dropdown-menu">
@@ -57,8 +58,8 @@
                                     <li>
                                         <a href="{{ route('lang', $lang->code) }}">
                                             <img class="flag"
-                                                src="{{ getImage(getFilePath('language') . '/' . @$lang->image, getFileSize('language')) }}"
-                                                alt="@lang('image')">
+                                                 src="{{ getImage(getFilePath('language') . '/' . @$lang->image, getFileSize('language')) }}"
+                                                 alt="@lang('image')">
                                             {{ __(@$lang->name) }}
                                         </a>
                                     </li>
@@ -66,6 +67,9 @@
                             </ul>
                         </div>
                     @endif
+                    <button class="navbar-toggler header-button">
+                        <span><i class="las la-bars"></i></span>
+                    </button>
                 </ul>
             </div>
         </nav>
