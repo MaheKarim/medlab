@@ -19,8 +19,8 @@ class CheckoutController extends Controller
     public function checkout(Request $request)
     {
         $pageTitle = 'Checkout';
-        $userId = auth()->user()->id;
-
+        $user   = auth()->user();
+        $userId = $user->id;
 
         $subtotal = $this->cartSubTotal($userId);
 
@@ -33,7 +33,6 @@ class CheckoutController extends Controller
 
         session()->put('total', $data['subtotal']);
         $shippingMethod = ShippingMethod::active()->get();
-        $user = auth()->user();
 
         return view('Template::checkout', compact('pageTitle', 'data',  'shippingMethod', 'user'));
     }
