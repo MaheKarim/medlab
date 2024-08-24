@@ -134,7 +134,6 @@
                 }
             });
 
-
             $('.remove-btn').on('click', function () {
                 removeableItem = $(this).closest("tr");
                 modal.modal('show');
@@ -156,7 +155,6 @@
                         if (response.success) {
                             removeableItem.remove();
                             subTotal();
-                            getCartCount();
                             notify('success', response.success);
                         } else {
                             notify('error', response.error);
@@ -165,18 +163,6 @@
                 });
                 modal.modal('hide');
             });
-
-            getCartCount();
-
-            function getCartCount() {
-                $.ajax({
-                    type: "GET",
-                    url: "{{ route('cart.getCartTotal') }}",
-                    success: function (response) {
-                        $('.cart-count').text(response);
-                    }
-                });
-            }
 
             subTotal();
 
@@ -208,24 +194,19 @@
 
             function CartCalculation(currentRow) {
                 let product_id = currentRow.find('.productName').data('product_id');
-                let quantity = parseInt(currentRow.find('input[name="quantity"]').val(), 10); // Ensure quantity is an integer
+                let quantity = parseInt(currentRow.find('input[name="quantity"]').val(), 10);
                 let productPrice = currentRow.find('.price').text().trim();
 
-                // Remove currency symbol and commas, then parse the price
                 let price = parseFloat(productPrice.replace("{{ gs('cur_sym') }}", '').replace(/,/g, ''));
-
                 if (isNaN(price) || isNaN(quantity) || quantity <= 0) {
-                    // Handle invalid price or quantity
                     notify('error', 'Invalid price or quantity.');
                     return;
                 }
 
                 let totalPrice = quantity * price;
                 currentRow.find('.subtotal').text("{{ gs('cur_sym') }}" + totalPrice.toFixed(2));
-
                 subTotal();
 
-                // Update the cart quantity via AJAX
                 $.ajax({
                     headers: {
                         "X-CSRF-TOKEN": "{{ csrf_token() }}",
