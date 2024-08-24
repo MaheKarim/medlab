@@ -9,6 +9,7 @@
                             <thead>
                                 <tr>
                                     <th>@lang('Name')</th>
+                                    <th>@lang('Listed Products')</th>
                                     <th>@lang('Status')</th>
                                     <th>@lang('Created Date')</th>
                                     <th>@lang('Action')</th>
@@ -25,6 +26,9 @@
                                                 </div>
                                                 <span class="name">{{ __($category->name) }}</span>
                                             </div>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge--primary badge-pill">{{ $category->products->where('status', 1)->count() }}</span>
                                         </td>
                                         <td> @php echo $category->statusBadge @endphp</td>
                                         <td>{{ showDateTime($category->created_at) }}</td>
