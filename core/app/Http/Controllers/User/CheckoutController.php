@@ -25,8 +25,7 @@ class CheckoutController extends Controller
         $subtotal = $this->cartSubTotal($userId);
 
         if ($subtotal == 0) {
-            $notify[] = ['error', 'Something went wrong'];
-            return redirect(route('cart.cart'))->withNotify($notify);
+            return redirect(route('cart.cart'));
 
         }
 
@@ -105,6 +104,9 @@ class CheckoutController extends Controller
 
             if ($product) {
                 if ($product->quantity < $cart->quantity) {
+                    $cart->delete();
+                    $notify[] = ['error', "The quantity of product '{$product->name}' in your cart exceeds the available stock. It has been removed from your cart."];
+                    session()->flash('notify', $notify);
                     return false;
                 }
 
@@ -115,5 +117,6 @@ class CheckoutController extends Controller
 
         return $subtotal;
     }
+
 
 }
