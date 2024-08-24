@@ -5,9 +5,8 @@
             <form action="{{ route('search') }}" autocomplete="off" class="search-box-wrapper">
                 <button type="button" class="search-icon  d-block d-lg-none"><i class="las la-search"></i></button>
                 <div class="search-field">
-                    <input type="text" class="form--control" name="search" placeholder="Search to buy...">
-                    <button type="submit" class="btn btn--base btn--sm">@lang('Search') <span class="icon"><i
-                                class="las la-search"></i></span></button>
+                    <input type="text" class="form--control" name="search" placeholder="@lang('Search products')...">
+                    <button type="submit" class="btn btn--base btn--sm">@lang('Search') <span class="icon"><i class="las la-search"></i></span></button>
                 </div>
             </form>
             <div class="header__button ms-auto">
@@ -26,11 +25,11 @@
                         </li>
                     @endif
                         @php
-                            $userId = auth()->id();
-                            $sessionId = session()->get('session_id');
                             if (auth()->check()) {
+                                $userId = auth()->id();
                                 $totalCart = App\Models\Cart::where('user_id', $userId)->count();
                             } else {
+                               $sessionId = session()->get('session_id');
                                $totalCart = App\Models\Cart::where('session_id', $sessionId)->count();
                             }
                         @endphp
@@ -51,7 +50,7 @@
                                 <img class="flag"
                                     src="{{ getImage(getFilePath('language') . '/' . @$selectedLang->image, getFileSize('language')) }}"
                                     alt="us">
-                                <span class="language-text text-white">{{ @$selectedLang->name }}</span>
+                                <span class="language-text text-white">{{ __(@$selectedLang->name) }}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 @foreach ($language as $lang)
@@ -60,7 +59,7 @@
                                             <img class="flag"
                                                 src="{{ getImage(getFilePath('language') . '/' . @$lang->image, getFileSize('language')) }}"
                                                 alt="@lang('image')">
-                                            {{ @$lang->name }}
+                                            {{ __(@$lang->name) }}
                                         </a>
                                     </li>
                                 @endforeach

@@ -90,7 +90,7 @@ class CheckoutController extends Controller
         }
 
 
-        $notify[] = ['success', 'Order successfully completed.'];
+        $notify[] = ['success', 'Order submitted successfully.'];
         return redirect()->route('user.home', $order->id)->withNotify($notify);
     }
 

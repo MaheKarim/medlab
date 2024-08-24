@@ -1,5 +1,8 @@
 @php
     $categories = \App\Models\Category::active()
+        ->whereHas('products',function($q){
+            $q->active();
+        })
         ->with([
             'products' => function ($query) {
                 $query->active()->orderBy('name')->take(10);
@@ -7,10 +10,7 @@
         ])
         ->orderBy('name')
         ->take(10)
-        ->get()
-        ->filter(function ($category) {
-            return $category->products->isNotEmpty();
-        });
+        ->get();
 @endphp
 <div class="Product-wrapper pt-60">
     @foreach ($categories as $category)

@@ -6,7 +6,7 @@
         <div>
             <div class="banner-slider__thumb">
                 <img class="banner-thumb"
-                     src="{{ frontendImage('banner', @$banner->data_values->slider_image, '1132x978') }}"
+                     src="{{ frontendImage('banner', @$banner->data_values->slider_image, '1132x278') }}"
                      alt="bannerImage">
             </div>
         </div>
