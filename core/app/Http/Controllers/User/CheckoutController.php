@@ -25,7 +25,9 @@ class CheckoutController extends Controller
         $subtotal = $this->cartSubTotal($userId);
 
         if ($subtotal == 0) {
-            return redirect(route('cart.cart'));
+            $notify[] = ['error', 'Something went wrong'];
+            return redirect(route('cart.cart'))->withNotify($notify);
+
         }
 
         $data['subtotal'] = $subtotal;
