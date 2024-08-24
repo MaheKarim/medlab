@@ -83,7 +83,7 @@
 </script>
 @endpush
 @push('style-lib')
-    <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/slick.css')}}">
+    <link rel="stylesheet" href="{{ asset($activeTemplateTrue.'css/slick.css') }}">
 @endpush
 
 @push('script-lib')

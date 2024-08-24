@@ -6,7 +6,7 @@
     <div class="section-heading">
         <h5 class="section-heading__title"> {{ __(@$categoryData->data_values->heading) }} </h5>
         <div class="section-heading__btn">
-            <a href="{{ route('all.category') }}" class="btn btn--base "> @lang('View All') </a>
+            <a href="{{ route('all.category') }}" class="btn btn--base ">@lang('View All')</a>
         </div>
     </div>
     <div class="product-slider mt-2">
@@ -58,4 +58,10 @@
       ]
     });
     </script>
+@endpush
+@push('style-lib')
+    <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/slick.css')}}">
+@endpush
+@push('script-lib')
+    <script src="{{ asset($activeTemplateTrue . 'js/slick.min.js') }}"></script>
 @endpush
