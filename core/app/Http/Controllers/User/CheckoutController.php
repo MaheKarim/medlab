@@ -25,7 +25,7 @@ class CheckoutController extends Controller
         $subtotal = $this->cartSubTotal($userId);
 
         if ($subtotal == 0) {
-            abort(404);
+            return redirect(route('cart.cart'));
         }
 
         $data['subtotal'] = $subtotal;
@@ -99,8 +99,13 @@ class CheckoutController extends Controller
         $subtotal = 0;
 
         foreach ($carts as $cart) {
-            $product  = Product::active()->where('id', $cart->product->id)->first();
+            $product = Product::active()->where('id', $cart->product->id)->first();
+
             if ($product) {
+                if ($product->quantity < $cart->quantity) {
+                    return false;
+                }
+
                 $price = showDiscountPrice($product->price, $product->discount, $product->discount_type);
                 $subtotal += $price * $cart->quantity;
             }
