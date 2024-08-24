@@ -7,7 +7,7 @@
             <div class="register-disable-image">
                 <img class="fit-image"
                      src="{{ frontendImage('register_disable',@$registrationDisabled->data_values->image,'280x280') }}"
-                     alt="">
+                     alt="Registration Disabled">
             </div>
             <h5 class="register-disable-title mt-4">{{ __(@$registrationDisabled->data_values->heading) }}</h5>
             <p class="register-disable-desc">
