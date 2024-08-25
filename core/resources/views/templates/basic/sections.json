@@ -1,5 +1,6 @@
 {
     "banner": {
+        "no_selection":true,
         "builder": true,
         "name": "Banner Section",
         "element": {

@@ -90,7 +90,6 @@
 <script>
     (function($) {
         "use strict";
-        // getCartTotal();
         $(".langSel").on("click", function() {
             window.location.href = "{{ route('home') }}/change/" + $(this).data('lang_code');
         });
@@ -167,16 +166,6 @@
                 },
             });
         });
-        {{--function getCartTotal() {--}}
-        {{--    $.ajax({--}}
-        {{--        url: "{{ route('cart.getCartTotal') }}",--}}
-        {{--        method: "get",--}}
-        {{--        dataType: "json",--}}
-        {{--        success: function (response) {--}}
-        {{--            $('.cart-count').text(response);--}}
-        {{--        }--}}
-        {{--    });--}}
-        {{--}--}}
     })(jQuery);
 </script>
 </body>

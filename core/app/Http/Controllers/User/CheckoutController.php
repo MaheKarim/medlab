@@ -89,7 +89,6 @@ class CheckoutController extends Controller
             return redirect()->route('user.deposit.index', $order->id);
         }
 
-
         $notify[] = ['success', 'Order submitted successfully.'];
         return redirect()->route('user.home', $order->id)->withNotify($notify);
     }
@@ -101,7 +100,6 @@ class CheckoutController extends Controller
 
         foreach ($carts as $cart) {
             $product = Product::active()->where('id', $cart->product->id)->first();
-
             if ($product) {
                 if ($product->quantity < $cart->quantity) {
                     $cart->delete();
@@ -114,7 +112,6 @@ class CheckoutController extends Controller
                 $subtotal += $price * $cart->quantity;
             }
         }
-
         return $subtotal;
     }
 

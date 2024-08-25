@@ -93,7 +93,9 @@ class CartController extends Controller
         $userId = auth()->user()->id ?? null;
         $sessionId = session()->get('session_id');
 
-        $cartQuery = Cart::with('product');
+        $cartQuery = Cart::with(['product' => function ($query) {
+            $query->available();
+        }]);
 
         if ($userId) {
             $cartQuery->where('user_id', $userId);
@@ -103,7 +105,7 @@ class CartController extends Controller
 
         $carts = $cartQuery->get()->filter(function ($cart) {
             $product = $cart->product;
-            if (!$product || $product->status == Status::DISABLE || $product->quantity == 0) {
+            if (!$product ) {
                 $cart->delete();
                 return false;
             }
