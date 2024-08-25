@@ -206,7 +206,7 @@
         "title": "Manage Orders",
         "icon": "la la-shopping-cart",
         "menu_active": "admin.order*",
-        "counters": ["pendingOrdersCount"],
+        "counters": ["pendingOrdersCount", "confirmedOrdersCount", "shippedOrdersCount"],
         "submenu": [
             {
                 "keyword": [
@@ -230,6 +230,28 @@
                 "route_name": "admin.order.pending",
                 "menu_active": "admin.order.pending",
                 "counter": "pendingOrdersCount"
+            },{
+                "keyword": [
+                    "Confirmed orders",
+                    "Manage Confirmed Orders",
+                    "Confirmed Order management",
+                    "Orders"
+                ],
+                "title": "Confirmed Orders",
+                "route_name": "admin.order.confirmed",
+                "menu_active": "admin.order.confirmed",
+                "counter": "confirmedOrdersCount"
+            },{
+                "keyword": [
+                    "Shipped orders",
+                    "Manage Shipped Orders",
+                    "Shipped Order management",
+                    "Orders"
+                ],
+                "title": "Shipped Orders",
+                "route_name": "admin.order.shipped",
+                "menu_active": "admin.order.shipped",
+                "counter": "shippedOrdersCount"
             },
             {
                 "keyword": [

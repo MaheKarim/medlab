@@ -62,6 +62,8 @@ class AppServiceProvider extends ServiceProvider
                 'pendingTicketCount'         => SupportTicket::whereIN('status', [Status::TICKET_OPEN, Status::TICKET_REPLY])->count(),
                 'pendingDepositsCount'    => Deposit::pending()->count(),
                 'pendingOrdersCount' => Order::pending()->count(),
+                'confirmedOrdersCount' => Order::confirmed()->count(),
+                'shippedOrdersCount' => Order::shipped()->count(),
                 'stockCheckCount' => Product::stockCheck()->count(),
                 'lowStockCount' => Product::lowStock()->count(),
                 'updateAvailable'    => version_compare(gs('available_version'),systemDetails()['version'],'>') ? 'v'.gs('available_version') : false,

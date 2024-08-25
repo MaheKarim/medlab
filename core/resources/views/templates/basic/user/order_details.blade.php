@@ -62,7 +62,7 @@
                                         </li>
                                         @if ($order->discount != 0)
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                @lang('Coupon')
+                                                @lang('Discount')
                                                 <span class="fw-bold">{{ __(@$order->discount) }}</span>
                                             </li>
                                         @endif
@@ -115,7 +115,7 @@
                                     @forelse($order->orderDetail as $detail)
                                         <tr>
                                             <td>
-                                                <a href="{{ route('admin.product.edit', $detail->product->id) }}">
+                                                <a href="{{ route('product.details', $detail->product->id) }}">
                                                     {{ __(strLimit($detail->product->name, 20)) }}
                                                 </a>
                                             </td>
