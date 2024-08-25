@@ -18,10 +18,6 @@ class FileInfo
 
     public function fileInfo(){
 
-        $data['depositVerify'] = [
-            'path'      =>'assets/images/verify/deposit'
-        ];
-
         $data['default'] = [
             'path'      => 'assets/images/default.png',
         ];
@@ -53,7 +49,6 @@ class FileInfo
         $data['push'] = [
             'path'      =>'assets/images/push_notification',
         ];
-
         $data['maintenance'] = [
             'path'      =>'assets/images/maintenance',
             'size'      =>'660x325',
@@ -66,7 +61,6 @@ class FileInfo
             'path' => 'assets/images/gateway',
             'size' => ''
         ];
-
         $data['pushConfig'] = [
             'path'      => 'assets/admin',
         ];
@@ -84,7 +78,7 @@ class FileInfo
         ];
         $data['banner'] = [
             'path' => 'assets/images/banner',
-            'size' => '1132x978'
+            'size' => '1132x278'
         ];
         $data['how_to_order'] = [
             'path' => 'assets/images/how_to_order',
