@@ -64,11 +64,10 @@ class AdminController extends Controller
         $order['shipped_order']   = Order::shipped()->count();
         $order['confirmed_order'] = Order::confirmed()->count();
         $order['delivered_order'] = Order::delivered()->count();
-        $recentOrders             = Order::latest()->pending()->take(10)->get();
         $bestSellingItems         = Product::orderBy('sale_count', 'desc')->limit(5)->get();
 
 
-        return view('admin.dashboard', compact('pageTitle', 'widget', 'chart','deposit', 'order','recentOrders', 'bestSellingItems'));
+        return view('admin.dashboard', compact('pageTitle', 'widget', 'chart','deposit', 'order', 'bestSellingItems'));
     }
 
     public function depositReport(Request $request) {

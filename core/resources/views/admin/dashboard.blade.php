@@ -235,55 +235,6 @@
         </div>
     </div>
 
-    <h5 class="mt-30">@lang('Latest Orders')</h5>
-    <div class="row mt-3">
-        <div class="col-md-12">
-            <div class="card b-radius--10 ">
-                <div class="card-body p-0">
-
-                    <div class="table-responsive--sm table-responsive">
-                        <table class="table table--light style--two">
-                            <thead>
-                            <tr>
-                                <th>@lang('Order No')</th>
-                                <th>@lang('Price')</th>
-                                <th>@lang('Status')</th>
-                                <th>@lang('Action')</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @forelse($recentOrders as $orders)
-                                <tr>
-                                    <td>{{ @$orders->order_no }}</td>
-                                    <td>{{ showAmount($orders->total) }}</td>
-                                    <td>
-                                        @php
-                                            echo $orders->ordersBadge;
-                                        @endphp
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('admin.order.details', $orders->id) }}"
-                                           class="btn btn-sm btn-outline--primary">
-                                            <i class="las la-desktop"></i>
-                                            @lang('Details')
-                                        </a>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td class="text-muted text-center" colspan="100%">
-                                        {{ __($emptyMessage) }}
-                                    </td>
-                                </tr>
-                            @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <h5 class="mt-30">@lang('Best Selling Products')</h5>
     <div class="row mt-3">
         <div class="col-md-12">
