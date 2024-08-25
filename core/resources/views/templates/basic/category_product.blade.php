@@ -8,10 +8,6 @@
                 </div>
                 <div class="col-xl-9 col-lg-8">
                     <div class="Product-wrapper">
-                        <ul class="link-list">
-                            <li class="link-list__item"><a href="{{ route('home') }}" class="link"> @lang('Home') <i class="las la-angle-right"></i></a></li>
-                            <li class="link-list__item"> {{ __($category->name) }} </li>
-                        </ul>
                         @if($products->isNotEmpty())
                         <div class="row gy-4 mb-4">
                             @foreach($products as $product)

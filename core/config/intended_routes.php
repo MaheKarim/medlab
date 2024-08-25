@@ -1,5 +1,5 @@
 <?php
 
 return [
-     'cart'=>'home'
+     'cart.cart'=>'cart.cart'
 ];

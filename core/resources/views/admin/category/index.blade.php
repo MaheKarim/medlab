@@ -115,7 +115,7 @@
                         </div>
                         <div class="form-group">
                             <label class="required addImageLabel">@lang('Image')</label>
-                            <x-image-uploader name="image" type="category" class="w-100" :required="true" />
+                            <x-image-uploader name="image" type="category" class="w-100" :required="false" />
                         </div>
                         <div class="form-group">
                             <label>@lang('Description')</label>
@@ -148,6 +148,8 @@
             $('.addBtn').on('click', function() {
                 var modal = $('#cuModal');
                 modal.find('.slug-verification').addClass('d-none').html('');
+                modal.find('.description').addClass('d-none').html('');
+
             });
 
             $('.editBtn').on('click', function() {

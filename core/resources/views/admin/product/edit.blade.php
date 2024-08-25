@@ -132,7 +132,7 @@
 @endsection
 
 @push('breadcrumb-plugins')
-    <x-back route="{{ route('admin.product.index') }}" />
+    <x-back route="{{ route('admin.product.stockOut') }}" />
 @endpush
 
 @push('script-lib')
