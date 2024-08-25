@@ -33,14 +33,12 @@
                     </form>
                 </div>
             </div>
+            @if(@$sections->secs != null)
+                @foreach(json_decode($sections->secs) as $sec)
+                    @include($activeTemplate.'sections.'.$sec)
+                @endforeach
+            @endif
         </div>
     </div>
 </section>
-
-
-@if(@$sections->secs != null)
-    @foreach(json_decode($sections->secs) as $sec)
-        @include($activeTemplate.'sections.'.$sec)
-    @endforeach
-@endif
 @endsection
