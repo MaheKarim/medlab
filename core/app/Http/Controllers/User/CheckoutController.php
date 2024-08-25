@@ -11,7 +11,6 @@ use App\Models\ShippingMethod;
 use Illuminate\Http\Request;
 use App\Traits\OrderConfirmation;
 
-
 class CheckoutController extends Controller
 {
     use OrderConfirmation;
@@ -19,14 +18,13 @@ class CheckoutController extends Controller
     public function checkout(Request $request)
     {
         $pageTitle = 'Checkout';
-        $user   = auth()->user();
+        $user = auth()->user();
         $userId = $user->id;
 
-        $subtotal = $this->cartSubTotal($userId);
+        $subtotal = $this->validateCartAndCalculateSubtotal($userId);
 
         if ($subtotal == 0) {
             return redirect(route('cart.cart'));
-
         }
 
         $data['subtotal'] = $subtotal;
@@ -35,9 +33,8 @@ class CheckoutController extends Controller
         session()->put('total', $data['subtotal']);
         $shippingMethod = ShippingMethod::active()->get();
 
-        return view('Template::checkout', compact('pageTitle', 'data',  'shippingMethod', 'user'));
+        return view('Template::checkout', compact('pageTitle', 'data', 'shippingMethod', 'user'));
     }
-
 
     public function order(Request $request)
     {
@@ -54,9 +51,14 @@ class CheckoutController extends Controller
             'payment_type'    => 'required|integer|in:1,2',
         ]);
 
-        $user     = auth()->user();
-        $subtotal = $this->cartSubTotal($user->id);
-        $shipping = ShippingMethod::where('id', $request->shipping_method)->where('status', Status::ENABLE)->first();
+        $user = auth()->user();
+        $subtotal = $this->validateCartAndCalculateSubtotal($user->id);
+
+        if ($subtotal === false) {
+            return back()->withInput();
+        }
+
+        $shipping = ShippingMethod::where('id', $request->shipping_method)->active()->first();
 
         if (!$shipping) {
             $notify[] = ['error', 'Shipping method unable to locate.'];
@@ -72,15 +74,15 @@ class CheckoutController extends Controller
             'city'    => $request->city,
         ];
 
-        $order                     = new Order();
-        $order->user_id            = $user->id;
-        $order->order_no           = getTrx();
-        $order->subtotal           = $subtotal;
-        $order->shipping_charge    = $shipping->price;
-        $order->total              = $grandTotal;
+        $order = new Order();
+        $order->user_id = $user->id;
+        $order->order_no = getTrx();
+        $order->subtotal = $subtotal;
+        $order->shipping_charge = $shipping->price;
+        $order->total = $grandTotal;
         $order->shipping_method_id = $shipping->id;
-        $order->address            = json_encode($address);
-        $order->payment_type       = $request->payment_type;
+        $order->address = json_encode($address);
+        $order->payment_type = $request->payment_type;
         $order->save();
 
         static::confirmOrder($order);
@@ -93,27 +95,28 @@ class CheckoutController extends Controller
         return redirect()->route('user.home', $order->id)->withNotify($notify);
     }
 
-    protected function cartSubTotal($user_id)
+    protected function validateCartAndCalculateSubtotal($userId)
     {
-        $carts = Cart::where('user_id', $user_id)->with('product')->get();
+        $carts = Cart::where('user_id', $userId)->with('product')->get();
         $subtotal = 0;
 
         foreach ($carts as $cart) {
             $product = Product::active()->where('id', $cart->product->id)->first();
-            if ($product) {
-                if ($product->quantity < $cart->quantity) {
-                    $cart->delete();
-                    $notify[] = ['error', "The quantity of product '{$product->name}' in your cart exceeds the available stock. It has been removed from your cart."];
-                    session()->flash('notify', $notify);
-                    return false;
-                }
 
-                $price = showDiscountPrice($product->price, $product->discount, $product->discount_type);
-                $subtotal += $price * $cart->quantity;
+            if (!$product) {
+                $cart->delete();
+                return false;
             }
+
+            if ($product->quantity < $cart->quantity) {
+                $cart->delete();
+                return false;
+            }
+
+            $price = showDiscountPrice($product->price, $product->discount, $product->discount_type);
+            $subtotal += $price * $cart->quantity;
         }
+
         return $subtotal;
     }
-
-
 }

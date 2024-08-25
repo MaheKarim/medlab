@@ -6,9 +6,7 @@ use App\Constants\Status;
 use App\Models\AdminNotification;
 use App\Models\Cart;
 use App\Models\OrderDetail;
-use App\Models\Product;
 use App\Models\Transaction;
-use Illuminate\Support\Facades\DB;
 
 trait OrderConfirmation
 {
