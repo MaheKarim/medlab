@@ -93,15 +93,4 @@ trait OrderConfirmation
         }
     }
 
-    protected static function createCart($user) {
-        $carts = session()->get('cart');
-
-        foreach ($carts as $key => $cart) {
-            $createCart = new Cart();
-            $createCart->user_id = $user->id;
-            $createCart->product_id = $key;
-            $createCart->quantity = $cart['quantity'];
-            $createCart->save();
-        }
-    }
 }

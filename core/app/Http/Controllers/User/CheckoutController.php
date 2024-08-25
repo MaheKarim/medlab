@@ -92,7 +92,7 @@ class CheckoutController extends Controller
         }
 
         $notify[] = ['success', 'Order submitted successfully.'];
-        return redirect()->route('user.home', $order->id)->withNotify($notify);
+        return redirect()->route('user.order.details', $order->id)->withNotify($notify);
     }
 
     protected function validateCartAndCalculateSubtotal($userId)
