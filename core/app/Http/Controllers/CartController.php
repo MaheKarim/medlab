@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Constants\Status;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
