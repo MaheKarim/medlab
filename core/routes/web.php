@@ -23,6 +23,7 @@ Route::controller('CartController')->prefix('cart')->name('cart.')->group(functi
     Route::post('add-to-cart', 'addToCart')->name('add');
     Route::post('remove', 'remove')->name('remove');
     Route::post('update', 'update')->name('update');
+    Route::get('get-cart-total', 'getCartTotal')->name('getCartTotal');
 });
 
 

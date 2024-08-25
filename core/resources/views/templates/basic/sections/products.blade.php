@@ -1,6 +1,6 @@
 @php
     $categories = \App\Models\Category::active()
-        ->whereHas('products',function($q){
+        ->whereHas('products', function ($q) {
             $q->active();
         })
         ->with([
@@ -99,9 +99,14 @@
         });
     </script>
 @endpush
-@push('style-lib')
-    <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/swiper.css')}}">
-@endpush
-@push('script-lib')
-    <script src="{{ asset($activeTemplateTrue . 'js/swiper.js') }}"></script>
-@endpush
+
+
+@if (!app()->offsetExists('swiper_asset'))
+    @push('style-lib')
+        <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/swiper.css') }}">
+    @endpush
+    @push('script-lib')
+        <script src="{{ asset($activeTemplateTrue . 'js/swiper.js') }}"></script>
+    @endpush
+    @php app()->offsetSet('swiper_asset',true) @endphp
+@endif

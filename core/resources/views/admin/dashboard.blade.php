@@ -46,6 +46,204 @@
             />
         </div><!-- dashboard-w1 end -->
     </div><!-- row end-->
+    <div class="row gy-4 mt-2">
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget
+                style="2"
+                icon_style="false"
+                link="{{ route('admin.order.delivered') }}"
+                title="{{ __('Delivered Orders') }}"
+                icon="las la-check-circle"
+                value="{{ $order['delivered_order'] }}"
+                color="success"
+            />
+        </div><!-- dashboard-w1 end -->
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget
+                style="2"
+                icon_style="false"
+                link="{{ route('admin.order.cancel') }}"
+                title="{{ __('Canceled Orders') }}"
+                icon="las la-times-circle"
+                value="{{ $order['canceled_order'] }}"
+                color="danger"
+            />
+        </div><!-- dashboard-w1 end -->
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget
+                style="2"
+                icon_style="false"
+                link="{{ route('admin.product.index') }}"
+                title="{{ __('Total Product') }}"
+                icon="fab fa-product-hunt"
+                value="{{ $widget['total_product'] }}"
+                color="success"
+            />
+        </div><!-- dashboard-w1 end -->
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget
+                style="2"
+                icon_style="false"
+                link="{{ route('admin.category.index') }}"
+                title="{{ __('Total Category') }}"
+                icon="las la-stream"
+                value="{{ $widget['total_category'] }}"
+                color="primary"
+            />
+        </div>
+    </div><!-- row end-->
+
+    <div class="row mt-2 gy-4">
+        <div class="col-xxl-6">
+            <div class="card box-shadow3 h-100">
+                <div class="card-body">
+                    <h5 class="card-title">@lang('Deposits')</h5>
+                    <div class="widget-card-wrapper">
+
+                        <div class="widget-card bg--success">
+                            <a href="{{ route('admin.deposit.list') }}" class="widget-card-link"></a>
+                            <div class="widget-card-left">
+                                <div class="widget-card-icon">
+                                    <i class="fas fa-hand-holding-usd"></i>
+                                </div>
+                                <div class="widget-card-content">
+                                    <h6 class="widget-card-amount">{{ showAmount($deposit['total_deposit_amount']) }}</h6>
+                                    <p class="widget-card-title">@lang('Total Deposited')</p>
+                                </div>
+                            </div>
+                            <span class="widget-card-arrow">
+                                <i class="las la-angle-right"></i>
+                            </span>
+                        </div>
+
+                        <div class="widget-card bg--warning">
+                            <a href="{{ route('admin.deposit.pending') }}" class="widget-card-link"></a>
+                            <div class="widget-card-left">
+                                <div class="widget-card-icon">
+                                    <i class="fas fa-spinner"></i>
+                                </div>
+                                <div class="widget-card-content">
+                                    <h6 class="widget-card-amount">{{ $deposit['total_deposit_pending'] }}</h6>
+                                    <p class="widget-card-title">@lang('Pending Deposits')</p>
+                                </div>
+                            </div>
+                            <span class="widget-card-arrow">
+                                <i class="las la-angle-right"></i>
+                            </span>
+                        </div>
+
+                        <div class="widget-card bg--danger">
+                            <a href="{{ route('admin.deposit.rejected') }}" class="widget-card-link"></a>
+                            <div class="widget-card-left">
+                                <div class="widget-card-icon">
+                                    <i class="fas fa-ban"></i>
+                                </div>
+                                <div class="widget-card-content">
+                                    <h6 class="widget-card-amount">{{ $deposit['total_deposit_rejected'] }}</h6>
+                                    <p class="widget-card-title">@lang('Rejected Deposits')</p>
+                                </div>
+                            </div>
+                            <span class="widget-card-arrow">
+                                <i class="las la-angle-right"></i>
+                            </span>
+                        </div>
+
+                        <div class="widget-card bg--primary">
+                            <a href="{{ route('admin.deposit.list') }}" class="widget-card-link"></a>
+                            <div class="widget-card-left">
+                                <div class="widget-card-icon">
+                                    <i class="fas fa-percentage"></i>
+                                </div>
+                                <div class="widget-card-content">
+                                    <h6 class="widget-card-amount">{{ showAmount($deposit['total_deposit_charge']) }}</h6>
+                                    <p class="widget-card-title">@lang('Deposited Charge')</p>
+                                </div>
+                            </div>
+                            <span class="widget-card-arrow">
+                                <i class="las la-angle-right"></i>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxl-6">
+            <div class="card box-shadow3 h-100">
+                <div class="card-body">
+                    <h5 class="card-title">@lang('Withdrawals')</h5>
+                    <div class="widget-card-wrapper">
+                        <div class="widget-card bg--success">
+                            <a href="{{ route('admin.withdraw.data.all') }}" class="widget-card-link"></a>
+                            <div class="widget-card-left">
+                                <div class="widget-card-icon">
+                                    <i class="lar la-credit-card"></i>
+                                </div>
+                                <div class="widget-card-content">
+                                    <h6 class="widget-card-amount">{{ showAmount($withdrawals['total_withdraw_amount']) }}</h6>
+                                    <p class="widget-card-title">@lang('Total Withdrawn')</p>
+                                </div>
+                            </div>
+                            <span class="widget-card-arrow">
+                                <i class="las la-angle-right"></i>
+                            </span>
+                        </div>
+
+                        <div class="widget-card bg--warning">
+                            <a href="{{ route('admin.withdraw.data.pending') }}" class="widget-card-link"></a>
+                            <div class="widget-card-left">
+                                <div class="widget-card-icon">
+                                    <i class="fas fa-spinner"></i>
+                                </div>
+                                <div class="widget-card-content">
+                                    <h6 class="widget-card-amount">{{ $withdrawals['total_withdraw_pending'] }}</h6>
+                                    <p class="widget-card-title">@lang('Pending Withdrawals')</p>
+                                </div>
+                            </div>
+                            <span class="widget-card-arrow">
+                                <i class="las la-angle-right"></i>
+                            </span>
+                        </div>
+
+                        <div class="widget-card bg--danger">
+                            <a href="{{ route('admin.withdraw.data.rejected') }}" class="widget-card-link"></a>
+                            <div class="widget-card-left">
+                                <div class="widget-card-icon">
+                                    <i class="las la-times-circle"></i>
+                                </div>
+                                <div class="widget-card-content">
+                                    <h6 class="widget-card-amount">{{ $withdrawals['total_withdraw_rejected'] }}</h6>
+                                    <p class="widget-card-title">@lang('Rejected Withdrawals')</p>
+                                </div>
+                            </div>
+                            <span class="widget-card-arrow">
+                                <i class="las la-angle-right"></i>
+                            </span>
+                        </div>
+
+                        <div class="widget-card bg--primary">
+                            <a href="{{ route('admin.withdraw.data.all') }}" class="widget-card-link"></a>
+                            <div class="widget-card-left">
+                                <div class="widget-card-icon">
+                                    <i class="las la-percent"></i>
+                                </div>
+                                <div class="widget-card-content">
+                                    <h6 class="widget-card-amount">{{ showAmount($withdrawals['total_withdraw_charge']) }}</h6>
+                                    <p class="widget-card-title">@lang('Withdrawal Charge')</p>
+                                </div>
+                            </div>
+                            <span class="widget-card-arrow">
+                                <i class="las la-angle-right"></i>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <div class="row gy-4 mt-2">
         <div class="col-xxl-3 col-sm-6">
@@ -137,52 +335,6 @@
         </div>
     </div><!-- row end-->
 
-    <div class="row gy-4 mt-2">
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="2"
-                icon_style="false"
-                link="{{ route('admin.order.delivered') }}"
-                title="{{ __('Delivered Orders') }}"
-                icon="las la-check-circle"
-                value="{{ $order['delivered_order'] }}"
-                color="success"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="2"
-                icon_style="false"
-                link="{{ route('admin.order.cancel') }}"
-                title="{{ __('Canceled Orders') }}"
-                icon="las la-times-circle"
-                value="{{ $order['canceled_order'] }}"
-                color="danger"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="2"
-                icon_style="false"
-                link="{{ route('admin.product.index') }}"
-                title="{{ __('Total Product') }}"
-                icon="fab fa-product-hunt"
-                value="{{ $widget['total_product'] }}"
-                color="success"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="2"
-                icon_style="false"
-                link="{{ route('admin.category.index') }}"
-                title="{{ __('Total Category') }}"
-                icon="las la-stream"
-                value="{{ $widget['total_category'] }}"
-                color="primary"
-            />
-        </div>
-    </div><!-- row end-->
 
 
     <div class="row mb-none-30 mt-30">

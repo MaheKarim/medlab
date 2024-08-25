@@ -154,6 +154,7 @@
                     success: function (response) {
                         if (response.success) {
                             removeableItem.remove();
+                            getCartCount();
                             subTotal();
                             notify('success', response.success);
                         } else {
@@ -163,6 +164,18 @@
                 });
                 modal.modal('hide');
             });
+
+            // Cart Calculation
+            getCartCount();
+            function getCartCount() {
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('cart.getCartTotal') }}",
+                    success: function (response) {
+                        $('.cart-count').text(response);
+                    }
+                });
+            }
 
             subTotal();
 

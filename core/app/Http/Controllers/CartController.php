@@ -179,4 +179,29 @@ class CartController extends Controller
 
         return response()->json(['success' => 'Cart was successfully updated.']);
     }
+
+    public function getCartTotal()
+    {
+        $userId    = auth()->user()->id ?? null;
+        if ($userId != null) {
+            $totalCart = Cart::where('user_id', $userId)
+                ->with(['product'])
+                ->whereHas('product', function ($q) {
+                    return $q->whereHas('category');
+                })
+                ->get();
+        } else {
+            $sessionId = session()->get('session_id');
+
+            $totalCart = Cart::where('session_id', $sessionId)
+                ->with(['product'])
+                ->whereHas('product', function ($q) {
+                    return $q->whereHas('category');
+                })
+                ->get();
+        }
+        session()->put('total', ['total' => $totalCart]);
+
+        return $totalCart->count();
+    }
 }

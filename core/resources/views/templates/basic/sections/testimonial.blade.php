@@ -82,10 +82,15 @@
 
 </script>
 @endpush
-@push('style-lib')
-    <link rel="stylesheet" href="{{ asset($activeTemplateTrue.'css/slick.css') }}">
-@endpush
 
-@push('script-lib')
-    <script src="{{ asset($activeTemplateTrue . 'js/slick.min.js') }}"></script>
-@endpush
+@if (!app()->offsetExists('slick_asset'))
+    @push('style-lib')
+        <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/slick.css') }}">
+    @endpush
+    @push('script-lib')
+        <script src="{{ asset($activeTemplateTrue . 'js/slick.min.js') }}"></script>
+    @endpush
+    @php app()->offsetSet('slick_asset',true) @endphp
+@endif
+
+
