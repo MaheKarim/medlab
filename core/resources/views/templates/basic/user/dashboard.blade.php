@@ -87,7 +87,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <!-- Dashboard Card End -->
         <div class="dashboard-table">

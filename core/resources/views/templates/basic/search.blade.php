@@ -2,10 +2,10 @@
 @section('content')
     <section class="main-section">
         <div class="container custom--container">
-            <div class="row gy-4">
+            <div class="row">
                 <div class="col-xl-9 col-lg-8">
-                    <div class="Product-wrapper pt-60">
-                        <div class="swiper mySwiper py-3">
+                    <div class="Product-wrapper pt-50">
+                        <div class="swiper mySwiper py-2">
                             <div class="swiper-wrapper">
                                 @forelse($products as $product)
                                     <div class="swiper-slide">
