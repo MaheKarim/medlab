@@ -28,6 +28,8 @@ Route::controller('CartController')->prefix('cart')->name('cart.')->group(functi
 
 
 Route::controller('SiteController')->group(function () {
+   
+    Route::get('pages/{slug}', 'pages')->name('pages');
     Route::get('/contact', 'contact')->name('contact');
 
     Route::post('/contact', 'contactSubmit');
@@ -51,8 +53,6 @@ Route::controller('SiteController')->group(function () {
     Route::get('all/categories', 'categories')->name('all.category');
     Route::get('/product/{id}', 'productDetails')->name('product.details');
     Route::get('all/search', 'search')->name('search');
-
-    Route::get('/{slug}', 'pages')->name('pages');
-
     Route::get('/', 'index')->name('home');
+
 });

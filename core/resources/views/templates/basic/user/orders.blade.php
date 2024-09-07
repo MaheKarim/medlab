@@ -8,7 +8,7 @@
                         <h5 class="card-title">{{ __($pageTitle) }}</h5>
                     </div>
                     <div class="card-body">
-                        <table class="table">
+                        <table class="table table--responsive--lg">
                             <thead>
                             <tr>
                                 <th scope="col">@lang('Order ID')</th>
@@ -23,7 +23,7 @@
                             <tbody>
                             @foreach($orders as $order)
                                 <tr>
-                                    <th>{{ $order->order_no }}</th>
+                                    <td>{{ $order->order_no }}</td>
                                     <td>
                                         @if ($order->payment_type == Status::PAYMENT_ONLINE)
                                             @lang('Online Payment')
@@ -52,13 +52,14 @@
                                     </td>
                                     <td>
                                         <a href="{{ route('user.order.details', $order->id) }}"
-                                           class="btn btn-sm btn-primary btn--primary">@lang('Details')</a>
+                                           class="btn btn--sm btn--primary">@lang('Details')</a>
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
                     </div>
+                {{ paginateLinks($orders) }}
                 </div>
             </div>
         </div>

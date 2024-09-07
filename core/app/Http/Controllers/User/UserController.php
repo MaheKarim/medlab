@@ -16,16 +16,16 @@ class UserController extends Controller
     public function home()
     {
         $pageTitle = 'Dashboard';
-        $userId               = auth()->user()->id;
-        $orders             = Order::where('user_id', $userId)->latest()->take(5)->with(['orderDetail'])->get();
-        $singleOrder['total']     = Order::where('user_id', $userId)->count();
-        $singleOrder['pending']   = Order::pending()->where('user_id', $userId)->count();
-        $singleOrder['confirmed'] = Order::confirmed()->where('user_id', $userId)->count();
-        $singleOrder['shipped']   = Order::shipped()->where('user_id', $userId)->count();
-        $singleOrder['delivered'] = Order::delivered()->where('user_id', $userId)->count();
-        $singleOrder['cancelled'] = Order::cancel()->where('user_id', $userId)->count();
+        $user      = auth()->user();
+        $orders    = Order::where('user_id', $user->id)->latest()->take(5)->with(['orderDetail'])->get();
+        $singleOrder['total']     = Order::where('user_id', $user->id)->count();
+        $singleOrder['pending']   = Order::pending()->where('user_id', $user->id)->count();
+        $singleOrder['confirmed'] = Order::confirmed()->where('user_id', $user->id)->count();
+        $singleOrder['shipped']   = Order::shipped()->where('user_id', $user->id)->count();
+        $singleOrder['delivered'] = Order::delivered()->where('user_id', $user->id)->count();
+        $singleOrder['cancelled'] = Order::cancel()->where('user_id', $user->id)->count();
 
-        return view('Template::user.dashboard', compact('pageTitle', 'orders', 'singleOrder'));
+        return view('Template::user.dashboard', compact('pageTitle', 'orders', 'singleOrder', 'user'));
     }
 
     public function depositHistory(Request $request)
@@ -155,7 +155,7 @@ class UserController extends Controller
     {
         $pageTitle = 'Orders History';
         $orders = Order::where('user_id', auth()->user()->id)
-            ->with(['orderDetail','orderDetail.product', 'user'])->orderBy('id', 'desc')->paginate(getPaginate());
+            ->with(['orderDetail','orderDetail.product', 'user'])->orderBy('id', 'desc')->paginate(getPaginate(7));
 
         return view('Template::user.orders', compact('pageTitle', 'orders'));
     }

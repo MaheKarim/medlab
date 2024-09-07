@@ -7,7 +7,7 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
                             <h5 class="card-title ">@lang('Order detail of') {{ $order->order_no }}</h5>
-                            <a href="{{ route('user.download.invoice',$order->id) }}" class="btn btn-outline--primary "
+                            <a href="{{ route('user.download.invoice',$order->id) }}" class="btn btn--base "
                                target="_blank">
                                 <i class="las la-print"></i>
                                 @lang('Print Invoice')

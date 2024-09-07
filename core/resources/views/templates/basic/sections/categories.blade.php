@@ -12,12 +12,12 @@
     <div class="product-slider mt-2">
         @foreach(@$sidebarCategories as $category)
             <div>
-                <div class="product-item">
+                <a href="#" class="product-item">
                     <div class="product-item__thumb">
                         <img src="{{ getImage(getFilePath('category') .'/' . $category->image, '50x50') }}" alt="Category Image">
                     </div>
                     <p class="product-item__text"> {{ __($category->name) }} </p>
-                </div>
+                </a>
             </div>
         @endforeach
     </div>

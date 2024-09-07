@@ -28,6 +28,36 @@
     });
     // ========================== Add Attribute For Bg Image Js End =====================
 
+    // qty js start here 
+    var buttonPlus = $(".qty-btn-plus");
+    var buttonMinus = $(".qty-btn-minus")
+    var incrementPlus = buttonPlus.click(function () {
+      var $n = $(this)
+        .parent(".qty-container")
+        .find(".input-qty");
+      $n.val(Number($n.val()) + 1);
+    });
+    var incrementMinus = buttonMinus.click(function () {
+      var $n = $(this)
+        .parent(".qty-container")
+        .find(".input-qty");
+      var amount = Number($n.val());
+      if (amount > 0) {
+        $n.val(amount - 1);
+      }
+    });
+
+  //  sidebar js start here 
+  $(".bar-icon, .dashboard-body__bar-icon").on("click", function () {
+    $(".sidebar-menu").addClass("show-sidebar");
+    $(".sidebar-overlay").addClass("show");
+  });
+  $(".sidebar-menu__close, .sidebar-overlay").on("click", function () {
+    $(".sidebar-menu").removeClass("show-sidebar");
+    $(".sidebar-overlay").removeClass("show");
+  });
+  //  sidebar js end here 
+
     // ========================== add active class to ul>li top Active current page Js Start =====================
     function dynamicActiveMenuClass(selector) {
       let fileName = window.location.pathname.split("/").reverse()[0];
@@ -90,7 +120,7 @@
     // Sidebar Icon & Overlay js
     // ===================== Sidebar Menu Js End =================
 
-  
+
 
     // ==================== Dashboard User Profile Dropdown Start ==================
     $(".user-info__button").on("click", function () {
@@ -131,29 +161,29 @@
 
   //============== product details slider js end here ==============
 
-    //=================== search box wrapper js start ===================
+  //=================== search box wrapper js start ===================
 
-    $('.search-icon').on('click', function(event) {
-      event.stopPropagation(); // Prevent the click event from propagating to the body
-      $('.search-field').toggleClass('show-search-field'); 
-    }); 
-    $('.search-field').on('click', function (event) {
-      event.stopPropagation(); // Prevent the click event from propagating to the body
-      $('.search-field').addClass('show-search-field')
-    }); 
-    $('body').on('click', function() {
-      $('.search-field').removeClass('show-search-field'); 
-    })
+  $('.search-icon').on('click', function (event) {
+    event.stopPropagation(); // Prevent the click event from propagating to the body
+    $('.search-field').toggleClass('show-search-field');
+  });
+  $('.search-field').on('click', function (event) {
+    event.stopPropagation(); // Prevent the click event from propagating to the body
+    $('.search-field').addClass('show-search-field')
+  });
+  $('body').on('click', function () {
+    $('.search-field').removeClass('show-search-field');
+  })
   //======================= search box wrapper js end =======================
 
   // cancelation js 
-  $('.single-product-item__icon').on('click', function() {
-   $(this).closest('.single-product-item').addClass('d-none');
+  $('.single-product-item__icon').on('click', function () {
+    $(this).closest('.single-product-item').addClass('d-none');
   })
 
   // ========================= Preloader Js Start =====================
-  $(window).on("load", function(){
-    $('.preloader-wrapper').fadeOut(); 
+  $(window).on("load", function () {
+    $('.preloader-wrapper').fadeOut();
   })
   // ========================= Preloader Js End=====================
 

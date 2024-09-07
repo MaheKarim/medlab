@@ -1,7 +1,7 @@
 @extends($activeTemplate.'layouts.frontend')
 
 @section('content')
-    <section class="account section-bg py-30">
+    <section class="account section-bg py-120">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-7 col-xl-5">

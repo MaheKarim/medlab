@@ -59,7 +59,7 @@
                         </div>
                         @else
                             <div class="alert alert-danger">
-                                @lang('No product found')
+                                @lang('No product found!')
                             </div>
                         @endif
                     </div>

@@ -117,7 +117,8 @@ class CartController extends Controller
     public function remove(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'product_id' => 'required|integer',
+            'product_id' => 'required|array',
+            'product_id.*' => 'integer',
         ]);
 
         if ($validator->fails()) {
@@ -125,10 +126,10 @@ class CartController extends Controller
         }
 
         $userId = auth()->id();
+        $productIds = $request->product_id;
 
         if ($userId) {
-            $cart = Cart::where('user_id', $userId)->where('product_id', $request->product_id)->first();
-            $cart->delete();
+            Cart::where('user_id', $userId)->whereIn('product_id', $productIds)->delete();
         } else {
             $sessionId = session()->get('session_id');
 
@@ -141,13 +142,11 @@ class CartController extends Controller
                 return response()->json(['error' => 'Session not found!']);
             }
 
-            $cart = Cart::where('session_id', $sessionId)->where('product_id', $request->product_id)->first();
-            $cart->delete();
+            Cart::where('session_id', $sessionId)->whereIn('product_id', $productIds)->delete();
         }
 
-        return response()->json(['success' => 'Product was successfully removed.']);
+        return response()->json(['success' => 'Product were successfully removed.']);
     }
-
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [

@@ -18,9 +18,9 @@
             $('.notice').append(`
                 <div class="row notification-alert">
                     <div class="col-lg-12">
-                        <div class="card mb-4">
+                        <div class="card mb-4 custom--card">
                             <div class="card-header justify-content-between d-flex flex-wrap notice_notify">
-                                <h5 class="alert-heading">@lang('Please Allow / Reset Browser Notification') <i class='las la-bell text--danger'></i></h5>
+                                <h5 class="card-title">@lang('Please Allow / Reset Browser Notification') <i class='las la-bell text--danger'></i></h5>
                             </div>
                             <div class="card-body">
                                 <p class="mb-0 small">@lang('If you want to get push notification then you have to allow notification from your browser')</p>

@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div class="card custom--card">
                     <div class="card-header card-header-bg d-flex flex-wrap justify-content-between align-items-center">
-                        <h5 class="mt-0">
+                        <h5 class="card-title">
                             @php echo $myTicket->statusBadge; @endphp
                             [@lang('Ticket')#{{ $myTicket->ticket }}] {{ $myTicket->subject }}
                         </h5>

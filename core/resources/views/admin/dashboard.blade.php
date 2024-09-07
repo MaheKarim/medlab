@@ -174,13 +174,13 @@
                     <h5 class="card-title">@lang('Withdrawals')</h5>
                     <div class="widget-card-wrapper">
                         <div class="widget-card bg--success">
-                            <a href="{{ route('admin.withdraw.data.all') }}" class="widget-card-link"></a>
+                            <a href="#" class="widget-card-link"></a>
                             <div class="widget-card-left">
                                 <div class="widget-card-icon">
                                     <i class="lar la-credit-card"></i>
                                 </div>
                                 <div class="widget-card-content">
-                                    <h6 class="widget-card-amount">{{ showAmount($withdrawals['total_withdraw_amount']) }}</h6>
+                                    <h6 class="widget-card-amount">#</h6>
                                     <p class="widget-card-title">@lang('Total Withdrawn')</p>
                                 </div>
                             </div>
@@ -190,13 +190,13 @@
                         </div>
 
                         <div class="widget-card bg--warning">
-                            <a href="{{ route('admin.withdraw.data.pending') }}" class="widget-card-link"></a>
+                            <a href="#" class="widget-card-link"></a>
                             <div class="widget-card-left">
                                 <div class="widget-card-icon">
                                     <i class="fas fa-spinner"></i>
                                 </div>
                                 <div class="widget-card-content">
-                                    <h6 class="widget-card-amount">{{ $withdrawals['total_withdraw_pending'] }}</h6>
+                                    <h6 class="widget-card-amount">#</h6>
                                     <p class="widget-card-title">@lang('Pending Withdrawals')</p>
                                 </div>
                             </div>
@@ -206,13 +206,13 @@
                         </div>
 
                         <div class="widget-card bg--danger">
-                            <a href="{{ route('admin.withdraw.data.rejected') }}" class="widget-card-link"></a>
+                            <a href="#" class="widget-card-link"></a>
                             <div class="widget-card-left">
                                 <div class="widget-card-icon">
                                     <i class="las la-times-circle"></i>
                                 </div>
                                 <div class="widget-card-content">
-                                    <h6 class="widget-card-amount">{{ $withdrawals['total_withdraw_rejected'] }}</h6>
+                                    <h6 class="widget-card-amount">#</h6>
                                     <p class="widget-card-title">@lang('Rejected Withdrawals')</p>
                                 </div>
                             </div>
@@ -222,13 +222,13 @@
                         </div>
 
                         <div class="widget-card bg--primary">
-                            <a href="{{ route('admin.withdraw.data.all') }}" class="widget-card-link"></a>
+                            <a href="#" class="widget-card-link"></a>
                             <div class="widget-card-left">
                                 <div class="widget-card-icon">
                                     <i class="las la-percent"></i>
                                 </div>
                                 <div class="widget-card-content">
-                                    <h6 class="widget-card-amount">{{ showAmount($withdrawals['total_withdraw_charge']) }}</h6>
+                                    <h6 class="widget-card-amount">#</h6>
                                     <p class="widget-card-title">@lang('Withdrawal Charge')</p>
                                 </div>
                             </div>

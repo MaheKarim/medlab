@@ -30,8 +30,8 @@
 @endif
 
 @if (@gs('socialite_credentials')->linkedin->status || @gs('socialite_credentials')->facebook->status == Status::ENABLE || @gs('socialite_credentials')->google->status == Status::ENABLE)
-<div class="text-center">
-    <span>@lang('OR')</span>
+<div class="text-center another-login">
+    <span class="text">@lang('OR')</span>
 </div>
 @endif
 @push('style')

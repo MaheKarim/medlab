@@ -3,12 +3,12 @@
     <div class="container">
         <div class="row justify-content-center mt-4">
             <div class="col-md-12">
-                <div class="text-end">
+                <div class="text-end mb-3">
                     <a href="{{route('ticket.index') }}" class="btn btn-sm btn--base mb-2">@lang('My Support Ticket')</a>
                 </div>
                 <div class="card custom--card">
                     <div class="card-header">
-                        <h5 class="text-white">{{ __($pageTitle) }}</h5>
+                        <h5 class="card-title">{{ __($pageTitle) }}</h5>
                     </div>
 
                     <div class="card-body">
