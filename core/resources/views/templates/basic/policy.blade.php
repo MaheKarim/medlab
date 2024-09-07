@@ -3,11 +3,11 @@
     <div class="about-section py-60">
         <div class="container">
             <div class="row gy-4">
-                <div class="card custom--card">
-                    <div class="card-header">
-                        <h5 class="card-title">{{ __($pageTitle) }}</h5>
+                <div class="page">
+                    <div class="page-header">
+                        <h5 class="page-title">{{ __($pageTitle) }}</h5>
                     </div>
-                    <div class="card-body">
+                    <div class="page-body">
                         @php
                             echo __(@$policy->data_values->details)
                         @endphp
