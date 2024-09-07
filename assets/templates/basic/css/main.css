@@ -2347,7 +2347,10 @@ input[type=number] {
     background-color: hsl(var(--danger)/0.15) !important;
     color: hsl(var(--danger)) !important;
 }
-
+.badge--dark {
+    background-color: hsl(var(--danger)/0.15) !important;
+    color: hsl(var(--dark)) !important;
+}
 .badge--warning {
     background-color: hsl(var(--warning)/0.15) !important;
     color: hsl(var(--warning)) !important;

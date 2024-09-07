@@ -88,10 +88,6 @@
                                             </span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            @lang('Order Date')
-                                            <span class="fw-bold">{{ showDateTime($order->created_at) }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
                                             @lang('Order Status')
                                             @php
                                                 echo $order->ordersBadge;
@@ -106,8 +102,8 @@
                                     <thead>
                                     <tr>
                                         <th>@lang('Product Name')</th>
-                                        <th>@lang('Quantity')</th>
                                         <th>@lang('Price')</th>
+                                        <th>@lang('Quantity')</th>
                                         <th>@lang('Subtotal')</th>
                                     </tr>
                                     </thead>
@@ -120,13 +116,11 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <strong>{{ $detail->quantity }}</strong>
-                                            </td>
-
-                                            <td>
                                                 <strong>{{ showAmount($detail->price) }} </strong>
                                             </td>
-
+                                            <td>
+                                                <strong>{{ $detail->quantity }}</strong>
+                                            </td>
                                             <td>
                                                 <strong>{{ showAmount($detail->price * $detail->quantity) }} </strong>
                                             </td>
@@ -138,7 +132,7 @@
                                         </tr>
                                     @endforelse
                                     </tbody>
-                                    <tfoot>
+                                    <tfoot class="text-end">
                                     <tr>
                                         <td colspan="3"></td>
                                         <td>

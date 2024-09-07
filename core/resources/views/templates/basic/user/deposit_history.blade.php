@@ -1,6 +1,5 @@
 @extends($activeTemplate.'layouts.master')
 @section('content')
-<div class="py-5 ">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -15,7 +14,7 @@
                     </div>
                 </form>
                 <div class="card custom--card">
-                    <div class="card-body p-0">
+                    <div class="card-body">
                         <div class="table-responsive">
                             <table class="table custom--table">
                                 <thead>
@@ -77,7 +76,7 @@
 
                                             <td>
                                                 @if($deposit->method_code >= 1000 && $deposit->method_code <= 5000)
-                                                <a href="javascript:void(0)" class="btn btn--base btn-sm detailBtn" data-info="{{ json_encode($details) }}"
+                                                <a href="javascript:void(0)" class="btn btn--base btn--sm detailBtn" data-info="{{ json_encode($details) }}"
                                                     @if ($deposit->status == Status::PAYMENT_REJECT)
                                                     data-admin_feedback="{{ $deposit->admin_feedback }}"
                                                     @endif
@@ -85,7 +84,7 @@
                                                     <i class="fas fa-desktop"></i>
                                                 </a>
                                                 @else
-                                                <button type="button" class="btn btn--success btn-sm" data-bs-toggle="tooltip" title="@lang('Automatically processed')">
+                                                <button type="button" class="btn btn--success btn--sm" data-bs-toggle="tooltip" title="@lang('Automatically processed')">
                                                     <i class="fas fa-check"></i>
                                                 </button>
                                                 @endif

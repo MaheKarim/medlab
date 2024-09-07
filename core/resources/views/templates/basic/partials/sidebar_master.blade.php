@@ -43,7 +43,7 @@
                     <span class="text"> @lang('Order History') </span>
                 </a>
             </li>
-            <li class="sidebar-menu-list__item">
+            <li class="sidebar-menu-list__item {{ menuActive('user.transactions') }}">
                 <a class="sidebar-menu-list__link" href="{{ route("user.transactions") }}">
                     <span class="icon">
                         <i class="las la-layer-group"></i>
@@ -52,19 +52,19 @@
                 </a>
             </li>
 
-            <li class="sidebar-menu-list__item">
+            <li class="sidebar-menu-list__item {{ menuActive('ticket.index') }}">
                 <a class="sidebar-menu-list__link" href="{{ route("ticket.index") }}">
                     <span class="icon"><i class="las la-clipboard-list"></i></span>
                     <span class="text">@lang('Support Tickets')</span>
                 </a>
             </li>
-            <li class="sidebar-menu-list__item">
+            <li class="sidebar-menu-list__item {{ menuActive('ticket.open') }}">
                 <a class="sidebar-menu-list__link" href="{{ route("ticket.open") }}">
                     <span class="icon"><i class="la la-ticket"></i></span>
                     <span class="text">@lang('Create Ticket')</span>
                 </a>
             </li>
-            <li class="sidebar-menu-list__item">
+            <li class="sidebar-menu-list__item {{ menuActive('user.change.password') }}">
                 <a class="sidebar-menu-list__link" href="{{ route("user.change.password") }}">
                     <span class="icon"><i class="las la-shield-alt"></i></span>
                     <span class="text">@lang("Change Password")</span>

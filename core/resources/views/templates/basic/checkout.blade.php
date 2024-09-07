@@ -131,7 +131,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-outline--base w-100 btn--sm mt-4" form="checkout-form">@lang('Place order')</button>
+                                <button type="submit" class="btn btn-outline--base w-100 mt-4" form="checkout-form">@lang('Place order')</button>
                                </div>
                             </div>
                         </div>
