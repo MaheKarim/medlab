@@ -123,7 +123,8 @@ class SiteController extends Controller
         $pageTitle = $blog->data_values->title;
         $seoContents = $blog->seo_content;
         $seoImage = @$seoContents->image ? frontendImage('blog',$seoContents->image,getFileSize('seo'),true) : null;
-        return view('Template::blog_details',compact('blog','pageTitle','seoContents','seoImage'));
+        $latestBlogs = Frontend::where('tempname', activeTemplateName())->where('data_keys', 'blog.element')->latest()->limit(4)->get();
+        return view('Template::blog_details',compact('blog','pageTitle','seoContents','seoImage', 'latestBlogs'));
     }
 
     public function cookieAccept(){
