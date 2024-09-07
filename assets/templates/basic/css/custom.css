@@ -335,14 +335,10 @@
   width: 100% !important;
 }
 
-.gateway-card {
-  padding: 15px;
-}
-
 .payment-card-title {
   padding: 13px 25px;
   text-align: center;
-  background-color: rgb(var(--main));
+  background-color: hsl(var(--base));
   border-radius: 5px;
   border: 0;
   margin-bottom: 0px;
@@ -358,7 +354,7 @@
   background-color: #fff;
   border-radius: 5px;
   height: 100%;
-
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 .payment-system-list.is-scrollable {
@@ -400,7 +396,7 @@
 }
 
 .payment-item:has(.payment-item__radio:checked) {
-  border-left: 3px solid var(--hover-border-color);
+  border-left: 3px solid hsl(var(--base));
   border-radius: 0px;
 }
 
@@ -409,7 +405,7 @@
 }
 
 .payment-item:has(.payment-item__radio:checked) .payment-item__check {
-  border: 3px solid rgb(var(--main));
+  border: 3px solid hsl(var(--base));
 }
 
 .payment-item__info {
@@ -422,7 +418,7 @@
 .payment-item__check {
   width: var(--radio-size);
   height: var(--radio-size);
-  border: 1px solid rgb(var(--main));
+  border: 1px solid hsl(var(--base));
   display: inline-block;
   border-radius: 100%;
 
@@ -456,8 +452,11 @@
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
-
+.deposit-info__input-group .form--control {
+  background: hsl(var(--black)/.03);
+}
 .deposit-info__title {
   max-width: 50%;
   margin-bottom: 0px;
@@ -521,7 +520,7 @@
 
 .payment-item__btn {
   border: 0;
-  border-block: 1px solid var(--border-color);
+  background: hsl(var(--base)) !important;
   border-bottom: 0;
   background: #fff;
   width: 100%;
@@ -535,7 +534,13 @@
 .payment-item:hover+.payment-item__btn {
   border-top-color: #fff;
 }
+.payment-item__btn-text {
+  color: hsl(var(--white));
+}
 
+.payment-item__btn__icon {
+  color: hsl(var(--white));
+}
 button .spinner-border {
   --bs-spinner-width: 1.5rem;
   --bs-spinner-height: 1.5rem;

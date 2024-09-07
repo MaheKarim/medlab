@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+        <div class="row justify-content-left">
+            <div class="col-md-10">
                 <div class="card custom--card">
                     <div class="card-header card-header-bg">
                         <h5 class="card-title">{{__($pageTitle)}}</h5>
