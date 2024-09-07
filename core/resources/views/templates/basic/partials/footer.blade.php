@@ -14,22 +14,6 @@
                             <a class="logo" href="{{ route('home') }}"><img src="{{ siteLogo() }}" alt="Site Logo"></a>
                         </div>
                         <p class="footer-item__desc"> {{ __(@$contactUsContent->data_values->description) }} </p>
-
-                        <div class="download-item">
-                            <p class="download-item__text">@lang('Over') <span
-                                    class="fw-bold">{{ __(@$contactUsContent->data_values->download) }} </span>@lang(' people
-                                download')</p>
-                            <div class="d-flex align-items-center gap-3">
-                                @foreach($downloadUrlElement as $element)
-                                    <a href="{{ @$element->data_values->link }}" class="download-item__link"
-                                       target="_blank">
-                                        <img
-                                            src="{{ frontendImage('download_url', @$element->data_values->image, '144x43') }}"
-                                            alt="App Store Image">
-                                    </a>
-                                @endforeach
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-sm-6 col-xsm-6 ps-lg-5">

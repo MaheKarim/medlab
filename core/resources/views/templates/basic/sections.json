@@ -38,21 +38,6 @@
             "modal": false
         }
     },
-    "download_url": {
-        "builder": true,
-        "no_selection":true,
-        "name": "Download URL",
-        "element": {
-            "title": "text",
-            "images": {
-                "image": {
-                    "size": "144x43"
-                }
-            },
-            "link": "text",
-            "modal": false
-        }
-    },
     "products": {
         "builder": true,
         "name": "Products"

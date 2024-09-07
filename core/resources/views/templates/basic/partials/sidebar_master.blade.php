@@ -22,19 +22,6 @@
                     <span class="text">@lang('Dashboard')</span>
                 </a>
             </li>
-
-            <li class="sidebar-menu-list__item {{ menuActive('user.profile.setting') }}">
-                <a class="sidebar-menu-list__link" href="{{ route("user.profile.setting") }}">
-                    <span class="icon"><i class="las la-user-alt"></i></span>
-                    <span class="text"> @lang('My Profile') </span>
-                </a>
-            </li>
-            <li class="sidebar-menu-list__item has-dropdown">
-                <a class="sidebar-menu-list__link" href="#">
-                    <span class="icon"> <i class="las la-money-bill-wave"></i> </span>
-                    <span class="text"> Payment Log </span>
-                </a>
-            </li>
             <li class="sidebar-menu-list__item {{ menuActive('user.order.history') }}">
                 <a class="sidebar-menu-list__link" href="{{ route("user.order.history") }}">
                 <span class="icon">
@@ -43,6 +30,7 @@
                     <span class="text"> @lang('Order History') </span>
                 </a>
             </li>
+
             <li class="sidebar-menu-list__item {{ menuActive('user.transactions') }}">
                 <a class="sidebar-menu-list__link" href="{{ route("user.transactions") }}">
                     <span class="icon">
@@ -62,6 +50,12 @@
                 <a class="sidebar-menu-list__link" href="{{ route("ticket.open") }}">
                     <span class="icon"><i class="la la-ticket"></i></span>
                     <span class="text">@lang('Create Ticket')</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-list__item {{ menuActive('user.profile.setting') }}">
+                <a class="sidebar-menu-list__link" href="{{ route("user.profile.setting") }}">
+                    <span class="icon"><i class="las la-user-alt"></i></span>
+                    <span class="text"> @lang('My Profile') </span>
                 </a>
             </li>
             <li class="sidebar-menu-list__item {{ menuActive('user.change.password') }}">
