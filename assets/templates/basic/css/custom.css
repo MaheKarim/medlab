@@ -590,6 +590,9 @@ button .spinner-border {
   .dropdown-lang {
     padding: 8px 25px;
   }
+  .category-menu .dropdown-lang {
+    padding: 8px 0px;
+  }
   .dropdown-lang .language-text {
     color: hsl(var(--black)) !important;
   }

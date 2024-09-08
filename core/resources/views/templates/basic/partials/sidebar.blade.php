@@ -14,9 +14,8 @@
             </span>
             </a>
         </li>
-
     @endforeach
-    <li class="category-menu__item ">
+    <li class="category-menu__item">
        @include($activeTemplate . 'partials.language')
     </li>
 </ul>
