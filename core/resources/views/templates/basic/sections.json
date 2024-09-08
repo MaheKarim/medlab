@@ -150,10 +150,10 @@
         "content": {
             "title": "text",
             "description": "textarea",
-            "download": "text",
             "email_address": "text",
             "contact_details": "text",
-            "contact_number": "text"
+            "contact_number": "text",
+            "map_url": "text"
         }
     }
 }

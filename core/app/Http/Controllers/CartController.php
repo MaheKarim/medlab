@@ -104,7 +104,7 @@ class CartController extends Controller
 
         $carts = $cartQuery->get()->filter(function ($cart) {
             $product = $cart->product;
-            if (!$product ) {
+            if (!$product) {
                 $cart->delete();
                 return false;
             }
@@ -151,7 +151,7 @@ class CartController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'product_id' => 'required|integer',
-            'quantity'   => 'required|integer|gt:0',
+            'quantity'   => 'required|integer|gte:1',
         ]);
 
         if ($validator->fails()) {
@@ -159,24 +159,38 @@ class CartController extends Controller
         }
 
         $product = Product::active()->find($request->product_id);
+
         $userId  = auth()->id();
 
         if ($request->quantity > $product->quantity) {
             return response()->json(['error' => 'Requested quantity is not available in our stock.']);
         }
 
+        $qty=$request->quantity;
+
         if ($userId) {
+
             $cart = Cart::where('user_id', $userId)->where('product_id', $request->product_id)->first();
-            $cart->quantity = $request->quantity;
+            $cart->quantity=$qty;
             $cart->save();
+            $subtotal=$cart->quantity*$product->price;
         } else {
             $sessionId = session()->get('session_id');
             $cart = Cart::where('session_id', $sessionId)->where('product_id', $request->product_id)->first();
-            $cart->quantity = $request->quantity;
+            $cart->quantity=$qty;
             $cart->save();
+            $subtotal=$cart->quantity*$product->price;
         }
 
-        return response()->json(['success' => 'Cart was successfully updated.']);
+        $totalCart = $this->getCartTotal();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Cart was successfully updated',
+            'total_cart_count' => $totalCart,
+            'subtotal' => showAmount($subtotal),
+            'quantity' => $cart->quantity
+        ]);
     }
 
     public function getCartTotal()
@@ -188,7 +202,7 @@ class CartController extends Controller
                 ->whereHas('product', function ($q) {
                     return $q->whereHas('category');
                 })
-                ->get();
+                ->count();
         } else {
             $sessionId = session()->get('session_id');
 
@@ -197,10 +211,10 @@ class CartController extends Controller
                 ->whereHas('product', function ($q) {
                     return $q->whereHas('category');
                 })
-                ->get();
+                ->count();
         }
         session()->put('total', ['total' => $totalCart]);
 
-        return $totalCart->count();
+        return $totalCart;
     }
 }

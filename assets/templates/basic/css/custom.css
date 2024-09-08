@@ -1240,6 +1240,128 @@ button .spinner-border {
   color: #5E5B5B;
   margin-bottom: 8px;
 }
-
+.register-disable-image {
+  max-width: 300px;
+  margin: 0 auto;
+}
 /* ========================= Latest Blog Css End ===================*/
+/*=========== contact section css start here ===========*/
+.contact-item-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  background-color: hsl(var(--white));
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  height: 100%;
+
+}
+
+@media screen and (max-width: 1199px) {
+  .contact-item-menu {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+.contact-item-menu__icon {
+  width: 64px;
+  height: 64px;
+  background-color: hsl(var(--base)/0.2);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: hsl(var(--base));
+  border-radius: 10px;
+  font-size: 1.5625rem;
+}
+
+@media screen and (max-width: 1199px) {
+  .contact-item-menu__icon {
+    margin: 0 auto;
+  }
+}
+
+.contact-item-menu__content {
+  width: calc(100% - 64px);
+  padding-left: 25px;
+}
+
+@media screen and (max-width: 1199px) {
+  .contact-item-menu__content {
+    width: 100%;
+    padding-left: 0;
+    text-align: center;
+    margin-top: 20px;
+  }
+}
+
+.contact-item-menu__title {
+  margin-bottom: 10px;
+  color: hsl(var(--black));
+}
+
+.contact-bottom {
+  margin-top: 40px;
+}
+
+.contact-bottom .contact-form {
+  position: relative;
+  z-index: 1;
+  background-color: hsl(var(--white));
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  padding: 45px 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+@media screen and (max-width: 575px) {
+  .contact-bottom .contact-form {
+    padding: 20px;
+  }
+}
+
+.contact-bottom .contact-form__title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.contact-bottom .contact-form__btn {
+  margin-top: 24px;
+}
+
+.contact-bottom__map {
+  height: 100%;
+  width: 100%;
+  background-color: hsl(var(--white));
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.contact-bottom__map iframe {
+  height: 100%;
+  border-radius: 10px;
+  width: 100%;
+  min-height: 300px;
+}
+
+/*=========== contact section css end here ===========*/
 

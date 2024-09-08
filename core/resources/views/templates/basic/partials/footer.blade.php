@@ -1,5 +1,4 @@
 @php
-    $downloadUrlElement = getContent('download_url.element', orderById: true);
     $contactUsContent = getContent('contact_us.content', true);
     $policyPages = getContent('policy_pages.element', orderById: true);
     $socialLinks = getContent('social_icon.element', orderById: true);

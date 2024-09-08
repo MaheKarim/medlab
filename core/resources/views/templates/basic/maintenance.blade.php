@@ -1,6 +1,6 @@
 @extends($activeTemplate . 'layouts.frontend')
 @section('content')
-    <section class="account section-bg maintenance-page flex-column justify-content-center">
+    <section class="account maintenance-page flex-column justify-content-center">
         <div class="container">
             <div class="row justify-content-center align-items-center">
                 <div class="col-lg-7 text-center">

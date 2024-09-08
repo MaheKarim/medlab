@@ -5,28 +5,32 @@
             <div class="cart-header">
                 <div class="cart">
                     <div class="cart-body">
-                        @if($carts->isEmpty())
+                        @if ($carts->isEmpty())
                             <div class="text-center py-5">
                                 <h5>@lang('No Cart found')</h5>
                             </div>
                         @else
                             @foreach ($carts as $cart)
                                 @php
-                                    $user     = auth()->user() ?? null;
-                                    $price    = showDiscountPrice($cart->product->price, $cart->product->discount, $cart->product->discount_type);
+                                    $user = auth()->user() ?? null;
+                                    $price = showDiscountPrice(
+                                        $cart->product->price,
+                                        $cart->product->discount,
+                                        $cart->product->discount_type,
+                                    );
                                 @endphp
                                 <div class="cart-item">
                                     <div class="cart-item__content">
                                         <div class="thumb">
                                             <img src="{{ getImage(getFilePath('product') . '/' . $cart->product->image, getFileSize('product')) }}"
-                                                 alt="@lang($cart->product->name)">
+                                                alt="@lang($cart->product->name)">
                                         </div>
                                         <div class="inner-content">
                                             <small class="inner-content__name">
                                                 @lang('Brand:') {{ __($cart->product->brand->name) }}
                                             </small>
-                                            <a href="{{ route('product.details',  $cart->product_id) }}" class="productName"
-                                               data-product_id="{{ $cart->product_id }}">
+                                            <a href="{{ route('product.details', $cart->product_id) }}" class="productName"
+                                                data-product_id="{{ $cart->product_id }}">
                                                 {{ __($cart->product->name) }}
                                             </a>
                                             <div class="size">
@@ -38,9 +42,12 @@
                                         </div>
                                     </div>
                                     <div class="qty-container">
-                                        <button class="qty-btn-minus btn-light" type="button"><i class="fa fa-minus"></i></button>
-                                        <input type="number" class="form-control input-qty" name="quantity" value="{{ $cart->quantity }}">
-                                        <button class="qty-btn-plus btn-light" type="button"><i class="fa fa-plus"></i></button>
+                                        <button class="qty-btn-minus btn-light" type="button"><i
+                                                class="fa fa-minus"></i></button>
+                                        <input type="number" class="form-control input-qty" name="quantity"
+                                            value="{{ $cart->quantity }}">
+                                        <button class="qty-btn-plus btn-light" type="button"><i
+                                                class="fa fa-plus"></i></button>
                                     </div>
                                     <div class="d-flex flex-column text-center">
                                         <span class="amount">@lang('Price')</span>
@@ -61,9 +68,10 @@
                         @endif
                     </div>
                 </div>
-                @if(!$carts->isEmpty())
+                @if (!$carts->isEmpty())
                     <div class="checkout-btn text-end">
-                        <a href="{{ route('user.checkout.index') }}" class="btn btn--base checkoutBtn"> @lang('Checkout') </a>
+                        <a href="{{ route('user.checkout.index') }}" class="btn btn--base checkoutBtn"> @lang('Checkout')
+                        </a>
                     </div>
                 @endif
             </div>
@@ -93,21 +101,21 @@
 
 @push('script')
     <script>
-        (function ($) {
+        (function($) {
             "use strict";
 
             let removeableItems = [];
             let modal = $('#removeCartModal');
 
             // Handle individual item removal
-            $('.remove-btn').on('click', function () {
+            $('.remove-btn').on('click', function() {
                 removeableItems = [$(this).closest('.cart-item')];
                 modal.modal('show');
             });
 
             // Confirm and remove product(s)
-            $(".remove-product").on('click', function () {
-                let productIds = removeableItems.map(function (item) {
+            $(".remove-product").on('click', function() {
+                let productIds = removeableItems.map(function(item) {
                     return $(item).find('.productName').data('product_id');
                 });
 
@@ -122,19 +130,21 @@
                         data: {
                             product_id: productIds
                         },
-                        success: function (response) {
+                        success: function(response) {
                             if (response.success) {
-                                removeableItems.forEach(function (item) {
+                                removeableItems.forEach(function(item) {
                                     item.remove();
                                 });
                                 getCartCount();
-                                subTotal();
+                                 calculationTotal();
                                 notify('success', response.success);
 
                                 if ($('.cart-item').length === 0) {
                                     $('.price-content').addClass('d-none');
                                     $('.checkoutBtn').addClass('d-none');
-                                    $('.cart-body').html('<div class="text-center py-5"><h5>@lang("No Cart found")</h5></div>');
+                                    $('.cart-body').html(
+                                        '<div class="text-center py-5"><h5>@lang('No Cart found')</h5></div>'
+                                        );
                                 }
                             } else {
                                 notify('error', response.error);
@@ -148,24 +158,26 @@
 
             // Cart Calculation
             getCartCount();
+
             function getCartCount() {
                 $.ajax({
                     type: "GET",
                     url: "{{ route('cart.getCartTotal') }}",
-                    success: function (response) {
+                    success: function(response) {
                         $('.cart-count').text(response);
                     }
                 });
             }
 
-            subTotal();
+             calculationTotal();
 
-            function subTotal() {
+            function calculationTotal() {
                 let subtotal = 0;
-                $('.cart-item').each(function () {
+                $('.cart-item').each(function() {
                     let subtotalText = $(this).find('.subtotal').text().trim();
                     if (subtotalText) {
-                        let price = parseFloat(subtotalText.replace("{{ gs('cur_sym') }}", '').replace(/,/g, ''));
+                        let price = parseFloat(subtotalText.replace("{{ gs('cur_sym') }}", '').replace(/,/g,
+                            ''));
                         if (!isNaN(price)) {
                             subtotal += price;
                         }
@@ -182,36 +194,26 @@
                     $('.checkoutBtn').addClass('d-none');
                     $('.price-content').addClass('d-none');
                     if ($('.cart-item').length === 0) {
-                        $('.cart-body').html('<div class="text-center py-5"><h5>@lang("No Cart found!")</h5></div>');
+                        $('.cart-body').html('<div class="text-center py-5"><h5>@lang('No Cart found!')</h5></div>');
                     }
                 }
             }
 
-            function initializeQuantityButtons() {
-                $('.qty-btn-plus, .qty-btn-minus').on('click', function() {
-                    let input = $(this).siblings('.input-qty');
-                    let currentValue = parseInt(input.val(), 10);
-                    let newValue = $(this).hasClass('qty-btn-plus') ? currentValue + 1 : Math.max(currentValue - 1, 1);
-                    input.val(newValue).trigger('change');
-                });
+            $('.qty-btn-plus, .qty-btn-minus').on('click', function() {
+                let input = $(this).siblings('.input-qty');
+                let currentValue = parseInt(input.val());
+                let newValue = $(this).hasClass('qty-btn-plus') ? currentValue + 1 : currentValue-1;
+                input.val(newValue).trigger('change');
+            });
 
-                $('.input-qty').on('change', function() {
-                    let currentRow = $(this).closest('.cart-item');
-                    CartCalculation(currentRow);
-                });
-            }
-            initializeQuantityButtons();
+            $('.input-qty').on('change', function() {
+                let currentRow = $(this).closest('.cart-item');
+                updateQty(currentRow);
+            });
 
-            function CartCalculation(currentRow) {
+            function updateQty(currentRow) {
                 let product_id = currentRow.find('.productName').data('product_id');
-                let quantity = parseInt(currentRow.find('input[name="quantity"]').val(), 10);
-                let productPrice = currentRow.find('.price').text().trim();
-
-                let price = parseFloat(productPrice.replace("{{ gs('cur_sym') }}", '').replace(/,/g, ''));
-                if (isNaN(price) || isNaN(quantity) || quantity <= 0) {
-                    notify('error', 'Invalid price or quantity.');
-                    return;
-                }
+                let quantity = currentRow.find('input[name="quantity"]').val();
 
                 $.ajax({
                     headers: {
@@ -221,26 +223,20 @@
                     url: "{{ route('cart.update') }}",
                     data: {
                         product_id: product_id,
-                        quantity: quantity
+                        quantity: quantity || 1
                     },
-                    success: function (response) {
+                    success: function(response) {
                         if (response.success) {
-                            let totalPrice = quantity * price;
-                            currentRow.find('.subtotal').text("{{ gs('cur_sym') }}" + totalPrice.toFixed(2));
-                            currentRow.find('input[name="quantity"]').val(quantity);
-                            subTotal();
-                            getCartCount();
-                            notify('success', response.success);
-                        } else {
-                            notify('error', response.error);
-                            // Revert the quantity to the last known good value
+                            $('.cart-count').text(response.total_cart_count);
+                            currentRow.find('.subtotal').text(response.subtotal);
                             currentRow.find('input[name="quantity"]').val(response.quantity);
+                            calculationTotal();
+                        } else {
+                            notify('error',"@lang('Something went wrong')");
                         }
                     },
                     error: function() {
-                        notify('error', 'An error occurred while updating the cart.');
-                        // Revert the quantity to the original value
-                        currentRow.find('input[name="quantity"]').val(originalQuantity);
+                        notify('error',"@lang('Something went wrong')");
                     }
                 });
             }

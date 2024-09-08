@@ -97,7 +97,7 @@
         <div class="col-xxl-6">
             <div class="card box-shadow3 h-100">
                 <div class="card-body">
-                    <h5 class="card-title">@lang('Deposits')</h5>
+                    <h5 class="card-title">@lang('Payments')</h5>
                     <div class="widget-card-wrapper">
 
                         <div class="widget-card bg--success">
@@ -108,7 +108,7 @@
                                 </div>
                                 <div class="widget-card-content">
                                     <h6 class="widget-card-amount">{{ showAmount($deposit['total_deposit_amount']) }}</h6>
-                                    <p class="widget-card-title">@lang('Total Deposited')</p>
+                                    <p class="widget-card-title">@lang('Total Payments')</p>
                                 </div>
                             </div>
                             <span class="widget-card-arrow">
@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="widget-card-content">
                                     <h6 class="widget-card-amount">{{ $deposit['total_deposit_pending'] }}</h6>
-                                    <p class="widget-card-title">@lang('Pending Deposits')</p>
+                                    <p class="widget-card-title">@lang('Pending Payments')</p>
                                 </div>
                             </div>
                             <span class="widget-card-arrow">
@@ -140,7 +140,7 @@
                                 </div>
                                 <div class="widget-card-content">
                                     <h6 class="widget-card-amount">{{ $deposit['total_deposit_rejected'] }}</h6>
-                                    <p class="widget-card-title">@lang('Rejected Deposits')</p>
+                                    <p class="widget-card-title">@lang('Rejected Payments')</p>
                                 </div>
                             </div>
                             <span class="widget-card-arrow">
@@ -156,7 +156,7 @@
                                 </div>
                                 <div class="widget-card-content">
                                     <h6 class="widget-card-amount">{{ showAmount($deposit['total_deposit_charge']) }}</h6>
-                                    <p class="widget-card-title">@lang('Deposited Charge')</p>
+                                    <p class="widget-card-title">@lang('Payments Charge')</p>
                                 </div>
                             </div>
                             <span class="widget-card-arrow">
@@ -171,17 +171,17 @@
         <div class="col-xxl-6">
             <div class="card box-shadow3 h-100">
                 <div class="card-body">
-                    <h5 class="card-title">@lang('Withdrawals')</h5>
+                    <h5 class="card-title">@lang('Orders')</h5>
                     <div class="widget-card-wrapper">
-                        <div class="widget-card bg--success">
-                            <a href="#" class="widget-card-link"></a>
+                        <div class="widget-card bg--primary">
+                            <a href="{{ route('admin.order.index') }}" class="widget-card-link"></a>
                             <div class="widget-card-left">
                                 <div class="widget-card-icon">
                                     <i class="lar la-credit-card"></i>
                                 </div>
                                 <div class="widget-card-content">
-                                    <h6 class="widget-card-amount">#</h6>
-                                    <p class="widget-card-title">@lang('Total Withdrawn')</p>
+                                    <h6 class="widget-card-amount">{{ $order['total_order'] }}</h6>
+                                    <p class="widget-card-title">@lang('Total Orders')</p>
                                 </div>
                             </div>
                             <span class="widget-card-arrow">
@@ -190,14 +190,14 @@
                         </div>
 
                         <div class="widget-card bg--warning">
-                            <a href="#" class="widget-card-link"></a>
+                            <a href="{{ route('admin.order.pending') }}" class="widget-card-link"></a>
                             <div class="widget-card-left">
                                 <div class="widget-card-icon">
                                     <i class="fas fa-spinner"></i>
                                 </div>
                                 <div class="widget-card-content">
-                                    <h6 class="widget-card-amount">#</h6>
-                                    <p class="widget-card-title">@lang('Pending Withdrawals')</p>
+                                    <h6 class="widget-card-amount">{{ $order['pending_order'] }}</h6>
+                                    <p class="widget-card-title">@lang('Pending Orders')</p>
                                 </div>
                             </div>
                             <span class="widget-card-arrow">
@@ -205,15 +205,15 @@
                             </span>
                         </div>
 
-                        <div class="widget-card bg--danger">
-                            <a href="#" class="widget-card-link"></a>
+                        <div class="widget-card bg--success">
+                            <a href="{{ route('admin.order.confirmed') }}" class="widget-card-link"></a>
                             <div class="widget-card-left">
                                 <div class="widget-card-icon">
-                                    <i class="las la-times-circle"></i>
+                                    <i class="las la-columns"></i>
                                 </div>
                                 <div class="widget-card-content">
-                                    <h6 class="widget-card-amount">#</h6>
-                                    <p class="widget-card-title">@lang('Rejected Withdrawals')</p>
+                                    <h6 class="widget-card-amount">{{ $order['confirmed_order'] }}</h6>
+                                    <p class="widget-card-title">@lang('Confirmed Orders')</p>
                                 </div>
                             </div>
                             <span class="widget-card-arrow">
@@ -222,120 +222,25 @@
                         </div>
 
                         <div class="widget-card bg--primary">
-                            <a href="#" class="widget-card-link"></a>
+                            <a href="{{ route('admin.order.shipped') }}" class="widget-card-link"></a>
                             <div class="widget-card-left">
                                 <div class="widget-card-icon">
                                     <i class="las la-percent"></i>
                                 </div>
                                 <div class="widget-card-content">
-                                    <h6 class="widget-card-amount">#</h6>
-                                    <p class="widget-card-title">@lang('Withdrawal Charge')</p>
+                                    <h6 class="widget-card-amount">{{ $order['shipped_order'] }}</h6>
+                                    <p class="widget-card-title">@lang('Shipped Orders')</p>
                                 </div>
                             </div>
                             <span class="widget-card-arrow">
                                 <i class="las la-angle-right"></i>
                             </span>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-    <div class="row gy-4 mt-2">
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="3"
-                link="{{ route('admin.deposit.list') }}"
-                title="{{ __('Total Payments') }}"
-                icon="fas fa-hand-holding-usd"
-                value="{{ showAmount($deposit['total_deposit_amount']) }}"
-                bg="primary"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="3"
-                link="{{ route('admin.deposit.pending') }}"
-                title="{{ __('Pending Payments') }}"
-                icon="fas fa-spinner"
-                value="{{ $deposit['total_deposit_pending'] }}"
-                bg="warning"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="3"
-                link="{{ route('admin.deposit.rejected') }}"
-                title="{{ __('Canceled Payments') }}"
-                icon="fas fa-ban"
-                value="{{ $deposit['total_deposit_rejected'] }}"
-                bg="danger"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="3"
-                link="{{ route('admin.deposit.list') }}"
-                title="{{ __('Payments Charge') }}"
-                icon="fas fa-percentage"
-                value="{{ showAmount($deposit['total_deposit_charge']) }}"
-                bg="3"
-            />
-        </div><!-- dashboard-w1 end -->
-    </div><!-- row end-->
-
-    <div class="row gy-4 mt-2">
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="6"
-                link="{{ route('admin.order.index') }}"
-                title="{{ __('Total Orders') }}"
-                icon="las la-list-alt"
-                value="{{ $order['total_order'] }}"
-                outline="false"
-                bg="19"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="6"
-                link="{{ route('admin.order.pending') }}"
-                title="{{ __('Pending Orders') }}"
-                icon="las la-spinner"
-                value="{{ $order['pending_order'] }}"
-                bg="4"
-                outline="false"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="6"
-                link="{{ route('admin.order.confirmed') }}"
-                title="{{ __('Confirmed Orders') }}"
-                icon="las la-check-double"
-                value="{{ $order['confirmed_order'] }}"
-                bg="info"
-                outline="true"
-            />
-        </div><!-- dashboard-w1 end -->
-        <div class="col-xxl-3 col-sm-6">
-            <x-widget
-                style="6"
-                link="{{ route('admin.order.shipped') }}"
-                title="{{ __('Shipped Orders') }}"
-                icon="las la-truck"
-                value="{{ $order['shipped_order']  }}"
-                bg="primary"
-                outline="true"
-            />
-        </div>
-    </div><!-- row end-->
-
-
 
     <div class="row mb-none-30 mt-30">
         <div class="col-xl-6 mb-30">

@@ -28,35 +28,18 @@
     });
     // ========================== Add Attribute For Bg Image Js End =====================
 
-    // qty js start here 
-    var buttonPlus = $(".qty-btn-plus");
-    var buttonMinus = $(".qty-btn-minus")
-    var incrementPlus = buttonPlus.click(function () {
-      var $n = $(this)
-        .parent(".qty-container")
-        .find(".input-qty");
-      $n.val(Number($n.val()) + 1);
-    });
-    var incrementMinus = buttonMinus.click(function () {
-      var $n = $(this)
-        .parent(".qty-container")
-        .find(".input-qty");
-      var amount = Number($n.val());
-      if (amount > 0) {
-        $n.val(amount - 1);
-      }
-    });
 
-  //  sidebar js start here 
-  $(".bar-icon, .dashboard-body__bar-icon").on("click", function () {
-    $(".sidebar-menu").addClass("show-sidebar");
-    $(".sidebar-overlay").addClass("show");
-  });
-  $(".sidebar-menu__close, .sidebar-overlay").on("click", function () {
-    $(".sidebar-menu").removeClass("show-sidebar");
-    $(".sidebar-overlay").removeClass("show");
-  });
-  //  sidebar js end here 
+
+    //  sidebar js start here 
+    $(".bar-icon, .dashboard-body__bar-icon").on("click", function () {
+      $(".sidebar-menu").addClass("show-sidebar");
+      $(".sidebar-overlay").addClass("show");
+    });
+    $(".sidebar-menu__close, .sidebar-overlay").on("click", function () {
+      $(".sidebar-menu").removeClass("show-sidebar");
+      $(".sidebar-overlay").removeClass("show");
+    });
+    //  sidebar js end here 
 
     // ========================== add active class to ul>li top Active current page Js Start =====================
     function dynamicActiveMenuClass(selector) {
@@ -133,26 +116,7 @@
     });
     // ==================== Dashboard User Profile Dropdown End ==================
 
-    // qty js start here 
-    var buttonPlus = $(".qty-btn-plus");
-    var buttonMinus = $(".qty-btn-minus");
 
-    var incrementPlus = buttonPlus.click(function () {
-      var $n = $(this)
-        .parent(".qty-container")
-        .find(".input-qty");
-      $n.val(Number($n.val()) + 1);
-    });
-
-    var incrementMinus = buttonMinus.click(function () {
-      var $n = $(this)
-        .parent(".qty-container")
-        .find(".input-qty");
-      var amount = Number($n.val());
-      if (amount > 0) {
-        $n.val(amount - 1);
-      }
-    });
 
     // qty js end here 
   });
