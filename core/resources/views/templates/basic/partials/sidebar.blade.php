@@ -16,28 +16,7 @@
         </li>
 
     @endforeach
-    <li>
-        <div class="d-block d-lg-none">
-            <div class="dropdown-lang dropdown d-block mt-0">
-                <a class="language-btn dropdown-toggle" data-bs-toggle="dropdown" href="#" aria-expanded="false">
-                    <img class="flag" src="http://localhost/medLab/assets/images/language/660b94fa876ac1712035066.png" alt="us">
-                    <span class="language-text">English</span>
-                </a>
-                <ul class="dropdown-menu">
-                                                            <li>
-                            <a href="http://localhost/medLab/change/en">
-                                <img class="flag" src="http://localhost/medLab/assets/images/language/660b94fa876ac1712035066.png" alt="image">
-                                English
-                            </a>
-                        </li>
-                                                            <li>
-                            <a href="http://localhost/medLab/change/bn">
-                                <img class="flag" src="http://localhost/medLab/assets/images/language/66c1fc71906051723989105.png" alt="image">
-                                Bangla
-                            </a>
-                        </li>
-                                                    </ul>
-            </div>
-        </div>
+    <li class="category-menu__item ">
+       @include($activeTemplate . 'partials.language')
     </li>
 </ul>

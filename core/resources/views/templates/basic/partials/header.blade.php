@@ -65,7 +65,7 @@
                             </div>
                         </div>
                     @endif
-                    <button class="navbar-toggler header-button">
+                        <button class="navbar-toggler header-button">
                         <span class="bar-icon"><i class="las la-bars"></i></span>
                     </button>
                 </ul>

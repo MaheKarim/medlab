@@ -48,7 +48,6 @@
                     </div>
                 </div>
                 <div class="col-xxl-4 col-lg-5">
-                    <!-- ============================= Blog Details Sidebar Start ======================== -->
                     <div class="blog-sidebar-wrapper">
                         <div class="blog-sidebar__bottom">
                             <div class="blog-sidebar">
@@ -68,7 +67,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- ============================= Blog Details Sidebar End ======================== -->
                 </div>
             </div>
         </div>
