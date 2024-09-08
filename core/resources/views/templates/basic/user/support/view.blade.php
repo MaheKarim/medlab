@@ -94,7 +94,7 @@
         </div>
     </div>
 
-    <x-confirmation-modal />
+    <x-confirmation-modal isFrontEndSubmit="true"/>
 @endsection
 @push('style')
     <style>

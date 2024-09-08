@@ -21,7 +21,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($orders as $order)
+                            @forelse($orders as $order)
                                 <tr>
                                     <td>{{ $order->order_no }}</td>
                                     <td>
@@ -54,8 +54,10 @@
                                         <a href="{{ route('user.order.details', $order->id) }}"
                                            class="btn btn--sm btn--primary">@lang('Details')</a>
                                     </td>
+                                @empty
+                                        <td colspan="100%" class="text-center">{{ __($emptyMessage) }}</td>
                                 </tr>
-                            @endforeach
+                            @endforelse
                             </tbody>
                         </table>
                     </div>

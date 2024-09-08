@@ -1453,7 +1453,7 @@ button:focus {
 }
 
 .form--control:disabled, .form--control[readonly] {
-    background-color: hsl(var(--black)/0.2);
+    background-color: hsl(var(--black)/0.04);
     opacity: 1;
     border: 0;
 }

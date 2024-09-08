@@ -6,7 +6,7 @@
                 <div class="col-xxl-8 col-lg-7">
                     <div class="blog-details">
                         <div class="blog-details__thumb wow fadeInUp" data-wow-duration="2s">
-                   <img src="{{ frontendImage('blog',@$blog->data_values->image,'728x465') }}" class="fit-image" alt="Blog">
+                            <img src="{{ frontendImage('blog',@$blog->data_values->image,'728x465') }}" class="fit-image" alt="@lang('Blog Image')">
                         </div>
                         <div class="blog-details__content">
                             <div class="d-flex align-items-center gap-3 flex-wrap wow fadeInUp" data-wow-duration="2s">
